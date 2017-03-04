@@ -1,0 +1,2483 @@
+//$icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
+
+@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400italic,400,300,700|Roboto:400,300,400italic,500,500italic);
+
+
+// 0. VARIABLES & MIXINS
+
+$header-font:       'Roboto Condensed';
+$paragraph-font:    'Roboto';
+
+$grey-darker:       lighten(#000, 13.5%); // #222
+$grey-dark:         #333333;   // #333
+// $grey:              lighten(#000, 33.5%); // #555
+// $grey-light:        lighten(#000, 60%);   // #999
+$grey:              #5f6062;
+$grey-light:        #cccccc;
+$grey-lighter:      #f3f3f3;
+$grey-shadow:       #b5b5b5;
+
+$white:             white;
+$black:             #090909;
+$text-grey:         #5f6062;
+$text-grey-light:   #a2a2a2;
+$text-grey-lighter: #cccccc;
+$nav-grey:          #999999;
+
+$brand-green:       #098743;
+$brand-gold:        #bc994b;
+$brand-black:       #231f20;
+$brand-green-light: lighten(#098743, 8%);
+
+$admin-button-grey: #58585b;
+$admin-dark-grey:   #343434;
+$admin-blue:        #27a9e1;
+$admin-green:       #2ab573;
+$admin-yellow:      #fbaf3f;
+$admin-red:         #f06059;
+
+
+@mixin bar-height($bar-height) {
+  height: $bar-height * 2;
+}
+
+.shadow {
+  box-shadow: 5px 5px 5px $black;
+}
+
+.admin-shadow {
+  box-shadow: inset -2px -2px 3px $grey-dark;
+}
+
+.left-bar {
+  border-left: 10px solid $brand-green;
+  padding-top: 1rem;
+  padding-left: 20px;
+}
+
+.bottom-bar {
+  border-bottom: 3px solid $brand-green;
+  padding-bottom: 15px;
+}
+
+.title-row {
+  border: 2px solid $white;
+}
+
+.description-list {
+  dl {
+    h3 {
+        vertical-align: middle;
+        white-space: normal;
+    }
+    p {
+        line-height: 22px;
+        vertical-align: middle;
+        margin-top: 22px;
+        margin-bottom: 10px;
+    }
+  }
+}
+
+.title-row {
+  padding-left: 20px;
+    &:hover {
+      color: $brand-gold;
+    }
+
+}
+
+.title-row.title-row-fill {
+    background-color: $white;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.float-text {
+  float: left;
+}
+
+h1.float-text {
+  margin-right: 5px;
+}
+
+
+.ngTopPanel {
+  overflow: visible;
+}
+
+.ngHeaderContainer {
+  overflow: visible;
+}
+
+
+// 1. BASE ------------------------------------------------------------
+
+  #hello-container {
+    min-height: 600px;
+  }
+
+  body {
+    font-family: $header-font, sans-serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 25px;
+    color: $text-grey;
+    padding-bottom: 20px;
+    background: #F3F3F3;
+    background-image: url('../images/tactile-grey-bg.png');
+    background-position: fixed;
+    padding-top: 140px;
+    padding-bottom: 0;
+  }
+
+  h1 {
+    font-size: 2.4rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: $white;
+  }
+
+  // Section titles
+  h2 {
+    font-size: 2.3rem ;
+    letter-spacing: 1px;
+    color: $brand-gold;
+    text-transform: uppercase;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    @extend .left-bar;
+    @include bar-height(2.4rem);
+  }
+
+  // Module titles, h2 without green bar
+  h3 {
+    font-size: 2rem;
+    color: $brand-gold;
+  }
+
+  // article title,
+  h4 {
+    font-size: 1.8rem;
+    color: $text-grey-light;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  // date
+  h5 {
+    font-size: 1.6rem;
+    color: $text-grey-lighter;
+    font-weight: normal;
+  }
+
+
+  p {
+    font-family: $paragraph-font, sans-serif;
+    font-weight: 400;
+    font-size: 1.4rem;
+  }
+
+  a {
+    color: $text-grey;
+    text-decoration: none;
+  }
+
+  a:hover, a:focus {
+    color: $text-grey;
+    text-decoration: none;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  dl {
+    margin-bottom: 0px;
+  }
+
+  span.brand-text {
+    display: none;
+  }
+
+  .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+  .breadcrumb {
+    float: right;
+    text-align: right;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 0px;
+    padding-right: 0px;
+    background-color: transparent;
+    border-bottom: 2px solid $grey;
+    li {
+      text-transform: capitalize;
+      a:not(.active) {
+        color: $brand-gold;
+      }
+    }
+  }
+
+  .table-striped > tbody > tr:nth-child(odd) > td,
+  .table-striped > tbody > tr:nth-child(odd) > th {
+    background-color: $white;
+  }
+
+
+  .table-striped > tbody > tr:nth-child(even) > td,
+  .table-striped > tbody > tr:nth-child(even) > th {
+    background-color: $grey-lighter;
+  }
+
+  .table > thead > tr > th,
+  .table > thead > tr > td,
+  .table > tbody > tr > th,
+  .table > tbody > tr > td,
+  .table > tfoot > tr > th,
+  .table > tfoot > tr > td {
+    border-top: none;
+    padding-left: 15px;
+  }
+
+  .table {
+    border: 3px solid white;
+    thead {
+      background-color: $grey-light;
+      border: none;
+    }
+    tbody {
+      font-family: $paragraph-font;
+      font-weight: 400;
+      font-size: 1.5rem;
+    }
+  }
+
+  .well {
+    padding: 20px 40px;
+    border-radius: 0px !important;
+    background-color: $white;
+    p {
+      margin-bottom: 20px;
+      margin-top: 10px;
+    }
+    border: none;
+  }
+
+
+  .btn-default {
+    border: 2px solid $text-grey;
+    margin-right: 7px;
+    margin-bottom: 20px;
+    &:hover {
+      background-color: $brand-gold;
+      color: $white;
+      border: 2px solid $grey-light;
+    }
+  }
+
+
+// 2. LAYOUT ------------------------------------------------------------
+
+
+  // .2 Default
+
+
+    /* Responsive: Portrait tablets and up */
+    @media screen and (min-width: 768px) {
+
+      /* Remove the padding we set earlier */
+      .header,
+      .marketing,
+      .footer {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+
+    .footerdiv {
+      position: relative;
+    }
+
+    .footer {
+      padding-bottom: 15px;
+      position: absolute;
+      bottom: -240px;
+      width: 100%;
+      .contact-details p {
+        padding: 10px 30px;
+        text-align: left;
+      }
+      .terms-copyright p {
+        text-align: right;
+        padding: 10px 30px;
+        float:right;
+      }
+      padding-top: 20px;
+      color: #777;
+      border-top: 4px solid $black;
+      background-image: url('../images/tactile-grey-bg.png');
+    }
+
+
+    #main-page{
+      margin-top: -90px;
+      h2 {
+        margin-top: 40px;
+      }
+      #landing-content {
+         @extend .bottom-bar;
+      }
+    }
+
+
+  /* NEWS ARTICLES */
+
+  // .2 MAIN
+
+
+    .latest-news {
+      h4, h5 {
+        font-size: 1.8rem;
+        padding: 5px 0;
+        color: $brand-gold;
+      }
+    }
+
+    .latest-news-body {
+      img {
+        width: 100%;
+        margin: 15px 0;
+      }
+      button.btn {
+        float: right;
+        margin-bottom: 3px;
+      }
+    }
+
+    .more-news {
+      .coverphoto {
+        padding: 0px;
+        position: relative !important;
+        height: 0;
+        padding-top: 37%;
+        overflow: hidden;
+        margin-bottom: 20px;
+        img {
+          width: 100%;
+          margin-bottom: 15px;
+          position: absolute !important;
+          left: 0 !important;
+          right: 0 !important;
+          top: 0 !important;
+          bottom: 0 !important;
+          max-height: none;
+        }
+      }
+      h4 {
+        color: $brand-gold;
+        margin: 10px 25px 22px 16px;
+        font-size: 1.8rem;
+
+      }
+      h5 {
+        color: $text-grey-light;
+        margin: 30px 20px 8px 16px;
+        font-size: 1.6rem;
+      }
+      a.btn,
+      button.btn {
+        float: right;
+      }
+    }
+
+    .more-news-body {
+      padding-top: 30px;
+    }
+
+    .articles-section {
+      a.block-anchor:hover {
+        h5, h4 {
+          color: $brand-gold;
+        }
+      }
+      .well {
+        padding: 20px 30px;
+      }
+      img:not(.cover){
+        display: none;
+      }
+      .title-row {
+        h5, h4 {
+          display: block;
+        }
+        h4 {
+          color: $text-grey-lighter;
+        }
+        h5 {
+          color: $text-grey-light;
+        }
+      }
+    }
+
+    .article-body {
+      table {
+        margin-bottom: 40px;
+        margin-top: 30px;
+        border: 2px solid $grey-lighter;
+        td {
+          padding: 3px 12px;
+        }
+        tr {
+          vertical-align: top;
+        }
+        @extend .table-striped;
+        tr:nth-of-type(1) td {
+          border: 2px solid $text-grey;
+          padding: 15px;
+        }
+      }
+      p em {
+        display: block;
+        max-width: 500px;
+      }
+    }
+
+    // 2. LOGIN PAGE
+
+    #login-page {
+      position: relative;
+      div.well {
+        margin-top: 40px;
+        margin-bottom: 40px;
+        min-height: 288px;
+        width: 400px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -200px;
+        margin-top: -144px;
+        @extend .shadow;
+      }
+      footer {
+        bottom: 0px;
+      }
+    }
+
+    .auth-forms {
+      max-width: 700px;
+      margin:0 auto;
+      background: #fff;
+      padding:1px 25px 25px 25px;
+      -moz-box-shadow: 0 0 5px rgba(0,0,0,0.2);
+      -ms-box-shadow: 0 0 5px rgba(0,0,0,0.2);
+      -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.2);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      -ms-border-radius: 10px;
+      border-radius: 10px;
+    }
+
+
+    // 2. PARTNERS PAGE
+
+    #partners-widget {
+      .logos {
+        div {
+          height: 90px;
+          // max-width: 180px;
+          background-repeat: no-repeat;
+          background-size: contain;
+          background-position: center;
+          float: left;
+          margin: 8px 13px;
+        }
+        a {
+          height: 100%;
+          width: 100%;
+        }
+      }
+      #official-partners .logos {
+        a:nth-child(1) div {
+            background-image: url(/images/logo-pgae-bw.png);
+            width: 150px;
+        }
+        a:nth-child(1):hover  div{
+            background-image: url(/images/logo-pgae.png);
+        }
+        a:nth-child(2) div {
+            background-image: url(/images/logo-hkga-bw.png);
+            width: 190px;
+        }
+        a:nth-child(2):hover div {
+            background-image: url(/images/logo-hkga.png);
+        }
+        a:nth-child(3)  div{
+            background-image: url(/images/logo-lcsd-bw.png);
+            width: 150px;
+        }
+        a:nth-child(3):hover div{
+            background-image: url(/images/logo-lcsd.png);
+        }
+        a:nth-child(4) div {
+            background-image: url(/images/logo-stjames-bw.png);
+            width: 160px;
+        }
+        a:nth-child(4):hover div {
+            background-image: url(/images/logo-stjames.png);
+        }
+      }
+      #sponsors .logos {
+        a:nth-child(1) div{
+            background-image: url(/images/logo-ageas-bw.png);
+            width: 150px;
+        }
+        a:nth-child(1):hover div{
+            background-image: url(/images/logo-ageas.png);
+        }
+      }
+      #supporting-organisations .logos {
+        a:nth-child(1) div{
+            background-image: url(/images/logo-nine-eagles-bw.png);
+            width: 150px;
+        }
+        a:nth-child(1):hover div{
+            background-image: url(/images/logo-nine-eagles.png);
+        }
+        a:nth-child(2) div{
+            background-image: url(/images/logo-phoenix-hill-bw.png);
+            width: 190px;
+        }
+        a:nth-child(2):hover div{
+            background-image: url(/images/logo-phoenix-hill.png);
+        }
+        a:nth-child(3) div{
+          background-image: url(/images/logo-yinli-bw.png);
+          width: 150px;
+        }
+        a:nth-child(3):hover div{
+          background-image: url(/images/logo-yinli.png);
+        }
+      }
+
+    }
+
+    // .2 PROS DIRECTORY PAGE //
+
+
+    .pros-page {
+      margin-top: 20px;
+      h2 {
+        margin-top: 30px;
+        margin-left: 14px;
+      }
+      h2:nth-child(1){
+        margin-top: 20px;
+      }
+      .well {
+        margin-bottom: 40px;
+        padding-bottom: 40px;
+      }
+      #directory-controls {
+        #name-search {
+          font-style: italic;
+          input {
+            margin-left: 24px;
+            margin-top: 7px;
+            margin-bottom: 20px;
+            line-height: 22px;
+            max-width: 100%;
+            min-width: 200px;
+            background-color: $grey-dark;
+            padding-left: 15px;
+            color: $white;
+            border: none;
+            box-shadow: 1px 1px 2px $grey;
+          }
+        }
+        #category-filter {
+          select {
+            font-style: italic;
+            background-color: $grey-dark;
+            color: $white;
+            margin-left: 23px;
+            margin-top: 5px;
+            max-width: 100%;
+            min-width: 200px;
+
+          }
+        }
+      }
+      .pros {
+        a {
+        display: block;
+        float: left;
+        padding-left: 15px;
+        padding-bottom: 4px;
+        font-weight: 400;
+        color: $text-grey;
+        font-size: 1.5rem;
+        height: 31px;
+        }
+        a:hover {
+          color: $brand-gold;
+          text-decoration: none;
+        }
+      }
+    }
+
+    // .2 PROFILE PAGE //
+
+    #profile-page {
+      img.profile-pic {
+        max-width: 170px;
+        min-width: 160px;
+        display: inline-block;
+        float: left;
+        margin-left: -25px;
+      }
+      div.pro-name {
+        height: 240px;
+        border-bottom: 2px solid $text-grey;
+        position: relative;
+        h1 {
+          color: $text-grey;
+          letter-spacing: 0px;
+          white-space: normal;
+          position: absolute;
+          bottom: 10px;
+        }
+      }
+      .pro-details {
+        margin-top: 15px;
+        @extend .description-list;
+      }
+      .back {
+          float: right;
+      }
+    }
+
+
+    // .2 COMMITTEE & HONORARY MEMBERS
+
+
+
+    // .2 CONTACT //
+
+    #contact-page {
+      @extend .description-list;
+      i {
+        margin-right: 15px;
+      }
+      .well {
+        padding-top: 30px;
+        padding-bottom: 40px;
+      }
+    }
+
+
+    // .2 STATIC //
+
+    #static-pages {
+      h1 {
+        color: $brand-green;
+        font-size: 2.5rem;
+        font-weight: 500;
+        border-bottom: 1px solid $grey-light;
+        padding-bottom: 25px;
+        margin-bottom: 25px;
+        margin-top: 30px;
+      }
+      h1:before {
+          font-family: FontAwesome;
+          content: "\f0a3"; // circle
+          display: inline-block;
+          padding-right: 18px;
+      }
+      h3 {
+        border-bottom: 1px solid $grey-light;
+        padding-bottom: 25px;
+        margin-bottom: 25px;
+        margin-top: 30px;
+      }
+      h4 {
+        border-left: none;
+        padding-left: 0px;
+        font-size: 2rem;
+      }
+      h5 {
+        color: $text-grey-light;
+        letter-spacing: 1px;
+      }
+      blockquote {
+        border-left: 3px solid $brand-green;
+        font-style: italic;
+        p {
+          margin-top: 6px;
+        }
+      }
+      blockquote p:last-child, blockquote ul:last-child, blockquote ol:last-child {
+        margin-bottom: 7px;
+      }
+      table {
+        @extend .table-striped;
+        font-family: $paragraph-font;
+        font-weight: 400;
+        font-size: 1.4rem;
+        margin: 10px 0px 30px 0px;
+        td {
+          padding: 5px 30px 5px 20px;
+        }
+      }
+      a {
+        color: $brand-gold;
+      }
+      img {
+        // min-height: 100%;
+        // min-width: 100%;
+        margin-top: 15px;
+        margin-bottom: -10px;
+        width: 100%;
+      }
+      // div.img {
+      //   height: 550px;
+      //   width: 100%;
+      // }
+    }
+
+
+    // .2 PRESS - RELEASES
+
+  .press {
+    h4 {
+      color: $text-grey;
+      padding-top: 6px;
+      padding-bottom: 6px;
+      margin-top: 2px;
+      margin-bottom: 25px;
+    }
+    h5 {
+      color: $text-grey-light;
+      font-size: 1.7rem;
+      margin-bottom: 0px;
+    }
+    .media-card {
+      background-color: $white;
+      box-shadow: 5px 5px 5px $black;
+      padding: 15px 25px 30px 25px;
+      margin-bottom: 25px;
+      img {
+        max-width: 100%;
+        max-height: 400px;
+      }
+      h4:nth-of-type(1) {
+        margin-bottom: 0px;
+        font-size: 2rem;
+      }
+      h4:nth-of-type(2) {
+        padding-top: 0px;
+        margin-top: 0px;
+        font-style: italic;
+      }
+    }
+  }
+
+  .press-releases-page {
+      .well {
+        min-height: 214px;
+      }
+      h5 {
+        margin-top: 13px;
+      }
+  }
+
+  .press-coverage-page {
+    h4:nth-of-type(2) {
+      border-bottom: 1px solid $text-grey;
+      padding-bottom: 25px;
+    }
+    h5 {
+      padding-bottom: 10px;
+      margin-top: 15px;
+    }
+    .media-card {
+      img {
+        max-width: 100%;
+        max-height: 330px;
+        margin: 0 auto;
+        margin-top: 2px;
+        margin-bottom: 10px;
+        display: block;
+      }
+    }
+  }
+
+  .press-magazine-page {
+    .media-card {
+      img {
+        max-width: 260px;
+        max-height: 330px;
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 10px;
+      }
+      h4:nth-of-type(2) {
+        margin-top: 5px;
+        border-bottom: 1px solid $text-grey;
+        padding-bottom: 22px;
+      }
+    }
+  }
+
+
+  // .2 ARCHIVE PAGE
+
+    #archive {
+      h2 {
+        float: left;
+      }
+      h4 {
+        margin-bottom: 0px;
+      }
+      h5 {
+        margin-top: 10px;
+      }
+      .archive-body {
+        font-family: 'Roboto';
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+      }
+      .search-title-row {
+        #text-search {
+          float: right;
+          color: $text-grey-light;
+          padding-top: 25px;
+          span {
+            padding-right: 15px;
+          }
+          input {
+            padding-left: 10px;
+          }
+        }
+      }
+    }
+
+
+  // .2 TOURNAMENTS PAGE
+
+    #merit-page,
+    #tournaments-page,
+    #tournament-page {
+      .well {
+        margin-bottom: 20px;
+      }
+      h4 {
+        padding-bottom: 5px;
+        margin-bottom: 15px;
+        padding-top: 0px;
+      }
+      h5 {
+        float: left;
+        padding: 0px;
+      }
+      a:hover{
+        h4 {
+        color: $brand-gold;
+        }
+      }
+      .title-row {
+        border-bottom: none;
+        a {
+          color: $text-grey;
+          text-transform: capitalize;
+        }
+      }
+      .label {
+        padding: 0.4em 0.8em 0.4em;
+        font-size: 100%;
+        line-height: 1.4;
+        margin-left: 8px;
+        font-weight: normal;
+        text-transform: capitalize;
+        display: inline-block;
+      }
+    }
+
+    #tournaments-page,
+    #tournament-page {
+      button {
+        width: 65px;
+      }
+      .tournament-card {
+        margin-bottom: 7px;
+      }
+      .tournament-action-tags a {
+        float: right;
+        margin-left: -17px;
+        margin-top: 4px;
+      }
+    }
+
+    #prize-money {
+      .btn {
+        margin: 20px 0px;
+      }
+      i {
+        padding-right: 20px;
+      }
+      h2 {
+        margin-top: 30px;
+      }
+    }
+
+
+// TOURNAMENT CHECKLIST
+
+  #tournament-scores,
+  #tournament-checklist {
+    .search-bar {
+      width: 80%;
+      margin: 0 auto;
+    }
+    .add-division .btn {
+      background-color: $brand-green;
+      border: none;
+      min-width: 100px;
+      display: block;
+      float: left;
+      margin-right: 15px;
+      margin-left: 15px;
+      margin-top: 20px;
+      box-shadow: 3px 3px 3px $black;
+      text-transform: capitalize;
+      &:active {
+        background-color: $brand-green-light;
+      }
+    }
+    .players-list {
+      .title-h3{
+        text-transform: uppercase;
+        margin-bottom: 20px;
+        margin-top: 20px;
+      }
+    }
+  }
+
+  #tournament-scores {
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      i {
+        padding-right: 20px;
+      }
+    }
+    h2 {
+      margin-bottom: 30px;
+      margin-top: 30px;
+    }
+    h4 {
+      text-align: center;
+      max-width: 80%;
+      margin: 0 auto;
+      color: $white;
+      line-height: 30px;
+    }
+    h5 {
+      text-align: center;
+      font-size: 1.7rem;
+      margin-bottom: 30px;
+    }
+    .add-division {
+      text-transform: capitalize;
+    }
+    .btn.btn-primary {
+      float: right;
+      margin-top: 15px;
+    }
+  }
+
+  #tournament-checklist {
+    .panel {
+      margin-bottom : 1px;
+    }
+    .close {
+      margin-bottom : 1px;
+    }
+  }
+
+  .gridStyle {
+    border-bottom: 2px solid white;
+  }
+
+  // .2 MERIT PAGE
+
+  #merit-page {
+    h1 {
+      padding-left: 0px;
+      margin-top: 25px;
+      margin-bottom: 20px;
+      font-size: 2.5rem;
+    }
+    i {
+      padding-right: 20px;
+    }
+    h2 {
+      text-transform: capitalize;
+      margin-bottom: 30px;
+      margin-top: 35px;
+      font-size: 2.2rem;
+    }
+    hr {
+      margin-top: 25px;
+    }
+  }
+
+
+  // .2 DASHBOARD PAGE
+
+    #dashboard-page {
+      font-size: 1.8rem;
+      i {
+          padding-right: 30px;
+      }
+      h1 {
+        margin-bottom: 35px;
+      }
+      .row {
+        padding-bottom: 20px;
+        margin-top: 40px;
+        margin-bottom: 20px;
+        border-bottom: 2px solid $white;
+      }
+      textarea {
+        width: 100%;
+        min-width: 400px;
+        min-height: 100px;
+      }
+      h3 a:hover {
+        color: $brand-gold;
+      }
+      p.instruction-text {
+        font-style: italic;
+        color: $text-grey-light;
+      }
+      .row-cards {
+        min-height: 350px;
+        margin-right: 30px;
+        box-shadow: 5px 5px 5px $black;
+        .btn-default {
+          margin-top: 15px;
+        }
+      }
+      .internal-announcements a:hover {
+        color: $brand-gold;
+      }
+      .feedback-form {
+        .btn-primary {
+          width: 80px;
+          margin-top: 20px;
+        }
+        textarea.feedback {
+          padding: 20px;
+          font-size: 1.8rem;
+        }
+      }
+      .data-source {
+        float: right;
+      }
+    }
+
+// 3. MODULE ------------------------------------------------------------
+
+
+  /* Buttons */
+
+    a.btn.btn-gold,
+    button.btn {
+      background-color: $brand-gold;
+      color: $white;
+      &:hover {
+          background-color: lighten($brand-gold, 5%);
+          color: $white;
+          box-shadow: 1px 1px 1px $grey-light;
+      }
+    }
+
+    a.back,
+    button.back {
+      margin-bottom: 30px;
+    }
+
+  /* NAV BAR */
+
+
+    .navbar {
+      z-index: 10050;
+    }
+
+    #social-media {
+      margin-right: 30px;
+      a {
+        font-size: 2.4rem;
+        float: left;
+        margin: 6px 10px 0px 10px;
+        text-align: center;
+      }
+      i {
+        color: $nav-grey;
+        &:hover {
+          color: $white;
+        }
+      }
+    }
+
+    #page-nav li a {
+        text-transform: uppercase;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    #user-nav {
+      margin-bottom: 6px;
+      margin-top: 14px;
+      font-family: Roboto;
+      font-size: 1.4rem;
+      li {
+        line-height: 22px;
+        color: $brand-gold;
+        padding: 0px;
+        font-weight: 400;
+      }
+      li > a {
+        color: $nav-grey;
+        padding: 0px;
+        font-size: 1.3rem;
+      }
+      li.user-lang {
+        padding-top: 2px;
+        padding-bottom: 2px;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-top: 3px;
+        margin-left: -1px;
+        border: 2px solid black;
+        width: 60px;
+        text-align: center;
+        a:hover {
+          color: $white;
+        }
+      }
+    }
+
+    #user-controls {
+      margin-right: 17px;
+      li {
+        line-height: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 8px;
+        margin-right: 12px;
+        vertical-align: middle;
+      }
+      a {
+        font-weight: 300;
+        font-family: Roboto;
+        font-size: 1.4rem;
+        :last-of-type {
+          font-size: 2rem;
+        }
+      }
+      a:hover {
+          color: $white;
+      }
+    }
+
+    #language-controls {
+      margin-right: 20px;
+    }
+
+    .navbar-nav {
+      float: right;
+      li > a {
+        font-weight: 400;
+      }
+    }
+
+    .navbar-inverse {
+      opacity: 0.98;
+      border-bottom: solid 4px $black;
+    }
+
+    .navbar-nav.navbar-right:last-child {
+      margin-right: 10px;
+    }
+
+    /* Navbar dropdown */
+
+    .navbar-nav > li > .dropdown-menu {
+      margin-top: 3px;
+      left: 0;
+      right: auto;
+    }
+
+  /* Widgets */
+
+  .widget {
+      padding-bottom: 60px;
+    h3 {
+      vertical-align: middle;
+      margin: 12px 12px;
+    }
+    .widget-title {
+      border-bottom: none;
+      vertical-align: middle;
+      height: 50px;
+      @extend .title-row;
+    }
+    .widget-footer {
+      margin-top: -20px;
+      padding: 0px 18px 13px;
+      a.btn,
+      button.btn {
+        float: right;
+        }
+      }
+    }
+
+    #merit-widget {
+      .table-responsive {
+        padding: 0;
+        overflow-x: visible;
+      }
+      @extend .bottom-bar;
+      .widget-footer {
+        background-color: $white;
+        margin-bottom: 24px;
+      }
+    }
+
+    #scores-widget {
+      .table-responsive {
+        padding: 0;
+        overflow-x: visible;
+      }
+      @extend .bottom-bar;
+      .widget-footer {
+        background-color: $white;
+        margin-bottom: 24px;
+      }
+      .widget-title {
+        height: 100%;
+      }
+      h5 {
+        color: $brand-gold;
+        margin: 11px 12px;
+        font-style: italic;
+      }
+      h3 {
+        font-size: 1.7rem;
+        padding-bottom: 0;
+        margin: -10px 0 12px 12px;
+      }
+      .widget-footer {
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+    }
+
+    #magazine-widget {
+      h2:nth-child(2) {
+        margin:  -34px 12px 16px 0px;
+        text-transform: capitalize;
+        font-size: 1.8rem;
+        @include bar-height(1.8rem);
+      }
+      .latest-magazine-thumbnail {
+        border: 2px solid $white;
+        padding: 5px 0;
+        width: 100%;
+        height: 481px;
+        background-image: url('/images/magazine-cover-march-14.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      .widget-footer {
+          margin-top: 15px;
+          margin-bottom: 20px;
+      }
+      h2.bar-subtext {
+        padding-bottom: 40px;
+        margin-bottom: 30px;
+      }
+    }
+
+
+
+  /* Side nav */
+    .side-nav {
+      padding: 20px 25px;
+      margin-bottom: 40px;
+      width: 100%;
+      height: auto;
+      color: $brand-gold;
+      border: 2px solid $white;
+      text-transform: capitalize;
+      ul {
+        list-style-type: none;
+        padding-left: 0;
+      }
+      li {
+        border-bottom: 1px solid $white;
+        padding: 7px 0;
+      }
+      li.side-level-1{
+        font-family: $header-font;
+        font-size: 1.8rem;
+        font-weight: 400;
+      }
+      li.side-level-2 {
+        padding-left: 40px;
+      }
+      li.side-level-3 {
+        padding-left: 60px;
+      }
+      a {
+        color: $brand-gold;
+      }
+    }
+
+
+  /* CAROUSEL */
+
+    #carousel-block {
+      border-bottom: 5px solid $black;
+      .carousel-control {
+        z-index: 1000;
+      }
+    }
+
+    // Title
+
+    .hkpga-title {
+      position: absolute;
+      width: 100%;
+      margin: 0 auto;
+      top: 320px;
+      z-index: 100;
+      h1 {
+        text-align: center;
+        max-width: 80%;
+        margin: 0 auto;
+        vertical-align: middle;
+        padding-top: 21px;
+        z-index: 20;
+      }
+    }
+
+    // Images
+
+    .carousel-inner {
+      .item {
+        width: 100%;
+        height: 600px;
+      }
+      .item:nth-child(1){
+        background-image: url(../images/skycity-nine-eagles-golf-course.jpeg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      .item:nth-child(2){
+        background-image: url(../images/jockey-club-kau-sai-chau-golf-course.jpeg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      .item:nth-child(3) {
+        background-image: url(../images/clearwater-bay-golf-course.jpeg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+
+      }
+      .item:nth-child(4) {
+        background-image: url(../images/discovery-bay-golf-club.jpeg);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+      .carousel-caption > p {
+        font-style: italic;
+      }
+    }
+
+    // Toggles
+
+    #carousel-block {
+      .icon-prev,
+      .icon-next,
+      .fa-angle-left,
+      .fa-angle-right {
+        position: absolute;
+        padding-top: 300px;
+        z-index: 5;
+        display: inline-block;
+      }
+      .icon-prev,
+      .fa-angle-left {
+        left: 50%;
+        margin-left: -10px;
+      }
+      .icon-next,
+      .fa-angle-right {
+        right: 50%;
+        margin-right: -10px;
+      }
+      .icon-prev,
+      .icon-next {
+        width:  25px;
+        height: 25px;
+        margin-top: -10px;
+        font-family: serif;
+      }
+    }
+
+
+    // Scale up the controls a smidge
+
+    .carousel-control {
+      .fa-angle-left,
+      .fa-angle-right,
+      .icon-prev,
+      .icon-next {
+        margin-top: -15px;
+      }
+      .fa-angle-left,
+      .icon-prev {
+        margin-left: -15px;
+      }
+      .fa-angle-right,
+      .icon-next {
+        margin-right: -15px;
+      }
+    }
+
+// Redactor
+
+.redactor_box .toolbar_fixed_box {
+  margin-bottom: -110px !important;
+}
+
+// 4. STATE ------------------------------
+
+.admin .full:before{
+  font-family: FontAwesome;
+  content: "\f005"; // fa-star
+  display: inline-block;
+  padding-right: 14px;
+  font-size: 1.2rem;
+}
+.admin .tournament:before{
+  font-family: FontAwesome;
+  content: "\f140"; // fa-bullseye
+  display: inline-block;
+  padding-right: 14px;
+  font-size: 1.2rem;
+}
+.admin .associate:before{
+  font-family: FontAwesome;
+  content: "\f0c8"; // fa-square
+  display: inline-block;
+  padding-right: 14px;
+  font-size: 1.1rem;
+}
+
+.admin .member:before {
+  font-family: FontAwesome;
+  content: "\f096"; // fa-square-0
+  display: inline-block;
+  padding-right: 14px;
+  font-size: 1.1rem;
+}
+
+.admin .trainer:before {
+  font-family: FontAwesome;
+  content: "\f0a3"; // fa-certificate
+  display: inline-block;
+  padding-right: 14px;
+  font-size: 1.1rem;
+}
+
+.admin .seniortrainee:before {
+  font-family: FontAwesome;
+  content: "\f13b"; // fa-html5
+  display: inline-block;
+  padding-right: 14px;
+  font-size: 1.1rem;
+}
+
+.admin .trainee:before {
+  font-family: FontAwesome;
+  content: "\f19d"; // fa-graduation-cap
+  display: inline-block;
+  padding-right: 14px;
+  font-size: 1.1rem;
+}
+
+.admin .honorary:before {
+  font-family: FontAwesome;
+  content: "\f19c"; // fa-institution
+  display: inline-block;
+  padding-right: 14px;
+  font-size: 1.1rem;
+}
+
+.admin .none:before,
+.admin .no-relation:before {
+  font-family: FontAwesome;
+  content: "\f072"; // fa-plane
+  display: inline-block;
+  padding-right: 14px;
+  font-size: 1.1rem;
+}
+
+// member: f096 / empty square
+
+.full:before,
+.tournament:before,
+.associate:before,
+.member:before{
+   font-family: FontAwesome;
+   content: "\f005"; // filled star
+   display: inline-block;
+   padding-right: 14px;
+   font-size: 1.2rem;
+}
+.trainer:before{
+   font-family: FontAwesome;
+   content: "\f111"; // filled circle
+   display: inline-block;
+   padding-right: 14px;
+   font-size: 1.2rem;
+}
+.seniortrainee:before,
+.trainee:before{
+   font-family: FontAwesome;
+   content: "\f10c"; // empty circle
+   display: inline-block;
+   padding-right: 14px;
+   font-size: 1.2rem;
+}
+
+
+  // .4 PROS LEGEND
+
+  .pros-legend {
+    .well {
+      background-color: transparent;
+      border: 2px solid $white;
+    }
+    h4 {
+      border-bottom: 1px solid $text-grey-light;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+      font-size: 1.7rem;
+    }
+    i, span {
+      font-size: 1.4rem;
+      margin-right: 20px;
+      color: $white;
+    }
+  }
+
+  // .4 Coming soon //
+
+  #events-page {
+    .well {
+      margin-bottom: 70px;
+    }
+  }
+
+  #event-article {
+
+  }
+
+
+// 5. THEME ------------------------------
+
+
+// 6. ADMIN ----------------------------------
+
+
+.admin-styling {
+
+    a {
+      font-size: 1.7rem;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    i {
+      padding-right: 10px;
+      padding-left: 10px;
+    }
+
+    h1 {
+      margin-top: 35px;
+      font-size: 3.5rem;
+    }
+
+    h2 {
+      border-left: none;
+      margin-left: none;
+      color: $white;
+    }
+
+    h2.left-i {
+      float: left;
+      margin-right: 10px;
+    }
+
+    .btn:active {
+      border: 2px solid $white;
+    }
+
+}
+
+.admin-styling#news-new-page,
+.admin-styling#events-new-page {
+  .publish-buttons {
+    a {
+    font-size: 1.7rem;
+    text-transform: uppercase;
+    font-weight: 400;
+    }
+    i {
+      padding-right: 10px;
+      padding-left: 10px;
+    }
+  }
+}
+
+.unscored-tournament-cards {
+  .publish-buttons {
+    margin-top: 25px;
+  }
+}
+
+
+.admin-styling {
+
+//  ADMIN CONTROLS
+
+    .date-picker {
+      height: 40px;
+      margin-top: 15px;
+      margin-bottom: 14px;
+      padding: 0px 15px;
+      background-color: $admin-button-grey;
+      border-radius: 3px;
+      span.date-view {
+        padding: 5px;
+        text-align: center;
+        color: $white;
+        width: 100%;
+        line-height: 39px;
+        height: 39px;
+        a {
+          float: right;
+          color: $brand-gold;
+          margin-top: 3px;
+          margin-right: -7px;
+        }
+        i {
+        font-size: 2.7rem;
+        }
+      }
+      .btn-default {
+        margin-bottom: -2px;
+      }
+      // .dropdown.calendar {
+      //   height: 358px;
+      //   padding: 2px 10px;
+      // }
+    }
+
+
+  .admin-controls {
+    border-radius: 3px;
+    box-shadow: 6px 6px 6px $grey-darker;
+    margin-bottom: 37px;
+    margin-top: 30px;
+    text-transform: capitalize;
+
+    .locale-switch {
+      padding: 15px 0px;
+      float: left;
+      .bootstrap-switch {
+        border: none;
+      }
+      .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-primary, .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-primary {
+        background-color: $admin-button-grey;
+        color: $admin-yellow;
+      }
+      .bootstrap-switch-handle-off.bootstrap-switch-danger {
+        background-color: $admin-button-grey;
+        color: $admin-green;
+      }
+    }
+
+    .publish-buttons {
+      i {
+        padding-right: 15px;
+      }
+      a {
+        margin-top: 15px;
+      }
+      a:nth-child(1) {
+        color: $admin-red;
+      }
+      a:nth-child(2) {
+        color: $admin-blue;
+      }
+    }
+
+
+  // End of .admin-styling
+  }
+
+
+
+
+
+
+  // ADMIN MODULES
+
+
+  .publish-buttons {
+    .btn {
+      float: right;
+      padding: 8px 12px;
+    }
+    a {
+      vertical-align: middle;
+      background-color: $admin-button-grey;
+      border: none;
+      display: block;
+    }
+    a:nth-child(1) {
+      margin-left: 10px;
+      border:none;
+      margin-right: 4px;
+      padding-right: 20px;
+    }
+    a:nth-child(2) {
+      padding-right: 20px;
+    }
+  }
+
+  .dropdown .well {
+    padding: 20px 20px;
+    border: 5px solid $admin-dark-grey;
+  }
+
+  .dropdown {
+    position: absolute;
+    z-index: 50000;
+    right: 0;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    padding: 0 10px;
+    position: absolute;
+    -webkit-transition: all 0.3s ease-in;
+       -moz-transition: all 0.3s ease-in;
+       -ms-transition: all 0.3s ease-in;
+         -o-transition: all 0.3s ease-in;
+            transition: all 0.3s ease-in;
+    &.open {
+        height: 300px;
+        padding: 10px;
+        opacity: 1.0;
+      }
+    button.btn {
+      background-color: transparent;
+      color: $brand-gold;
+    }
+  }
+
+  .feedback-form {
+    background-color: $admin-button-grey;
+    position: absolute;
+    z-index: 50000;
+    right: 0;
+    width: 0;
+    overflow: hidden;
+    opacity: 0;
+    min-height: 300px;
+    -webkit-transition: all 0.3s ease-in;
+       -moz-transition: all 0.3s ease-in;
+       -ms-transition: all 0.3s ease-in;
+         -o-transition: all 0.3s ease-in;
+            transition: all 0.3s ease-in;
+    .feedback {
+      width: 0px;
+      min-height: 300px;
+      -webkit-transition: all 0.3s ease-in;
+       -moz-transition: all 0.3s ease-in;
+       -ms-transition: all 0.3s ease-in;
+         -o-transition: all 0.3s ease-in;
+            transition: all 0.3s ease-in;
+      &.open {
+        padding: 10px;
+        width: 300px;
+       }
+    }
+    &.open {
+      width: 340px;
+      opacity: 1.0;
+      padding: 10px 21px;
+
+    }
+    .btn {
+      background-color: transparent;
+      color: $brand-gold;
+      margin: 0 10px;
+    }
+  }
+
+  .input-article-title {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .redactor_editor {
+    min-height : 300px;
+  }
+
+}
+
+#feedback-list {
+  h1 {
+    margin-bottom: 30px;
+  }
+  .well {
+    border-radius: 3px;
+  }
+  span.feedback-date {
+    display: block;
+    font-size: 1.9rem;
+    color: $brand-gold;
+  }
+  .delete-feedback a {
+    padding-right: 23px;
+  }
+  .feedback-comment {
+    font-size: 1.7rem;
+    margin-bottom: 15px;
+  }
+}
+
+//  ADMIN EDITOR
+
+  .admin-editor {
+    ul {
+      li.ng-isolate-scope {
+        background-color: $admin-dark-grey;
+        border-radius: 3px;
+      }
+    }
+  }
+
+
+// ADMIN PANEL
+
+
+
+
+  #admin-panel.well {
+      background-color: $admin-dark-grey;
+      margin-top: 30px;
+      .well {
+        border-radius: 3px !important;
+        @extend .shadow;
+      }
+  }
+
+  #admin-panel {
+    .row {
+      border-bottom: 2px solid $white;
+      padding-bottom: 40px;
+    }
+    .row-cards .well {
+      margin-right: 20px;
+      min-height: 280px;
+      @extend .shadow;
+      position: relative;
+      span a {
+        margin: 10px 0px;
+      }
+      a.btn {
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+      }
+      i.add-new {
+        margin: 0 auto;
+        vertical-align: middle;
+      }
+    }
+    .publish-buttons a {
+      color: $admin-blue;
+      display: block;
+    }
+    .add-new {
+      font-size: 5rem;
+      color: $brand-gold;
+    }
+    .row-cards.add-press {
+      a {
+        font-size: 2rem;
+      }
+    }
+    .row-cards.add-press .well {
+      height: 180px;
+      position: relative;
+      padding-left: 30px;
+      i {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+      }
+    }
+    .row.row-cards.new-tournament {
+      .well {
+        min-height: 250px;
+      }
+      h4 {
+        padding-top: 6px;
+        font-size: 1.9rem;
+        line-height: 26px;
+      }
+    }
+    .new-pro {
+      img {
+         max-height: 152px;
+      }
+    }
+  }
+
+
+// NEW CONTENT FORM
+
+
+.new-content-form {
+
+    form {
+      fieldset {
+        h1 {
+          color: $white;
+          font-size: 3rem;
+          margin-top: 30px;
+          margin-bottom: 30px;
+          display: block;
+        }
+      }
+      label {
+        color: $grey-light;
+        font-weight: normal;
+      }
+    }
+
+    .well {
+      background-color: $admin-dark-grey;
+      .well {
+        background-color: $white;
+        border-radius: 4px !important;
+        box-shadow: inset 2px 2px 2px $grey-light;
+      }
+    }
+
+    .publish-buttons {
+      input {
+        float: right;
+        font-size: 1.7rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      i {
+        float: right;
+        line-height: 38px;
+        font-size: 2.3rem;
+        color: $white;
+        margin-right: 10px;
+      }
+    }
+
+    #tournament-divisions {
+      text-transform: capitalize;
+      .checkbox-inline {
+        margin-left: 10px;
+        padding-right: 10px;
+      }
+      #division-label {
+        line-height: 40px;
+        display: inline-block;
+        padding-left: 20px;
+      }
+    }
+}
+
+
+
+// Modal
+
+.modal {
+  margin-top: 200px;
+}
+
+// 7. MEDIA QUERIES ----------------------------------
+
+#login-page {
+      min-height: 770px;
+}
+
+
+.navbar .navbar-default .navbar-fixed-top .navbar-inverse {
+  height: 110px;
+  z-index: 10006;
+}
+
+.navbar-brand {
+  img {
+      width: 85px;
+      margin-left: 20px;
+      margin-top: 5px;
+  }
+}
+
+
+
+
+// Custom query
+@media (min-width: 1620px) {
+  .navbar-brand {
+    img {
+      width: 140px;
+      margin-left: 60px;
+      margin-top: 20px;
+    }
+  }
+}
+
+
+
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: $screen-lg-min) {
+  .navbar-brand {
+    img {
+      width: 120px;
+      margin-left: 30px;
+      margin-top: 10px;
+    }
+  }
+  #committee-page {
+    span {
+      display: block;
+    }
+    .dl-horizontal dt {
+      width: 350px;
+    }
+  }
+  #committee-page {
+    .dl-horizontal dd {
+      margin-left: 380px;
+    }
+  }
+  .more-news {
+    .coverphoto {
+      padding-top: 34%;
+      margin-bottom: 0px;
+    }
+  }
+}
+
+
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: $screen-md-min) {
+  .navbar-brand {
+    img {
+      width: 120px;
+      margin-left: 20px;
+      margin-top: 10px;
+    }
+  }
+  #committee-page {
+    .dl-horizontal dt {
+      width: 270px;
+    }
+  }
+  #committee-page {
+    .dl-horizontal dd {
+      margin-left: 300px;
+    }
+  }
+  .side-nav {
+    // position: fixed;
+    width: 280px;
+    top: 219px;
+  }
+  .pros-legend {
+    // position: fixed;
+    width: 280px;
+    .well {
+      padding: 20px 26px
+    }
+  }
+  .pros-page {
+    .side-nav {
+      top: 249px;
+    }
+    .pros-legend {
+      top: 450px;
+    }
+  }
+  #main-page {
+    .more-news-body {
+      p {
+        margin-top: -4px;
+        padding-left: 35px;
+        padding-right: 0px;
+      }
+    }
+  }
+  .more-news {
+    .coverphoto {
+      padding-top: 38%;
+    }
+  }
+}
+
+
+// Custom query (866px)
+@media (min-width: 866px) {
+  .open > .dropdown-menu {
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1);
+    opacity:1;
+  }
+  .dropdown-menu {
+    -webkit-transform-origin: top;
+    -moz-transform-origin: top;
+    -ms-transform-origin: top;
+    transform-origin: top;
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+    -ms-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-transform: scale(1, 0);
+    -moz-transform: scale(1, 0);
+    -ms-transform: scale(1, 0);
+    display: block;
+    transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -ms-transition: all 0.2s ease;
+  }
+}
+
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: $screen-sm-min) {
+  .navbar-brand {
+    img {
+      width: 110px;
+      margin-left: 20px;
+      margin-top: 7px;
+    }
+  }
+  #committee-page {
+    span {
+      display: block;
+    }
+    .dl-horizontal dt {
+      width: 300px;
+      h3 {
+        margin-top: 10px;
+        font-size: 1.7rem;
+        line-height: 20px;
+      }
+    }
+    .description-list {
+      dl {
+        h3 {
+            vertical-align: middle;
+            white-space: normal;
+        }
+        p {
+            line-height: 22px;
+            vertical-align: middle;
+            margin-top: 22px;
+            margin-bottom: 10px;
+        }
+      }
+    }
+  }
+  #committee-page {
+    .dl-horizontal dd {
+      margin-left: 325px;
+      p {
+        margin-top: 11px;
+        line-height: 20px;
+      }
+    }
+  }
+  #static-pages {
+    table {
+      td {
+        padding: 5px 15px 5px 15px;
+      }
+    }
+  }
+}
+
+
+// Custom query (769px - 866px)
+@media (min-width: 769px) and (max-width: 866px) {
+  .navbar-brand {
+    img {
+      width: 85px;
+      margin-left: 20px;
+      margin-top: 5px;
+    }
+  }
+}
+
+
+
+// Custom query (400px - 767px)
+@media (min-width: 400px) and (max-width: 767px) {
+  #committee-page {
+    span {
+      display: block;
+    }
+  }
+  #static-pages {
+    table {
+      td {
+        padding-right: 7px;
+        padding-left: 3px;
+      }
+    }
+  }
+  .more-news {
+    .coverphoto {
+      padding-top: 70%;
+    }
+  }
+}
+
+
+
+// Custom query - up to 470px;
+@media (max-width : 470px) {
+  .hideelement {
+    display: none !important;
+  }
+  .more-news .coverphoto {
+    padding-top: 70%;
+  }
+  #merit-page,
+  #tournaments-page,
+  #tournament-page  {
+    span.tournament-division {
+      display: none;
+    }
+  }
+  #profile-page {
+    img.profile-pic {
+      max-width: 140px;
+      min-width: 130px;
+    }
+  }
+}
+
+
+// Custom query - up to 400px;
+@media (max-width: 400px) {
+  #profile-page {
+    img.profile-pic {
+      max-width: 110px;
+      min-width: 100px;
+    }
+  }
+}
+
+
+// Changing navbar collapsing breakpoint
+
+@media (max-width: 865px) {
+  body {
+    padding-top: 90px;
+  }
+  .hkpga-title {
+    top: 272px;
+  }
+  .navbar-header {
+    float: none;
+    height: 65px;
+  }
+  .navbar-left,.navbar-right {
+    float: none !important;
+  }
+  .navbar-toggle {
+    display: block;
+    padding: 4px 14px;
+    border: 2px solid $brand-gold;
+    border-radius: 0px;
+    font-size: 2rem;
+    font-weight: 400;
+    color: #bc994b;
+    padding: 10px;
+    margin-top: 14px;
+    margin-right: 22px;
+    background-color: #333333;
+    border-radius: 6px;
+  }
+  .navbar-brand {
+    display: none;
+  }
+  span.brand-text {
+    display: block;
+    margin-left: 33px;
+    h2 {
+    border-left: none;
+    padding-left: 0px;
+    }
+  }
+  .icon-bar {
+      background-color: $brand-gold !important;
+  }
+  .navbar-collapse {
+    border-top: 1px solid transparent;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+  .navbar-fixed-top {
+  top: 0;
+  border-width: 0 0 1px;
+  }
+  .navbar-collapse.collapse {
+    display: none!important;
+  }
+  .navbar-nav {
+    float: none!important;
+  }
+  .navbar-nav>li {
+    float: none;
+  }
+  .navbar-nav>li>a {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    text-align: center;
+  }
+  .navbar-nav>li>ul>li>a {
+    text-align: center;
+  }
+  .collapse.in{
+    display:block !important;
+  }
+  #page-nav li {
+    a {
+      padding-top: 5px;
+      padding-bottom: 5px;
+      text-transform: capitalize;
+    }
+  }
+  #page-nav li#contact-li {
+    margin-bottom: 30px;
+  }
+  .navbar-inverse .navbar-toggle {
+    border-color: $brand-gold;
+  }
+  .navbar-fixed-top .navbar-collapse, .navbar-fixed-bottom .navbar-collapse {
+    max-height: 466px;
+  }
+  #user-nav {
+    margin-top: 0;
+  }
+  ul#language-controls {
+    text-align: center;
+    margin-top: 8px;
+    li.user-lang {
+      display: inline;
+      border: none;
+      padding-top: 0px;
+      padding-bottom: 0px;
+      padding-left: 0px;
+      padding-right: 0px;
+      margin-left: 0px;
+    }
+  }
+  ul#social-media {
+    margin: 0 auto;
+  }
+  .navbar .navbar-default .navbar-fixed-top .navbar-inverse {
+      border-bottom: 4px solid $black;
+  }
+  ul.dropdown-menu > li {
+    background-color: $white;
+    a {
+      color: $text-grey !important;
+    }
+  }
+}
+
+.scoreLabel {
+    font-family: FontAwesome;
+    width: 30px;
+    height: 25px;
+    margin-left: -30px;
+    overflow: visible;
+    background-color: #999;
+    display: block;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    padding-left: 8px;
+    padding-top: 1px;
+    color: black;
+}
+
+.gridStyle {
+  .ngViewport {
+    overflow: visible;
+  }
+  .none:before {
+    content: "\f072";
+    @extend .scoreLabel;
+  }
+
+  .trainee:before {
+    content: "\f19d";
+    @extend .scoreLabel;
+  }
+
+  .seniortrainee:before {
+    content: "\f13b";
+    @extend .scoreLabel;
+  }
+
+  .trainer:before {
+    content: "\f0a3";
+    @extend .scoreLabel;
+  }
+
+  .full:before, .tournament:before, .associate:before, .member:before {
+    display: none;
+  }
+}

@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
 import { Route, Switch } from 'react-router-dom';
 import { routes } from '../../routes';
+import { getLang } from '../Lang/actions';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import NoMatch from '../../components/NoMatch';
 import Message from '../Message';
 
 class App extends Component {
@@ -18,8 +21,9 @@ class App extends Component {
                 <Message location={this.props.location} />
                   <Switch>
                     {routes.map((route, i) => (
-                      <Route key={i} path={route.path} component={route.component} exactly={route.exactly} />
+                      <Route exact key={i} path={route.path} component={route.component} />
                     ))}
+                      <Route component={NoMatch}/>
                   </Switch>
               </div>
             </div>

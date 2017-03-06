@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class Text extends Component {
   constructor(props, context) {
@@ -7,8 +8,8 @@ class Text extends Component {
     this.createMarkup = this.createMarkup.bind(this);
   }
       
-    createMarkup(text){;
-        return {__html: text.en};
+    createMarkup(text){
+        return {__html: text[this.props.lang]};
     }
 
     render(){
@@ -20,4 +21,10 @@ class Text extends Component {
     }
 }
 
-export default Text;
+function mapStateToProps(store) {
+  return {
+      lang: store.languageReducer.lang
+  };
+}
+
+export default connect(mapStateToProps)(Text);

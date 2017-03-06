@@ -10,6 +10,7 @@ const Coverage    = asyncRoute(() => System.import('./containers/Coverage'));
 const Magazine    = asyncRoute(() => System.import('./containers/Magazine'));
 const Releases    = asyncRoute(() => System.import('./containers/Releases'));
 const Tournaments = asyncRoute(() => System.import('./containers/Tournaments'));
+const Login       = asyncRoute(() => System.import('./containers/Login'));
 
 export const routes = [
   { path: '/about-us',
@@ -32,7 +33,10 @@ export const routes = [
   },       
   { path: '/contact',
     component: Contact
-  },      
+  },  
+  { path: '/login',
+    component: Login
+  },        
   { path: '/',
     component: Home,
     exactly: true,

@@ -14,6 +14,9 @@ class Releases extends Component {
       if (typeof this.props.releases !=='undefined'){
         return(
           <div className="container press press-releases-page">
+            <h2>Press Releases</h2>
+
+            <div className="well">
             <ul className="press-items">
               {Object.keys(this.props.releases).map((key, i) =>
                 <div key={i} className="">
@@ -26,6 +29,7 @@ class Releases extends Component {
                 </div>
               )}   
             </ul>
+            </div>
           </div>
         );
       } else {

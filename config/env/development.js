@@ -1,9 +1,15 @@
 const config = {};
 
-config.host = 'http://localhost';
-config.api = 'http://localhost:8080';
-config.port = 8000;
-config.serverRendering = false;
-config.s3URL = 'http://planchek.s3-website-us-east-1.amazonaws.com/';
+config.port = 3000;
+config.firebase = {
+    logging: true,
+    creds: {
+        apiKey: "AIzaSyCKVl4dyJM59an6sX5CcqVHSLgXfVvHTjM",
+        authDomain: "taylor-fuqua.firebaseapp.com",
+        databaseURL: "https://taylor-fuqua.firebaseio.com",
+        storageBucket: "taylor-fuqua.appspot.com",
+        messagingSenderId: "442806122444"
+    }    
+};
 
-module.exports = config;
+export default config;

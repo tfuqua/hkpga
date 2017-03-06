@@ -1,8 +1,13 @@
 const config = {};
 
-config.host = 'http://localhost';
-config.api = 'http://localhost:8080';
 config.port = 8000;
-config.serverRendering = true;
+config.firebase = {};
+config.firebase.logging = false;
+config.firebase.creds = {
+    apiKey: "AIzaSyCKVl4dyJM59an6sX5CcqVHSLgXfVvHTjM",
+    authDomain: "taylor-fuqua.firebaseapp.com",
+    databaseURL: "https://taylor-fuqua.firebaseio.com",
+    storageBucket: "taylor-fuqua.appspot.com"
+}
 
 module.exports = config;

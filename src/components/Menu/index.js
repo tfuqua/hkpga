@@ -28,14 +28,16 @@ class Menu extends Component{
                 <div className="container-fluid collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <div className="clearfix" id="user-nav">
 
-                <ul id="user-controls" className="nav navbar-nav navbar-right clearfix">
-                    <li><Link to="/dashboard">{translations[this.props.lang].MEMBER_DASHBOARD}</Link></li>
-                    <li><a to="#" onClick={this.props.logoutUser}>{translations[this.props.lang].LOGOUT}</a></li>
-                    <li><Link to="/login">{translations[this.props.lang].LOGIN}
-                        { this.props.authenticated ? 'yes' : 'no' }
-                    </Link></li>
-                    <li><Link to="/admin"><i className="fa fa-gear"></i></Link></li>
-                </ul>
+                    {(this.props.authenticated) ?
+                        <ul id="user-controls" className="nav navbar-nav navbar-right clearfix">
+                            <li><Link to="/dashboard">{translations[this.props.lang].MEMBER_DASHBOARD}</Link></li>
+                            <li><a to="#" onClick={this.props.logoutUser}>{translations[this.props.lang].LOGOUT}</a></li>
+                        </ul>
+                    :
+                        <ul id="user-controls" className="nav navbar-nav navbar-right clearfix">
+                            <li><Link to="/login">{translations[this.props.lang].LOGIN}</Link></li>
+                        </ul>
+                    }
 
                 <ul className="nav navbar-nav navbar-right clearfix" id="language-controls">
                     <li className="user-lang"><a onClick={this.props.setLang.bind(this, 'en')}>

@@ -2,20 +2,26 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import Text from '../../components/Text';
 import { connect } from 'react-redux';
-import Archives from '../Archives';
 import { getTournaments } from './actions';
+import Archives from '../Archives';
+import Loader from '../../components/Loader';
 
 class Tournaments extends Component {
   constructor(props, context) {
     super(props, context);
+
+    this.state = {
+        year: this.props.match.params.year
+    }
   }
 
   componentDidMount(){
     if (this.props.tournaments === undefined)
-      this.props.getTournaments(this.props.match.params.year);
+      this.props.getTournaments(this.state.year);
   }
   componentWillReceiveProps(nextProps){
-    if (nextProps.match.params.year !== this.props.match.params.year){
+    if (nextProps.match.params.year !== this.state.year){
+        this.setState({year: nextProps.match.params.year});
         this.props.getTournaments(nextProps.match.params.year);    
     }
   }
@@ -31,13 +37,17 @@ class Tournaments extends Component {
                         <Archives type={'tournaments'} link={'/tournaments/'} />
                     </div>
                     <div className="contact col-md-8">
-                        <div className="well">
-                            <ul>
-                                {Object.keys(this.props.tournaments).map((key, i) =>
-                                    <li key={i}><Text text={this.props.tournaments[key].name} /></li>
-                                )}
-                            </ul>
-                        </div>
+                        { (!this.props.isFetching) ?
+                            <div className="well">
+                                <ul>
+                                    {Object.keys(this.props.tournaments).map((key, i) =>
+                                        <li key={i}><Text text={this.props.tournaments[key].name} /></li>
+                                    )}
+                                </ul>
+                            </div>                       
+                            :
+                            <Loader />   
+                        }
                     </div>
                 </div>
             </div>              
@@ -55,7 +65,8 @@ Tournaments.need = [(params) => {
 
 function mapStateToProps(store) {
   return {
-      tournaments: store.tournamentReducer.tournaments
+      tournaments: store.tournamentReducer.tournaments,
+      isFetching: store.tournamentReducer.isFetching
   };
 }
 

@@ -30,7 +30,7 @@ class Menu extends Component{
 
                     {(this.props.authenticated) ?
                         <ul id="user-controls" className="nav navbar-nav navbar-right clearfix">
-                            <li><Link to="/dashboard">{translations[this.props.lang].MEMBER_DASHBOARD}</Link></li>
+                            <li><Link to="/admin/dashboard">{translations[this.props.lang].MEMBER_DASHBOARD}</Link></li>
                             <li><a to="#" onClick={this.props.logoutUser}>{translations[this.props.lang].LOGOUT}</a></li>
                         </ul>
                     :

@@ -11,7 +11,7 @@ class Tournaments extends Component {
     super(props, context);
 
     this.state = {
-        year: this.props.match.params.year
+        year: (this.props.match.params.year) ? this.props.match.params.year : 2017
     }
   }
 

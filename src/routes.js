@@ -1,5 +1,3 @@
-import React from 'react';
-import { Match, Redirect } from 'react-router-dom';
 import asyncRoute from './util/asyncRoute';
 
 //App Specific components
@@ -11,6 +9,7 @@ const Magazine    = asyncRoute(() => System.import('./containers/Magazine'));
 const Releases    = asyncRoute(() => System.import('./containers/Releases'));
 const Tournaments = asyncRoute(() => System.import('./containers/Tournaments'));
 const Login       = asyncRoute(() => System.import('./containers/Login'));
+const Dashboard   = asyncRoute(() => System.import('./containers/Dashboard'));
 
 export const routes = [
   { path: '/about-us',
@@ -36,46 +35,12 @@ export const routes = [
   },  
   { path: '/login',
     component: Login
-  },        
+  }, 
+  { path: '/admin/dashboard',
+    component: Dashboard
+  },          
   { path: '/',
     component: Home,
     exactly: true,
   },  
 ]
-
-export const GenerateRoutes = (props) => {
-  return (
-    <div>
-      { props.routes.map((route, i) => (
-        <div key={i}>
-          {(route.path.startsWith('/admin')) ? 
-            <MatchWhenAuthed authenticated={props.authenticated} {...route}/>
-            :
-            <Match {...route} render={(props) => ( <route.component {...props} routes={route.routes}/>)}/>
-          }
-          </div>
-        ))}
-    </div>
-  );
-}
-
-export const MatchWhenAuthed = ({ component: Component, ...route }) => {
-
-  return (
-    <Match {...route} render={props => (route.authenticated ?
-      (<Match {...route} render={(props) => ( <Component {...props} routes={route.routes}/>)}/>)
-      :
-      (<Redirect to={{ pathname: '/', state: { from: props.location }}}/>)
-    )}/>
-  );
-}
-
-export function getActiveRoute(location){
-  if (location !== undefined){
-    for (let route of routes){
-      if (route.path === location.pathname){
-        return route;
-      }
-    }
-  }
-}

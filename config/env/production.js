@@ -1,6 +1,6 @@
 const config = {};
 
-config.port = 8000;
+config.port = 7000;
 config.firebase = {};
 config.firebase.logging = false;
 config.firebase.creds = {

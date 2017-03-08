@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import Text from '../../components/Text';
 import { connect } from 'react-redux';
-import { getTournaments } from './actions';
+import { getTournaments, fixTournaments } from './actions';
 import Archives from '../Archives';
 import Loader from '../../components/Loader';
 
@@ -13,6 +13,7 @@ class Tournaments extends Component {
     this.state = {
         year: (this.props.match.params.year) ? this.props.match.params.year : 2017
     }
+    this.fixData = this.fixData.bind(this);
   }
 
   componentDidMount(){
@@ -24,6 +25,10 @@ class Tournaments extends Component {
         this.setState({year: nextProps.match.params.year});
         this.props.getTournaments(nextProps.match.params.year);    
     }
+  }
+
+  fixData(){
+    this.props.fixTournaments();
   }
 
   render() {
@@ -44,6 +49,9 @@ class Tournaments extends Component {
                                         <li key={i}><Text text={this.props.tournaments[key].name} /></li>
                                     )}
                                 </ul>
+                                <button onClick={this.fixData} className="btn btn-default">
+                                    Fix Data
+                                </button>
                             </div>                       
                             :
                             <Loader />   
@@ -71,7 +79,7 @@ function mapStateToProps(store) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getTournaments }, dispatch)
+  return bindActionCreators({ getTournaments, fixTournaments }, dispatch)
 }
 
 

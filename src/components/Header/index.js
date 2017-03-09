@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Menu from '../Menu';
+import AdminMenu from '../Menu/AdminMenu';
 
 class Header extends Component{
   
@@ -8,7 +9,11 @@ class Header extends Component{
     return(
       <header>
         <div className="header">
-          <Menu/>
+          {(this.props.location.pathname.startsWith('/admin')) ?
+            <AdminMenu />
+            :
+            <Menu/>
+          }
         </div>      
       </header>
     );

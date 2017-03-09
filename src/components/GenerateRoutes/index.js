@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { routes } from '../../routes';
 
 function GenerateRoutes(props){
-    console.log(props);
   return (
     <div>
       {routes.map((route, i) => (
@@ -12,7 +11,7 @@ function GenerateRoutes(props){
           {(route.path.startsWith('/admin')) ?
             <MatchWhenAuthed authenticated={props.authenticated} {...route}/>
             :
-            <Route exact path={route.path} component={route.component} />
+            <Route {...route} />
           }
         </div>
       ))}
@@ -22,7 +21,7 @@ function GenerateRoutes(props){
 
 const MatchWhenAuthed = (route) => {
   if (route.authenticated) {
-    return (<Route exact path={route.path} component={route.component} />);
+    return (<Route {...route} />);
   } else {
     return (<Redirect to={{ pathname: '/login',}}/>);
   }

@@ -34,7 +34,7 @@ class Login extends Component {
     return (
       <div>
         {this.props.isAuthenticated ?
-          <Redirect to='/admin/dashboard'/>
+          <Redirect to='/admin'/>
           :
             <div id="login-page">
               <div className="auth-forms well">

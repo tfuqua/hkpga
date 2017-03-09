@@ -14,8 +14,6 @@ export function getPages(){
    return database.ref('pages').once('value', pages => {
        dispatch(receivePages(pages.val()));
     })
-    .catch((error) => {
-      console.log(error);
-    });
+    .catch((error) => { console.log(error);});
   }
 }

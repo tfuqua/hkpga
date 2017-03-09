@@ -10,7 +10,7 @@ class App extends Component {
   render() {
     return(
         <div className="site">
-          <Header />
+          <Header location={this.props.location}/>
             <div className="site-content">
               <Switch>                    
                 <GenerateRoutes />

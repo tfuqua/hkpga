@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { configureStore } from './store';
 import { Match } from 'react-router-dom';
 import App from './containers/App';
-import {BrowserRouter, browserHistory} from 'react-router-dom';
+import {BrowserRouter, Route} from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
 import styles from './styles/style.scss';
 
@@ -16,7 +16,7 @@ ReactDOM.render(
   <Provider store={store}>
     <IntlProvider locale="en">
       <BrowserRouter>
-        <App/>
+        <Route path="/" component={App}/>
       </BrowserRouter>
     </IntlProvider>
   </Provider> , document.getElementById('root'));

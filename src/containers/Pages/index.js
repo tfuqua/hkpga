@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getPages } from './actions';
 
-class About extends Component {
+class Page extends Component {
 
   componentDidMount(){
     this.props.getPages();
@@ -38,7 +38,7 @@ class About extends Component {
 
 function mapStateToProps(store) {
   return {
-    pages: store.aboutReducer.pages
+    pages: store.pageReducer.pages
   };
 }
 
@@ -47,4 +47,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(About);
+export default connect(mapStateToProps, mapDispatchToProps)(Page);

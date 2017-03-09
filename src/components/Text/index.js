@@ -9,6 +9,9 @@ class Text extends Component {
   }
       
     createMarkup(text){
+        if (typeof text === 'undefined')
+            return  {__html: ''};
+
         return {__html: text[this.props.lang]};
     }
 

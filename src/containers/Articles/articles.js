@@ -12,15 +12,10 @@ class Articles extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.fixData = this.fixData.bind(this);
   }
 
   componentDidMount(){
     this.props.getArticles();
-  }
-
-  fixData(){
-    this.props.fixArticles();
   }
 
   render() {
@@ -30,16 +25,12 @@ class Articles extends Component {
             <h2>Articles</h2>
                 <div className="well">
 
-                  <button onClick={this.fixData} className="btn">Fix Data</button>
-                  <br/>
-
                   <table className="table table-striped table-bordered">
                     <thead>
                       <tr>
                           <th>Title</th>
                           <th>Author</th>
                           <th>Publish Date</th>
-                          <th>Category</th>
                           <th>Actions</th>
                       </tr>
                     </thead>
@@ -48,8 +39,13 @@ class Articles extends Component {
                         <tr key={i}>
                             <td style={{width:'50%'}}><Text text={this.props.articles[key].title}/></td>
                             <td>{this.props.articles[key].author}</td>
-                            <td><FormattedDate value={new Date(this.props.articles[key].publish_date)}/></td>
-                            <td>{this.props.articles[key].category}</td>
+                            <td>
+                                <FormattedDate
+                                value={new Date(this.props.articles[key].updated_at)}
+                                year='numeric'
+                                month='long'
+                                day='2-digit'/>
+                            </td>
                             <td><Link className="btn btn-default" to={`/admin/articles/${key}`}>Edit</Link></td>
                         </tr>
                       )}

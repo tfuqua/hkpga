@@ -9,10 +9,12 @@ const Magazine          = asyncRoute(() => System.import('./containers/Magazine'
 const Releases          = asyncRoute(() => System.import('./containers/Releases'));
 const Tournaments       = asyncRoute(() => System.import('./containers/Tournaments'));
 const Login             = asyncRoute(() => System.import('./containers/Login'));
-const Dashboard         = asyncRoute(() => System.import('./containers/Admin/Dashboard'));
-const AdminTournaments  = asyncRoute(() => System.import('./containers/Admin/Tournaments'));
-const AdminPages        = asyncRoute(() => System.import('./containers/Admin/Pages'));
-const AdminUsers        = asyncRoute(() => System.import('./containers/Admin/Users'));
+const Dashboard         = asyncRoute(() => System.import('./containers/Dashboard'));
+const AdminTournaments  = asyncRoute(() => System.import('./containers/Tournaments/tournaments'));
+const EditTournament    = asyncRoute(() => System.import('./containers/Articles/EditArticle'));
+const AdminPages        = asyncRoute(() => System.import('./containers/Pages/pages'));
+const EditPage          = asyncRoute(() => System.import('./containers/Pages/EditPage'));
+const AdminUsers        = asyncRoute(() => System.import('./containers/Users'));
 const AdminArticles     = asyncRoute(() => System.import('./containers/Articles/articles'));
 const EditArticle       = asyncRoute(() => System.import('./containers/Articles/EditArticle'));
 
@@ -57,12 +59,19 @@ export const routes = [
     component: Dashboard
   },    
   { path: '/admin/pages',
-    component: AdminPages
+    component: AdminPages,
+    exact: true
   },   
+  { path: '/admin/pages/:key',
+    component: EditPage
+  },     
   { path: '/admin/tournaments',
     component: AdminTournaments,
     exact: true,
-  },                   
+  },   
+  { path: '/admin/tournaments/:key',
+    component: EditTournament,
+  },                     
   { path: '/admin/users',
     component: AdminUsers
   },      

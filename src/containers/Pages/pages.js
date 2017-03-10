@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Text from '../../../components/Text';
-import { getPages } from '../../Pages/actions';
+import Text from '../../components/Text';
+import { getPages } from './actions';
+import { FormattedDate } from 'react-intl';
+import Loader from '../../components/Loader';
 
 class Pages extends Component {
 
@@ -12,7 +14,7 @@ class Pages extends Component {
   }
 
   render() {
-    if (this.props.pages){
+    if (!this.props.isFetching && this.props.pages){
       return(
         <div className="container">
             <h2>Pages</h2>
@@ -24,6 +26,7 @@ class Pages extends Component {
                           <th>URL</th>
                           <th>Author</th>
                           <th>Last Updated</th>
+                          <th>Actions</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -32,7 +35,14 @@ class Pages extends Component {
                             <td><Text text={this.props.pages[key].title}/></td>
                             <td>{this.props.pages[key].slug}</td>
                             <td>{this.props.pages[key].author}</td>
-                            <td>{this.props.pages[key].updated_at}</td>
+                            <td>
+                                <FormattedDate
+                                value={new Date(this.props.pages[key].updated_at)}
+                                year='numeric'
+                                month='long'
+                                day='2-digit'/>
+                            </td>
+                            <td><Link className="btn btn-default" to={`/admin/pages/${key}`}>Edit</Link></td>
                         </tr>
                       )}
                     </tbody>
@@ -42,14 +52,15 @@ class Pages extends Component {
       );
 
     } else {
-      return(<div></div>);
+      return(<Loader/>);
     }           
   }
 }
 
 function mapStateToProps(store) {
   return {
-      pages: store.pageReducer.pages
+      pages: store.pageReducer.pages,
+      isFetching: store.pageReducer.isFetching
   };
 }
 

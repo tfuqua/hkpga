@@ -1,4 +1,4 @@
-import database from '../../../database';
+import database from '../../database';
 
 export const GET_USERS = 'GET_USERS';
 

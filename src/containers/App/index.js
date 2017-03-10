@@ -7,6 +7,13 @@ import NoMatch from '../../components/NoMatch';
 
 class App extends Component {
 
+
+  componentWillReceiveProps(nextProps){
+    if (nextProps.location.pathname !== this.props.location.pathname){
+      window.scrollTo(0, 0);
+    }
+  }
+
   render() {
     return(
         <div className="site">

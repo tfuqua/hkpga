@@ -48,7 +48,6 @@ export function getArticle(key){
   return dispatch => {
     const ref = database.ref(`articles/${key}`);
     return ref.once('value', article => {
-      console.log(article.val());
       dispatch(receiveLatestArticle(article.val()));
     })
     .catch((error) => {

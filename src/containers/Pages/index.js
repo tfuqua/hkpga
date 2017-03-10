@@ -4,6 +4,7 @@ import Text from '../../components/Text';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getPages } from './actions';
+import Loader from '../../components/Loader';
 
 class Page extends Component {
 
@@ -13,7 +14,7 @@ class Page extends Component {
 
   render() {
     console.log(this.props.pages);
-    if (typeof this.props.pages !== 'undefined'){
+    if (!this.props.isFetching && typeof this.props.pages !== 'undefined'){
       let page = this.props.pages['about-us'];
       return(
             <div className="container" id="contact-page">
@@ -29,7 +30,7 @@ class Page extends Component {
       );
     } else {
       return (
-        <div></div>
+        <Loader/>
       );
     }
   }

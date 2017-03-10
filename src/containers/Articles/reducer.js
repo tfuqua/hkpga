@@ -4,7 +4,6 @@ function articleReducer(state = {}, action) {
 
   switch(action.type) {
     case GET_ARTICLES:
-    console.log(action);
     return {
         ...state,
         articles: action.articles,
@@ -21,6 +20,8 @@ function articleReducer(state = {}, action) {
     }      
     case GET_ARTICLE:
     return {
+        ...state,
+        isFetching: false,
         article: action.article
     }
     default:

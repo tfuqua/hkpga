@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Loader from '../../../components/Loader';
-import Text from '../../../components/Text';
-import { getAllTournaments, deleteTournament } from '../../Tournaments/actions';
+import Loader from '../../components/Loader';
+import Text from '../../components/Text';
+import { getAllTournaments, deleteTournament } from './actions';
 
 class Tournaments extends Component {
   constructor(props, context) {

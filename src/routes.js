@@ -13,7 +13,8 @@ const Dashboard         = asyncRoute(() => System.import('./containers/Admin/Das
 const AdminTournaments  = asyncRoute(() => System.import('./containers/Admin/Tournaments'));
 const AdminPages        = asyncRoute(() => System.import('./containers/Admin/Pages'));
 const AdminUsers        = asyncRoute(() => System.import('./containers/Admin/Users'));
-const AdminArticles     = asyncRoute(() => System.import('./containers/Admin/Articles'));
+const AdminArticles     = asyncRoute(() => System.import('./containers/Articles/articles'));
+const EditArticle       = asyncRoute(() => System.import('./containers/Articles/EditArticle'));
 
 export const routes = [
   { path: '/about-us',
@@ -46,8 +47,12 @@ export const routes = [
     exact: true,
   },     
   { path: '/admin/articles',
-    component: AdminArticles
-  },     
+    component: AdminArticles,
+    exact: true,
+  },  
+  { path: '/admin/articles/:key',
+    component: EditArticle
+  },      
   { path: '/admin/press',
     component: Dashboard
   },    

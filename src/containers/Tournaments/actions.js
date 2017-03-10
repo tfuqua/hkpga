@@ -1,13 +1,22 @@
 import database from '../../database';
 
 export const GET_TOURNAMENTS = 'GET_TOURNAMENTS';
+export const GET_TOURNAMENT = 'GET_TOURNAMENT';
 export const REQUEST_TOURNAMENTS = 'REQUEST_TOURNAMENTS';
+
 const ref = database.ref('tournaments');
 
 export function receiveTournaments(tournaments) {
   return {
     type: GET_TOURNAMENTS,
     tournaments
+  };
+}
+
+export function receiveTournament(tournament) {
+  return {
+    type: GET_TOURNAMENT,
+    tournament
   };
 }
 
@@ -51,6 +60,19 @@ export function deleteTournament(id){
     deleteRef.remove()
     .then(() => dispatch(getAllTournaments()))
     .catch((error) => { console.log(error);});
+  }
+}
+
+
+/******* Get Tournament by Key *********/
+export function getTournament(key){
+  return dispatch => {
+    dispatch(requestTournaments());
+
+    return database.ref(`tournaments/${key}`).once('value', tournament => {
+      dispatch(receiveTournament(tournament.val()));
+    })
+    .catch((error) => {console.log(error);});
   }
 }
 

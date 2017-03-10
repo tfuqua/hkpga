@@ -1,4 +1,4 @@
-import { GET_TOURNAMENTS, REQUEST_TOURNAMENTS } from './actions';
+import { GET_TOURNAMENTS, REQUEST_TOURNAMENTS, GET_TOURNAMENT } from './actions';
 
 function tournamentReducer(state = {}, action) {
 
@@ -8,7 +8,13 @@ function tournamentReducer(state = {}, action) {
         ...state,
         tournaments: action.tournaments,
         isFetching: false
-    } 
+    }
+    case GET_TOURNAMENT:
+    return {
+        ...state,
+        tournament: action.tournament,
+        isFetching: false
+    }      
     case REQUEST_TOURNAMENTS:
     return {
         ...state,

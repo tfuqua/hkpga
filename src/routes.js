@@ -11,7 +11,7 @@ const Tournaments       = asyncRoute(() => System.import('./containers/Tournamen
 const Login             = asyncRoute(() => System.import('./containers/Login'));
 const Dashboard         = asyncRoute(() => System.import('./containers/Dashboard'));
 const AdminTournaments  = asyncRoute(() => System.import('./containers/Tournaments/tournaments'));
-const EditTournament    = asyncRoute(() => System.import('./containers/Articles/EditArticle'));
+const EditTournament    = asyncRoute(() => System.import('./containers/Tournaments/EditTournament'));
 const AdminPages        = asyncRoute(() => System.import('./containers/Pages/pages'));
 const EditPage          = asyncRoute(() => System.import('./containers/Pages/EditPage'));
 const AdminUsers        = asyncRoute(() => System.import('./containers/Users'));

@@ -41,7 +41,7 @@ class Articles extends Component {
                             <td>{this.props.articles[key].author}</td>
                             <td>
                                 <FormattedDate
-                                value={new Date(this.props.articles[key].updated_at)}
+                                value={new Date(this.props.articles[key].publish_date)}
                                 year='numeric'
                                 month='long'
                                 day='2-digit'/>

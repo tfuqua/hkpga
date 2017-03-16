@@ -10,7 +10,7 @@ import messageReducer from './containers/Message/reducer';
 import pageReducer from './containers/Pages/reducer';
 import releasesReducer from './containers/Releases/reducer';
 import tournamentReducer from './containers/Tournaments/reducer';
-import userReducer from './containers/Admin/Users/reducer';
+import userReducer from './containers/Users/reducer';
 
 const reducer = combineReducers({
     archiveReducer,

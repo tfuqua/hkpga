@@ -56,6 +56,12 @@ export function getArticle(key){
   }
 }
 
+export function saveArticle(id, article){
+  return dispatch => {
+    return database.ref(`articles/${id}`).set(article);
+  }
+}
+
 export function getArticles(){
   return dispatch => {
     dispatch(requestArticles());

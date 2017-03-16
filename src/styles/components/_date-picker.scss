@@ -1,0 +1,26 @@
+.SingleDatePickerInput{
+  border:none;
+  border-bottom:solid 1px #979797;
+}
+.DateInput{
+  font-size: 16px;
+  padding:2px 4px;
+  width:150px;
+  font-weight: 400;
+}
+.DateInput__display-text--focused{
+  background: transparent;
+  border-color: transparent;
+  border-radius: 3px;
+  color: #2d6aa7;
+}
+.DateInput__display-text{
+  padding:0;
+}
+
+.CalendarMonth__day--selected-start,
+.CalendarMonth__day--selected-end,
+.CalendarMonth__day--selected{
+  background: #2d6aa7;
+  border-color: #2d6aa7;
+}

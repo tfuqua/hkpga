@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
-import LatestNews from '../../components/LatestNews';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import LatestNews from "../../components/LatestNews";
+import { Link } from "react-router-dom";
 
 class Home extends Component {
-
   render() {
-    return(
+    return (
       <div>
         <div className="banner">
           <div className="hkpga-title">
@@ -14,10 +13,14 @@ class Home extends Component {
 
           <div id="carousel-block" className="carousel slide">
             <ol className="carousel-indicators">
-              <li data-target="#carousel-block" data-slide-to="0" className="active"></li>
-              <li data-target="#carousel-block" data-slide-to="1"></li>
-              <li data-target="#carousel-block" data-slide-to="2"></li>
-              <li data-target="#carousel-block" data-slide-to="3"></li>
+              <li
+                data-target="#carousel-block"
+                data-slide-to="0"
+                className="active"
+              />
+              <li data-target="#carousel-block" data-slide-to="1" />
+              <li data-target="#carousel-block" data-slide-to="2" />
+              <li data-target="#carousel-block" data-slide-to="3" />
             </ol>
 
             <div className="carousel-inner">
@@ -43,22 +46,30 @@ class Home extends Component {
               </div>
             </div>
 
-            <span className="left carousel-control" data-target="#carousel-block" data-slide="prev" >
-              <span><i className="fa fa-angle-left fa-2x"></i></span>
+            <span
+              className="left carousel-control"
+              data-target="#carousel-block"
+              data-slide="prev"
+            >
+              <span><i className="fa fa-angle-left fa-2x" /></span>
             </span>
-            <span className="right carousel-control" data-target="#carousel-block" data-slide="next">
-              <span><i className="fa fa-angle-right fa-2x"></i></span>
+            <span
+              className="right carousel-control"
+              data-target="#carousel-block"
+              data-slide="next"
+            >
+              <span><i className="fa fa-angle-right fa-2x" /></span>
             </span>
           </div>
         </div>
 
-          <div className="container">
-            <div className="row">
+        <div className="container-fluid">
+          <div className="row">
             <div className="col-md-8">
               <LatestNews />
-            </div>  
             </div>
           </div>
+        </div>
       </div>
     );
   }

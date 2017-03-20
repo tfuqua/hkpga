@@ -26,6 +26,7 @@ class ArticleForm extends Component {
   }
   
   handleFieldChange(field, content){
+    
     let newState = {...this.state.article, [field['en']]: content};
 
     console.log(newState);

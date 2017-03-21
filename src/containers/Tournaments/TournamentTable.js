@@ -8,8 +8,8 @@ function TournamentTable(props) {
     <table className="table table-striped table-bordered">
       <thead>
         <tr>
-          <th onClick={props.sort.bind(this, "name.en")}>Name</th>
-          <th onClick={props.sort.bind(this, "year")}>Year</th>
+          <th>Name</th>
+          <th>Year</th>
           <th>Actions</th>
         </tr>
       </thead>

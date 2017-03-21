@@ -13,8 +13,6 @@ import styles from "./styles/style.scss";
 const store = configureStore(window.__INITIAL_STATE__);
 
 function render(Component) {
-  console.log(styles);
-
   ReactDOM.render(
     <Provider store={store}>
       <IntlProvider locale="en">

@@ -14,5 +14,8 @@
     // Enable word based suggestions
     "editor.wordBasedSuggestions": true,
     "vsicons.presets.angular": false,
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "prettier.singleQuote": true,
+    "prettier.printWidth": 120,
+    "prettier.jsxBracketSameLine": true
 }

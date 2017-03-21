@@ -6,26 +6,24 @@ import Footer from '../../components/Footer';
 import NoMatch from '../../components/NoMatch';
 
 class App extends Component {
-
-
-  componentWillReceiveProps(nextProps){
-    if (nextProps.location.pathname !== this.props.location.pathname){
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location.pathname !== this.props.location.pathname) {
       window.scrollTo(0, 0);
     }
   }
 
   render() {
-    return(
-        <div className="site">
-          <Header location={this.props.location}/>
-            <div className="site-content">
-              <Switch>                    
-                <GenerateRoutes />
-                <Route component={NoMatch}/>
-              </Switch>
-            </div>
-          <Footer />
+    return (
+      <div className="site">
+        <Header location={this.props.location} />
+        <div className="site-content">
+          <Switch>
+            <GenerateRoutes />
+            <Route component={NoMatch} />
+          </Switch>
         </div>
+        <Footer />
+      </div>
     );
   }
 }

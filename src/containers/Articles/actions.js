@@ -1,9 +1,12 @@
-import database from '../../database';
+import database from "../../database";
+import config from "../../../config/env/development";
+import axios from "axios";
 
-export const GET_ARTICLES = 'GET_ARTICLES';
-export const REQUEST_ARTICLES = 'REQUEST_ARTICLES';
-export const GET_ARTICLE = 'GET_ARTICLE';
-export const GET_LATEST_ARTICLE = 'GET_LATEST_ARTICLE';
+export const GET_ARTICLES = "GET_ARTICLES";
+export const REQUEST_ARTICLES = "REQUEST_ARTICLES";
+export const GET_ARTICLE = "GET_ARTICLE";
+export const GET_ARTICLE_QUERY = "GET_ARTICLE_QUERY";
+export const GET_LATEST_ARTICLE = "GET_LATEST_ARTICLE";
 
 export function receiveArticles(articles) {
   return {
@@ -12,11 +15,18 @@ export function receiveArticles(articles) {
   };
 }
 
-export function receiveArticle(article){
+export function receiveArticle(article) {
   return {
     type: GET_ARTICLE,
     article
-  }
+  };
+}
+
+export function receiveArticleQuery(query) {
+  return {
+    type: GET_ARTICLE_QUERY,
+    query
+  };
 }
 
 export function receiveLatestArticle(article) {
@@ -26,50 +36,101 @@ export function receiveLatestArticle(article) {
   };
 }
 
-export function requestArticles(){
+export function requestArticles() {
   return {
     type: REQUEST_ARTICLES
   };
 }
 
-export function getLatestArticle(){
+export function getLatestArticle() {
   return dispatch => {
-    const ref = database.ref('articles');
-    return ref.orderByChild('publish_date').limitToLast(1).once('value', article => {
-      dispatch(receiveLatestArticle(article.val()));
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }
+    const ref = database.ref("articles");
+    return ref
+      .orderByChild("publish_date")
+      .limitToLast(1)
+      .once("value", article => {
+        dispatch(receiveLatestArticle(article.val()));
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 }
 
-export function getArticle(key){
+export function getArticle(key) {
   return dispatch => {
     const ref = database.ref(`articles/${key}`);
-    return ref.once('value', article => {
-      dispatch(receiveLatestArticle(article.val()));
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }
+    return ref
+      .once("value", article => {
+        dispatch(receiveLatestArticle(article.val()));
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 }
 
-export function saveArticle(id, article){
+export function saveArticle(id, article) {
   return dispatch => {
     return database.ref(`articles/${id}`).set(article);
-  }
+  };
 }
 
-export function getArticles(){
+export function getArticles() {
+  let t1 = new Date();
+
   return dispatch => {
     dispatch(requestArticles());
 
-    const ref = database.ref('articles');
-    return ref.orderByChild('publish_date').once('value', articles => {
-      dispatch(receiveArticles(articles.val()));
-    })
-    .catch((error) => { console.log(error);});
-  }
+    const ref = database.ref("articles");
+    return ref
+      .orderByChild("publish_date")
+      .once("value", articles => {
+        dispatch(receiveArticles(articles.val()));
+        let t2 = new Date();
+        console.log(t2 - t1);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+}
+
+export function queryArticles(query) {
+  let t1 = new Date();
+
+  return dispatch => {
+    dispatch(requestArticles());
+
+    return axios
+      .get(`${config.firebase.creds.databaseURL}/articles.json?shallow=true`)
+      .then(res => {
+        const keys = Object.keys(res.data).sort();
+        const numberOfResults = keys.length;
+        const totalPages = Math.ceil(numberOfResults / 10);
+
+        database
+          .ref("articles")
+          .orderByKey()
+          .startAt(keys[10 * (query.page - 1)])
+          .limitToFirst(10)
+          .once("value", users => {
+            dispatch(
+              receiveArticleQuery({
+                data: users.val(),
+                numberOfResults,
+                totalPages,
+                current: query.page,
+                first: query.page === 1 ? true : false,
+                last: query.page === totalPages
+              })
+            );
+            let t2 = new Date();
+            console.log(t2 - t1);
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      });
+  };
 }

@@ -1,66 +1,39 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { FormattedDate } from "react-intl";
-import { Link } from "react-router-dom";
 import Loader from "../../components/Loader";
-import Text from "../../components/Text";
+import PaginatedTable from "../../components/PaginatedTable";
+import ArticleTable from "./ArticleTable";
 import { fixArticles } from "../Data/actions";
-import { getArticles } from "./actions";
+import { getArticles, queryArticles } from "./actions";
 
 class Articles extends Component {
   constructor(props, context) {
     super(props, context);
+
+    this.fetchArticles = this.fetchArticles.bind(this);
   }
 
   componentDidMount() {
-    this.props.getArticles();
+    //this.props.getArticles();
+    this.props.queryArticles({ page: 1 });
+  }
+
+  fetchArticles(query) {
+    this.props.queryArticles(query);
   }
 
   render() {
-    if (!this.props.isFetching && this.props.articles) {
+    if (this.props.query) {
       return (
         <div className="container-fluid">
           <h2>Articles</h2>
-          <div className="well">
-
-            <table className="table table-striped table-bordered">
-              <thead>
-                <tr>
-                  <th>Title</th>
-                  <th>Author</th>
-                  <th>Publish Date</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {Object.keys(this.props.articles).map((key, i) => (
-                  <tr key={i}>
-                    <td style={{ width: "50%" }}>
-                      <Text text={this.props.articles[key].title} />
-                    </td>
-                    <td>{this.props.articles[key].author}</td>
-                    <td>
-                      <FormattedDate
-                        value={new Date(this.props.articles[key].publish_date)}
-                        year="numeric"
-                        month="long"
-                        day="2-digit"
-                      />
-                    </td>
-                    <td>
-                      <Link
-                        className="btn btn-default"
-                        to={`/admin/articles/${key}`}
-                      >
-                        Edit
-                      </Link>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <PaginatedTable
+            isFetching={this.props.isFetching}
+            fetch={this.fetchArticles}
+            query={this.props.query}
+            component={<ArticleTable />}
+          />
         </div>
       );
     } else {
@@ -71,13 +44,16 @@ class Articles extends Component {
 
 function mapStateToProps(store) {
   return {
-    articles: store.articleReducer.articles,
+    query: store.articleReducer.query,
     isFetching: store.articleReducer.isFetching
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getArticles, fixArticles }, dispatch);
+  return bindActionCreators(
+    { getArticles, fixArticles, queryArticles },
+    dispatch
+  );
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Articles);

@@ -10,17 +10,21 @@ class EditArticle extends Component {
     this.props.getArticle(this.props.match.params.key);
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log(this.props.match.params.key);
+    console.log(nextProps.match.params.key);
+  }
+
   render() {
     if (this.props.article) {
       return (
         <div className="container-fluid">
           <h2>Edit Article</h2>
-          <div className="well">
-            <ArticleForm
-              article={this.props.article}
-              id={this.props.match.params.key}
-            />
-          </div>
+
+          <ArticleForm
+            article={this.props.article}
+            id={this.props.match.params.key}
+          />
         </div>
       );
     } else {

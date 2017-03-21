@@ -65,15 +65,24 @@ class Menu extends Component {
             </ul>
 
             <ul className="social">
-              <Link to="https://www.facebook.com/thehkpga" target="_blank">
-                <li><i className="fa fa-facebook" /></li>
-              </Link>
-              <Link to="https://twitter.com/thehkpga" target="_blank">
-                <li><i className="fa fa-twitter" /></li>
-              </Link>
-              <Link to="http://weibo.com/u/5209724886" target="_blank">
-                <li><i className="fa fa-weibo" /></li>
-              </Link>
+              <li>
+                <a
+                  href="https://www.facebook.com/hongkonggolfassociation/"
+                  target="_blank"
+                >
+                  <i className="fa fa-facebook" />
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/thehkpga" target="_blank">
+                  <i className="fa fa-twitter" />
+                </a>
+              </li>
+              <li>
+                <a href="http://weibo.com/u/5209724886" target="_blank">
+                  <i className="fa fa-weibo" />
+                </a>
+              </li>
             </ul>
           </div>
 

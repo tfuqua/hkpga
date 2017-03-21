@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import Loader from "../../components/Loader";
-import PaginatedTable from "../../components/PaginatedTable";
-import TournamentTable from "./TournamentTable";
-import { deleteTournament, queryTournaments } from "./actions";
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import Loader from '../../components/Loader';
+import PaginatedTable from '../../components/PaginatedTable';
+import TournamentTable from './TournamentTable';
+import { deleteTournament, queryTournaments } from './actions';
 
 class Tournaments extends Component {
   constructor(props, context) {
@@ -26,8 +26,6 @@ class Tournaments extends Component {
   }
 
   render() {
-    console.log(this.props);
-
     if (this.props.query) {
       return (
         <div className="container-fluid">

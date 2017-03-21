@@ -3,6 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import TextField from '../../components/TextField';
+import Select from '../../components/Select';
+import { userFields, genders } from '../../util/data';
 import { saveUser } from './actions';
 
 class UserForm extends Component {
@@ -18,6 +20,7 @@ class UserForm extends Component {
     this.saveUser = this.saveUser.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
     this.handleFieldChange = this.handleFieldChange.bind(this);
+    this.handleSelectChange = this.handleSelectChange.bind(this);
   }
 
   handleDateChange(date) {
@@ -40,11 +43,18 @@ class UserForm extends Component {
     };
   }
 
+  handleSelectChange(field) {
+    return e => {
+      this.setState({ user: { ...this.state.user, [field]: e.target.value } });
+    };
+  }
+
   saveUser() {
     this.props.saveUser(this.state.id, this.state.user);
   }
 
   render() {
+    console.log(genders);
     return (
       <div className="">
 
@@ -54,30 +64,130 @@ class UserForm extends Component {
 
         <h4>Name & Standing</h4>
         <hr />
-        <div className="form-group">
-          <label>English Name</label>
-          <TextField
-            showError={this.state.showErrors}
-            text={this.state.user.name.en}
-            onFieldChanged={this.handleFieldChange('name.en')}
-          />
+
+        <div className="row">
+          <div className="col-sm-6">
+            <div className="form-group">
+              <label>English Name</label>
+              <TextField
+                showError={this.state.showErrors}
+                text={this.state.user.name.en}
+                onFieldChanged={this.handleFieldChange('name.en')}
+              />
+            </div>
+            <div className="form-group">
+              <label>Chinese Name</label>
+              <TextField
+                showError={this.state.showErrors}
+                text={this.state.user.name['zh-cn']}
+                onFieldChanged={this.handleFieldChange('name.zh-cn')}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Chinese Name</label>
+              <TextField
+                showError={this.state.showErrors}
+                text={this.state.user.name['zh-hk']}
+                onFieldChanged={this.handleFieldChange('name.zh-hk')}
+              />
+            </div>
+          </div>
+
+          <div className="col-sm-6">
+            <div className="form-group">
+              <label>Committee</label>
+              <Select
+                handleChange={this.handleSelectChange('committee')}
+                value={this.state.user.committee}
+                options={userFields.committee}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Honorary Position</label>
+              <Select
+                handleChange={this.handleSelectChange('honorary')}
+                value={this.state.user.honorary}
+                options={userFields.honorary}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>HKPGA Relation</label>
+              <Select
+                handleChange={this.handleSelectChange('relation')}
+                value={this.state.user.relation}
+                options={userFields.relations}
+              />
+            </div>
+          </div>
         </div>
-        <div className="form-group">
-          <label>Chinese Name</label>
-          <TextField
-            showError={this.state.showErrors}
-            text={this.state.user.name['zh-cn']}
-            onFieldChanged={this.handleFieldChange('name.zh-cn')}
-          />
+
+        <br />
+        <h4>Personal Info</h4>
+        <hr />
+
+        <div className="row">
+          <div className="col-sm-6">
+            <div className="form-group">
+              <label>Email</label>
+              <TextField
+                showError={this.state.showErrors}
+                text={this.state.user.email}
+                onFieldChanged={this.handleFieldChange('email')}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Phone</label>
+              <TextField
+                showError={this.state.showErrors}
+                text={this.state.user.phone}
+                onFieldChanged={this.handleFieldChange('phone')}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Gender</label>
+              <Select
+                handleChange={this.handleSelectChange('gender')}
+                value={this.state.user.gender}
+                options={genders}
+              />
+            </div>
+          </div>
+
+          <div className="col-sm-6">
+            <div className="form-group">
+              <label>Member Since</label>
+              <TextField
+                showError={this.state.showErrors}
+                text={this.state.user.member_since}
+                onFieldChanged={this.handleFieldChange('member_since')}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Profile Picture</label>
+              <TextField
+                showError={this.state.showErrors}
+                text={this.state.user.profile_picture}
+                onFieldChanged={this.handleFieldChange('profile_picture')}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Pro Since</label>
+              <TextField
+                showError={this.state.showErrors}
+                text={this.state.user.pro_since}
+                onFieldChanged={this.handleFieldChange('pro_since')}
+              />
+            </div>
+          </div>
         </div>
-        <div className="form-group">
-          <label>Email</label>
-          <TextField
-            showError={this.state.showErrors}
-            text={this.state.user.email}
-            onFieldChanged={this.handleFieldChange('email')}
-          />
-        </div>
+
       </div>
     );
   }

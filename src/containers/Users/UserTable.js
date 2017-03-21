@@ -11,7 +11,8 @@ function UserTable(props) {
         <tr>
           <th>Name</th>
           <th>Email</th>
-          <th>Active</th>
+          <th>Committee</th>
+          <th>Honorary</th>
           <th>isAdmin</th>
           <th>Actions</th>
         </tr>
@@ -21,7 +22,8 @@ function UserTable(props) {
           <tr key={i}>
             <td><Text text={user.name} /></td>
             <td>{user.email}</td>
-            <td>{user.isActive ? 'yes' : 'no'}</td>
+            <td>{user.committee}</td>
+            <td>{user.honorary}</td>
             <td>{user.isAdmin ? 'yes' : 'no'}</td>
             <td>
               <Link to={`/admin/users/${user.id}`}>

@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { Link } from "react-router-dom";
-import Logo from "../../images/hkpga-logo.png";
-import translations from "../../util/translations";
-import { setLang, getLang } from "../../containers/Lang/actions";
-import { logoutUser } from "../../containers/Login/actions";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { NavLink } from 'react-router-dom';
+import Logo from '../../images/hkpga-logo.png';
+import translations from '../../util/translations';
+import { setLang, getLang } from '../../containers/Lang/actions';
+import { logoutUser } from '../../containers/Login/actions';
 
 class Menu extends Component {
   render() {
@@ -18,9 +18,9 @@ class Menu extends Component {
             <span className="icon-bar" />
             <span className="icon-bar" />
           </button>
-          <Link className="navbar-brand" to="/">
+          <NavLink className="navbar-brand" to="/">
             {/*<img alt="Hong Kong PGA" src={Logo} className="logo-img"/>*/}
-          </Link>
+          </NavLink>
         </div>
 
         <div className="container-fluid collapse navbar-collapse">
@@ -28,9 +28,9 @@ class Menu extends Component {
             {this.props.authenticated
               ? <ul className="auth-links">
                   <li>
-                    <Link to="/admin">
+                    <NavLink to="/admin">
                       {translations[this.props.lang].MEMBER_DASHBOARD}
-                    </Link>
+                    </NavLink>
                   </li>
                   <li>
                     <a to="#" onClick={this.props.logoutUser}>
@@ -40,25 +40,25 @@ class Menu extends Component {
                 </ul>
               : <ul className="auth-links">
                   <li>
-                    <Link to="/login">
+                    <NavLink to="/login">
                       {translations[this.props.lang].LOGIN}
-                    </Link>
+                    </NavLink>
                   </li>
                 </ul>}
 
             <ul className="language">
               <li className="user-lang">
-                <a onClick={this.props.setLang.bind(this, "en")}>
+                <a onClick={this.props.setLang.bind(this, 'en')}>
                   {translations[this.props.lang].LANG_EN}
                 </a>
               </li>
               <li className="user-lang">
-                <a onClick={this.props.setLang.bind(this, "zh-hk")}>
+                <a onClick={this.props.setLang.bind(this, 'zh-hk')}>
                   {translations[this.props.lang].LANG_ZH_HK}
                 </a>
               </li>
               <li className="user-lang">
-                <a onClick={this.props.setLang.bind(this, "zh-cn")}>
+                <a onClick={this.props.setLang.bind(this, 'zh-cn')}>
                   {translations[this.props.lang].LANG_ZH_CN}
                 </a>
               </li>
@@ -66,10 +66,7 @@ class Menu extends Component {
 
             <ul className="social">
               <li>
-                <a
-                  href="https://www.facebook.com/hongkonggolfassociation/"
-                  target="_blank"
-                >
+                <a href="https://www.facebook.com/hongkonggolfassociation/" target="_blank">
                   <i className="fa fa-facebook" />
                 </a>
               </li>
@@ -88,12 +85,12 @@ class Menu extends Component {
 
           <div className="main-nav">
             <ul className="nav navbar-nav navbar-right" id="page-nav">
-              <li><Link to="/admin">Dashboard</Link></li>
-              <li><Link to="/admin/articles">Articles</Link></li>
-              <li><Link to="/admin/press">Press</Link></li>
-              <li><Link to="/admin/pages">Pages</Link></li>
-              <li><Link to="/admin/tournaments">Tournaments</Link></li>
-              <li><Link to="/admin/users">Users</Link></li>
+              <li><NavLink activeClassName="active" to="/admin">Dashboard</NavLink></li>
+              <li><NavLink activeClassName="active" to="/admin/articles">Articles</NavLink></li>
+              <li><NavLink activeClassName="active" to="/admin/press">Press</NavLink></li>
+              <li><NavLink activeClassName="active" to="/admin/pages">Pages</NavLink></li>
+              <li><NavLink activeClassName="active" to="/admin/tournaments">Tournaments</NavLink></li>
+              <li><NavLink activeClassName="active" to="/admin/users">Users</NavLink></li>
             </ul>
           </div>
 

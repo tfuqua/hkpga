@@ -1,0 +1,19 @@
+.accordion{
+    border:1px solid #ccc;
+    border-bottom: none;
+
+    .accordion-header{
+        background:#eee; 
+        padding:5px 10px;
+    }
+    .accordion-content{
+        padding:10px;
+        border-top:1px solid #ccc;
+    }
+}
+
+.accordion-wrapper{
+    .accordion:last-of-type {
+     border-bottom:1px solid #ccc;   
+    }
+}

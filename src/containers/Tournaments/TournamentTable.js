@@ -1,5 +1,6 @@
-import React from "react";
-import Text from "../../components/Text";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Text from '../../components/Text';
 
 function TournamentTable(props) {
   let data = props.data ? props.data : [];
@@ -18,7 +19,9 @@ function TournamentTable(props) {
           <tr key={i}>
             <td><Text text={tournament.name} /></td>
             <td>{tournament.year}</td>
-            <td><button className="btn btn-default">Edit</button></td>
+            <td>
+              <Link to={`/admin/tournaments/${tournament.id}`}><button className="btn btn-default">Edit</button></Link>
+            </td>
           </tr>
         ))}
       </tbody>

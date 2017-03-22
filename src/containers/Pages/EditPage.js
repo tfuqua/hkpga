@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { FormattedDate } from "react-intl";
-import { Link } from "react-router-dom";
-import Loader from "../../components/Loader";
-import config from "../../../config/env/development";
-import ReactQuill from "react-quill";
-import Text from "../../components/Text";
-import { getPage } from "./actions";
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { FormattedDate } from 'react-intl';
+import { Link } from 'react-router-dom';
+import Loader from '../../components/Loader';
+import config from '../../../config/env/development';
+import ReactQuill from 'react-quill';
+import Text from '../../components/Text';
+import { getPage } from './actions';
 
 class EditArticle extends Component {
   constructor(props, context) {
@@ -24,24 +24,16 @@ class EditArticle extends Component {
       return (
         <div className="container-fluid">
           <h2>Edit Page</h2>
-          <div className="well">
-            <ReactQuill
-              theme="snow"
-              modules={config.editor.modules}
-              formats={config.editor.formats}
-              className=""
-            >
+          <ReactQuill theme="snow" modules={config.editor.modules} formats={config.editor.formats} className="">
 
-              <div
-                key="editor"
-                ref="editor"
-                className="quill-contents my-class-name"
-                dangerouslySetInnerHTML={{ __html: this.props.page.html.en }}
-              />
+            <div
+              key="editor"
+              ref="editor"
+              className="quill-contents my-class-name"
+              dangerouslySetInnerHTML={{ __html: this.props.page.html.en }}
+            />
 
-            </ReactQuill>
-
-          </div>
+          </ReactQuill>
         </div>
       );
     } else {

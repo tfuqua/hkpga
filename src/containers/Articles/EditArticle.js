@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { getArticle } from "./actions";
-import Loader from "../../components/Loader";
-import ArticleForm from "./ArticleForm";
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { getArticle } from './actions';
+import Loader from '../../components/Loader';
+import ArticleForm from './ArticleForm';
 
 class EditArticle extends Component {
   componentDidMount() {
@@ -21,10 +21,11 @@ class EditArticle extends Component {
         <div className="container-fluid">
           <h2>Edit Article</h2>
 
-          <ArticleForm
-            article={this.props.article}
-            id={this.props.match.params.key}
-          />
+          <pre>
+            {JSON.stringify(this.props.article, null, ' ')}
+          </pre>
+
+          <ArticleForm article={this.props.article} id={this.props.match.params.key} />
         </div>
       );
     } else {

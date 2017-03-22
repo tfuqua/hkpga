@@ -50,3 +50,4 @@ export const userFields = {
 };
 
 export const genders = [{ value: 'male', name: 'Male' }, { value: 'female', name: 'Female' }];
+export const trueFalse = [{ value: 'false', name: 'False' }, { value: 'true', name: 'True' }];

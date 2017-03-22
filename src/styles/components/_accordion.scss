@@ -3,12 +3,51 @@
     border-bottom: none;
 
     .accordion-header{
-        background:#eee; 
         padding:5px 10px;
+        position:relative;
+        
+        &:hover{
+            cursor:pointer;
+            background:#eee; 
+        }
+
+        &:after{
+            font-family: fontawesome;
+            font-size:18px;
+            color:#666;
+            line-height: 30px;
+            content:'\f054';
+            position: absolute;
+            right:10px;
+            top:50%;
+            margin-top:-15px;
+        }
     }
     .accordion-content{
         padding:10px;
-        border-top:1px solid #ccc;
+
+        opacity:1;
+        display:block;
+        transition: all 1s ease-out; 
+    }
+
+    &.closed{
+        .accordion-content{
+            display:none;
+        }
+    }
+
+    &.open{
+        .accordion-header{  
+
+            &:after{
+                -webkit-transform: rotate(90deg);
+                -moz-transform: rotate(90deg);
+                -o-transform: rotate(90deg);
+                -ms-transform: rotate(90deg);
+                transform: rotate(90deg);
+            }
+        }
     }
 }
 

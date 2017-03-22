@@ -15,11 +15,11 @@ class Accordion extends Component {
   }
   render() {
     return (
-      <div className="accordion">
+      <div className={this.state.open ? 'accordion open' : 'accordion closed'}>
         <div className="accordion-header" onClick={this.togglePane}>
           <h4>{this.props.header}</h4>
         </div>
-        <div className={this.state.open ? ' accordion-content' : 'accordion-content hidden'}>
+        <div className="accordion-content">
           {this.props.children}
         </div>
       </div>

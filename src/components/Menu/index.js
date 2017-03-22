@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { Link } from "react-router-dom";
-import Logo from "../../images/hkpga-logo.png";
-import translations from "../../util/translations";
-import { setLang, getLang } from "../../containers/Lang/actions";
-import { logoutUser } from "../../containers/Login/actions";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
+import Logo from '../../images/hkpga-logo.png';
+import translations from '../../util/translations';
+import { setLang, getLang } from '../../containers/Lang/actions';
+import { logoutUser } from '../../containers/Login/actions';
 
 class Menu extends Component {
   render() {
@@ -20,7 +20,7 @@ class Menu extends Component {
               <span className="icon-bar" />
             </button>
             <Link className="navbar-brand" to="/">
-              {/*<img alt="Hong Kong PGA" src={Logo} className="logo-img"/>*/}
+              {<img alt="Hong Kong PGA" src={Logo} className="logo-img" />}
             </Link>
           </div>
 
@@ -49,17 +49,17 @@ class Menu extends Component {
 
               <ul className="language">
                 <li className="user-lang">
-                  <a onClick={this.props.setLang.bind(this, "en")}>
+                  <a onClick={this.props.setLang.bind(this, 'en')}>
                     {translations[this.props.lang].LANG_EN}
                   </a>
                 </li>
                 <li className="user-lang">
-                  <a onClick={this.props.setLang.bind(this, "zh-hk")}>
+                  <a onClick={this.props.setLang.bind(this, 'zh-hk')}>
                     {translations[this.props.lang].LANG_ZH_HK}
                   </a>
                 </li>
                 <li className="user-lang">
-                  <a onClick={this.props.setLang.bind(this, "zh-cn")}>
+                  <a onClick={this.props.setLang.bind(this, 'zh-cn')}>
                     {translations[this.props.lang].LANG_ZH_CN}
                   </a>
                 </li>
@@ -84,11 +84,7 @@ class Menu extends Component {
                   <Link to="/">{translations[this.props.lang].MENU_HOME}</Link>
                 </li>
                 <li>
-                  <Link
-                    to="/about-us"
-                    className="dropdown-toggle"
-                    data-toggle="dropdown"
-                  >
+                  <Link to="/about-us" className="dropdown-toggle" data-toggle="dropdown">
                     {translations[this.props.lang].MENU_ABOUT}
                   </Link>
                   <ul className="dropdown-menu">
@@ -110,11 +106,7 @@ class Menu extends Component {
                   </ul>
                 </li>
                 <li>
-                  <Link
-                    to="/tournaments"
-                    className="dropdown-toggle"
-                    data-toggle="dropdown"
-                  >
+                  <Link to="/tournaments" className="dropdown-toggle" data-toggle="dropdown">
                     {translations[this.props.lang].MENU_TOURNAMENTS}
                   </Link>
                   <ul className="dropdown-menu">
@@ -131,11 +123,7 @@ class Menu extends Component {
                   </ul>
                 </li>
                 <li>
-                  <Link
-                    to="/pros"
-                    className="dropdown-toggle"
-                    data-toggle="dropdown"
-                  >
+                  <Link to="/pros" className="dropdown-toggle" data-toggle="dropdown">
                     {translations[this.props.lang].MENU_PROS}
                   </Link>
                   <ul className="dropdown-menu">
@@ -152,11 +140,7 @@ class Menu extends Component {
                   </ul>
                 </li>
                 <li>
-                  <Link
-                    to="/"
-                    className="dropdown-toggle hidden-xs hidden-sm"
-                    data-toggle="dropdown"
-                  >
+                  <Link to="/" className="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
                     {translations[this.props.lang].MENU_COMMUNITY}
                   </Link>
                   <ul className="dropdown-menu">
@@ -168,11 +152,7 @@ class Menu extends Component {
                   </ul>
                 </li>
                 <li>
-                  <Link
-                    to="/press/releases"
-                    className="dropdown-toggle"
-                    data-toggle="dropdown"
-                  >
+                  <Link to="/press/releases" className="dropdown-toggle" data-toggle="dropdown">
                     {translations[this.props.lang].MENU_PRESS}
                   </Link>
                   <ul className="dropdown-menu">

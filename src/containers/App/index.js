@@ -18,13 +18,11 @@ class App extends Component {
       <div className="site">
         <Header location={this.props.location} />
         <div className="site-content">
-          <div className="container-fluid">
-            <Message location={this.props.location} />
-            <Switch>
-              <GenerateRoutes />
-              <Route component={NoMatch} />
-            </Switch>
-          </div>
+          <Message location={this.props.location} />
+          <Switch>
+            <GenerateRoutes />
+            <Route component={NoMatch} />
+          </Switch>
         </div>
         <Footer />
       </div>

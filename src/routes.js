@@ -1,23 +1,23 @@
-import asyncRoute from './util/asyncRoute';
+import routeLoader from './util/routeLoader';
 
 //App Specific components
-const Home = asyncRoute(() => System.import('./containers/Home'));
-const Page = asyncRoute(() => System.import('./containers/Pages'));
-const Contact = asyncRoute(() => System.import('./containers/Contact'));
-const Coverage = asyncRoute(() => System.import('./containers/Coverage'));
-const Magazine = asyncRoute(() => System.import('./containers/Magazine'));
-const Releases = asyncRoute(() => System.import('./containers/Releases'));
-const Tournaments = asyncRoute(() => System.import('./containers/Tournaments'));
-const Login = asyncRoute(() => System.import('./containers/Login'));
-const Dashboard = asyncRoute(() => System.import('./containers/Dashboard'));
-const AdminTournaments = asyncRoute(() => System.import('./containers/Tournaments/tournaments'));
-const EditTournament = asyncRoute(() => System.import('./containers/Tournaments/EditTournament'));
-const AdminPages = asyncRoute(() => System.import('./containers/Pages/pages'));
-const EditPage = asyncRoute(() => System.import('./containers/Pages/EditPage'));
-const AdminUsers = asyncRoute(() => System.import('./containers/Users'));
-const EditUser = asyncRoute(() => System.import('./containers/Users/EditUser'));
-const AdminArticles = asyncRoute(() => System.import('./containers/Articles/articles'));
-const EditArticle = asyncRoute(() => System.import('./containers/Articles/EditArticle'));
+const Home = routeLoader(() => System.import('./containers/Home'));
+const Page = routeLoader(() => System.import('./containers/Pages'));
+const Contact = routeLoader(() => System.import('./containers/Contact'));
+const Coverage = routeLoader(() => System.import('./containers/Coverage'));
+const Magazine = routeLoader(() => System.import('./containers/Magazine'));
+const Releases = routeLoader(() => System.import('./containers/Releases'));
+const Tournaments = routeLoader(() => System.import('./containers/Tournaments'));
+const Login = routeLoader(() => System.import('./containers/Login'));
+const Dashboard = routeLoader(() => System.import('./containers/Dashboard'));
+const AdminTournaments = routeLoader(() => System.import('./containers/Tournaments/tournaments'));
+const EditTournament = routeLoader(() => System.import('./containers/Tournaments/EditTournament'));
+const AdminPages = routeLoader(() => System.import('./containers/Pages/pages'));
+const EditPage = routeLoader(() => System.import('./containers/Pages/EditPage'));
+const AdminUsers = routeLoader(() => System.import('./containers/Users'));
+const EditUser = routeLoader(() => System.import('./containers/Users/EditUser'));
+const AdminArticles = routeLoader(() => System.import('./containers/Articles/articles'));
+const EditArticle = routeLoader(() => System.import('./containers/Articles/EditArticle'));
 
 export const routes = [
   {

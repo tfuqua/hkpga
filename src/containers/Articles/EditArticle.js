@@ -7,12 +7,9 @@ import ArticleForm from './ArticleForm';
 
 class EditArticle extends Component {
   componentDidMount() {
-    this.props.getArticle(this.props.match.params.key);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log(this.props.match.params.key);
-    console.log(nextProps.match.params.key);
+    if (!this.props.article) {
+      this.props.getArticle(this.props.match.params.key);
+    }
   }
 
   render() {

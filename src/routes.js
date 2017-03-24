@@ -12,6 +12,7 @@ const Login = routeLoader(() => System.import('./containers/Login'));
 const Dashboard = routeLoader(() => System.import('./containers/Dashboard'));
 const AdminTournaments = routeLoader(() => System.import('./containers/Tournaments/tournaments'));
 const EditTournament = routeLoader(() => System.import('./containers/Tournaments/EditTournament'));
+const EditTournamentResults = routeLoader(() => System.import('./containers/Tournaments/EditResults'));
 const AdminPages = routeLoader(() => System.import('./containers/Pages/pages'));
 const EditPage = routeLoader(() => System.import('./containers/Pages/EditPage'));
 const AdminUsers = routeLoader(() => System.import('./containers/Users'));
@@ -25,13 +26,14 @@ export const routes = [
     component: Page
   },
   {
-    path: '/tournaments/:year',
+    path: '/tournaments',
     component: Tournaments,
     exact: true
   },
   {
-    path: '/tournaments',
-    component: Tournaments
+    path: '/tournaments/:year',
+    component: Tournaments,
+    exact: true
   },
   {
     path: '/press/releases',
@@ -87,7 +89,12 @@ export const routes = [
   },
   {
     path: '/admin/tournaments/:key',
-    component: EditTournament
+    component: EditTournament,
+    exact: true
+  },
+  {
+    path: '/admin/tournaments/:key/results',
+    component: EditTournamentResults
   },
   {
     path: '/admin/users',

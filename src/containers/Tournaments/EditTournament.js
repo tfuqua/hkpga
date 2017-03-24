@@ -1,11 +1,9 @@
-import React, { Component } from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { FormattedDate } from "react-intl";
-import { Link } from "react-router-dom";
-import Loader from "../../components/Loader";
-import Text from "../../components/Text";
-import { getTournament } from "./actions";
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import Loader from '../../components/Loader';
+import TournamentForm from './TournamentForm';
+import { getTournament } from './actions';
 
 class EditTournament extends Component {
   constructor(props, context) {
@@ -13,7 +11,9 @@ class EditTournament extends Component {
   }
 
   componentDidMount() {
-    this.props.getTournament(this.props.match.params.key);
+    if (!this.props.tournament) {
+      this.props.getTournament(this.props.match.params.key);
+    }
   }
 
   render() {
@@ -21,11 +21,11 @@ class EditTournament extends Component {
       return (
         <div className="container-fluid">
           <h2>Edit Tournament</h2>
-          <div className="well">
-            <pre>
-              {JSON.stringify(this.props.tournament, null, " ")}
-            </pre>
-          </div>
+
+          <TournamentForm id={this.props.match.params.key} tournament={this.props.tournament} />
+          <pre>
+            {JSON.stringify(this.props.tournament, null, ' ')}
+          </pre>
         </div>
       );
     } else {

@@ -1,7 +1,7 @@
-import React from "react";
-import Text from "../../components/Text";
-import { Link } from "react-router-dom";
-import { FormattedDate } from "react-intl";
+import React from 'react';
+import Text from '../../components/Text';
+import { Link } from 'react-router-dom';
+import { FormattedDate } from 'react-intl';
 
 function ArticleTable(props) {
   let data = props.data ? props.data : [];
@@ -18,24 +18,16 @@ function ArticleTable(props) {
       <tbody>
         {data.map((article, i) => (
           <tr key={i}>
-            <td style={{ width: "50%" }}>
+            <td style={{ width: '50%' }}>
               <Text text={article.title} />
             </td>
             <td>{article.author}</td>
             <td>
-              <FormattedDate
-                value={new Date(article.publish_date)}
-                year="numeric"
-                month="long"
-                day="2-digit"
-              />
+              <FormattedDate value={new Date(article.publish_date)} year="numeric" month="long" day="2-digit" />
             </td>
             <td>
-              <Link
-                className="btn btn-default"
-                to={`/admin/articles/${article.id}`}
-              >
-                Edit
+              <Link to={`/admin/articles/${article.id}`}>
+                <button onClick={() => props.receiveArticle(article)} className="btn btn-default">Edit</button>
               </Link>
             </td>
           </tr>

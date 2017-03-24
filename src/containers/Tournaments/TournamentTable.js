@@ -20,7 +20,9 @@ function TournamentTable(props) {
             <td><Text text={tournament.name} /></td>
             <td>{tournament.year}</td>
             <td>
-              <Link to={`/admin/tournaments/${tournament.id}`}><button className="btn btn-default">Edit</button></Link>
+              <Link to={`/admin/tournaments/${tournament.id}`}>
+                <button onClick={() => props.receiveTournament(tournament)} className="btn btn-default">Edit</button>
+              </Link>
             </td>
           </tr>
         ))}

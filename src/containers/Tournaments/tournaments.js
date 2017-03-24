@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Loader from '../../components/Loader';
 import PaginatedTable from '../../components/PaginatedTable';
 import TournamentTable from './TournamentTable';
-import { deleteTournament, queryTournaments } from './actions';
+import { deleteTournament, queryTournaments, receiveTournament } from './actions';
 
 class Tournaments extends Component {
   constructor(props, context) {
@@ -14,7 +14,9 @@ class Tournaments extends Component {
   }
 
   componentDidMount() {
-    this.props.queryTournaments({ page: 1 });
+    if (!this.props.query) {
+      this.props.queryTournaments({ page: 1 });
+    }
   }
 
   handleDelete(id) {
@@ -34,7 +36,7 @@ class Tournaments extends Component {
             isFetching={this.props.isFetching}
             fetch={this.fetchTournaments}
             query={this.props.query}
-            component={<TournamentTable />}
+            component={<TournamentTable receiveTournament={this.props.receiveTournament} />}
           />
         </div>
       );
@@ -52,7 +54,7 @@ function mapStateToProps(store) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ deleteTournament, queryTournaments }, dispatch);
+  return bindActionCreators({ deleteTournament, queryTournaments, receiveTournament }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Tournaments);

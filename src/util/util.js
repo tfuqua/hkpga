@@ -1,3 +1,5 @@
+import { sortBy } from 'lodash';
+
 export function mapObjectToArray(obj) {
   let arr = [];
 
@@ -20,4 +22,10 @@ export function mapStringToProps(str) {
   });
 
   return obj;
+}
+
+export function sortResults(results) {
+  results = mapObjectToArray(results);
+
+  return sortBy(results, ['rank', 'totalScore']);
 }

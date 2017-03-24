@@ -1,5 +1,6 @@
 body {
   overflow-y: scroll;
+  overflow-x: hidden; 
 }
 
 .site{
@@ -9,6 +10,7 @@ body {
 }
 .site-content { // Sticky Footer
   flex: 1;
+  overflow: hidden;
 }
 .container-fluid{
   max-width:1080px;

@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import Loader from "../../components/Loader";
-import PaginatedTable from "../../components/PaginatedTable";
-import ArticleTable from "./ArticleTable";
-import { fixArticles } from "../Data/actions";
-import { getArticles, queryArticles } from "./actions";
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import Loader from '../../components/Loader';
+import PaginatedTable from '../../components/PaginatedTable';
+import ArticleTable from './ArticleTable';
+import { fixArticles } from '../Data/actions';
+import { getArticles, queryArticles, receiveArticle } from './actions';
 
 class Articles extends Component {
   constructor(props, context) {
@@ -15,8 +15,9 @@ class Articles extends Component {
   }
 
   componentDidMount() {
-    //this.props.getArticles();
-    this.props.queryArticles({ page: 1 });
+    if (!this.props.query) {
+      this.props.queryArticles({ page: 1 });
+    }
   }
 
   fetchArticles(query) {
@@ -32,7 +33,7 @@ class Articles extends Component {
             isFetching={this.props.isFetching}
             fetch={this.fetchArticles}
             query={this.props.query}
-            component={<ArticleTable />}
+            component={<ArticleTable receiveArticle={this.props.receiveArticle} />}
           />
         </div>
       );
@@ -50,10 +51,7 @@ function mapStateToProps(store) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(
-    { getArticles, fixArticles, queryArticles },
-    dispatch
-  );
+  return bindActionCreators({ getArticles, fixArticles, queryArticles, receiveArticle }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Articles);

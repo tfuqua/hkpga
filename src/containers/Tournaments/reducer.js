@@ -1,9 +1,11 @@
 import {
   GET_TOURNAMENTS,
   REQUEST_TOURNAMENTS,
+  REQUEST_RESULTS,
   GET_TOURNAMENT,
-  GET_TOURNAMENT_QUERY
-} from "./actions";
+  GET_TOURNAMENT_QUERY,
+  GET_RESULTS
+} from './actions';
 
 function tournamentReducer(state = {}, action) {
   switch (action.type) {
@@ -29,6 +31,17 @@ function tournamentReducer(state = {}, action) {
         ...state,
         isFetching: false,
         query: action.query
+      };
+    case REQUEST_RESULTS:
+      return {
+        ...state,
+        isFetching: true
+      };
+    case GET_RESULTS:
+      return {
+        ...state,
+        isFetching: false,
+        results: action.results
       };
     default:
       return state;

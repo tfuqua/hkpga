@@ -16,7 +16,9 @@ class Pages extends Component {
   }
 
   componentDidMount() {
-    this.props.getUsers({ page: 1 });
+    if (!this.props.query) {
+      this.props.getUsers({ page: 1 });
+    }
   }
 
   queryUsers(query) {

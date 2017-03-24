@@ -1,0 +1,32 @@
+
+.tabs{
+    overflow:hidden;
+    
+    ul {
+        list-style: none;
+        padding:0;
+        margin:0;
+
+        li{
+            float:left;
+            display: block;
+            text-align: center;
+            font-size: 16px;
+            min-width: 80px;
+            padding:5px 8px;
+            border-bottom: 2px solid transparent;
+            text-transform: capitalize;
+            
+            &.active{
+                font-weight: bold;
+                border-bottom: 2px solid $darker-green;
+                color:$darker-green;
+            }
+
+            &:hover{
+                cursor:pointer;
+                border-bottom: 2px solid $darker-green;
+            }
+        }
+    }
+}

@@ -12,6 +12,10 @@ import { getPage } from './actions';
 class EditArticle extends Component {
   constructor(props, context) {
     super(props, context);
+
+    this.state = {
+      page: this.props.page
+    };
   }
 
   componentDidMount() {
@@ -19,18 +23,29 @@ class EditArticle extends Component {
     //tiny(); //TinyMCE Init
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.page.slug !== this.state.page.slug) {
+      this.setState({ page: nextProps.page });
+    }
+  }
+
   render() {
-    if (this.props.page) {
+    if (this.state.page) {
       return (
         <div className="container-fluid">
           <h2>Edit Page</h2>
+
+          <pre>
+            {JSON.stringify(this.state.page, null, ' ')}
+          </pre>
+
           <ReactQuill theme="snow" modules={config.editor.modules} formats={config.editor.formats} className="">
 
             <div
               key="editor"
               ref="editor"
               className="quill-contents my-class-name"
-              dangerouslySetInnerHTML={{ __html: this.props.page.html.en }}
+              dangerouslySetInnerHTML={{ __html: this.state.page.html.en }}
             />
 
           </ReactQuill>

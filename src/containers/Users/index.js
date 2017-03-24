@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import Text from "../../components/Text";
-import Loader from "../../components/Loader";
-import PaginatedTable from "../../components/PaginatedTable";
-import UserTable from "./UserTable";
-import { getUsers } from "./actions";
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import Text from '../../components/Text';
+import Loader from '../../components/Loader';
+import PaginatedTable from '../../components/PaginatedTable';
+import UserTable from './UserTable';
+import { getUsers, receiveUser } from './actions';
 
 class Pages extends Component {
   constructor(props, context) {
@@ -32,7 +32,7 @@ class Pages extends Component {
             isFetching={this.props.isFetching}
             fetch={this.queryUsers}
             query={this.props.query}
-            component={<UserTable />}
+            component={<UserTable receiveUser={this.props.receiveUser} />}
           />
         </div>
       );
@@ -50,7 +50,7 @@ function mapStateToProps(store) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getUsers }, dispatch);
+  return bindActionCreators({ getUsers, receiveUser }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Pages);

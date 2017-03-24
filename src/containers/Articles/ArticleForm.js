@@ -10,66 +10,76 @@ import { saveArticle } from './actions';
 class ArticleForm extends Component {
   constructor(props, context) {
     super(props, context);
- 
+
     this.state = {
       showCalendar: false,
       article: props.article,
       id: props.id
-    }
+    };
 
     this.saveArticle = this.saveArticle.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
   }
-  
-  handleDateChange(date){
-    this.setState({article: {...this.state.article, publish_date: moment(date).valueOf()}});
+
+  handleDateChange(date) {
+    this.setState({ article: { ...this.state.article, publish_date: moment(date).valueOf() } });
   }
-  
-  handleFieldChange(field, content){
-    
-    let newState = {...this.state.article, [field['en']]: content};
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.article.slug !== this.state.article.slug) {
+      this.setState({ article: nextProps.article });
+    }
+  }
+
+  handleFieldChange(field, content) {
+    let newState = { ...this.state.article, [field['en']]: content };
 
     console.log(newState);
   }
 
-  saveArticle(){
+  saveArticle() {
     this.props.saveArticle(this.state.id, this.state.article);
   }
 
   render() {
-        return (
-            <div className="">
+    return (
+      <div className="">
 
-                <div className="text-right">
-                  <button onClick={this.saveArticle} className="btn btn-default">Save</button>
-                </div>
+        <div className="text-right">
+          <button onClick={this.saveArticle} className="btn btn-default">Save</button>
+        </div>
 
-                <div className="form-group">
-                  <label>Publish Date</label>
-                  <SingleDatePicker
-                    id="publishDate"
-                    withPortal={true}
-                    date={moment(this.state.article.publish_date)}
-                    focused={this.state.showCalendar}
-                    numberOfMonths={1}
-                    isOutsideRange={() => false} 
-                    onDateChange={this.handleDateChange}
-                    onFocusChange={({ focused }) => { this.setState({ showCalendar: focused })}} />
-                </div>
+        <div className="form-group">
+          <label>Publish Date</label>
+          <SingleDatePicker
+            id="publishDate"
+            withPortal={true}
+            date={moment(this.state.article.publish_date)}
+            focused={this.state.showCalendar}
+            numberOfMonths={1}
+            isOutsideRange={() => false}
+            onDateChange={this.handleDateChange}
+            onFocusChange={({ focused }) => {
+              this.setState({ showCalendar: focused });
+            }}
+          />
+        </div>
 
-                <ReactQuill theme="snow"
-                    onChange={this.handleFieldChange.bind(this, 'html')}
-                    name="html.en"
-                    modules={config.editor.modules}
-                    formats={config.editor.formats}
-                    value={this.state.article.html.en}/>
-            </div>
-        );
+        <ReactQuill
+          theme="snow"
+          onChange={this.handleFieldChange.bind(this, 'html')}
+          name="html.en"
+          modules={config.editor.modules}
+          formats={config.editor.formats}
+          value={this.state.article.html.en}
+        />
+      </div>
+    );
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ saveArticle }, dispatch)
+  return bindActionCreators({ saveArticle }, dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(ArticleForm);

@@ -37,7 +37,6 @@ class UserForm extends Component {
           ...this.state.user[arr[0]],
           [arr[1]]: e.target.value
         };
-
         this.setState({ user: { ...this.state.user, [arr[0]]: user } });
       } else {
         this.setState({ user: { ...this.state.user, [field]: e.target.value } });
@@ -56,7 +55,6 @@ class UserForm extends Component {
   }
 
   render() {
-    console.log(genders);
     return (
       <div className="">
 

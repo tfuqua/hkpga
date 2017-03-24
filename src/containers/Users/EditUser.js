@@ -11,7 +11,9 @@ class EditUser extends Component {
   }
 
   componentDidMount() {
-    this.props.getUser(this.props.match.params.key);
+    if (!this.props.user) {
+      this.props.getUser(this.props.match.params.key);
+    }
   }
 
   render() {

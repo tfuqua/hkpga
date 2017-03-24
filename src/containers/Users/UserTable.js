@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 function UserTable(props) {
   let data = props.data ? props.data : [];
-
   return (
     <table className="table table-striped">
       <thead>
@@ -27,7 +26,9 @@ function UserTable(props) {
             <td>{user.isAdmin ? 'yes' : 'no'}</td>
             <td>
               <Link to={`/admin/users/${user.id}`}>
-                <button className="btn btn-default">Edit</button>
+                <button onClick={() => props.receiveUser(user)} className="btn btn-default">
+                  Edit
+                </button>
               </Link>
             </td>
           </tr>

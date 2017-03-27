@@ -59,7 +59,7 @@
     "react-addons-shallow-compare": "^15.4.2",
     "react-dates": "^4.3.3",
     "react-dom": "^15.4.2",
-    "react-draft-wysiwyg": "^1.7.7",
+    "react-draft-wysiwyg": "^1.8.4",
     "react-intl": "^2.2.3",
     "react-loadable": "^3.0.1",
     "react-quill": "^1.0.0-beta-3",

@@ -5,6 +5,7 @@ import moment from 'moment';
 import TextField from '../../components/TextField';
 import TextArea from '../../components/TextArea';
 import Accordion from '../../components/Accordion';
+import Tabs from '../../components/Tabs';
 import Select from '../../components/Select';
 import { userFields, genders, trueFalse } from '../../util/data';
 import { saveUser } from './actions';
@@ -67,29 +68,43 @@ class UserForm extends Component {
           <Accordion open={true} header={`Name & Standing`}>
             <div className="row">
               <div className="col-sm-6">
-                <div className="form-group">
-                  <label>English Name</label>
-                  <TextField
-                    showError={this.state.showErrors}
-                    text={this.state.user.name.en}
-                    onFieldChanged={this.handleFieldChange('name.en')}
-                  />
-                </div>
-                <div className="form-group">
-                  <label>Chinese Name</label>
-                  <TextField
-                    showError={this.state.showErrors}
-                    text={this.state.user.name['zh-cn']}
-                    onFieldChanged={this.handleFieldChange('name.zh-cn')}
-                  />
-                </div>
 
                 <div className="form-group">
-                  <label>Chinese Name</label>
-                  <TextField
-                    showError={this.state.showErrors}
-                    text={this.state.user.name['zh-hk']}
-                    onFieldChanged={this.handleFieldChange('name.zh-hk')}
+                  <label>Name</label>
+                  <Tabs
+                    selectedIndex={0}
+                    tabs={[
+                      {
+                        name: 'en',
+                        component: (
+                          <TextField
+                            showError={this.state.showErrors}
+                            text={this.state.user.name.en}
+                            onFieldChanged={this.handleFieldChange('name.en')}
+                          />
+                        )
+                      },
+                      {
+                        name: 'zh-cn',
+                        component: (
+                          <TextField
+                            showError={this.state.showErrors}
+                            text={this.state.user.name['zh-cn']}
+                            onFieldChanged={this.handleFieldChange('name.zh-cn')}
+                          />
+                        )
+                      },
+                      {
+                        name: 'zh-hk',
+                        component: (
+                          <TextField
+                            showError={this.state.showErrors}
+                            text={this.state.user.name['zh-hk']}
+                            onFieldChanged={this.handleFieldChange('name.zh-hk')}
+                          />
+                        )
+                      }
+                    ]}
                   />
                 </div>
 
@@ -98,6 +113,14 @@ class UserForm extends Component {
                   <Select
                     handleChange={this.handleSelectChange('isAdmin')}
                     value={this.state.user.isAdmin}
+                    options={trueFalse}
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Active</label>
+                  <Select
+                    handleChange={this.handleSelectChange('active')}
+                    value={this.state.user.active}
                     options={trueFalse}
                   />
                 </div>
@@ -128,15 +151,6 @@ class UserForm extends Component {
                     handleChange={this.handleSelectChange('relation')}
                     value={this.state.user.relation}
                     options={userFields.relations}
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label>Active</label>
-                  <Select
-                    handleChange={this.handleSelectChange('active')}
-                    value={this.state.user.active}
-                    options={trueFalse}
                   />
                 </div>
               </div>
@@ -209,58 +223,85 @@ class UserForm extends Component {
             <div className="row">
               <div className="col-sm-6">
                 <div className="form-group">
-                  <label>Qualifications (EN)</label>
-                  <TextArea
-                    showError={this.state.showErrors}
-                    text={this.state.user.qualifications.en}
-                    onFieldChanged={this.handleFieldChange('qualifications.en')}
-                  />
-                </div>
-                <div className="form-group">
-                  <label>Qualifications (ZH-HK)</label>
-                  <TextArea
-                    showError={this.state.showErrors}
-                    text={this.state.user.qualifications['zh-hk']}
-                    onFieldChanged={this.handleFieldChange('qualifications.zh-hk')}
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label>Qualifications (CN)</label>
-                  <TextArea
-                    showError={this.state.showErrors}
-                    text={this.state.user.qualifications['zh-cn']}
-                    onFieldChanged={this.handleFieldChange('qualifications.zh-cn')}
+                  <label>Qualifications</label>
+                  <Tabs
+                    selectedIndex={0}
+                    tabs={[
+                      {
+                        name: 'en',
+                        component: (
+                          <TextArea
+                            showError={this.state.showErrors}
+                            text={this.state.user.qualifications.en}
+                            onFieldChanged={this.handleFieldChange('qualifications.en')}
+                          />
+                        )
+                      },
+                      {
+                        name: 'zh-cn',
+                        component: (
+                          <TextArea
+                            showError={this.state.showErrors}
+                            text={this.state.user.qualifications['zh-cn']}
+                            onFieldChanged={this.handleFieldChange('qualifications.zh-cn')}
+                          />
+                        )
+                      },
+                      {
+                        name: 'zh-hk',
+                        component: (
+                          <TextArea
+                            showError={this.state.showErrors}
+                            text={this.state.user.qualifications['zh-hk']}
+                            onFieldChanged={this.handleFieldChange('qualifications.zh-hk')}
+                          />
+                        )
+                      }
+                    ]}
                   />
                 </div>
               </div>
               <div className="col-sm-6">
                 <div className="form-group">
-                  <label>Achievements (EN)</label>
-                  <TextArea
-                    showError={this.state.showErrors}
-                    text={this.state.user.achievements.en}
-                    onFieldChanged={this.handleFieldChange('achievements.en')}
-                  />
-                </div>
-                <div className="form-group">
-                  <label>Achievements (ZH-HK)</label>
-                  <TextArea
-                    showError={this.state.showErrors}
-                    text={this.state.user.achievements['zh-hk']}
-                    onFieldChanged={this.handleFieldChange('achievements.zh-hk')}
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label>Achievements (CN)</label>
-                  <TextArea
-                    showError={this.state.showErrors}
-                    text={this.state.user.achievements['zh-cn']}
-                    onFieldChanged={this.handleFieldChange('achievements.zh-cn')}
+                  <label>Achievements</label>
+                  <Tabs
+                    selectedIndex={0}
+                    tabs={[
+                      {
+                        name: 'en',
+                        component: (
+                          <TextArea
+                            showError={this.state.showErrors}
+                            text={this.state.user.achievements.en}
+                            onFieldChanged={this.handleFieldChange('achievements.en')}
+                          />
+                        )
+                      },
+                      {
+                        name: 'zh-cn',
+                        component: (
+                          <TextArea
+                            showError={this.state.showErrors}
+                            text={this.state.user.achievements['zh-cn']}
+                            onFieldChanged={this.handleFieldChange('achievements.zh-cn')}
+                          />
+                        )
+                      },
+                      {
+                        name: 'zh-hk',
+                        component: (
+                          <TextArea
+                            showError={this.state.showErrors}
+                            text={this.state.user.achievements['zh-hk']}
+                            onFieldChanged={this.handleFieldChange('achievements.zh-hk')}
+                          />
+                        )
+                      }
+                    ]}
                   />
                 </div>
               </div>
+
             </div>
           </Accordion>
 
@@ -268,28 +309,41 @@ class UserForm extends Component {
             <div className="row">
               <div className="col-sm-6">
                 <div className="form-group">
-                  <label>Teaching Experience (EN)</label>
-                  <TextArea
-                    showError={this.state.showErrors}
-                    text={this.state.user.teaching_experience.en}
-                    onFieldChanged={this.handleFieldChange('teaching_experience.en')}
-                  />
-                </div>
-                <div className="form-group">
-                  <label>Teaching Experience (ZH-HK)</label>
-                  <TextArea
-                    showError={this.state.showErrors}
-                    text={this.state.user.teaching_experience['zh-hk']}
-                    onFieldChanged={this.handleFieldChange('teaching_experience.zh-hk')}
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label>Teaching Experience (ZH-CN)</label>
-                  <TextArea
-                    showError={this.state.showErrors}
-                    text={this.state.user.teaching_experience['zh-cn']}
-                    onFieldChanged={this.handleFieldChange('teaching_experience.zh-cn')}
+                  <label>Teaching Experience</label>
+                  <Tabs
+                    selectedIndex={0}
+                    tabs={[
+                      {
+                        name: 'en',
+                        component: (
+                          <TextArea
+                            showError={this.state.showErrors}
+                            text={this.state.user.teaching_experience.en}
+                            onFieldChanged={this.handleFieldChange('teaching_experience.en')}
+                          />
+                        )
+                      },
+                      {
+                        name: 'zh-cn',
+                        component: (
+                          <TextArea
+                            showError={this.state.showErrors}
+                            text={this.state.user.teaching_experience['zh-cn']}
+                            onFieldChanged={this.handleFieldChange('teaching_experience.zh-cn')}
+                          />
+                        )
+                      },
+                      {
+                        name: 'zh-hk',
+                        component: (
+                          <TextArea
+                            showError={this.state.showErrors}
+                            text={this.state.user.teaching_experience['zh-hk']}
+                            onFieldChanged={this.handleFieldChange('teaching_experience.zh-hk')}
+                          />
+                        )
+                      }
+                    ]}
                   />
                 </div>
               </div>

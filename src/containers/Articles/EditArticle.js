@@ -17,12 +17,8 @@ class EditArticle extends Component {
       return (
         <div className="container-fluid">
           <h2>Edit Article</h2>
-
-          <pre>
-            {JSON.stringify(this.props.article, null, ' ')}
-          </pre>
-
           <ArticleForm article={this.props.article} id={this.props.match.params.key} />
+
         </div>
       );
     } else {

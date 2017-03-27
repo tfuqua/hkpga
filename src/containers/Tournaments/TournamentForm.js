@@ -109,7 +109,6 @@ class TournamentForm extends Component {
               }
             ]}
           />
-
         </div>
 
         <div className="form-group">

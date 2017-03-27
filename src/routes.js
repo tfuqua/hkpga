@@ -8,6 +8,7 @@ const Coverage = routeLoader(() => System.import('./containers/Coverage'));
 const Magazine = routeLoader(() => System.import('./containers/Magazine'));
 const Releases = routeLoader(() => System.import('./containers/Releases'));
 const Tournaments = routeLoader(() => System.import('./containers/Tournaments'));
+const TournamentView = routeLoader(() => System.import('./containers/Tournament'));
 const Login = routeLoader(() => System.import('./containers/Login'));
 const Dashboard = routeLoader(() => System.import('./containers/Dashboard'));
 const AdminTournaments = routeLoader(() => System.import('./containers/Tournaments/tournaments'));
@@ -26,13 +27,13 @@ export const routes = [
     component: Page
   },
   {
-    path: '/tournaments',
+    path: '/tournaments/:year?',
     component: Tournaments,
     exact: true
   },
   {
-    path: '/tournaments/:year',
-    component: Tournaments,
+    path: '/tournaments/:year?/:key',
+    component: TournamentView,
     exact: true
   },
   {

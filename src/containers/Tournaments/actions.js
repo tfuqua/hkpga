@@ -110,6 +110,25 @@ export function getTournament(key) {
   };
 }
 
+/******* Get Tournament by Slug *********/
+export function getTournamentBySlug(slug) {
+  return dispatch => {
+    dispatch(requestTournaments());
+
+    let db = database.ref(`tournaments`);
+
+    return db
+      .orderByChild('slug')
+      .equalTo(slug)
+      .once('value', tournament => {
+        dispatch(receiveTournament(tournament.val()));
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+}
+
 /******* Get Tournament Result by Key *********/
 export function getResults(key) {
   return dispatch => {

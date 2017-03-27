@@ -1,7 +1,7 @@
 import database from '../../database';
 import config from '../../../config/env/development';
 import { displayMessage } from '../Message/actions';
-import { SAVE_SUCCESSFUL } from '../../util/messages';
+import { SAVE_SUCCESSFUL, SAVE_ERROR } from '../../util/messages';
 import axios from 'axios';
 
 export const GET_USERS = 'GET_USERS';
@@ -30,7 +30,7 @@ export function RequestUsers() {
 
 export function saveUser(id, user) {
   return dispatch => {
-    dispatch(displayMessage(SAVE_SUCCESSFUL));
+    dispatch(displayMessage(SAVE_ERROR));
     return database.ref(`users/${id}`).set(user);
   };
 }

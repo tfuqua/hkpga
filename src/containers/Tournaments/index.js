@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
-import Text from '../../components/Text';
 import { connect } from 'react-redux';
 import { getTournaments, fixTournaments } from './actions';
+import { mapObjectToArray } from '../../util/util';
 import Archives from '../Archives';
+import TournamentRow from './TournamentRow';
 import Loader from '../../components/Loader';
 
 class Tournaments extends Component {
@@ -13,12 +14,14 @@ class Tournaments extends Component {
     this.state = {
       year: this.props.match.params.year ? this.props.match.params.year : new Date().getFullYear()
     };
-    this.fixData = this.fixData.bind(this);
   }
 
   componentDidMount() {
-    if (this.props.tournaments === undefined) this.props.getTournaments(this.state.year);
+    if (this.props.tournaments === undefined) {
+      this.props.getTournaments(this.state.year);
+    }
   }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.match.params.year !== this.state.year) {
       this.setState({ year: nextProps.match.params.year });
@@ -32,16 +35,18 @@ class Tournaments extends Component {
 
   render() {
     if (!this.props.isFetching && this.props.tournaments) {
+      let tournaments = mapObjectToArray(this.props.tournaments);
+
       return (
         <div className="container-fluid">
-          <h2>Tournaments</h2>
-          <ul>
-            {Object.keys(this.props.tournaments).map((key, i) => (
-              <li key={i}>
-                <Text text={this.props.tournaments[key].name} />
-              </li>
-            ))}
-          </ul>
+          <h1>Tournaments</h1>
+          <h3>{this.state.year} &nbsp;Schedule</h3>
+          {tournaments.map((tournament, i) => <TournamentRow key={i} tournament={tournament} />)}
+          <div className="row">
+            <div className="col-sm-3">
+              <Archives type={'tournaments'} link={'/tournaments/'} />
+            </div>
+          </div>
 
         </div>
       );

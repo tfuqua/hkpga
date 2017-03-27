@@ -1,14 +1,19 @@
 .message{
-    margin:20px auto;
-    max-width:500px;
+    margin:0 auto 20px;
+    width:100%;
+    border:none;
+    border-radius:0px;
+}
+.close{
+    color:#fff;
+    text-shadow:none;
+    opacity:1;
 }
 .alert-SUCCESS{
-    color: #3c763d;
-    background-color: #dff0d8;
-    border-color: #d6e9c6;
+    color: #fff;
+    background-color: #4caf50;
 }
 .alert-ERROR{
-    color: #a94442;
-    background-color: #f2dede;
-    border-color: #ebccd1;
+    color: #fff;
+    background-color: #d32F2f;
 }

@@ -51,8 +51,13 @@
   "dependencies": {
     "axios": "^0.15.3",
     "babel-polyfill": "^6.23.0",
+    "draft-js-image-plugin": "^2.0.0-beta10",
+    "draft-js-import-html": "^0.3.2",
+    "draft-js-plugins-editor": "^2.0.0-beta10",
+    "draftjs-to-html": "^0.7.0",
     "express": "^4.14.1",
     "firebase": "^3.6.9",
+    "html-to-draftjs": "0.1.0-beta7",
     "lodash": "^4.17.4",
     "moment": "^2.17.1",
     "react": "^15.4.2",

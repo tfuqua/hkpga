@@ -1,36 +1,35 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 class Contact extends Component {
   render() {
     return (
-      <div className="container-fluid" id="contact-page">
+      <div className="container-fluid">
         <h2>CONTACT</h2>
-        <div className="row">
-          <div className="contact col-md-12">
-            <div className="well">
-              <dl className="dl-horizontal">
-                <dt><h3>PHONE</h3></dt>
-                <dd><p> <i className="fa fa-phone" /> +852 2671 7455</p></dd>
-                <dt><h3>FAX</h3></dt>
-                <dd><p> <i className="fa fa-fax" /> +852 2671 1489</p></dd>
-                <dt><h3>ADDRESS</h3></dt>
-                <dd>
-                  <p>
-                    {" "}
-                    <i className="fa fa-home" />
-                    {" "}
-                    2/F, No. 42 Man Kok Tsuen, Sheung Shui Wai, Sheung Shui, New Territories, Hong Kong
-                    {" "}
-                  </p>
-                </dd>
-                <dt><h3>EMAIL</h3></dt>
-                <dd>
-                  <p> <i className="fa fa-envelope" /> info@hkpga.com.hk</p>
-                </dd>
-              </dl>
-            </div>
-          </div>
-        </div>
+
+        <br />
+        <table className="table">
+          <tbody>
+            <tr>
+              <td>PHONE</td>
+              <td><i className="fa fa-phone" /> +852 2671 7455</td>
+            </tr>
+            <tr>
+              <td>FAX</td>
+              <td><i className="fa fa-fax" /> +852 2671 1489</td>
+            </tr>
+            <tr>
+              <td>ADDRESS</td>
+              <td>
+                <i className="fa fa-home" />
+                2/F, No. 42 Man Kok Tsuen, Sheung Shui Wai, Sheung Shui, New Territories, Hong Kong
+              </td>
+            </tr>
+            <tr>
+              <td>EMAIL</td>
+              <td><i className="fa fa-envelope" /> info@hkpga.com.hk</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     );
   }

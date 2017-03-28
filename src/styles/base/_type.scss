@@ -5,3 +5,9 @@ a:hover {
 button a {
     display: block;
 }
+
+h2 {
+    font-weight: 400;
+    border-left: 8px solid $darker-green;
+    padding: 8px 5px 8px 15px;
+}

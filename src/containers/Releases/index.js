@@ -1,7 +1,10 @@
-import React, { Component } from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { getReleases } from "./actions";
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { FormattedDate } from 'react-intl';
+import Text from '../../components/Text';
+import { getReleases } from './actions';
+import { mapObjectToArray } from '../../util/util';
 
 class Releases extends Component {
   componentDidMount() {
@@ -9,29 +12,30 @@ class Releases extends Component {
   }
 
   render() {
-    if (typeof this.props.releases !== "undefined") {
+    if (typeof this.props.releases !== 'undefined') {
+      let releases = mapObjectToArray(this.props.releases);
+      releases.reverse();
+
       return (
         <div className="container-fluid press press-releases-page">
           <h2>Press Releases</h2>
+          <br />
+          {releases.map((release, i) => (
+            <div key={i} className="">
+              <h5>
+                <FormattedDate value={new Date(release.updated_at)} year="numeric" month="long" day="2-digit" />
+              </h5>
 
-          <div className="well">
-            <ul className="press-items">
-              {Object.keys(this.props.releases).map((key, i) => (
-                <div key={i} className="">
-                  <li>
-                    <h5 className="release-date">
-                      {this.props.releases[key].updated_at}
-                    </h5>
-                    <h4 className="press-title">
-                      <a target="_blank" href={this.props.releases[key].url}>
-                        {this.props.releases[key].title.en}
-                      </a>
-                    </h4>
-                  </li>
-                </div>
-              ))}
-            </ul>
-          </div>
+              <h4 className="press-title">
+                <a target="_blank" href={release.url[this.props.lang]}>
+                  <Text text={release.title} />
+                </a>
+              </h4>
+              <hr />
+
+            </div>
+          ))}
+
         </div>
       );
     } else {
@@ -42,7 +46,8 @@ class Releases extends Component {
 
 function mapStateToProps(store) {
   return {
-    releases: store.releasesReducer.releases
+    releases: store.releasesReducer.releases,
+    lang: store.languageReducer.lang
   };
 }
 

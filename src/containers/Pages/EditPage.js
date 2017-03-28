@@ -20,13 +20,12 @@ class EditArticle extends Component {
 
   componentDidMount() {
     this.props.getPage(this.props.match.params.key);
-    //tiny(); //TinyMCE Init
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.page.slug !== this.state.page.slug) {
+    /*if (nextProps.page.slug !== this.state.page.slug) {
       this.setState({ page: nextProps.page });
-    }
+    }*/
   }
 
   render() {

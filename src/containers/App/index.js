@@ -17,13 +17,13 @@ class App extends Component {
     return (
       <div className="site">
         <Header location={this.props.location} />
-        <div className="site-content">
+        <main className="site-content">
           <Message location={this.props.location} />
           <Switch>
             <GenerateRoutes />
             <Route component={NoMatch} />
           </Switch>
-        </div>
+        </main>
         <Footer />
       </div>
     );

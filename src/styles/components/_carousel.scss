@@ -4,7 +4,8 @@
 
     .item {
       width: 100%;
-      height: 500px;
+      background: #333;
+      height: 600px;
     }
     .item:nth-child(1){
       background-image: url(../images/the-hong-kong-golf-club.jpg);
@@ -12,31 +13,33 @@
       background-repeat: no-repeat;
       background-position: center;
     }
+    /*
     .item:nth-child(2){
       background-image: url(../images/skycity-nine-eagles-golf-course.jpeg);
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
-    }
-    .item:nth-child(3){
+    }*/
+    .item:nth-child(2){
       background-image: url(../images/jockey-club-kau-sai-chau-golf-course.jpeg);
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
     }
-    .item:nth-child(4) {
+    .item:nth-child(3) {
       background-image: url(../images/clearwater-bay-golf-course.jpeg);
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
 
     }
-    .item:nth-child(5) {
+    .item:nth-child(4) {
       background-image: url(../images/discovery-bay-golf-club.jpeg);
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
     }
+
     .carousel-caption > p {
       position: absolute;
       z-index:4;
@@ -54,7 +57,7 @@
       width: 100%;
       height: 100%;
       background: rgba(0,0,0,0.2);
-      background: -webkit-linear-gradient(top,rgba(0,0,0,0.4) 0,rgba(0,0,0,0.0) 30%,rgba(0,0,0,0.0) 70%,rgba(0,0,0,0.4) 100%);
+      background: -webkit-linear-gradient(top,rgba(0,0,0,0.5) 0,rgba(0,0,0,0.0) 30%,rgba(0,0,0,0.0) 70%,rgba(0,0,0,0.5) 100%);
       background: linear-gradient(to bottom,
       rgba(0,0,0,0.4) 0,
       rgba(0,0,0,0.0) 30%,

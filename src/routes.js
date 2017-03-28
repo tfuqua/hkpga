@@ -19,11 +19,20 @@ const EditPage = routeLoader(() => System.import('./containers/Pages/EditPage'))
 const AdminUsers = routeLoader(() => System.import('./containers/Users'));
 const EditUser = routeLoader(() => System.import('./containers/Users/EditUser'));
 const AdminArticles = routeLoader(() => System.import('./containers/Articles/articles'));
+const ArticleView = routeLoader(() => System.import('./containers/Articles/ArticleView'));
 const EditArticle = routeLoader(() => System.import('./containers/Articles/EditArticle'));
 
 export const routes = [
   {
-    path: '/about-us',
+    path: '/about/about-us',
+    component: Page
+  },
+  {
+    path: '/community/project-skyhigh',
+    component: Page
+  },
+  {
+    path: '/pros/training-program',
     component: Page
   },
   {
@@ -34,6 +43,11 @@ export const routes = [
   {
     path: '/tournaments/:year?/:key',
     component: TournamentView,
+    exact: true
+  },
+  {
+    path: '/news/:slug',
+    component: ArticleView,
     exact: true
   },
   {

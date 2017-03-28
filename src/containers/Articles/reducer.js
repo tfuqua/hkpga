@@ -3,8 +3,9 @@ import {
   GET_LATEST_ARTICLE,
   REQUEST_ARTICLES,
   GET_ARTICLE,
-  GET_ARTICLE_QUERY
-} from "./actions";
+  GET_ARTICLE_QUERY,
+  GET_MORE_NEWS
+} from './actions';
 
 function articleReducer(state = {}, action) {
   switch (action.type) {
@@ -21,7 +22,7 @@ function articleReducer(state = {}, action) {
       };
     case GET_LATEST_ARTICLE:
       return {
-        article: action.article
+        latestArticle: action.article
       };
     case GET_ARTICLE:
       return {
@@ -34,6 +35,11 @@ function articleReducer(state = {}, action) {
         ...state,
         isFetching: false,
         query: action.query
+      };
+    case GET_MORE_NEWS:
+      return {
+        ...state,
+        moreNews: action.moreNews
       };
     default:
       return state;

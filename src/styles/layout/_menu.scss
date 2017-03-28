@@ -3,11 +3,10 @@
     margin:0;
 }
 
-nav a {
-    color: #777
-    
+nav li a {
+    color: #777;
+    border-bottom:2px solid transparent;
 }
-
 .main-nav{
     clear:both;
 
@@ -44,3 +43,54 @@ nav a {
     }
 }
 
+.nav > li > a:hover, 
+.nav > li > a.active,
+.nav > li > a:focus{
+    background:transparent;
+    color:#fff;
+    //border-bottom: 2px solid $darker-green;    
+}
+
+.admin-nav{
+    background:#e2e2e2;
+    overflow:hidden;
+    
+    .nav > li > a:hover, 
+    .nav > li > a.active,
+    .nav > li > a:focus{
+        color:#333;
+        border-bottom: 2px solid #888    
+    }
+}
+
+
+nav ul > li > ul{
+    display:none;
+    position: absolute;
+    background-image: url('../images/tactile-grey-bg.png');
+    min-width: 180px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 10;
+    padding:5px 0;
+    list-style:none;
+
+    li {
+        border-left:2px solid transparent;
+        &:hover{ border-left: 2px solid $darker-green;}
+
+        a {
+            color:#777;
+            display:block;
+            padding:5px 8px;
+            &:hover{
+                color:#fff;
+            }
+        }
+    }
+}
+
+nav ul > li:hover{
+    ul {
+        display: block;
+    }
+}

@@ -1,9 +1,9 @@
 import React from 'react';
 
-function NoMatch(){
+function NoMatch() {
   return (
     <div>
-        Page Not Found
+      Page Not Found
     </div>
   );
 }

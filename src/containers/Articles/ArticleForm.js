@@ -1,30 +1,35 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import ReactQuill from 'react-quill';
 import { SingleDatePicker } from 'react-dates';
 import { trueFalse } from '../../util/data';
 import TextField from '../../components/TextField';
 import Tabs from '../../components/Tabs';
 import Select from '../../components/Select';
 import moment from 'moment';
-import config from '../../../config/env/development';
 import { Editor } from 'react-draft-wysiwyg';
-import { EditorState, ContentState, convertFromHTML } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
+import htmlToDraft from 'html-to-draftjs';
+import { EditorState, ContentState, convertToRaw } from 'draft-js';
 import { saveArticle } from './actions';
 
 class ArticleForm extends Component {
   constructor(props, context) {
     super(props, context);
 
+    console.log(props.article.html.en);
+    const blocksFromHTML = htmlToDraft(props.article.html.en);
+    const contentBlocks = blocksFromHTML.contentBlocks;
+    const contentState = ContentState.createFromBlockArray(contentBlocks);
+    //const content = ContentState.createFromBlockArray(blocksFromHTML.contentBlocks, blocksFromHTML.entityMap);
+
     this.state = {
       showCalendar: false,
       article: props.article,
       id: props.id,
-      editorState: EditorState.createEmpty()
+      editorState: EditorState.createWithContent(contentState)
     };
 
-    this.onChange = editorState => this.setState({ editorState });
     this.saveArticle = this.saveArticle.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
     this.onEditorStateChange = this.onEditorStateChange.bind(this);
@@ -43,14 +48,13 @@ class ArticleForm extends Component {
       this.setState({ article: nextProps.article });
     }
   }
-  onEditorChange(editorContent) {
-    this.setState({
-      editorContent
-    });
-  }
+
   onEditorStateChange(editorState) {
+    const rawContentState = convertToRaw(editorState.getCurrentContent());
+    const markup = draftToHtml(rawContentState);
     this.setState({
-      editorState
+      editorState,
+      article: { ...this.state.article, html: { en: markup } }
     });
   }
 
@@ -92,55 +96,8 @@ class ArticleForm extends Component {
           />
         </div>
 
-        <div className="">
-
-          <Editor
-            editorState={this.state.editorState}
-            onEditorStateChange={this.onEditorStateChange}
-            onChange={this.onChange}
-          />
-          {/*
-          <Tabs
-            selectedIndex={0}
-            tabs={[
-              {
-                name: 'en',
-                component: (
-                  <ReactQuill
-                    theme="snow"
-                    onChange={this.handleHTMLChange('name.en')}
-                    modules={config.editor.modules}
-                    formats={config.editor.formats}
-                    value={this.state.article.html.en}
-                  />
-                )
-              },
-              {
-                name: 'zh-cn',
-                component: (
-                  <ReactQuill
-                    theme="snow"
-                    onChange={this.handleHTMLChange('name.zh-cn')}
-                    modules={config.editor.modules}
-                    formats={config.editor.formats}
-                    value={this.state.article.html['zh-cn']}
-                  />
-                )
-              },
-              {
-                name: 'zh-hk',
-                component: (
-                  <ReactQuill
-                    theme="snow"
-                    onChange={this.handleHTMLChange('name.zh-hk')}
-                    modules={config.editor.modules}
-                    formats={config.editor.formats}
-                    value={this.state.article.html['zh-hk']}
-                  />
-                )
-              }
-            ]}
-          />*/}
+        <div className="editor">
+          <Editor editorState={this.state.editorState} onEditorStateChange={this.onEditorStateChange} />
         </div>
       </div>
     );

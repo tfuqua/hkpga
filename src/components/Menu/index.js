@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import Logo from '../../images/hkpga-logo.png';
 import translations from '../../util/translations';
 import { setLang, getLang } from '../../containers/Lang/actions';
@@ -64,18 +64,6 @@ class Menu extends Component {
                   </a>
                 </li>
               </ul>
-
-              <ul className="social">
-                <Link to="https://www.facebook.com/thehkpga" target="_blank">
-                  <li><i className="fa fa-facebook" /></li>
-                </Link>
-                <Link to="https://twitter.com/thehkpga" target="_blank">
-                  <li><i className="fa fa-twitter" /></li>
-                </Link>
-                <Link to="http://weibo.com/u/5209724886" target="_blank">
-                  <li><i className="fa fa-weibo" /></li>
-                </Link>
-              </ul>
             </div>
 
             <div className="main-nav">
@@ -84,10 +72,10 @@ class Menu extends Component {
                   <Link to="/">{translations[this.props.lang].MENU_HOME}</Link>
                 </li>
                 <li>
-                  <Link to="/about-us" className="dropdown-toggle" data-toggle="dropdown">
+                  <Link to="/about/about-us">
                     {translations[this.props.lang].MENU_ABOUT}
                   </Link>
-                  <ul className="dropdown-menu">
+                  <ul>
                     <li>
                       <Link to="/about/about-us">
                         {translations[this.props.lang].ABOUT_US}
@@ -106,10 +94,10 @@ class Menu extends Component {
                   </ul>
                 </li>
                 <li>
-                  <Link to="/tournaments" className="dropdown-toggle" data-toggle="dropdown">
+                  <Link to="/tournaments">
                     {translations[this.props.lang].MENU_TOURNAMENTS}
                   </Link>
-                  <ul className="dropdown-menu">
+                  <ul>
                     <li>
                       <Link to="/tournaments/merit">
                         {translations[this.props.lang].ORDER_OF_MERIT}
@@ -123,27 +111,30 @@ class Menu extends Component {
                   </ul>
                 </li>
                 <li>
-                  <Link to="/pros" className="dropdown-toggle" data-toggle="dropdown">
+                  <Link to="/pros">
                     {translations[this.props.lang].MENU_PROS}
                   </Link>
-                  <ul className="dropdown-menu">
+                  <ul>
                     <li>
                       <Link to="/pros">
                         {translations[this.props.lang].DIRECTORY}
                       </Link>
                     </li>
                     <li>
-                      <Link to="#/pros/training-program">
+                      <Link to="/pros/training-program">
                         {translations[this.props.lang].TRAINING_PROGRAM}
                       </Link>
                     </li>
                   </ul>
                 </li>
                 <li>
-                  <Link to="/" className="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
+                  <Link
+                    to="/community/project-skyhigh"
+                    className="dropdown-toggle hidden-xs hidden-sm"
+                    data-toggle="dropdown">
                     {translations[this.props.lang].MENU_COMMUNITY}
                   </Link>
-                  <ul className="dropdown-menu">
+                  <ul>
                     <li>
                       <Link to="/community/project-skyhigh">
                         {translations[this.props.lang].PROJECT_SKYHIGH}
@@ -152,10 +143,10 @@ class Menu extends Component {
                   </ul>
                 </li>
                 <li>
-                  <Link to="/press/releases" className="dropdown-toggle" data-toggle="dropdown">
+                  <Link to="/press/releases" className="dropdown-toggle">
                     {translations[this.props.lang].MENU_PRESS}
                   </Link>
-                  <ul className="dropdown-menu">
+                  <ul>
                     <li>
                       <Link to="/press/releases">
                         {translations[this.props.lang].PRESS_RELEASES}
@@ -174,9 +165,9 @@ class Menu extends Component {
                   </ul>
                 </li>
                 <li id="contact-li">
-                  <Link to="/contact">
+                  <NavLink to="/contact" activeClassName="active" exact>
                     {translations[this.props.lang].MENU_CONTACT}
-                  </Link>
+                  </NavLink>
                 </li>
               </ul>
             </div>

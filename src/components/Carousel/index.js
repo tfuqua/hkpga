@@ -11,6 +11,7 @@ function Carousel(props) {
     dots: true,
     infinite: true,
     fade: true,
+    lazyLoad: true,
     autoplay: true,
     autoplaySpeed: 5000,
     slidesToShow: 1,
@@ -32,11 +33,12 @@ function Carousel(props) {
           </div>
         </div>
 
+        {/*
         <div className="item">
           <div className="carousel-caption">
             <p>SkyCity Nine Eagles Golf Course</p>
           </div>
-        </div>
+        </div> */}
 
         <div className="item">
           <div className="carousel-caption">

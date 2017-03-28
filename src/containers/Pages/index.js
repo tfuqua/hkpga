@@ -1,29 +1,33 @@
-import React, { Component } from "react";
-import { bindActionCreators } from "redux";
-import Text from "../../components/Text";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { getPages } from "./actions";
-import Loader from "../../components/Loader";
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import Text from '../../components/Text';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getPageBySlug } from './actions';
+import Loader from '../../components/Loader';
 
 class Page extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    let slug = this.props.location.pathname.split('/');
+    this.state = {
+      slug: slug[slug.length - 1]
+    };
+  }
+
   componentDidMount() {
-    this.props.getPages();
+    this.props.getPageBySlug(this.state.slug);
   }
 
   render() {
-    console.log(this.props.pages);
-    if (!this.props.isFetching && typeof this.props.pages !== "undefined") {
-      let page = this.props.pages["about-us"];
+    if (!this.props.isFetching && typeof this.props.page !== 'undefined') {
+      let page = this.props.page[Object.keys(this.props.page)[0]];
       return (
-        <div className="container-fluid" id="contact-page">
-          <h2>CONTACT</h2>
-          <div className="row">
-            <div className="contact col-md-12">
-              <div className="well">
-                <Text text={page.html} />
-              </div>
-            </div>
+        <div className="container-fluid">
+          <h2><Text text={page.title} /></h2>
+          <div>
+            <Text text={page.html} />
           </div>
         </div>
       );
@@ -35,12 +39,12 @@ class Page extends Component {
 
 function mapStateToProps(store) {
   return {
-    pages: store.pageReducer.pages
+    page: store.pageReducer.page
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getPages }, dispatch);
+  return bindActionCreators({ getPageBySlug }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Page);

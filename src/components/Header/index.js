@@ -8,8 +8,8 @@ class Header extends Component {
     return (
       <header>
         <div className="header">
-          <Menu />
-          {this.props.location.pathname.startsWith('/admin') ? <AdminMenu /> : null}
+          <Menu {...this.props} />
+          {this.props.location.pathname.startsWith('/admin') ? <AdminMenu {...this.props} /> : null}
         </div>
       </header>
     );

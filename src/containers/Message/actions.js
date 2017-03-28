@@ -1,10 +1,11 @@
 export const SHOW_MESSAGE = 'SHOW_MESSAGE';
 export const HIDE_MESSAGE = 'HIDE_MESSAGE';
 
-export function showMessage(message) {
+export function showMessage(message, details) {
   return {
     type: SHOW_MESSAGE,
-    message
+    message,
+    details
   };
 }
 
@@ -14,9 +15,8 @@ export function hideMessage() {
   };
 }
 
-export function displayMessage(message) {
-  console.log(message);
+export function displayMessage(message, details) {
   return dispatch => {
-    dispatch(showMessage(message));
+    dispatch(showMessage(message, details));
   };
 }

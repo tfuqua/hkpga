@@ -1,24 +1,24 @@
-import { SHOW_MESSAGE, HIDE_MESSAGE} from './actions';
+import { SHOW_MESSAGE, HIDE_MESSAGE } from './actions';
 
 function messageReducer(state = {}, action) {
-
-  switch(action.type) {
+  switch (action.type) {
     case SHOW_MESSAGE:
-    return {
-      message: {
+      return {
+        message: {
           type: action.message.type,
           message: action.message.message,
+          details: action.details,
           show: true
-      }
-    }
+        }
+      };
     case HIDE_MESSAGE:
-    return {
-      message: {
+      return {
+        message: {
           type: '',
           message: '',
           show: false
-      }
-    }    
+        }
+      };
     default:
       return state;
   }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import GenerateRoutes from '../../components/GenerateRoutes';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { routes } from '../../routes';
 import Message from '../Message';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -16,11 +17,16 @@ class App extends Component {
   render() {
     return (
       <div className="site">
-        <Header location={this.props.location} />
+        <Header {...this.props} />
         <main className="site-content">
           <Message location={this.props.location} />
           <Switch>
-            <GenerateRoutes />
+            {routes.map(
+              (route, i) =>
+                route.path.startsWith('/admin')
+                  ? <MatchWhenAuthed key={i} authenticated={this.props.authenticated} {...route} />
+                  : <Route key={i} path={route.path} {...route} />
+            )}
             <Route component={NoMatch} />
           </Switch>
         </main>
@@ -30,4 +36,19 @@ class App extends Component {
   }
 }
 
-export default App;
+const MatchWhenAuthed = route => {
+  console.log(route);
+  if (route.authenticated) {
+    return <Route {...route} />;
+  } else {
+    return <Redirect to={{ pathname: '/login' }} />;
+  }
+};
+
+function mapStateToProps(store) {
+  return {
+    authenticated: store.loginReducer.isAuthenticated
+  };
+}
+
+export default connect(mapStateToProps)(App);

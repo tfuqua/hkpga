@@ -30,9 +30,9 @@ class Menu extends Component {
               {this.props.authenticated
                 ? <ul className="auth-links">
                     <li>
-                      <Link to="/admin">
+                      <NavLink activeClassName="active" to="/admin">
                         {translations[this.props.lang].MEMBER_DASHBOARD}
-                      </Link>
+                      </NavLink>
                     </li>
                     <li>
                       <a to="#" onClick={this.props.logoutUser}>
@@ -42,9 +42,9 @@ class Menu extends Component {
                   </ul>
                 : <ul className="auth-links">
                     <li>
-                      <Link to="/login">
+                      <NavLink activeClassName="active" to="/login">
                         {translations[this.props.lang].LOGIN}
-                      </Link>
+                      </NavLink>
                     </li>
                   </ul>}
 
@@ -70,107 +70,116 @@ class Menu extends Component {
             <div className="main-nav">
               <ul className="nav navbar-nav navbar-right" id="page-nav">
                 <li>
-                  <Link to="/">{translations[this.props.lang].MENU_HOME}</Link>
+                  <NavLink activeClassName="active" exact to="/">{translations[this.props.lang].MENU_HOME}</NavLink>
                 </li>
                 <li>
-                  <Link to="/about/about-us" onClick={this.props.getPageBySlug.bind(this, 'about-us')}>
+                  <NavLink
+                    activeClassName="active"
+                    to="/about/about-us"
+                    onClick={this.props.getPageBySlug.bind(this, 'about-us')}>
                     {translations[this.props.lang].MENU_ABOUT}
-                  </Link>
+                  </NavLink>
                   <ul>
                     <li>
-                      <Link to="/about/about-us" onClick={this.props.getPageBySlug.bind(this, 'about-us')}>
+                      <NavLink
+                        activeClassName="active"
+                        to="/about/about-us"
+                        onClick={this.props.getPageBySlug.bind(this, 'about-us')}>
                         {translations[this.props.lang].ABOUT_US}
-                      </Link>
+                      </NavLink>
                     </li>
                     <li>
-                      <Link to="/about/partners">
+                      <NavLink activeClassName="active" to="/about/partners">
                         {translations[this.props.lang].PARTNERS}
-                      </Link>
+                      </NavLink>
                     </li>
                     <li>
-                      <Link to="/about/committee-honorary">
+                      <NavLink activeClassName="active" to="/about/committee-honorary">
                         {translations[this.props.lang].COMMITTEE_HONORARY}
-                      </Link>
+                      </NavLink>
                     </li>
                   </ul>
                 </li>
                 <li>
-                  <Link to="/tournaments">
+                  <NavLink activeClassName="active" to="/tournaments">
                     {translations[this.props.lang].MENU_TOURNAMENTS}
-                  </Link>
+                  </NavLink>
                   <ul>
                     <li>
-                      <Link to="/tournaments/merit">
+                      <NavLink activeClassName="active" to="/tournaments/merit">
                         {translations[this.props.lang].ORDER_OF_MERIT}
-                      </Link>
+                      </NavLink>
                     </li>
                     <li>
-                      <Link to="/tournaments">
+                      <NavLink activeClassName="active" to="/tournaments">
                         {translations[this.props.lang].SCHEDULE_RESULTS}
-                      </Link>
+                      </NavLink>
                     </li>
                   </ul>
                 </li>
                 <li>
-                  <Link to="/pros">
+                  <NavLink activeClassName="active" to="/pros">
                     {translations[this.props.lang].MENU_PROS}
-                  </Link>
+                  </NavLink>
                   <ul>
                     <li>
-                      <Link to="/pros">
+                      <NavLink activeClassName="active" to="/pros">
                         {translations[this.props.lang].DIRECTORY}
-                      </Link>
+                      </NavLink>
                     </li>
                     <li>
-                      <Link
+                      <NavLink
+                        activeClassName="active"
                         to="/pros/training-program"
                         onClick={this.props.getPageBySlug.bind(this, 'training-program')}>
                         {translations[this.props.lang].TRAINING_PROGRAM}
-                      </Link>
+                      </NavLink>
                     </li>
                   </ul>
                 </li>
                 <li>
-                  <Link
+                  <NavLink
+                    activeClassName="active"
                     to="/community/project-skyhigh"
                     className="dropdown-toggle hidden-xs hidden-sm"
                     onClick={this.props.getPageBySlug.bind(this, 'project-skyhigh')}>
                     {translations[this.props.lang].MENU_COMMUNITY}
-                  </Link>
+                  </NavLink>
                   <ul>
                     <li>
-                      <Link
+                      <NavLink
+                        activeClassName="active"
                         to="/community/project-skyhigh"
                         onClick={this.props.getPageBySlug.bind(this, 'project-skyhigh')}>
                         {translations[this.props.lang].PROJECT_SKYHIGH}
-                      </Link>
+                      </NavLink>
                     </li>
                   </ul>
                 </li>
                 <li>
-                  <Link to="/press/releases" className="dropdown-toggle">
+                  <NavLink activeClassName="active" to="/press/releases" className="dropdown-toggle">
                     {translations[this.props.lang].MENU_PRESS}
-                  </Link>
+                  </NavLink>
                   <ul>
                     <li>
-                      <Link to="/press/releases">
+                      <NavLink activeClassName="active" to="/press/releases">
                         {translations[this.props.lang].PRESS_RELEASES}
-                      </Link>
+                      </NavLink>
                     </li>
                     <li>
-                      <Link to="#/press/media">
+                      <NavLink activeClassName="active" to="#/press/media">
                         {translations[this.props.lang].MEDIA_COVERAGE}
-                      </Link>
+                      </NavLink>
                     </li>
                     <li>
-                      <Link to="#/press/magazine">
+                      <NavLink activeClassName="active" to="#/press/magazine">
                         {translations[this.props.lang].MAGAZINE}
-                      </Link>
+                      </NavLink>
                     </li>
                   </ul>
                 </li>
                 <li id="contact-li">
-                  <NavLink to="/contact" activeClassName="active" exact>
+                  <NavLink activeClassName="active" to="/contact" exact>
                     {translations[this.props.lang].MENU_CONTACT}
                   </NavLink>
                 </li>

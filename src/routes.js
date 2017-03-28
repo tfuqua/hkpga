@@ -22,6 +22,7 @@ const AdminArticles = routeLoader(() => System.import('./containers/Articles/art
 const ArticleView = routeLoader(() => System.import('./containers/Articles/ArticleView'));
 const EditArticle = routeLoader(() => System.import('./containers/Articles/EditArticle'));
 const Pros = routeLoader(() => System.import('./containers/Pros'));
+const Partners = routeLoader(() => System.import('./containers/Partners'));
 
 export const routes = [
   {
@@ -40,6 +41,10 @@ export const routes = [
     path: '/pros',
     component: Pros,
     exact: true
+  },
+  {
+    path: '/about/partners',
+    component: Partners
   },
   {
     path: '/tournaments/:year?',

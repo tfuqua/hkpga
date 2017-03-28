@@ -2,61 +2,67 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { firebaseAuth } from '../../database';
-import { loginUser } from './actions'
+import TextField from '../../components/TextField';
+import { loginUser } from './actions';
 
 class Login extends Component {
   constructor(props, context) {
-     super(props, context);
+    super(props, context);
 
-     this.state = {
-       username: '',
-       password: ''
-     }
-     
-    
-     this.handleSubmit = this.handleSubmit.bind(this);
-     this.handleFieldChange = this.handleFieldChange.bind(this);
+    this.state = {
+      username: '',
+      password: ''
+    };
 
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleFieldChange = this.handleFieldChange.bind(this);
   }
 
-  handleSubmit(e){
+  handleSubmit(e) {
     e.preventDefault();
     this.props.loginUser(this.state);
   }
 
- handleFieldChange(e){
-    this.setState(Object.assign(this.state, {[e.target.name]: e.target.value}));
+  handleFieldChange(field) {
+    return e => {
+      this.setState({ ...this.state, [field]: e.target.value });
+    };
   }
 
   render() {
+    return this.props.isAuthenticated
+      ? <Redirect to="/admin" />
+      : <div className="container-fluid">
 
-    return (
-      <div>
-        {this.props.isAuthenticated ?
-          <Redirect to='/admin'/>
-          :
-            <div id="login-page">
-              <div className="auth-forms well">
-
-              <h2>LOGIN</h2>
-              <form onSubmit={this.handleSubmit} className="form">
-                  <input name="username" type="text" className="form-control" placeholder="Email"
-                    value={this.state.username} onChange={this.handleFieldChange} />
-                  <input name="password" type="password" className="form-control" placeholder="Password"
-                    value={this.state.password} onChange={this.handleFieldChange} />
-                  <input type="submit" value="Login" className="button button-primary btn-block"/>
-              </form>
+          <div className="login-form">
+            <h2>LOGIN</h2>
+            <form onSubmit={this.handleSubmit} className="form">
+              <div className="form-group">
+                <TextField
+                  showError={this.state.showErrors}
+                  text={this.state.username}
+                  onFieldChanged={this.handleFieldChange('username')}
+                  placeholder="Email"
+                />
               </div>
-            </div>
-          }
-      </div>
-    );
+              <div className="form-group border-less">
+                <TextField
+                  showError={this.state.showErrors}
+                  text={this.state.password}
+                  onFieldChanged={this.handleFieldChange('password')}
+                  type="password"
+                  placeholder="Password"
+                />
+              </div>
+              <input type="submit" value="Login" className="btn btn-success btn-block" />
+            </form>
+          </div>
+        </div>;
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ loginUser }, dispatch)
+  return bindActionCreators({ loginUser }, dispatch);
 }
 
 function mapStateToProps(store) {

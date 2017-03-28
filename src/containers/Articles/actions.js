@@ -131,8 +131,6 @@ export function getArticles() {
 }
 
 export function queryArticles(query) {
-  let t1 = new Date();
-
   return dispatch => {
     dispatch(requestArticles());
 
@@ -157,8 +155,6 @@ export function queryArticles(query) {
               last: query.page === totalPages
             })
           );
-          let t2 = new Date();
-          console.log(t2 - t1);
         })
         .catch(error => {
           console.log(error);

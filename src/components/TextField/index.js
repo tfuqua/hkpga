@@ -6,11 +6,11 @@ function TextField(props) {
   return (
     <div>
       <input
-        type="text"
         className="form-control"
         placeholder={props.placeholder}
         value={value}
         onChange={props.onFieldChanged}
+        type={props.type ? props.type : 'text'}
       />
       {props.showError && props.errorText !== ''
         ? <div className="validation-error">

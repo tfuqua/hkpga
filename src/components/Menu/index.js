@@ -167,12 +167,12 @@ class Menu extends Component {
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink activeClassName="active" to="#/press/media">
+                      <NavLink activeClassName="active" to="/press/media">
                         {translations[this.props.lang].MEDIA_COVERAGE}
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink activeClassName="active" to="#/press/magazine">
+                      <NavLink activeClassName="active" to="/press/magazine">
                         {translations[this.props.lang].MAGAZINE}
                       </NavLink>
                     </li>

@@ -37,7 +37,6 @@ class App extends Component {
 }
 
 const MatchWhenAuthed = route => {
-  console.log(route);
   if (route.authenticated) {
     return <Route {...route} />;
   } else {

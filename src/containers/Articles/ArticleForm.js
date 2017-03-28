@@ -33,8 +33,23 @@ class ArticleForm extends Component {
     this.saveArticle = this.saveArticle.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
     this.onEditorStateChange = this.onEditorStateChange.bind(this);
+    this.handleFieldChange = this.handleFieldChange.bind(this);
   }
 
+  handleFieldChange(field) {
+    return e => {
+      if (field.includes('.')) {
+        let arr = field.split('.');
+        let article = {
+          ...this.state.article[arr[0]],
+          [arr[1]]: e.target.value
+        };
+        this.setState({ article: { ...this.state.article, [arr[0]]: article } });
+      } else {
+        this.setState({ article: { ...this.state.article, [field]: e.target.value } });
+      }
+    };
+  }
   handleDateChange(date) {
     this.setState({ article: { ...this.state.article, publish_date: moment(date).valueOf() } });
   }
@@ -84,6 +99,15 @@ class ArticleForm extends Component {
             onFocusChange={({ focused }) => {
               this.setState({ showCalendar: focused });
             }}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Cover</label>
+          <TextField
+            showError={this.state.showErrors}
+            text={this.state.article.cover}
+            onFieldChanged={this.handleFieldChange('cover')}
           />
         </div>
 

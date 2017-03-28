@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Text from '../../components/Text';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { receiveUser } from '../Users/actions';
 import TextField from '../../components/TextField';
 import { mapObjectToArray } from '../../util/util';
 
@@ -43,7 +46,7 @@ class ProListing extends Component {
                   {this.state.pros[key].map((pro, i) => (
                     <div key={i} className="col-sm-4 col-md-4">
                       <div className={pro.relation}>
-                        <Link to={`/pros/${pro.username}`}>
+                        <Link onClick={() => this.props.receiveUser(pro)} to={`/pros/${pro.username}`}>
                           <Text text={pro.name} />
                         </Link>
                       </div>
@@ -96,4 +99,8 @@ class ProListing extends Component {
   }
 }
 
-export default ProListing;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ receiveUser }, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(ProListing);

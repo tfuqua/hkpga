@@ -39,7 +39,7 @@ class Tournaments extends Component {
 
       return (
         <div className="container-fluid">
-          <h1>Tournaments</h1>
+          <h2>Tournaments</h2>
           <h3>{this.state.year} &nbsp;Schedule</h3>
           {tournaments.map((tournament, i) => <TournamentRow key={i} tournament={tournament} />)}
           <div className="row">

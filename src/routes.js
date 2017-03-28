@@ -22,6 +22,7 @@ const AdminArticles = routeLoader(() => System.import('./containers/Articles/art
 const ArticleView = routeLoader(() => System.import('./containers/Articles/ArticleView'));
 const EditArticle = routeLoader(() => System.import('./containers/Articles/EditArticle'));
 const Pros = routeLoader(() => System.import('./containers/Pros'));
+const ProView = routeLoader(() => System.import('./containers/Pros/ProView'));
 const Partners = routeLoader(() => System.import('./containers/Partners'));
 
 export const routes = [
@@ -35,7 +36,13 @@ export const routes = [
   },
   {
     path: '/pros/training-program',
-    component: Page
+    component: Page,
+    exact: true
+  },
+  {
+    path: '/pros/:username',
+    component: ProView,
+    exact: true
   },
   {
     path: '/pros',

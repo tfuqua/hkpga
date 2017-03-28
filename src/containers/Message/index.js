@@ -38,9 +38,13 @@ class Message extends Component {
               <div>
                 {message.message}
               </div>
-              <ul>
-                <li>{message.details.message}</li>
-              </ul>
+
+              {message.details
+                ? <ul>
+                    <li>{message.details.message}</li>
+                  </ul>
+                : null}
+
             </div>
           : ''}
       </div>

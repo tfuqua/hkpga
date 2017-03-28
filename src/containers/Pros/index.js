@@ -6,10 +6,6 @@ import Loader from '../../components/Loader';
 import ProListing from './ProListing';
 
 class Pros extends Component {
-  constructor(props, context) {
-    super(props, context);
-  }
-
   componentDidMount() {
     this.props.getAllUsers();
   }

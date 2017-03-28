@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Text from '../../components/Text';
-import { getPages } from './actions';
+import { getPages, getPage } from './actions';
 import { FormattedDate } from 'react-intl';
 import Loader from '../../components/Loader';
 
@@ -43,7 +43,10 @@ class Pages extends Component {
                     />
                   </td>
                   <td>
-                    <Link className="btn btn-default" to={`/admin/pages/${key}`}>
+                    <Link
+                      onClick={() => this.props.getPage(key)}
+                      className="btn btn-default"
+                      to={`/admin/pages/${key}`}>
                       Edit
                     </Link>
                   </td>
@@ -67,7 +70,7 @@ function mapStateToProps(store) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getPages }, dispatch);
+  return bindActionCreators({ getPages, getPage }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Pages);

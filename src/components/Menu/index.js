@@ -6,6 +6,7 @@ import Logo from '../../images/hkpga-logo.png';
 import translations from '../../util/translations';
 import { setLang, getLang } from '../../containers/Lang/actions';
 import { logoutUser } from '../../containers/Login/actions';
+import { getPageBySlug } from '../../containers/Pages/actions';
 
 class Menu extends Component {
   render() {
@@ -72,12 +73,12 @@ class Menu extends Component {
                   <Link to="/">{translations[this.props.lang].MENU_HOME}</Link>
                 </li>
                 <li>
-                  <Link to="/about/about-us">
+                  <Link to="/about/about-us" onClick={this.props.getPageBySlug.bind(this, 'about-us')}>
                     {translations[this.props.lang].MENU_ABOUT}
                   </Link>
                   <ul>
                     <li>
-                      <Link to="/about/about-us">
+                      <Link to="/about/about-us" onClick={this.props.getPageBySlug.bind(this, 'about-us')}>
                         {translations[this.props.lang].ABOUT_US}
                       </Link>
                     </li>
@@ -121,7 +122,9 @@ class Menu extends Component {
                       </Link>
                     </li>
                     <li>
-                      <Link to="/pros/training-program">
+                      <Link
+                        to="/pros/training-program"
+                        onClick={this.props.getPageBySlug.bind(this, 'training-program')}>
                         {translations[this.props.lang].TRAINING_PROGRAM}
                       </Link>
                     </li>
@@ -131,12 +134,14 @@ class Menu extends Component {
                   <Link
                     to="/community/project-skyhigh"
                     className="dropdown-toggle hidden-xs hidden-sm"
-                    data-toggle="dropdown">
+                    onClick={this.props.getPageBySlug.bind(this, 'project-skyhigh')}>
                     {translations[this.props.lang].MENU_COMMUNITY}
                   </Link>
                   <ul>
                     <li>
-                      <Link to="/community/project-skyhigh">
+                      <Link
+                        to="/community/project-skyhigh"
+                        onClick={this.props.getPageBySlug.bind(this, 'project-skyhigh')}>
                         {translations[this.props.lang].PROJECT_SKYHIGH}
                       </Link>
                     </li>
@@ -187,7 +192,7 @@ function mapStateToProps(store) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getLang, setLang, logoutUser }, dispatch);
+  return bindActionCreators({ getLang, setLang, logoutUser, getPageBySlug }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);

@@ -14,12 +14,12 @@ class Menu extends Component {
         <div className="container-fluid">
           <nav role="navigation">
             <ul className="nav navbar-nav navbar-right">
-              <li><NavLink activeClassName="active" to="/admin">Dashboard</NavLink></li>
-              <li><NavLink activeClassName="active" to="/admin/articles">Articles</NavLink></li>
-              <li><NavLink activeClassName="active" to="/admin/press">Press</NavLink></li>
-              <li><NavLink activeClassName="active" to="/admin/pages">Pages</NavLink></li>
-              <li><NavLink activeClassName="active" to="/admin/tournaments">Tournaments</NavLink></li>
-              <li><NavLink activeClassName="active" to="/admin/users">Users</NavLink></li>
+              <li><NavLink activeClassName="active" exact to="/admin">Dashboard</NavLink></li>
+              <li><NavLink activeClassName="active" exact to="/admin/articles">Articles</NavLink></li>
+              <li><NavLink activeClassName="active" exact to="/admin/press">Press</NavLink></li>
+              <li><NavLink activeClassName="active" exact to="/admin/pages">Pages</NavLink></li>
+              <li><NavLink activeClassName="active" exact to="/admin/tournaments">Tournaments</NavLink></li>
+              <li><NavLink activeClassName="active" exact to="/admin/users">Users</NavLink></li>
             </ul>
           </nav>
         </div>

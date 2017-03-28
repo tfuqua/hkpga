@@ -1,0 +1,98 @@
+.full:before{
+  font-family: FontAwesome;
+  content: "\f005"; // fa-star
+  display: inline-block;
+  padding-right: 14px;
+  font-size: 1.2rem;
+}
+.tournament:before{
+  font-family: FontAwesome;
+  content: "\f140"; // fa-bullseye
+  display: inline-block;
+  padding-right: 14px;
+  font-size: 1.2rem;
+}
+.associate:before{
+  font-family: FontAwesome;
+  content: "\f0c8"; // fa-square
+  display: inline-block;
+  padding-right: 14px;
+  font-size: 1.1rem;
+}
+
+.member:before {
+  font-family: FontAwesome;
+  content: "\f096"; // fa-square-0
+  display: inline-block;
+  padding-right: 14px;
+  font-size: 1.1rem;
+}
+
+.trainer:before {
+  font-family: FontAwesome;
+  content: "\f0a3"; // fa-certificate
+  display: inline-block;
+  padding-right: 14px;
+  font-size: 1.1rem;
+}
+
+.seniortrainee:before {
+  font-family: FontAwesome;
+  content: "\f13b"; // fa-html5
+  display: inline-block;
+  padding-right: 14px;
+  font-size: 1.1rem;
+}
+
+.trainee:before {
+  font-family: FontAwesome;
+  content: "\f19d"; // fa-graduation-cap
+  display: inline-block;
+  padding-right: 14px;
+  font-size: 1.1rem;
+}
+
+.honorary:before {
+  font-family: FontAwesome;
+  content: "\f19c"; // fa-institution
+  display: inline-block;
+  padding-right: 14px;
+  font-size: 1.1rem;
+}
+
+.none:before,
+.no-relation:before {
+  font-family: FontAwesome;
+  content: "\f072"; // fa-plane
+  display: inline-block;
+  padding-right: 14px;
+  font-size: 1.1rem;
+}
+
+// member: f096 / empty square
+
+.full:before,
+.tournament:before,
+.associate:before,
+.member:before{
+   font-family: FontAwesome;
+   content: "\f005"; // filled star
+   display: inline-block;
+   padding-right: 14px;
+   font-size: 1.2rem;
+}
+.trainer:before{
+   font-family: FontAwesome;
+   content: "\f111"; // filled circle
+   display: inline-block;
+   padding-right: 14px;
+   font-size: 1.2rem;
+}
+.seniortrainee:before,
+.trainee:before{
+   font-family: FontAwesome;
+   content: "\f10c"; // empty circle
+   display: inline-block;
+   padding-right: 14px;
+   font-size: 1.2rem;
+}

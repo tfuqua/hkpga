@@ -1,4 +1,4 @@
-import { GET_USERS, REQUEST_USERS, GET_USER } from './actions';
+import { GET_USERS, REQUEST_USERS, GET_USER, GET_ALL_USERS } from './actions';
 
 function userReducer(state = {}, action) {
   switch (action.type) {
@@ -18,6 +18,12 @@ function userReducer(state = {}, action) {
       return {
         ...state,
         isFetching: true
+      };
+    case GET_ALL_USERS:
+      return {
+        ...state,
+        isFetching: false,
+        users: action.users
       };
     default:
       return state;

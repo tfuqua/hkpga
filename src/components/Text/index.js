@@ -7,26 +7,21 @@ class Text extends Component {
 
     this.createMarkup = this.createMarkup.bind(this);
   }
-      
-    createMarkup(text){
-        if (typeof text === 'undefined')
-            return  {__html: ''};
 
-        return {__html: text[this.props.lang]};
-    }
+  createMarkup(text) {
+    if (typeof text === 'undefined') return { __html: '' };
 
-    render(){
-        return(
-            <div>
-                <div dangerouslySetInnerHTML={this.createMarkup(this.props.text)} />
-            </div>
-        );
-    }
+    return { __html: text[this.props.lang] };
+  }
+
+  render() {
+    return <span dangerouslySetInnerHTML={this.createMarkup(this.props.text)} />;
+  }
 }
 
 function mapStateToProps(store) {
   return {
-      lang: store.languageReducer.lang
+    lang: store.languageReducer.lang
   };
 }
 

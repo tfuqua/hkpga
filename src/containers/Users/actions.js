@@ -5,6 +5,7 @@ import { SAVE_SUCCESSFUL, SAVE_ERROR } from '../../util/messages';
 import axios from 'axios';
 
 export const GET_USERS = 'GET_USERS';
+export const GET_ALL_USERS = 'GET_ALL_USERS';
 export const GET_USER = 'GET_USER';
 export const REQUEST_USERS = 'REQUEST_USERS';
 
@@ -12,6 +13,13 @@ export function receiveUsers(userQuery) {
   return {
     type: GET_USERS,
     userQuery
+  };
+}
+
+export function receiveAllUsers(users) {
+  return {
+    type: GET_ALL_USERS,
+    users
   };
 }
 
@@ -30,7 +38,7 @@ export function RequestUsers() {
 
 export function saveUser(id, user) {
   return dispatch => {
-    dispatch(displayMessage(SAVE_ERROR));
+    dispatch(displayMessage(SAVE_SUCCESSFUL));
     return database.ref(`users/${id}`).set(user);
   };
 }
@@ -44,6 +52,22 @@ export function getUser(key) {
       .ref(`users/${key}`)
       .once('value', user => {
         dispatch(receiveUser(user.val()));
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+}
+
+/******* Get All Users *********/
+export function getAllUsers() {
+  return dispatch => {
+    dispatch(RequestUsers());
+
+    return database
+      .ref(`users`)
+      .once('value', users => {
+        dispatch(receiveAllUsers(users.val()));
       })
       .catch(error => {
         console.log(error);

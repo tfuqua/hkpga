@@ -17,11 +17,17 @@ class Page extends Component {
   }
 
   componentDidMount() {
-    this.props.getPageBySlug(this.state.slug);
+    if (!this.props.page) {
+      this.props.getPageBySlug(this.state.slug);
+    }
   }
 
   render() {
-    if (!this.props.isFetching && typeof this.props.page !== 'undefined') {
+    if (
+      !this.props.isFetching &&
+      typeof this.props.page !== 'undefined' &&
+      this.props.page[Object.keys(this.props.page)[0]].slug === this.state.slug
+    ) {
       let page = this.props.page[Object.keys(this.props.page)[0]];
       return (
         <div className="container-fluid">

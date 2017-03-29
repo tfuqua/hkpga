@@ -10,7 +10,7 @@ function NewsCard(props) {
 
   return (
     <div className="news-card">
-
+      <hr />
       <FormattedDate value={new Date(article.publish_date)} year="numeric" month="long" day="2-digit" />
       <h4> <Text text={article.title} /></h4>
 
@@ -23,22 +23,25 @@ function NewsCard(props) {
               <div className="preview">
                 <Text text={generatePreview(article.html, 400)} />
               </div>
-              <div className="text-right">
-                <Link to={`/news/${article.slug}`}>
-                  <button type="button" className="btn btn-default">READ_MORE</button>
-                </Link>
-              </div>
+            </div>
+            <div className="col-xs-12 text-right">
+              <Link to={`/news/${article.slug}`}>
+                <button type="button" className="btn btn-success">{translations[props.lang].READ_MORE}</button>
+              </Link>
             </div>
           </div>
-        : <div className="preview">
-            <Text text={generatePreview(article.html, 400)} />
-            <div className="text-right">
+        : <div className="row">
+            <div className="col-xs-12">
+              <div className="preview">
+                <Text text={generatePreview(article.html, 400)} />
+              </div>
+            </div>
+            <div className="col-sm-12 text-right">
               <Link to={`/news/${article.slug}`}>
-                <button type="button" className="btn btn-default">READ_MORE</button>
+                <button type="button" className="btn btn-success">{translations[props.lang].READ_MORE}</button>
               </Link>
             </div>
           </div>}
-      <hr />
     </div>
   );
 }

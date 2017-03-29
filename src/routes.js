@@ -24,6 +24,7 @@ const EditArticle = routeLoader(() => System.import('./containers/Articles/EditA
 const Pros = routeLoader(() => System.import('./containers/Pros'));
 const ProView = routeLoader(() => System.import('./containers/Pros/ProView'));
 const Partners = routeLoader(() => System.import('./containers/Partners'));
+const Committee = routeLoader(() => System.import('./containers/Committee'));
 
 export const routes = [
   {
@@ -52,6 +53,10 @@ export const routes = [
   {
     path: '/about/partners',
     component: Partners
+  },
+  {
+    path: '/about/committee-honorary',
+    component: Committee
   },
   {
     path: '/tournaments/:year?',

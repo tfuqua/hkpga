@@ -6,6 +6,8 @@ import axios from 'axios';
 
 export const GET_USERS = 'GET_USERS';
 export const GET_ALL_USERS = 'GET_ALL_USERS';
+export const GET_COMMITTEE = 'GET_COMMITTEE';
+export const GET_HONORARY = 'GET_HONORARY';
 export const GET_USER = 'GET_USER';
 export const REQUEST_USERS = 'REQUEST_USERS';
 
@@ -20,6 +22,18 @@ export function receiveAllUsers(users) {
   return {
     type: GET_ALL_USERS,
     users
+  };
+}
+export function receiveCommittee(committee) {
+  return {
+    type: GET_COMMITTEE,
+    committee
+  };
+}
+export function receiveHonorary(honorary) {
+  return {
+    type: GET_HONORARY,
+    honorary
   };
 }
 
@@ -68,6 +82,45 @@ export function getAllUsers() {
       .ref(`users`)
       .once('value', users => {
         dispatch(receiveAllUsers(users.val()));
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+}
+
+/******* Get Committtee *********/
+export function getCommittee() {
+  return dispatch => {
+    dispatch(RequestUsers());
+
+    return database
+      .ref(`users`)
+      .orderByChild('committee')
+      .startAt('A')
+      .endAt('Z')
+      .once('value', users => {
+        dispatch(receiveCommittee(users.val()));
+      })
+      .then(() => {
+        dispatch(getHonorary());
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+}
+export function getHonorary() {
+  return dispatch => {
+    dispatch(RequestUsers());
+
+    return database
+      .ref(`users`)
+      .orderByChild('honorary')
+      .startAt('A')
+      .endAt('Z')
+      .once('value', users => {
+        dispatch(receiveHonorary(users.val()));
       })
       .catch(error => {
         console.log(error);

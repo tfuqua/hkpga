@@ -145,30 +145,6 @@ export function getResults(key) {
   };
 }
 
-/******* Flatten Out Results Data  *********/
-export function fixTournaments() {
-  const ref = database.ref('tournaments');
-
-  ref.once('value', function(snapshot) {
-    snapshot.forEach(function(childSnapshot) {
-      const resultsRef = database.ref(`/results/${childSnapshot.key}`);
-      const results = childSnapshot.val().results;
-      if (results) {
-        resultsRef.set(results);
-      }
-      const tourney = database.ref('tournaments/' + childSnapshot.key + '/results');
-      tourney
-        .remove()
-        .then(function() {
-          console.log('Remove succeeded.');
-        })
-        .catch(function(error) {
-          console.log('Remove failed: ' + error.message);
-        });
-    });
-  });
-}
-
 export function queryTournaments(query) {
   return dispatch => {
     dispatch(requestTournaments());
@@ -200,4 +176,53 @@ export function queryTournaments(query) {
         });
     });
   };
+}
+
+/******* Flatten Out Results Data  *********/
+export function fixTournaments() {
+  const ref = database.ref('tournaments');
+
+  ref.once('value', function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      const resultsRef = database.ref(`/results/${childSnapshot.key}`);
+      const results = childSnapshot.val().results;
+      if (results) {
+        resultsRef.set(results);
+      }
+      const tourney = database.ref('tournaments/' + childSnapshot.key + '/results');
+      tourney
+        .remove()
+        .then(function() {
+          console.log('Remove succeeded.');
+        })
+        .catch(function(error) {
+          console.log('Remove failed: ' + error.message);
+        });
+    });
+  });
+}
+
+/******* Remove Results from Users  *********/
+export function fixUserData() {
+  const ref = database.ref('users');
+
+  ref.once('value', function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      /*const resultsRef = database.ref(`/results/${childSnapshot.key}`);
+      const results = childSnapshot.val().results;
+      if (results) {
+        resultsRef.set(results);
+      }*/
+
+      const user = database.ref('users/' + childSnapshot.key + '/results');
+      user
+        .remove()
+        .then(function() {
+          console.log('Remove succeeded.');
+        })
+        .catch(function(error) {
+          console.log('Remove failed: ' + error.message);
+        });
+    });
+  });
 }

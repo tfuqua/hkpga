@@ -1,7 +1,8 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { fixTournaments, fixUserData } from '../Tournaments/actions';
 
 class Dashboard extends Component {
   render() {
@@ -27,9 +28,20 @@ class Dashboard extends Component {
             </Link>
           </div>
         </div>
+
+        <button onClick={this.props.fixTournaments.bind(this)} className="btn btn-default">
+          Fix Tournament Data
+        </button>
+        <button onClick={this.props.fixUserData.bind(this)} className="btn btn-default">
+          Remove Results from User Data
+        </button>
       </div>
     );
   }
 }
 
-export default Dashboard;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ fixTournaments, fixUserData }, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(Dashboard);

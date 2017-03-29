@@ -27,13 +27,26 @@ class LatestNews extends Component {
             <h5>
               <FormattedDate value={new Date(article.publish_date)} year="numeric" month="long" day="2-digit" />
             </h5>
-            {article.cover ? <img className="cover" src={article.cover} alt={article.slug} /> : null}
-            <div className="preview">
-              <Text text={generatePreview(article.html, 500)} />
-            </div>
-            <Link to={`/news/${article.slug}`}>
-              <button type="button" className="btn btn-default">{translations[this.props.lang].READ_MORE}</button>
-            </Link>
+            {article.cover
+              ? <div className="row">
+                  <div className="col-md-5 col-sm-4">
+                    <img className="cover" src={article.cover} alt={article.slug} />
+                  </div>
+                  <div className="col-md-7 col-sm-8">
+                    <div className="preview">
+                      <Text text={generatePreview(article.html, 500)} />
+                      <br /><br />
+                      <div className="text-right">
+                        <Link to={`/news/${article.slug}`}>
+                          <button type="button" className="btn btn-success">
+                            {translations[this.props.lang].READ_MORE}
+                          </button>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              : null}
           </div>
         </div>
       );

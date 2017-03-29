@@ -4,6 +4,7 @@ import MoreNews from '../../components/News/MoreNews';
 import Carousel from '../../components/Carousel';
 import OrderOfMerit from '../../components/Merit';
 import LatestTournamentScores from '../../components/Tournament/Latest';
+import Partners from '../Partners';
 import { Link } from 'react-router-dom';
 
 class Home extends Component {
@@ -22,6 +23,10 @@ class Home extends Component {
             <div className="col-md-4">
               <OrderOfMerit />
               <LatestTournamentScores />
+            </div>
+            <div className="col-xs-12">
+              <hr />
+              <Partners />
             </div>
           </div>
         </div>

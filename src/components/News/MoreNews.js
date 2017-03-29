@@ -19,8 +19,7 @@ class MoreNews extends Component {
       return (
         <div className="latest-news">
           <h2>{translations[this.props.lang].MORE_NEWS}</h2>
-          <hr />
-          {news.map((news, i) => <NewsCard key={i} article={news} />)}
+          {news.map((news, i) => <NewsCard key={i} article={news} lang={this.props.lang} />)}
         </div>
       );
     } else {

@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getAllUsers } from '../Users/actions';
 import Loader from '../../components/Loader';
+import translations from '../../util/translations';
 import ProListing from './ProListing';
 
 class Pros extends Component {
@@ -14,7 +15,7 @@ class Pros extends Component {
     if (this.props.users) {
       return (
         <div className="container-fluid">
-          <h2>PROFESSIONALS' DIRECTORY</h2>
+          <h2>{translations[this.props.lang].PROS}</h2>
           <ProListing pros={this.props.users} />
         </div>
       );
@@ -27,6 +28,7 @@ class Pros extends Component {
 function mapStateToProps(store) {
   return {
     users: store.userReducer.users,
+    lang: store.languageReducer.lang,
     isFetching: store.userReducer.isFetching
   };
 }

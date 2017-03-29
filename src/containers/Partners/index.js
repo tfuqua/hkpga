@@ -1,41 +1,48 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getAllUsers } from '../Users/actions';
-import Loader from '../../components/Loader';
+import translations from '../../util/translations';
 
 class Partners extends Component {
-  constructor(props, context) {
-    super(props, context);
-  }
-
-  componentDidMount() {
-    this.props.getAllUsers();
-  }
-
   render() {
-    if (this.props.users) {
-      return (
-        <div className="container-fluid">
-          <h2>PARTNERS</h2>
+    return (
+      <div className="container-fluid" id="partners-widget">
+
+        <div id="official-partners">
+          <h2>{translations[this.props.lang].OFFICIAL_PARTNERS}</h2>
+          <div className="logos">
+            <a href="http://www.pgae.com/" target="_blank"><div className="col-md-3" /></a>
+            <a href="http://www.hkga.com/eng/" target="_blank"><div className="col-md-3" /></a>
+            <a href="http://www.lcsd.gov.hk/" target="_blank"><div className="col-md-3" /></a>
+            <a href="http://www.sjs.org.hk/en/intro/" target="_blank"><div className="col-md-3" /></a>
+          </div>
+        </div>
+
+        <div id="sponsors">
+          <h2>{translations[this.props.lang].OFFICIAL_SPONSORS}</h2>
+          <div className="logos">
+            <a href="http://www.ageas.com.hk/eng/index.htm" target="_blank"><div className="col-md-3" /></a>
+          </div>
 
         </div>
-      );
-    } else {
-      return <Loader />;
-    }
+
+        <div id="supporting-organisations">
+          <h2>{translations[this.props.lang].SUPPORTING_ORGANISATIONS}</h2>
+          <div className="logos">
+            <a href="http://www.nine-eagles.com/eng/" target="_blank"><div className="col-md-3" /></a>
+            <a href="http://www.fhsgolf.com/" target="_blank"><div className="col-md-3" /></a>
+            <a href="http://www.yinligolf.com/" target="_blank"><div className="col-md-3" /></a>
+          </div>
+        </div>
+
+      </div>
+    );
   }
 }
 
 function mapStateToProps(store) {
   return {
-    users: store.userReducer.users,
-    isFetching: store.userReducer.isFetching
+    lang: store.languageReducer.lang
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getAllUsers }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Partners);
+export default connect(mapStateToProps)(Partners);

@@ -1,0 +1,81 @@
+    #partners-widget {
+      .logos {
+          overflow:hidden;
+        div {
+          height: 90px;
+          background-repeat: no-repeat;
+          background-size: contain;
+          background-position: center;
+          float: left;
+          margin: 8px 13px;
+        }
+        a {
+          height: 100%;
+          width: 100%;
+        }
+      }
+
+      #official-partners .logos {
+        a:nth-child(1) div {
+            background-image: url(../images/logo-pgae-bw.png);
+            width: 150px;
+        }
+        a:nth-child(1):hover  div{
+            background-image: url(../images/logo-pgae.png);
+        }
+        a:nth-child(2) div {
+            background-image: url(../images/logo-hkga-bw.png);
+            width: 190px;
+        }
+        a:nth-child(2):hover div {
+            background-image: url(../images/logo-hkga.png);
+        }
+        a:nth-child(3)  div{
+            background-image: url(../images/logo-lcsd-bw.png);
+            width: 150px;
+        }
+        a:nth-child(3):hover div{
+            background-image: url(../images/logo-lcsd.png);
+        }
+        a:nth-child(4) div {
+            background-image: url(../images/logo-stjames-bw.png);
+            width: 160px;
+        }
+        a:nth-child(4):hover div {
+            background-image: url(../images/logo-stjames.png);
+        }
+      }
+      #sponsors .logos {
+        a:nth-child(1) div{
+            background-image: url(../images/logo-ageas-bw.png);
+            width: 150px;
+        }
+        a:nth-child(1):hover div{
+            background-image: url(../images/logo-ageas.png);
+        }
+      }
+      #supporting-organisations .logos {
+        a:nth-child(1) div{
+            background-image: url(../images/logo-nine-eagles-bw.png);
+            width: 150px;
+        }
+        a:nth-child(1):hover div{
+            background-image: url(../images/logo-nine-eagles.png);
+        }
+        a:nth-child(2) div{
+            background-image: url(../images/logo-phoenix-hill-bw.png);
+            width: 190px;
+        }
+        a:nth-child(2):hover div{
+            background-image: url(../images/logo-phoenix-hill.png);
+        }
+        a:nth-child(3) div{
+          background-image: url(../images/logo-yinli-bw.png);
+          width: 150px;
+        }
+        a:nth-child(3):hover div{
+          background-image: url(../images/logo-yinli.png);
+        }
+      }
+
+    }

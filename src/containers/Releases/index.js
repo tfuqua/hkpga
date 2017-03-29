@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedDate } from 'react-intl';
 import Text from '../../components/Text';
+import translations from '../../util/translations';
 import { getReleases } from './actions';
 import { mapObjectToArray } from '../../util/util';
 
@@ -18,13 +19,13 @@ class Releases extends Component {
 
       return (
         <div className="container-fluid press press-releases-page">
-          <h2>Press Releases</h2>
+          <h2>{translations[this.props.lang].PRESS_RELEASES}</h2>
           <br />
           {releases.map((release, i) => (
             <div key={i} className="">
-              <h5>
+              <h4>
                 <FormattedDate value={new Date(release.updated_at)} year="numeric" month="long" day="2-digit" />
-              </h5>
+              </h4>
 
               <h4 className="press-title">
                 <a target="_blank" href={release.url[this.props.lang]}>

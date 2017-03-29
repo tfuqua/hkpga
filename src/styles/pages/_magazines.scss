@@ -1,0 +1,9 @@
+.magazines {
+    .mag{
+        padding:15px;
+
+        &:nth-child(even){
+            clear:left;
+        }
+    }
+}

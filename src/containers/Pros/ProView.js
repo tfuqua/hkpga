@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getUser } from '../Users/actions';
 import Loader from '../../components/Loader';
 import Text from '../../components/Text';
+import translations from '../../util/translations';
 
 class ProView extends Component {
   componentDidMount() {
@@ -14,7 +15,7 @@ class ProView extends Component {
     if (this.props.user) {
       return (
         <div className="container-fluid">
-          <h2>PROFESSIONALS PROFILE</h2>
+          <h2>{translations[this.props.lang].PROFILE}</h2>
 
           {this.props.user.profile_picture
             ? <img
@@ -74,6 +75,7 @@ class ProView extends Component {
 function mapStateToProps(store) {
   return {
     user: store.userReducer.user,
+    lang: store.languageReducer.lang,
     isFetching: store.userReducer.isFetching
   };
 }

@@ -29,11 +29,11 @@ function Footer() {
                 </div>
                 <p className="">
                   {' '}
-                  <a href="#/terms#tc"> Terms & Conditions &nbsp; </a>
+                  <a href="/terms#tc"> Terms & Conditions &nbsp; </a>
                   {' '}
                   |
                   {' '}
-                  <a href="#/terms#privacy"> &nbsp; Privacy Policy &nbsp; </a>
+                  <a href="/terms#privacy"> &nbsp; Privacy Policy &nbsp; </a>
                   | &nbsp; Copyright © 2002-2015 HKPGA. &nbsp;
                   {' '}
                 </p>

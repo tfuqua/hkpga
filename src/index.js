@@ -25,7 +25,7 @@ function render(Component) {
   );
 }
 
-if (window.location.hash) {
+if (window.location.hash.includes('#/')) {
   window.location = window.location.hash.replace('#', '');
 } else {
   render(App);

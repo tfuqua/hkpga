@@ -25,6 +25,7 @@ const Pros = routeLoader(() => System.import('./containers/Pros'));
 const ProView = routeLoader(() => System.import('./containers/Pros/ProView'));
 const Partners = routeLoader(() => System.import('./containers/Partners'));
 const Committee = routeLoader(() => System.import('./containers/Committee'));
+const Terms = routeLoader(() => System.import('./containers/Terms'));
 
 export const routes = [
   {
@@ -142,6 +143,10 @@ export const routes = [
   {
     path: '/admin/users/:key',
     component: EditUser
+  },
+  {
+    path: '/terms',
+    component: Terms
   },
   {
     path: '/',

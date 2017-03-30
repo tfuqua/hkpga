@@ -35,14 +35,16 @@ class LatestNews extends Component {
                   <div className="col-md-7 col-sm-8">
                     <div className="preview">
                       <Text text={generatePreview(article.html, 500)} />
-                      <br /><br />
-                      <div className="text-right">
-                        <Link to={`/news/${article.slug}`}>
-                          <button type="button" className="btn btn-success">
-                            {translations[this.props.lang].READ_MORE}
-                          </button>
-                        </Link>
-                      </div>
+                      <br />
+                    </div>
+                  </div>
+                  <div className="col-xs-12">
+                    <div className="text-right">
+                      <Link to={`/news/${article.slug}`}>
+                        <button type="button" className="btn btn-success">
+                          {translations[this.props.lang].READ_MORE}
+                        </button>
+                      </Link>
                     </div>
                   </div>
                 </div>

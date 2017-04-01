@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Text from '../Text';
 import { FormattedDate } from 'react-intl';
@@ -11,8 +11,8 @@ function NewsCard(props) {
   return (
     <div className="news-card">
       <hr />
-      <FormattedDate value={new Date(article.publish_date)} year="numeric" month="long" day="2-digit" />
-      <h4> <Text text={article.title} /></h4>
+      <h3> <Text text={article.title} /></h3>
+      <FormattedDate value={new Date(article.publish_date)} year="numeric" month="long" day="2-digit" /><br /><br />
 
       {article.cover
         ? <div className="row">

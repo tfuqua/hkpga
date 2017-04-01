@@ -41,8 +41,11 @@ class Tournaments extends Component {
         <div className="container-fluid">
           <h2>Tournaments</h2>
           <h3>{this.state.year} &nbsp;Schedule</h3>
-          {tournaments.map((tournament, i) => <TournamentRow key={i} tournament={tournament} />)}
+          <hr />
           <div className="row">
+            <div className="col-sm-9">
+              {tournaments.map((tournament, i) => <TournamentRow key={i} tournament={tournament} />)}
+            </div>
             <div className="col-sm-3">
               <Archives type={'tournaments'} link={'/tournaments/'} />
             </div>

@@ -37,15 +37,15 @@ class CommitteeTable extends Component {
       return (
         <div>
           <dl className="dl-horizontal">
-            <CommitteeRow position="Chairman" committee={this.state.committee.CHAIRPERSON} />
-            <CommitteeRow position="Vice Chairman" committee={this.state.committee.VICECHAIRPERSON} />
-            <CommitteeRow position="Captain of Open Division" committee={this.state.committee.CAPTAINOPEN} />
-            <CommitteeRow position="Vice Captain of Open Division" committee={this.state.committee.VICECAPTAINOPEN} />
-            <CommitteeRow position="Senior Captain" committee={this.state.committee.CAPTAINSENIOR} />
-            <CommitteeRow position="Vice Senior Captain" committee={this.state.committee.VICECAPTAINSENIOR} />
-            <CommitteeRow position="Ladies Captain" committee={this.state.committee.CAPTAINLADIES} />
-            <CommitteeRow position="Vice Ladies Captain" committee={this.state.committee.VICECAPTAINLADIES} />
-            <CommitteeRow position="Honorary Treasurer" committee={this.state.committee.TREASURER} />
+            <CommitteeRow position="CHAIRMAN" committee={this.state.committee.CHAIRPERSON} />
+            <CommitteeRow position="VICE_CHAIRMAN" committee={this.state.committee.VICECHAIRPERSON} />
+            <CommitteeRow position="CAPTAIN_OPEN" committee={this.state.committee.CAPTAINOPEN} />
+            <CommitteeRow position="VICE_CAPTAIN_OPEN" committee={this.state.committee.VICECAPTAINOPEN} />
+            <CommitteeRow position="SENIOR_CAPTAIN" committee={this.state.committee.CAPTAINSENIOR} />
+            <CommitteeRow position="VICE_SENIOR_CAPTAIN" committee={this.state.committee.VICECAPTAINSENIOR} />
+            <CommitteeRow position="LADIES_CAPTAIN" committee={this.state.committee.CAPTAINLADIES} />
+            <CommitteeRow position="VICE_LADIES_CAPTAIN" committee={this.state.committee.VICECAPTAINLADIES} />
+            <CommitteeRow position="HONORARY_TREASURER" committee={this.state.committee.TREASURER} />
           </dl>
 
         </div>

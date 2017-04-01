@@ -34,20 +34,22 @@ class HonoraryTable extends Component {
 
   render() {
     if (this.state.honorary) {
+      console.log(this.state.honorary);
       return (
         <div>
           <dl className="dl-horizontal">
-            <HonoraryRow position="Founder" honorary={this.state.honorary.FOUNDER} />
+            <HonoraryRow position="FOUNDER" honorary={this.state.honorary.FOUNDER} />
             <HonoraryRow
-              position="Permanent Honorary President"
+              position="PERMANENT_HONORARY_PRESIDENT"
               honorary={this.state.honorary.PERMANENTHONORARYPRESIDENT}
             />
-            <HonoraryRow position="Honorary President" honorary={this.state.honorary.HONORARYPRESIDENT} />
-            <HonoraryRow position="Honorary Vice President" honorary={this.state.honorary.HONORARYVICEPRESIDENT} />
-            <HonoraryRow position="Legal Advisor" honorary={this.state.honorary.LEGALADVISOR} />
-            <HonoraryRow position="Advisor (Constitution)" honorary={this.state.honorary.ADVISOR} />
-            <HonoraryRow position="Honorary Member" honorary={this.state.honorary.HONORARYMEMBER} />
-            <HonoraryRow position="Founder Member" honorary={this.state.honorary.FOUNDERMEMBER} />
+            <HonoraryRow position="HONORARY_PRESIDENT" honorary={this.state.honorary.HONORARYPRESIDENT} />
+            <HonoraryRow position="HONORARY_VICE_PRESIDENT" honorary={this.state.honorary.HONORARYVICEPRESIDENT} />
+            <HonoraryRow position="LEGAL_ADVISOR" honorary={this.state.honorary.LEGALADVISOR} />
+            <HonoraryRow position="ADVISOR" honorary={this.state.honorary.ADVISOR} />
+            <HonoraryRow position="ADVISOR_CONSTITUTION" honorary={this.state.honorary.ADVISORCONSTITUTION} />
+            <HonoraryRow position="HONORARY_MEMBER" honorary={this.state.honorary.HONORARYMEMBER} />
+            <HonoraryRow position="FOUNDER_MEMBER" honorary={this.state.honorary.FOUNDERMEMBER} />
 
           </dl>
 

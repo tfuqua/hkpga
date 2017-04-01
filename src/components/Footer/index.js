@@ -14,28 +14,22 @@ function Footer() {
                 </p>
               </div>
               <div className="terms-copyright col-md-6">
-                <div>
+                <div className="">
                   <ul className="social">
-                    <a href="https://www.facebook.com/thehkpga" target="_blank">
-                      <li><i className="fa fa-facebook" /></li>
-                    </a>
-                    <a href="https://twitter.com/thehkpga" target="_blank">
-                      <li><i className="fa fa-twitter" /></li>
-                    </a>
-                    <a href="http://weibo.com/u/5209724886" target="_blank">
-                      <li><i className="fa fa-weibo" /></li>
-                    </a>
+                    <li>
+                      <a href="https://www.facebook.com/thehkpga" target="_blank"><i className="fa fa-facebook" /></a>
+                    </li>
+                    <li>
+                      <a href="https://twitter.com/thehkpga" target="_blank"><i className="fa fa-twitter" /></a>
+                    </li>
+                    <li> <a href="http://weibo.com/u/5209724886" target="_blank"><i className="fa fa-weibo" /></a></li>
                   </ul>
                 </div>
                 <p className="">
-                  {' '}
                   <a href="/terms#tc"> Terms & Conditions &nbsp; </a>
-                  {' '}
                   |
-                  {' '}
                   <a href="/terms#privacy"> &nbsp; Privacy Policy &nbsp; </a>
                   | &nbsp; Copyright © 2002-2015 HKPGA. &nbsp;
-                  {' '}
                 </p>
               </div>
             </div>

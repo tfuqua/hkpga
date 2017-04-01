@@ -1,71 +1,134 @@
+.pros {
+    .fa {
+        color:$darker-green;
+    }
+}
+
+.pros-legend{
+    border:1px solid #eeeeee;
+    padding:8px 15px;
+
+    hr {
+        margin:5px 0 10px;
+    }
+
+    h3{
+        margin:0;
+    }
+
+    ul {
+        list-style:none;
+        padding:0;
+
+        li {
+            padding:3px 0;
+        }
+    }
+
+    .fa {
+        display:inline-block;
+        padding:0 5px 0 0;
+        color:#5f6062;
+    }
+}
+.pro {
+    display:block;
+    padding:3px 0;
+
+    &:before{
+        color:#5f6062;
+    }
+
+    &:hover{
+        &:before{color:$primary-yellow};
+    }
+
+    a {
+        color: #5f6062;
+
+        &:hover{
+            color:$primary-yellow;
+        }
+    }   
+}
+
 .full:before{
   font-family: FontAwesome;
+
   content: "\f005"; // fa-star
   display: inline-block;
-  padding-right: 14px;
+  padding-right: 8px;
   font-size: 1.2rem;
 }
 .tournament:before{
   font-family: FontAwesome;
+
   content: "\f140"; // fa-bullseye
   display: inline-block;
-  padding-right: 14px;
+  padding-right: 8px;
   font-size: 1.2rem;
 }
 .associate:before{
   font-family: FontAwesome;
+
   content: "\f0c8"; // fa-square
   display: inline-block;
-  padding-right: 14px;
+  padding-right: 8px;
   font-size: 1.1rem;
 }
 
 .member:before {
   font-family: FontAwesome;
+
   content: "\f096"; // fa-square-0
   display: inline-block;
-  padding-right: 14px;
+  padding-right: 8px;
   font-size: 1.1rem;
 }
 
 .trainer:before {
   font-family: FontAwesome;
+
   content: "\f0a3"; // fa-certificate
   display: inline-block;
-  padding-right: 14px;
+  padding-right: 8px;
   font-size: 1.1rem;
 }
 
 .seniortrainee:before {
   font-family: FontAwesome;
+
   content: "\f13b"; // fa-html5
   display: inline-block;
-  padding-right: 14px;
+  padding-right: 8px;
   font-size: 1.1rem;
 }
 
 .trainee:before {
   font-family: FontAwesome;
+
   content: "\f19d"; // fa-graduation-cap
   display: inline-block;
-  padding-right: 14px;
+  padding-right: 8px;
   font-size: 1.1rem;
 }
 
 .honorary:before {
   font-family: FontAwesome;
+
   content: "\f19c"; // fa-institution
   display: inline-block;
-  padding-right: 14px;
+  padding-right: 8px;
   font-size: 1.1rem;
 }
 
 .none:before,
 .no-relation:before {
-  font-family: FontAwesome;
+  font-family: FontAwesome; 
+
   content: "\f072"; // fa-plane
   display: inline-block;
-  padding-right: 14px;
+  padding-right: 8px;
   font-size: 1.1rem;
 }
 
@@ -76,23 +139,26 @@
 .associate:before,
 .member:before{
    font-family: FontAwesome;
+ 
    content: "\f005"; // filled star
    display: inline-block;
-   padding-right: 14px;
+   padding-right: 8px;
    font-size: 1.2rem;
 }
 .trainer:before{
    font-family: FontAwesome;
+ 
    content: "\f111"; // filled circle
    display: inline-block;
-   padding-right: 14px;
+   padding-right: 8px;
    font-size: 1.2rem;
 }
 .seniortrainee:before,
 .trainee:before{
    font-family: FontAwesome;
+ 
    content: "\f10c"; // empty circle
    display: inline-block;
-   padding-right: 14px;
+   padding-right: 8px;
    font-size: 1.2rem;
 }

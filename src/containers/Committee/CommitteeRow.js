@@ -3,18 +3,24 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { receiveUser } from '../Users/actions';
 import { Link } from 'react-router-dom';
+import translations from '../../util/translations';
+import Text from '../../components/Text';
 
 class CommitteeRow extends Component {
   render() {
     if (this.props.committee) {
       return (
         <div>
-          <dt>{this.props.position}</dt>
-          {this.props.committee.map((user, i) => (
-            <dd key={i}>
-              <Link onClick={() => this.props.receiveUser(user)} to={`/pros/${user.username}`}>{user.name.en}</Link>
-            </dd>
-          ))}
+          <dt><h3>{translations[this.props.lang][this.props.position]}</h3></dt>
+          <dd>
+            {this.props.committee.map((user, i) => (
+              <div key={i}>
+                <Link onClick={() => this.props.receiveUser(user)} to={`/pros/${user.username}`}>
+                  <Text text={user.name} />
+                </Link>
+              </div>
+            ))}
+          </dd>
         </div>
       );
     } else {
@@ -23,8 +29,14 @@ class CommitteeRow extends Component {
   }
 }
 
+function mapStateToProps(store) {
+  return {
+    lang: store.languageReducer.lang
+  };
+}
+
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ receiveUser }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(CommitteeRow);
+export default connect(mapStateToProps, mapDispatchToProps)(CommitteeRow);

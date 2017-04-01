@@ -23,7 +23,7 @@ class LatestNews extends Component {
           <hr />
 
           <div className="article">
-            <h4> <Text text={article.title} /></h4>
+            <h3> <Text text={article.title} /></h3>
             <h5>
               <FormattedDate value={new Date(article.publish_date)} year="numeric" month="long" day="2-digit" />
             </h5>

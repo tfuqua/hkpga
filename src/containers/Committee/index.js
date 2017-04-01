@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getCommittee, getHonorary } from '../Users/actions';
 import CommitteeTable from './CommitteeTable';
+import translations from '../../util/translations';
 import HonoraryTable from './HonoraryTable';
 import Loader from '../../components/Loader';
 
@@ -17,9 +18,9 @@ class Committee extends Component {
     if (!this.props.isFetching) {
       return (
         <div className="container-fluid">
-          <h2>COMMITTEE (2016-2017)</h2>
+          <h2>{translations[this.props.lang].COMMITTEE} (2016-2017)</h2>
           <CommitteeTable committee={this.props.committee} />
-          <h2>HONORARY MEMBERS</h2>
+          <h2>{translations[this.props.lang].HONORARY}</h2>
           <HonoraryTable honorary={this.props.honorary} />
         </div>
       );
@@ -32,6 +33,7 @@ class Committee extends Component {
 function mapStateToProps(store) {
   return {
     committee: store.userReducer.committee,
+    lang: store.languageReducer.lang,
     honorary: store.userReducer.honorary,
     isFetching: store.userReducer.isFetching
   };

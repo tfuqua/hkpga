@@ -1,11 +1,65 @@
+.navbar-toggle{
+    margin:0;
+    margin-right:10px;
+    margin-top:5px;
+    position:relative;
+    height: 40px;
+    width:40px;
+    padding:0;
+
+    span, 
+    span:before, 
+    span:after{
+        cursor: pointer;
+        border-radius: 0;
+        height: 3px;
+        width: 30px;
+        background: #fff;
+        position: absolute;
+        display: block;
+        content: '';
+        top:17px;
+        right:0;
+    }
+
+    span:before{
+        top: -8px;
+    }
+    span:after{
+        top:8px;
+    }
+
+    &.open{
+        span{
+            background:transparent;
+        }
+        span:before, span:after{
+            top:0;
+        }
+        span:before{
+            -ms-transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+        span:after{
+            -ms-transform: rotate(-45deg);
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+        }
+    }
+}
+
+
 .navbar {
     border:none;
     margin:0;
 }
 
-nav li a {
-    color: #777;
-    border-bottom:2px solid transparent;
+nav li {
+    a {
+        color: #777;
+        border-bottom:2px solid transparent;
+    }
 }
 .main-nav{
     clear:both;
@@ -28,30 +82,53 @@ nav li a {
 
         a {
             display: block;
-            padding: 5px;
+            padding: 10px 15px;
+            padding-bottom: 10px;
+            line-height: 20px;
         }
 
         &.language{
-            a {
-                border:1px solid #333;
-                width: 40px;
-                height: 40px;
-                line-height: 30px;
-                text-align: center;
+            li {
+                a {
+                    text-align: center;
+                    @media (min-width: $screen-sm-min) {
+                        border-top:1px solid #000;
+                        border-bottom:1px solid #000;
+                        border-left: 1px solid #000;
+                    }
+                }
+
+                &.active a {
+                    color:$primary-yellow;
+                }
+                @media (min-width: $screen-sm-min) {
+                    &:last-child(){
+                        border-right: 1px solid #000;
+                    }
+                }
             }
         }
     }
 }
 
+
 .nav > li > a:hover, 
 .nav > li > a.active,
-.nav > li > a:focus{
+.nav > li > a:focus
+.secondary-nav li > a:hover, 
+.secondary-nav li > a.active,
+.secondary-nav li > a:focus{
     background:transparent;
-    color:#fff;
-    //border-bottom: 2px solid $darker-green;    
+    color:#fff; 
 }
 
 .admin-nav{
+    display:none;
+
+    @media (min-width: $screen-sm-min) {
+        display:block;
+    }
+
     background:#e2e2e2;
     overflow:hidden;
     
@@ -66,13 +143,16 @@ nav li a {
 
 nav ul > li > ul{
     display:none;
-    position: absolute;
-    background-image: url('../images/tactile-grey-bg.png');
-    min-width: 180px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 10;
-    padding:5px 0;
-    list-style:none;
+
+    @media (min-width: $screen-sm-min) {
+        position: absolute;
+        background-image: url('../images/tactile-grey-bg.png');
+        min-width: 180px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 10;
+        padding:5px 0;
+        list-style:none;
+    }
 
     li {
         border-left:2px solid transparent;
@@ -89,8 +169,68 @@ nav ul > li > ul{
     }
 }
 
-nav ul > li:hover{
-    ul {
-        display: block;
+@media (min-width: $screen-sm-min) {
+    nav ul > li:hover{
+        ul {
+            display: block;
+        }
     }
 }
+
+@media (max-width: $screen-xs-max) {
+    .main-nav ul {
+        border-top: 1px solid #333;
+        margin:0 -15px;
+        clear:both;
+
+        li {
+            float:left;
+            display:block;
+            width:50%;
+            
+            a {
+                display: block;
+                width:100%;
+                border-bottom:1px solid #333;
+            }
+            &:nth-child(even) a, &:nth-child(7) a {
+                border-left:1px solid #333;
+            }
+        }
+    }
+
+    .secondary-nav {
+        overflow:hidden;
+        margin: 0 -15px;
+
+        .auth-links {
+            float:right;
+            width:50%;
+            padding:0;
+
+            li {
+                width:100%;
+                border-left:1px solid #333;
+                &:nth-child(2){
+                    border-top:1px solid #333;
+                }
+            }
+        }
+        .language {
+            padding:0;
+            width:50%;
+
+            li {
+                width:33%;
+                float:left;
+
+                a {
+                    width:100%;
+                    border:none;
+                }
+            }
+        }  
+    }
+   
+}
+

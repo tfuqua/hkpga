@@ -45,7 +45,7 @@ class ProListing extends Component {
                 <div className="row">
                   {this.state.pros[key].map((pro, i) => (
                     <div key={i} className="col-sm-4 col-md-4">
-                      <div className={pro.relation}>
+                      <div className={`pro ${pro.relation}`}>
                         <Link onClick={() => this.props.receiveUser(pro)} to={`/pros/${pro.username}`}>
                           <Text text={pro.name} />
                         </Link>
@@ -59,10 +59,13 @@ class ProListing extends Component {
           </div>
           <div className="col-sm-3">
             <div className="pros-legend">
-              <h4>Categories </h4>
-              <i className="fa fa-star" /><span>Qualified professionals</span><br />
-              <i className="fa fa-circle" /><span>Certified Instructors</span><br />
-              <i className="fa fa-circle-o" /><span>Trainees</span><br />
+              <h3>Categories </h3>
+              <hr />
+              <ul>
+                <li><i className="fa fa-star" /><span>Qualified professionals</span></li>
+                <li><i className="fa fa-circle" /><span>Certified Instructors</span></li>
+                <li><i className="fa fa-circle-o" /><span>Trainees</span></li>
+              </ul>
             </div>
           </div>
         </div>

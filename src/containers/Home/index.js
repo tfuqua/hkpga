@@ -16,11 +16,11 @@ class Home extends Component {
         </div>
         <div className="container-fluid">
           <div className="row">
-            <div className="col-md-8">
+            <div className="col-md-7">
               <LatestNews />
               <MoreNews />
             </div>
-            <div className="col-md-4">
+            <div className="col-md-5">
               <OrderOfMerit />
               <LatestTournamentScores />
             </div>

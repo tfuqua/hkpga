@@ -9,23 +9,44 @@ import { logoutUser } from '../../containers/Login/actions';
 import { getPageBySlug } from '../../containers/Pages/actions';
 
 class Menu extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      showMenu: false
+    };
+    this.toggleMenu = this.toggleMenu.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location.pathname !== this.props.location.pathname) {
+      this.setState({ showMenu: false });
+    }
+  }
+
+  toggleMenu() {
+    this.setState({ showMenu: !this.state.showMenu });
+  }
+
   render() {
     return (
       <nav className="navbar" role="navigation">
         <div className="container-fluid">
           <div className="navbar-header">
-            <button type="button" className="navbar-toggle">
+            <button
+              onClick={this.toggleMenu}
+              type="button"
+              className={`navbar-toggle ${this.state.showMenu ? 'open' : ''}`}>
+              <span />
               <span className="sr-only">Toggle navigation</span>
-              <span className="icon-bar" />
-              <span className="icon-bar" />
-              <span className="icon-bar" />
             </button>
             <Link className="navbar-brand" to="/">
-              {<img alt="Hong Kong PGA" src={Logo} className="logo-img" />}
+              <span className="brand">HKPGA</span>
+              <img alt="Hong Kong PGA" src={Logo} className="logo-img" />
             </Link>
           </div>
 
-          <div className="container-fluid collapse navbar-collapse">
+          <div className={`collapse navbar-collapse ${this.state.showMenu ? 'in' : ''}`}>
             <div className="secondary-nav">
               {this.props.authenticated
                 ? <ul className="auth-links">
@@ -49,17 +70,17 @@ class Menu extends Component {
                   </ul>}
 
               <ul className="language">
-                <li className="user-lang">
+                <li className={`user-lang ${this.props.lang === 'en' ? 'active' : ''}`}>
                   <a onClick={this.props.setLang.bind(this, 'en')}>
                     {translations[this.props.lang].LANG_EN}
                   </a>
                 </li>
-                <li className="user-lang">
+                <li className={`user-lang ${this.props.lang === 'zh-hk' ? 'active' : ''}`}>
                   <a onClick={this.props.setLang.bind(this, 'zh-hk')}>
                     {translations[this.props.lang].LANG_ZH_HK}
                   </a>
                 </li>
-                <li className="user-lang">
+                <li className={`user-lang ${this.props.lang === 'zh-cn' ? 'active' : ''}`}>
                   <a onClick={this.props.setLang.bind(this, 'zh-cn')}>
                     {translations[this.props.lang].LANG_ZH_CN}
                   </a>
@@ -106,7 +127,7 @@ class Menu extends Component {
                   </NavLink>
                   <ul>
                     <li>
-                      <NavLink activeClassName="active" to="/tournaments/merit">
+                      <NavLink activeClassName="active" to="/merit">
                         {translations[this.props.lang].ORDER_OF_MERIT}
                       </NavLink>
                     </li>

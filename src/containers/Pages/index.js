@@ -24,6 +24,7 @@ class Page extends Component {
   render() {
     if (
       !this.props.isFetching &&
+      this.props.page !== null &&
       typeof this.props.page !== 'undefined' &&
       this.props.page[Object.keys(this.props.page)[0]].slug === this.state.slug
     ) {

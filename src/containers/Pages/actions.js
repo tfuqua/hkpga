@@ -1,4 +1,6 @@
 import database from '../../database';
+import { displayMessage } from '../Message/actions';
+import { SAVE_SUCCESSFUL } from '../../util/messages';
 
 export const GET_PAGES = 'GET_PAGES';
 export const GET_PAGE = 'GET_PAGE';
@@ -47,6 +49,28 @@ export function getPage(key) {
       .ref(`pages/${key}`)
       .once('value', page => {
         dispatch(receivePage(page.val()));
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+}
+
+export function savePage(key, page) {
+  console.log(page);
+  return dispatch => {
+    dispatch(displayMessage(SAVE_SUCCESSFUL));
+    return database.ref(`pages/${key}`).set(page);
+  };
+}
+
+export function deletePage(key) {
+  return dispatch => {
+    return database
+      .ref(`pages/${key}`)
+      .remove()
+      .then(() => {
+        console.log('Page Deleted');
       })
       .catch(error => {
         console.log(error);

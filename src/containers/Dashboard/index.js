@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { fixTournaments, fixUserData } from '../Tournaments/actions';
+import { fixTournaments, fixUserData } from '../Data/actions';
 
 class Dashboard extends Component {
   render() {

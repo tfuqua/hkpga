@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import Text from '../../components/Text';
 
 function TournamentTable(props) {
-  let data = props.data ? props.data : [];
+  let tournaments = props.results ? props.results : [];
 
   return (
-    <table className="table table-striped table-bordered">
+    <table className="table table-striped">
       <thead>
         <tr>
           <th>Name</th>
@@ -15,7 +15,7 @@ function TournamentTable(props) {
         </tr>
       </thead>
       <tbody>
-        {data.map((tournament, i) => (
+        {tournaments.map((tournament, i) => (
           <tr key={i}>
             <td><Text text={tournament.name} /></td>
             <td>{tournament.year}</td>

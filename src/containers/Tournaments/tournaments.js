@@ -4,12 +4,13 @@ import { connect } from 'react-redux';
 import Loader from '../../components/Loader';
 import PaginatedTable from '../../components/PaginatedTable';
 import TournamentTable from './TournamentTable';
-import { deleteTournament, queryTournaments, receiveTournament } from './actions';
+import { deleteTournament, queryTournaments, receiveTournament, changePage } from './actions';
 
 class Tournaments extends Component {
   constructor(props, context) {
     super(props, context);
 
+    this.changePage = this.changePage.bind(this);
     this.fetchTournaments = this.fetchTournaments.bind(this);
   }
 
@@ -23,6 +24,10 @@ class Tournaments extends Component {
     this.props.deleteTournament(id);
   }
 
+  changePage(page) {
+    this.props.changePage(page);
+  }
+
   fetchTournaments(query) {
     this.props.queryTournaments(query);
   }
@@ -34,9 +39,11 @@ class Tournaments extends Component {
           <h2>Tournaments</h2>
           <PaginatedTable
             isFetching={this.props.isFetching}
-            fetch={this.fetchTournaments}
+            changePage={this.changePage}
             query={this.props.query}
-            component={<TournamentTable receiveTournament={this.props.receiveTournament} />}
+            component={
+              <TournamentTable results={this.props.results} receiveTournament={this.props.receiveTournament} />
+            }
           />
         </div>
       );
@@ -49,12 +56,13 @@ class Tournaments extends Component {
 function mapStateToProps(store) {
   return {
     query: store.tournamentReducer.query,
+    results: store.tournamentReducer.results,
     isFetching: store.tournamentReducer.isFetching
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ deleteTournament, queryTournaments, receiveTournament }, dispatch);
+  return bindActionCreators({ deleteTournament, queryTournaments, receiveTournament, changePage }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Tournaments);

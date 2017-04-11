@@ -8,6 +8,7 @@ export const GET_TOURNAMENT = 'GET_TOURNAMENT';
 export const REQUEST_TOURNAMENTS = 'REQUEST_TOURNAMENTS';
 export const REQUEST_RESULTS = 'REQUEST_RESULTS';
 export const GET_TOURNAMENT_QUERY = 'GET_TOURNAMENT_QUERY';
+export const CHANGE_TOURNAMENT_PAGE = 'CHANGE_TOURNAMENT_PAGE';
 
 const ref = database.ref('tournaments');
 
@@ -41,6 +42,13 @@ export function receiveTournament(tournament) {
 export function requestTournaments() {
   return {
     type: REQUEST_TOURNAMENTS
+  };
+}
+
+export function changePage(page) {
+  return {
+    type: CHANGE_TOURNAMENT_PAGE,
+    page
   };
 }
 
@@ -150,15 +158,12 @@ export function queryTournaments(query) {
     dispatch(requestTournaments());
 
     return axios.get(`${config.firebase.creds.databaseURL}/tournaments.json?shallow=true`).then(res => {
-      const keys = Object.keys(res.data).sort();
+      const keys = Object.keys(res.data);
       const numberOfResults = keys.length;
       const totalPages = Math.ceil(numberOfResults / 10);
 
       database
         .ref('tournaments')
-        .orderByKey()
-        .startAt(keys[10 * (query.page - 1)])
-        .limitToFirst(10)
         .once('value', tournaments => {
           dispatch(
             receiveTournamentQuery({

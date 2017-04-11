@@ -8,26 +8,24 @@ import CoverageView from './CoverageView';
 import { getPressByType } from './actions';
 
 class Press extends Component {
-  constructor(props, context) {
-    super(props, context);
-
-    this.state = {
-      type: this.props.match.params.type
-    };
+  componentDidMount() {
+    this.props.getPressByType(this.props.match.params.type);
   }
 
-  componentDidMount() {
-    this.props.getPressByType(this.state.type);
+  componentWillReceiveProps(nextProps) {
+    this.props.getPressByType(nextProps.match.params.type);
   }
 
   render() {
+    let type = this.props.match.params.type;
+
     if (!this.props.isFetching && this.props.press) {
-      if (this.state.type === 'magazine') {
+      if (type === 'magazine') {
         return <MagazineView lang={this.props.lang} press={this.props.press} />;
-      } else if (this.state.type === 'release') {
-        //return <MagazineView press={this.props.press} />
+      } else if (type === 'releases') {
+        return <ReleaseView lang={this.props.lang} press={this.props.press} />;
       } else {
-        //return <MagazineView press={this.props.press} />
+        return <CoverageView lang={this.props.lang} press={this.props.press} />;
       }
     } else {
       return <Loader />;

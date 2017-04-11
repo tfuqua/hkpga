@@ -6,9 +6,6 @@ const Register = routeLoader(() => import('./containers/Register'));
 const Forgot = routeLoader(() => import('./containers/Forgot'));
 const Page = routeLoader(() => import('./containers/Pages'));
 const Contact = routeLoader(() => import('./containers/Contact'));
-/*const Coverage = routeLoader(() => import('./containers/Coverage'));
-const Magazine = routeLoader(() => import('./containers/Magazine'));
-const Releases = routeLoader(() => import('./containers/Releases'));*/
 const Tournaments = routeLoader(() => import('./containers/Tournaments'));
 const TournamentView = routeLoader(() => import('./containers/Tournament'));
 const Login = routeLoader(() => import('./containers/Login'));

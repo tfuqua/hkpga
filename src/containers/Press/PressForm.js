@@ -100,14 +100,55 @@ class PressForm extends Component {
           />
         </div>
 
-        <div className="form-group">
-          <label>URL</label>
-          <TextField
-            showError={this.state.showErrors}
-            text={this.state.entry.url}
-            onFieldChanged={this.handleFieldChange('url')}
-          />
-        </div>
+        {this.state.entry.type !== 'releases'
+          ? <div className="form-group">
+              <label>URL</label>
+              <TextField
+                showError={this.state.showErrors}
+                text={this.state.entry.url}
+                onFieldChanged={this.handleFieldChange('url')}
+              />
+            </div>
+          : <div className="form-group">
+              <label>
+                URL
+              </label>
+              <Tabs
+                selectedIndex={0}
+                tabs={[
+                  {
+                    name: 'en',
+                    component: (
+                      <TextField
+                        showError={this.state.showErrors}
+                        text={this.state.entry.url.en}
+                        onFieldChanged={this.handleFieldChange('url.en')}
+                      />
+                    )
+                  },
+                  {
+                    name: 'zh-cn',
+                    component: (
+                      <TextField
+                        showError={this.state.showErrors}
+                        text={this.state.entry.url['zh-cn']}
+                        onFieldChanged={this.handleFieldChange('url.zh-cn')}
+                      />
+                    )
+                  },
+                  {
+                    name: 'zh-hk',
+                    component: (
+                      <TextField
+                        showError={this.state.showErrors}
+                        text={this.state.entry.url['zh-hk']}
+                        onFieldChanged={this.handleFieldChange('url.zh-hk')}
+                      />
+                    )
+                  }
+                ]}
+              />
+            </div>}
 
         <div className="form-group">
           <label>Publish Date</label>

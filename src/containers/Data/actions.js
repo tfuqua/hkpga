@@ -74,7 +74,7 @@ export function mergePressData() {
           publish_date: cov.publish_date,
           publication: cov.publication,
           url: cov.url,
-          type: 'coverage'
+          type: 'media'
         };
 
         let newEntry = pressRef.push();
@@ -111,7 +111,7 @@ export function mergePressData() {
           title: rel.title,
           publish_date: rel.publish_date,
           url: rel.url,
-          type: 'release'
+          type: 'releases'
         };
 
         let newEntry = pressRef.push();

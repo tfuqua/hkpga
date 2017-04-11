@@ -11,7 +11,9 @@ class PaginatedTable extends Component {
   }
 
   changePage(page) {
-    this.props.fetch({ page });
+    if (page > 0 && page <= this.props.query.totalPages) {
+      this.props.changePage(page);
+    }
   }
 
   render() {

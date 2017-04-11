@@ -3,7 +3,7 @@ import Text from '../../components/Text';
 import { Link } from 'react-router-dom';
 
 function UserTable(props) {
-  let data = props.data ? props.data : [];
+  let users = props.results ? props.results : [];
   return (
     <table className="table table-striped">
       <thead>
@@ -17,7 +17,7 @@ function UserTable(props) {
         </tr>
       </thead>
       <tbody>
-        {data.map((user, i) => (
+        {users.map((user, i) => (
           <tr key={i}>
             <td><Text text={user.name} /></td>
             <td>{user.email}</td>

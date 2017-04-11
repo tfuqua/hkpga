@@ -49,7 +49,6 @@ class Pages extends Component {
               <tr>
                 <th>Title</th>
                 <th>URL</th>
-                <th>Author</th>
                 <th>Last Updated</th>
                 <th>Actions</th>
               </tr>
@@ -59,7 +58,6 @@ class Pages extends Component {
                 <tr key={i}>
                   <td><Text text={this.props.pages[key].title} /></td>
                   <td>{this.props.pages[key].slug}</td>
-                  <td>{this.props.pages[key].author}</td>
                   <td>
                     <FormattedDate
                       value={new Date(this.props.pages[key].updated_at)}
@@ -87,14 +85,13 @@ class Pages extends Component {
             <div className="modal-body">
               Are you sure you want to delete this page?
             </div>
-
             <div className="modal-footer">
               <button className="btn btn-link" onClick={this.toggleModal}>Cancel</button>
               &nbsp;&nbsp;&nbsp;
               <button type="submit" onClick={this.deletePage} className="btn btn-danger">Delete Page</button>
             </div>
-
           </Modal>
+
         </div>
       );
     } else {

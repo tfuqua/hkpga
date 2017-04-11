@@ -1,6 +1,8 @@
 import database from '../../database';
 import config from '../../../config/env/development';
 import axios from 'axios';
+import { displayMessage } from '../Message/actions';
+import { ARTICLE_DELETE_SUCCESS, SAVE_SUCCESSFUL } from '../../util/messages';
 
 export const GET_ARTICLES = 'GET_ARTICLES';
 export const GET_MORE_NEWS = 'GET_MORE_NEWS';
@@ -8,6 +10,7 @@ export const REQUEST_ARTICLES = 'REQUEST_ARTICLES';
 export const GET_ARTICLE = 'GET_ARTICLE';
 export const GET_ARTICLE_QUERY = 'GET_ARTICLE_QUERY';
 export const GET_LATEST_ARTICLE = 'GET_LATEST_ARTICLE';
+export const CHANGE_ARTICLE_PAGE = 'CHANGE_ARTICLE_PAGE';
 
 export function receiveArticles(articles) {
   return {
@@ -47,6 +50,12 @@ export function receiveMoreNews(moreNews) {
 export function requestArticles() {
   return {
     type: REQUEST_ARTICLES
+  };
+}
+export function changePage(page) {
+  return {
+    type: CHANGE_ARTICLE_PAGE,
+    page
   };
 }
 
@@ -110,7 +119,22 @@ export function getArticleBySlug(slug) {
 
 export function saveArticle(id, article) {
   return dispatch => {
+    dispatch(displayMessage(SAVE_SUCCESSFUL));
     return database.ref(`articles/${id}`).set(article);
+  };
+}
+
+export function deleteArticle(key) {
+  return dispatch => {
+    return database
+      .ref(`articles/${key}`)
+      .remove()
+      .then(() => {
+        dispatch(displayMessage(ARTICLE_DELETE_SUCCESS));
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 }
 
@@ -135,15 +159,12 @@ export function queryArticles(query) {
     dispatch(requestArticles());
 
     return axios.get(`${config.firebase.creds.databaseURL}/articles.json?shallow=true`).then(res => {
-      const keys = Object.keys(res.data).sort();
+      const keys = Object.keys(res.data);
       const numberOfResults = keys.length;
       const totalPages = Math.ceil(numberOfResults / 10);
 
       database
         .ref('articles')
-        .orderByKey()
-        .startAt(keys[10 * (query.page - 1)])
-        .limitToFirst(10)
         .once('value', users => {
           dispatch(
             receiveArticleQuery({

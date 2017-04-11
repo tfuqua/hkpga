@@ -14,3 +14,8 @@ export const RESET_SUCCESS = {
   message: 'Password reset successful. Check your email for reset link',
   type: 'SUCCESS'
 };
+
+export const ARTICLE_DELETE_SUCCESS = {
+  message: 'Article successfully deleted.',
+  type: 'SUCCESS'
+};

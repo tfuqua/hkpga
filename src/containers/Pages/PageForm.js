@@ -30,7 +30,6 @@ class PageForm extends Component {
 
     for (let i = 0; i < langs.length; i++) {
       let html = page.html[langs[i]] ? page.html[langs[i]] : '<div></div>';
-      console.log(html);
       const blocksFromHTML = htmlToDraft(html);
       const contentBlocks = blocksFromHTML.contentBlocks;
       const contentState = ContentState.createFromBlockArray(contentBlocks);
@@ -56,7 +55,8 @@ class PageForm extends Component {
   }
 
   savePage() {
-    this.props.savePage(this.state.id, this.state.page);
+    let page = { ...this.state.page, updated_at: Date.now() };
+    this.props.savePage(this.state.id, page);
   }
 
   componentWillReceiveProps(nextProps) {

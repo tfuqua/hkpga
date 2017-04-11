@@ -57,7 +57,6 @@ export function getPage(key) {
 }
 
 export function savePage(key, page) {
-  console.log(page);
   return dispatch => {
     dispatch(displayMessage(SAVE_SUCCESSFUL));
     return database.ref(`pages/${key}`).set(page);

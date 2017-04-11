@@ -10,6 +10,7 @@ export const GET_COMMITTEE = 'GET_COMMITTEE';
 export const GET_HONORARY = 'GET_HONORARY';
 export const GET_USER = 'GET_USER';
 export const REQUEST_USERS = 'REQUEST_USERS';
+export const CHANGE_USER_PAGE = 'CHANGE_USER_PAGE';
 
 export function receiveUsers(userQuery) {
   return {
@@ -47,6 +48,13 @@ export function receiveUser(user) {
 export function RequestUsers() {
   return {
     type: REQUEST_USERS
+  };
+}
+
+export function changePage(page) {
+  return {
+    type: CHANGE_USER_PAGE,
+    page
   };
 }
 
@@ -133,15 +141,12 @@ export function getUsers(query) {
     dispatch(RequestUsers());
 
     return axios.get(`${config.firebase.creds.databaseURL}/users.json?shallow=true`).then(res => {
-      const keys = Object.keys(res.data).sort();
+      const keys = Object.keys(res.data);
       const numberOfResults = keys.length;
       const totalPages = Math.ceil(numberOfResults / 10);
 
       database
         .ref('users')
-        .orderByKey()
-        .startAt(keys[10 * (query.page - 1)])
-        .limitToFirst(10)
         .once('value', users => {
           dispatch(
             receiveUsers({

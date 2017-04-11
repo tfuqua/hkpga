@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { fixArticles } from '../Data/actions';
+import { getArticles, queryArticles, receiveArticle, changePage } from './actions';
 import Loader from '../../components/Loader';
 import PaginatedTable from '../../components/PaginatedTable';
 import ArticleTable from './ArticleTable';
-import { fixArticles } from '../Data/actions';
-import { getArticles, queryArticles, receiveArticle } from './actions';
 
 class Articles extends Component {
   constructor(props, context) {
     super(props, context);
 
+    this.changePage = this.changePage.bind(this);
     this.fetchArticles = this.fetchArticles.bind(this);
   }
 
@@ -24,6 +25,10 @@ class Articles extends Component {
     this.props.queryArticles(query);
   }
 
+  changePage(page) {
+    this.props.changePage(page);
+  }
+
   render() {
     if (this.props.query) {
       return (
@@ -31,9 +36,15 @@ class Articles extends Component {
           <h2>Articles</h2>
           <PaginatedTable
             isFetching={this.props.isFetching}
-            fetch={this.fetchArticles}
+            changePage={this.changePage}
             query={this.props.query}
-            component={<ArticleTable receiveArticle={this.props.receiveArticle} />}
+            component={
+              <ArticleTable
+                receiveArticle={this.props.receiveArticle}
+                query={this.props.query}
+                results={this.props.results}
+              />
+            }
           />
         </div>
       );
@@ -46,12 +57,13 @@ class Articles extends Component {
 function mapStateToProps(store) {
   return {
     query: store.articleReducer.query,
+    results: store.articleReducer.results,
     isFetching: store.articleReducer.isFetching
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getArticles, fixArticles, queryArticles, receiveArticle }, dispatch);
+  return bindActionCreators({ getArticles, fixArticles, queryArticles, receiveArticle, changePage }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Articles);

@@ -5,6 +5,7 @@ import { SingleDatePicker } from 'react-dates';
 import { trueFalse } from '../../util/data';
 import TextField from '../../components/TextField';
 import Select from '../../components/Select';
+import Tabs from '../../components/Tabs';
 import moment from 'moment';
 import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
@@ -16,22 +17,35 @@ class ArticleForm extends Component {
   constructor(props, context) {
     super(props, context);
 
-    const blocksFromHTML = htmlToDraft(props.article.html.en);
-    const contentBlocks = blocksFromHTML.contentBlocks;
-    const contentState = ContentState.createFromBlockArray(contentBlocks);
-    //const content = ContentState.createFromBlockArray(blocksFromHTML.contentBlocks, blocksFromHTML.entityMap);
-
     this.state = {
       showCalendar: false,
       article: props.article,
       id: props.id,
-      editorState: EditorState.createWithContent(contentState)
+      editorState: this.setupEditor(props.article)
     };
 
     this.saveArticle = this.saveArticle.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
     this.onEditorStateChange = this.onEditorStateChange.bind(this);
     this.handleFieldChange = this.handleFieldChange.bind(this);
+  }
+
+  setupEditor(article) {
+    const langs = ['en', 'zh-cn', 'zh-hk'];
+    let content = {};
+
+    for (let i = 0; i < langs.length; i++) {
+      if (article.html[langs[i]]) {
+        const blocksFromHTML = htmlToDraft(article.html[langs[i]]);
+        const contentBlocks = blocksFromHTML.contentBlocks;
+        const contentState = ContentState.createFromBlockArray(contentBlocks);
+        content[langs[i]] = EditorState.createWithContent(contentState);
+      } else {
+        content[langs[i]] = EditorState.createEmpty();
+      }
+    }
+
+    return content;
   }
 
   handleFieldChange(field) {
@@ -51,23 +65,28 @@ class ArticleForm extends Component {
   handleDateChange(date) {
     this.setState({ article: { ...this.state.article, publish_date: moment(date).valueOf() } });
   }
+
   handleSelectChange(field) {
     return e => {
       this.setState({ article: { ...this.state.article, [field]: e.target.value } });
     };
   }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.article.slug !== this.state.article.slug) {
-      this.setState({ article: nextProps.article });
+      this.setState({
+        article: nextProps.article,
+        editorState: this.setupEditor(nextProps.article)
+      });
     }
   }
 
-  onEditorStateChange(editorState) {
+  onEditorStateChange(lang, editorState) {
     const rawContentState = convertToRaw(editorState.getCurrentContent());
     const markup = draftToHtml(rawContentState);
     this.setState({
-      editorState,
-      article: { ...this.state.article, html: { en: markup } }
+      editorState: { ...this.state.editorState, [lang]: editorState },
+      article: { ...this.state.article, html: { ...this.state.article.html, [lang]: markup } }
     });
   }
 
@@ -80,7 +99,7 @@ class ArticleForm extends Component {
       <div className="">
 
         <div className="text-right">
-          <button onClick={this.saveArticle} className="btn btn-default">Save</button>
+          <button onClick={this.saveArticle} className="btn btn-primary">Save</button>
         </div>
 
         <div className="form-group">
@@ -118,9 +137,48 @@ class ArticleForm extends Component {
           />
         </div>
 
-        <div className="editor">
-          <Editor editorState={this.state.editorState} onEditorStateChange={this.onEditorStateChange} />
+        <div className="form-group">
+          <label>Content</label>
+          <Tabs
+            selectedIndex={0}
+            tabs={[
+              {
+                name: 'en',
+                component: (
+                  <div className="editor">
+                    <Editor
+                      editorState={this.state.editorState.en}
+                      onEditorStateChange={this.onEditorStateChange.bind(this, 'en')}
+                    />
+                  </div>
+                )
+              },
+              {
+                name: 'zh-cn',
+                component: (
+                  <div className="editor">
+                    <Editor
+                      editorState={this.state.editorState['zh-cn']}
+                      onEditorStateChange={this.onEditorStateChange.bind(this, 'zh-cn')}
+                    />
+                  </div>
+                )
+              },
+              {
+                name: 'zh-hk',
+                component: (
+                  <div className="editor">
+                    <Editor
+                      editorState={this.state.editorState['zh-hk']}
+                      onEditorStateChange={this.onEditorStateChange.bind(this, 'zh-hk')}
+                    />
+                  </div>
+                )
+              }
+            ]}
+          />
         </div>
+
       </div>
     );
   }

@@ -1,21 +1,105 @@
 .CalendarDay {
-  position: relative;
-  display: table;
-  height: 100%;
-  width: 100%; }
+  border: 1px solid #e4e7e7;
+  padding: 0;
+  box-sizing: border-box;
+  color: #565a5c;
+  cursor: pointer; }
 
-.CalendarDay__day {
-  display: table-cell;
-  vertical-align: middle;
-  user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none; }
+.CalendarDay__button {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  background: none;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  cursor: pointer;
+  box-sizing: border-box; }
+  .CalendarDay__button:active {
+    background: #f2f2f2;
+    outline: 0; }
+
+.CalendarDay--highlighted-calendar {
+  background: #ffe8bc;
+  color: #565a5c;
+  cursor: default; }
+  .CalendarDay--highlighted-calendar:active {
+    background: #007a87; }
+
+.CalendarDay--outside {
+  border: 0;
+  cursor: default; }
+  .CalendarDay--outside:active {
+    background: #fff; }
+
+.CalendarDay--hovered {
+  background: #e4e7e7;
+  border: 1px double #d4d9d9;
+  color: inherit; }
+
+.CalendarDay--blocked-minimum-nights {
+  color: #cacccd;
+  background: #fff;
+  border: 1px solid #e4e7e7;
+  cursor: default; }
+  .CalendarDay--blocked-minimum-nights:active {
+    background: #fff; }
+
+.CalendarDay--selected-span {
+  background: #66e2da;
+  border: 1px double #33dacd;
+  color: #fff; }
+  .CalendarDay--selected-span.CalendarDay--hovered, .CalendarDay--selected-span:active {
+    background: #33dacd;
+    border: 1px double #00a699; }
+  .CalendarDay--selected-span.CalendarDay--last-in-range {
+    border-right: #00a699; }
+
+.CalendarDay--hovered-span,
+.CalendarDay--after-hovered-start {
+  background: #b2f1ec;
+  border: 1px double #80e8e0;
+  color: #007a87; }
+
+.CalendarDay--selected-start,
+.CalendarDay--selected-end,
+.CalendarDay--selected {
+  background: #00a699;
+  border: 1px double #00a699;
+  color: #fff; }
+  .CalendarDay--selected-start:active,
+  .CalendarDay--selected-end:active,
+  .CalendarDay--selected:active {
+    background: #00a699; }
+
+.CalendarDay--blocked-calendar {
+  background: #cacccd;
+  color: #82888a;
+  cursor: default; }
+  .CalendarDay--blocked-calendar:active {
+    background: #cacccd; }
+
+.CalendarDay--blocked-out-of-range {
+  color: #cacccd;
+  background: #fff;
+  border: 1px solid #e4e7e7;
+  cursor: default; }
+  .CalendarDay--blocked-out-of-range:active {
+    background: #fff; }
 
 .CalendarMonth {
   text-align: center;
   padding: 0 13px;
-  vertical-align: top; }
+  vertical-align: top;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
   .CalendarMonth:first-of-type {
     position: absolute;
     z-index: -1;
@@ -23,7 +107,8 @@
     pointer-events: none; }
   .CalendarMonth table {
     border-collapse: collapse;
-    border-spacing: 0; }
+    border-spacing: 0;
+    caption-caption-side: initial; }
 
 .CalendarMonth--horizontal {
   display: inline-block;
@@ -36,88 +121,16 @@
   color: #3c3f40;
   margin-top: 7px;
   font-size: 18px;
-  padding: 15px 0 35px;
   text-align: center;
-  margin-bottom: 2px; }
+  margin-bottom: 2px;
+  caption-side: initial; }
 
-.CalendarMonth__day {
-  border: 1px solid #e4e7e7;
-  padding: 0;
-  box-sizing: border-box;
-  color: #565a5c;
-  cursor: pointer;
-  width: 39px;
-  height: 38px; }
-  .CalendarMonth__day:active {
-    background: #f2f2f2; }
+.CalendarMonth--horizontal .CalendarMonth__caption,
+.CalendarMonth--vertical .CalendarMonth__caption {
+  padding: 15px 0 35px; }
 
-.CalendarMonth__day--highlighted-calendar {
-  background: #ffe8bc;
-  color: #565a5c;
-  cursor: default; }
-  .CalendarMonth__day--highlighted-calendar:active {
-    background: #007a87; }
-
-.CalendarMonth__day--outside {
-  border: 0;
-  cursor: default; }
-  .CalendarMonth__day--outside:active {
-    background: #fff; }
-
-.CalendarMonth__day--hovered {
-  background: #e4e7e7;
-  border: 1px double #d4d9d9;
-  color: inherit; }
-
-.CalendarMonth__day--blocked-minimum-nights {
-  color: #cacccd;
-  background: #fff;
-  border: 1px solid #e4e7e7;
-  cursor: default; }
-  .CalendarMonth__day--blocked-minimum-nights:active {
-    background: #fff; }
-
-.CalendarMonth__day--selected-span {
-  background: #66e2da;
-  border: 1px double #33dacd;
-  color: #fff; }
-  .CalendarMonth__day--selected-span.CalendarMonth__day--hovered, .CalendarMonth__day--selected-span:active {
-    background: #33dacd;
-    border: 1px double #00a699; }
-  .CalendarMonth__day--selected-span.CalendarMonth__day--last-in-range {
-    border-right: #00a699; }
-
-.CalendarMonth__day--hovered-span,
-.CalendarMonth__day--after-hovered-start {
-  background: #b2f1ec;
-  border: 1px double #80e8e0;
-  color: #007a87; }
-
-.CalendarMonth__day--selected-start,
-.CalendarMonth__day--selected-end,
-.CalendarMonth__day--selected {
-  background: #00a699;
-  border: 1px double #00a699;
-  color: #fff; }
-  .CalendarMonth__day--selected-start:active,
-  .CalendarMonth__day--selected-end:active,
-  .CalendarMonth__day--selected:active {
-    background: #00a699; }
-
-.CalendarMonth__day--blocked-calendar {
-  background: #cacccd;
-  color: #82888a;
-  cursor: default; }
-  .CalendarMonth__day--blocked-calendar:active {
-    background: #cacccd; }
-
-.CalendarMonth__day--blocked-out-of-range {
-  color: #cacccd;
-  background: #fff;
-  border: 1px solid #e4e7e7;
-  cursor: default; }
-  .CalendarMonth__day--blocked-out-of-range:active {
-    background: #fff; }
+.CalendarMonth--vertical-scrollable .CalendarMonth__caption {
+  padding: 5px 0; }
 
 .CalendarMonthGrid {
   background: #fff;
@@ -132,12 +145,14 @@
 
 .CalendarMonthGrid--horizontal {
   position: absolute;
-  left: 9px;
-  width: 1200px; }
+  left: 9px; }
 
 .CalendarMonthGrid--vertical {
-  width: 300px;
   margin: 0 auto; }
+
+.CalendarMonthGrid--vertical-scrollable {
+  margin: 0 auto;
+  overflow-y: scroll; }
 
 .DayPicker {
   background: #fff;
@@ -157,6 +172,9 @@
 .DayPicker--vertical.DayPicker--portal {
   position: initial; }
 
+.DayPicker__focus-region {
+  outline: none; }
+
 .DayPicker__week-headers {
   position: relative; }
 
@@ -166,7 +184,6 @@
 .DayPicker__week-header {
   color: #757575;
   position: absolute;
-  width: 300px;
   top: 62px;
   z-index: 2;
   padding: 0 13px;
@@ -177,12 +194,32 @@
     padding-left: 0; }
   .DayPicker__week-header li {
     display: inline-block;
-    width: 39px;
     text-align: center; }
 
 .DayPicker--vertical .DayPicker__week-header {
-  margin-left: -150px;
   left: 50%; }
+
+.DayPicker--vertical-scrollable {
+  height: 100%; }
+  .DayPicker--vertical-scrollable .DayPicker__week-header {
+    top: 0;
+    display: table-row;
+    border-bottom: 1px solid #dbdbdb;
+    background: white; }
+  .DayPicker--vertical-scrollable .transition-container--vertical {
+    padding-top: 20px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    overflow-y: scroll; }
+  .DayPicker--vertical-scrollable .DayPicker__week-header {
+    margin-left: 0;
+    left: 0;
+    width: 100%;
+    text-align: center; }
 
 .transition-container {
   position: relative;
@@ -199,13 +236,13 @@
 .DayPickerNavigation__next {
   cursor: pointer;
   line-height: 0.78;
-  user-select: none;
   -webkit-user-select: none;
   /* Chrome/Safari */
   -moz-user-select: none;
   /* Firefox */
   -ms-user-select: none;
-  /* IE10+ */ }
+  /* IE10+ */
+  user-select: none; }
 
 .DayPickerNavigation__prev--default,
 .DayPickerNavigation__next--default {
@@ -267,6 +304,134 @@
       width: 42px;
       fill: #484848; }
 
+.DayPickerNavigation--vertical-scrollable {
+  position: relative; }
+  .DayPickerNavigation--vertical-scrollable .DayPickerNavigation__next {
+    width: 100%; }
+
+.DayPickerKeyboardShortcuts__show,
+.DayPickerKeyboardShortcuts__close {
+  background: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  padding: 0;
+  cursor: pointer; }
+  .DayPickerKeyboardShortcuts__show:active,
+  .DayPickerKeyboardShortcuts__close:active {
+    outline: none; }
+
+.DayPickerKeyboardShortcuts__show {
+  display:none;
+  width: 22px;
+  position: absolute; }
+
+.DayPickerKeyboardShortcuts__show--bottom-right {
+  border-top: 26px solid #fff;
+  border-right: 33px solid #00a699;
+  bottom: 0;
+  right: 0; }
+  .DayPickerKeyboardShortcuts__show--bottom-right:hover {
+    border-right: 33px solid #008489; }
+  .DayPickerKeyboardShortcuts__show--bottom-right .DayPickerKeyboardShortcuts__show_span {
+    bottom: 0;
+    right: -28px; }
+
+.DayPickerKeyboardShortcuts__show--top-right {
+  border-bottom: 26px solid #fff;
+  border-right: 33px solid #00a699;
+  top: 0;
+  right: 0; }
+  .DayPickerKeyboardShortcuts__show--top-right:hover {
+    border-right: 33px solid #008489; }
+  .DayPickerKeyboardShortcuts__show--top-right .DayPickerKeyboardShortcuts__show_span {
+    top: 1px;
+    right: -28px; }
+
+.DayPickerKeyboardShortcuts__show--top-left {
+  border-bottom: 26px solid #fff;
+  border-left: 33px solid #00a699;
+  top: 0;
+  left: 0; }
+  .DayPickerKeyboardShortcuts__show--top-left:hover {
+    border-left: 33px solid #008489; }
+  .DayPickerKeyboardShortcuts__show--top-left .DayPickerKeyboardShortcuts__show_span {
+    top: 1px;
+    left: -28px; }
+
+.DayPickerKeyboardShortcuts__show_span {
+  color: #fff;
+  position: absolute; }
+
+.DayPickerKeyboardShortcuts__panel {
+  background: #fff;
+  border: 1px solid #dbdbdb;
+  border-radius: 2px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 2;
+  padding: 22px;
+  margin: 33px; }
+
+.DayPickerKeyboardShortcuts__title {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0; }
+
+.DayPickerKeyboardShortcuts__list {
+  list-style: none;
+  padding: 0; }
+
+.DayPickerKeyboardShortcuts__close {
+  position: absolute;
+  right: 22px;
+  top: 22px;
+  z-index: 2; }
+  .DayPickerKeyboardShortcuts__close svg {
+    height: 15px;
+    width: 15px;
+    fill: #cacccd; }
+    .DayPickerKeyboardShortcuts__close svg:hover, .DayPickerKeyboardShortcuts__close svg:focus {
+      fill: #82888a; }
+  .DayPickerKeyboardShortcuts__close:active {
+    outline: none; }
+
+.KeyboardShortcutRow {
+  margin: 6px 0; }
+
+.KeyboardShortcutRow__key-container {
+  display: inline-block;
+  width: 15%;
+  white-space: nowrap;
+  text-align: right;
+  margin-right: 6px; }
+
+.KeyboardShortcutRow__key {
+  font-family: monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  background: #f2f2f2;
+  padding: 2px 6px; }
+
+.KeyboardShortcutRow__action {
+  display: inline-block; }
+
+.DayPickerKeyboardShortcuts__panel--block .KeyboardShortcutRow {
+  margin-bottom: 16px; }
+
+.DayPickerKeyboardShortcuts__panel--block .KeyboardShortcutRow__key-container {
+  width: auto;
+  text-align: left;
+  display: inline; }
+
+.DayPickerKeyboardShortcuts__panel--block .KeyboardShortcutRow__action {
+  display: inline; }
+
 .DateInput {
   font-weight: 200;
   font-size: 18px;
@@ -302,16 +467,6 @@
 .DateInput--disabled {
   background: #cacccd; }
 
-.DateInput__label {
-  border: 0;
-  clip: rect(0, 0, 0, 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px; }
-
 .DateInput__input {
   opacity: 0;
   position: absolute;
@@ -320,6 +475,11 @@
   border: 0;
   height: 100%;
   width: 100%; }
+  .DateInput__input[readonly] {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none; }
 
 .DateInput__display-text {
   padding: 4px 8px;
@@ -357,12 +517,6 @@
   background-color: #fff;
   position: absolute;
   top: 72px; }
-
-.DateRangePicker__picker--show {
-  visibility: visible; }
-
-.DateRangePicker__picker--invisible {
-  visibility: hidden; }
 
 .DateRangePicker__picker--direction-left {
   left: 0; }
@@ -448,6 +602,24 @@
   background: #dbdbdb;
   border-radius: 50%; }
 
+.DateRangePickerInput__calendar-icon {
+  background: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  padding: 10px;
+  margin: 0 5px 0 10px; }
+  .DateRangePickerInput__calendar-icon svg {
+    fill: #82888a;
+    height: 15px;
+    width: 14px;
+    vertical-align: middle; }
+
 .SingleDatePicker {
   position: relative;
   display: inline-block; }
@@ -457,12 +629,6 @@
   background-color: #fff;
   position: absolute;
   top: 72px; }
-
-.SingleDatePicker__picker--show {
-  visibility: visible; }
-
-.SingleDatePicker__picker--invisible {
-  visibility: hidden; }
 
 .SingleDatePicker__picker--direction-left {
   left: 0; }

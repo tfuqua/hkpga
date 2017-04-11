@@ -1,8 +1,7 @@
-import React, { Component } from "react";
-import { orderBy } from "lodash";
-import { mapObjectToArray } from "../../util/util";
-import Loader from "../Loader";
-import Pager from "./Pager";
+import React, { Component } from 'react';
+import { mapObjectToArray } from '../../util/util';
+import Loader from '../Loader';
+import Pager from './Pager';
 
 class PaginatedTable extends Component {
   constructor(props, context) {
@@ -18,10 +17,8 @@ class PaginatedTable extends Component {
   render() {
     return (
       <div>
-        <div className={this.props.isFetching ? "fetching" : "fetched"}>
-          {this.props.isFetching
-            ? <div className="loader-container"><Loader /></div>
-            : <div />}
+        <div className={this.props.isFetching ? 'fetching' : 'fetched'}>
+          {this.props.isFetching ? <div className="loader-container"><Loader /></div> : <div />}
           {React.cloneElement(this.props.component, {
             data: mapObjectToArray(this.props.query.data)
           })}

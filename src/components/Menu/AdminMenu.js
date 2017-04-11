@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { NavLink } from 'react-router-dom';
-import Logo from '../../images/hkpga-logo.png';
-import translations from '../../util/translations';
 import { setLang, getLang } from '../../containers/Lang/actions';
 import { logoutUser } from '../../containers/Login/actions';
 

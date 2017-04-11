@@ -6,10 +6,6 @@ import { getUser } from './actions';
 import UserForm from './UserForm';
 
 class EditUser extends Component {
-  constructor(props, context) {
-    super(props, context);
-  }
-
   componentDidMount() {
     if (!this.props.user) {
       this.props.getUser(this.props.match.params.key);

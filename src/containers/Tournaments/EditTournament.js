@@ -6,10 +6,6 @@ import TournamentForm from './TournamentForm';
 import { getTournament } from './actions';
 
 class EditTournament extends Component {
-  constructor(props, context) {
-    super(props, context);
-  }
-
   componentDidMount() {
     if (!this.props.tournament) {
       this.props.getTournament(this.props.match.params.key);

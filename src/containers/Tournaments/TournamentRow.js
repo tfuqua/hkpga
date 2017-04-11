@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import Text from '../../components/Text';
 
 function TournamentRow(props) {
-  console.log(props.tournament);
   return (
     <div>
       <h5>

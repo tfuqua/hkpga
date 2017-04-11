@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Text from '../Text';
 import Slider from 'react-slick';
 import RightArrow from './RightArrow';
 import LeftArrow from './LeftArrow';

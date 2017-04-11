@@ -6,7 +6,7 @@ function Terms(props) {
       <h2>Terms & Conditions </h2>
       <div className="row">
         <div className="col-md-12">
-          <div className="well">
+          <div>
             <h3> AGREEMENT BETWEEN USER AND Official Website of the Hong Kong Professional Golfers’ Association </h3>
 
             <p>
@@ -141,7 +141,7 @@ function Terms(props) {
       <h2 id="privacy ">Privacy</h2>
       <div className="row">
         <div className="col-md-12">
-          <div className="well">
+          <div>
             <p>
               Official Website of the Hong Kong Professional Golfers’ Association is committed to protecting your privacy and developing technology that gives you the most powerful and safe online experience. This Statement of Privacy applies to the Official Website of the Hong Kong Professional Golfers’ Association and governs data collection and usage. By using the Official Website of the Hong Kong Professional Golfers’ Association, you consent to the data practices described in this statement.
             </p>

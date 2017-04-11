@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import Text from '../../components/Text';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getPageBySlug } from './actions';
 import Loader from '../../components/Loader';

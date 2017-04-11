@@ -208,12 +208,6 @@ export function fixUserData() {
 
   ref.once('value', function(snapshot) {
     snapshot.forEach(function(childSnapshot) {
-      /*const resultsRef = database.ref(`/results/${childSnapshot.key}`);
-      const results = childSnapshot.val().results;
-      if (results) {
-        resultsRef.set(results);
-      }*/
-
       const user = database.ref('users/' + childSnapshot.key + '/results');
       user
         .remove()

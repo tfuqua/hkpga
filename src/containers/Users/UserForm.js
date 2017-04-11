@@ -232,7 +232,7 @@ class UserForm extends Component {
                         component: (
                           <TextArea
                             showError={this.state.showErrors}
-                            text={this.state.user.qualifications.en}
+                            text={this.state.user.qualifications ? this.state.user.qualifications.en : ''}
                             onFieldChanged={this.handleFieldChange('qualifications.en')}
                           />
                         )
@@ -242,7 +242,7 @@ class UserForm extends Component {
                         component: (
                           <TextArea
                             showError={this.state.showErrors}
-                            text={this.state.user.qualifications['zh-cn']}
+                            text={this.state.user.qualifications ? this.state.user.qualifications['zh-cn'] : ''}
                             onFieldChanged={this.handleFieldChange('qualifications.zh-cn')}
                           />
                         )
@@ -252,7 +252,7 @@ class UserForm extends Component {
                         component: (
                           <TextArea
                             showError={this.state.showErrors}
-                            text={this.state.user.qualifications['zh-hk']}
+                            text={this.state.user.qualifications ? this.state.user.qualifications['zh-hk'] : ''}
                             onFieldChanged={this.handleFieldChange('qualifications.zh-hk')}
                           />
                         )
@@ -272,7 +272,7 @@ class UserForm extends Component {
                         component: (
                           <TextArea
                             showError={this.state.showErrors}
-                            text={this.state.user.achievements.en}
+                            text={this.state.user.achievements ? this.state.user.achievements.e : ''}
                             onFieldChanged={this.handleFieldChange('achievements.en')}
                           />
                         )
@@ -282,7 +282,7 @@ class UserForm extends Component {
                         component: (
                           <TextArea
                             showError={this.state.showErrors}
-                            text={this.state.user.achievements['zh-cn']}
+                            text={this.state.user.achievements ? this.state.user.achievements['zh-cn'] : ''}
                             onFieldChanged={this.handleFieldChange('achievements.zh-cn')}
                           />
                         )
@@ -292,7 +292,7 @@ class UserForm extends Component {
                         component: (
                           <TextArea
                             showError={this.state.showErrors}
-                            text={this.state.user.achievements['zh-hk']}
+                            text={this.state.user.achievements ? this.state.user.achievements['zh-hk'] : ''}
                             onFieldChanged={this.handleFieldChange('achievements.zh-hk')}
                           />
                         )
@@ -318,7 +318,7 @@ class UserForm extends Component {
                         component: (
                           <TextArea
                             showError={this.state.showErrors}
-                            text={this.state.user.teaching_experience.en}
+                            text={this.state.user.teaching_experience ? this.state.user.teaching_experience.en : ''}
                             onFieldChanged={this.handleFieldChange('teaching_experience.en')}
                           />
                         )
@@ -328,7 +328,9 @@ class UserForm extends Component {
                         component: (
                           <TextArea
                             showError={this.state.showErrors}
-                            text={this.state.user.teaching_experience['zh-cn']}
+                            text={
+                              this.state.user.teaching_experience ? this.state.user.teaching_experience['zh-cn'] : ''
+                            }
                             onFieldChanged={this.handleFieldChange('teaching_experience.zh-cn')}
                           />
                         )
@@ -338,7 +340,9 @@ class UserForm extends Component {
                         component: (
                           <TextArea
                             showError={this.state.showErrors}
-                            text={this.state.user.teaching_experience['zh-hk']}
+                            text={
+                              this.state.user.teaching_experience ? this.state.user.teaching_experience['zh-hk'] : ''
+                            }
                             onFieldChanged={this.handleFieldChange('teaching_experience.zh-hk')}
                           />
                         )

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { SingleDatePicker } from 'react-dates';
 import { trueFalse } from '../../util/data';
 import TextField from '../../components/TextField';
-import Tabs from '../../components/Tabs';
 import Select from '../../components/Select';
 import moment from 'moment';
 import { Editor } from 'react-draft-wysiwyg';
@@ -17,7 +16,6 @@ class ArticleForm extends Component {
   constructor(props, context) {
     super(props, context);
 
-    console.log(props.article.html.en);
     const blocksFromHTML = htmlToDraft(props.article.html.en);
     const contentBlocks = blocksFromHTML.contentBlocks;
     const contentState = ContentState.createFromBlockArray(contentBlocks);

@@ -14,8 +14,6 @@ class Coverage extends Component {
 
   render() {
     if (typeof this.props.coverage !== 'undefined') {
-      console.log(this.props.coverage);
-
       return (
         <div className="container-fluid">
           <h2>{translations[this.props.lang].MEDIA_COVERAGE}</h2>

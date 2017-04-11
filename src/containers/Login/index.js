@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import TextField from '../../components/TextField';
+import translations from '../../util/translations';
 import { loginUser } from './actions';
 
 class Login extends Component {
@@ -35,7 +36,7 @@ class Login extends Component {
       : <div className="container-fluid">
 
           <div className="login-form">
-            <h2>LOGIN</h2>
+            <h2>{translations[this.props.lang].LOGIN}</h2>
             <form onSubmit={this.handleSubmit} className="form">
               <div className="form-group">
                 <TextField
@@ -54,8 +55,13 @@ class Login extends Component {
                   placeholder="Password"
                 />
               </div>
-              <input type="submit" value="Login" className="btn btn-success btn-block" />
+              <input type="submit" value={translations[this.props.lang].LOGIN} className="btn btn-success btn-block" />
             </form>
+          </div>
+          <div className="text-center">
+            <Link to="/register">{translations[this.props.lang].REGISTER}</Link>
+            &nbsp; | &nbsp;
+            <Link to="/forgot">{translations[this.props.lang].RESETPASSWORD}</Link>
           </div>
         </div>;
   }
@@ -67,7 +73,8 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(store) {
   return {
-    isAuthenticated: store.loginReducer.isAuthenticated
+    isAuthenticated: store.loginReducer.isAuthenticated,
+    lang: store.languageReducer.lang
   };
 }
 

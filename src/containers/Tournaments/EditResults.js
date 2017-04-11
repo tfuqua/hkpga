@@ -7,10 +7,6 @@ import ResultsTable from './ResultsTable';
 import { getTournament, getResults } from './actions';
 
 class EditResults extends Component {
-  constructor(props, context) {
-    super(props, context);
-  }
-
   componentDidMount() {
     if (!this.props.results) {
       this.props.getTournament(this.props.match.params.key);

@@ -1,6 +1,6 @@
 import { firebaseAuth } from '../../database';
 import { displayMessage } from '../Message/actions';
-import { SAVE_SUCCESSFUL, LOGIN_ERROR } from '../../util/messages';
+import { LOGIN_ERROR } from '../../util/messages';
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
@@ -19,6 +19,7 @@ export function loginUser(creds) {
     return firebaseAuth
       .signInWithEmailAndPassword(creds.username, creds.password)
       .then(user => {
+        console.log(user);
         localStorage.setItem('user', user.email);
         dispatch(receiveLogin(user));
       })

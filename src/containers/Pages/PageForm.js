@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { SingleDatePicker } from 'react-dates';
-import { trueFalse } from '../../util/data';
-import TextField from '../../components/TextField';
-import Tabs from '../../components/Tabs';
-import Select from '../../components/Select';
 import moment from 'moment';
 import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
@@ -27,8 +22,6 @@ class PageForm extends Component {
       id: props.id,
       editorState: EditorState.createWithContent(contentState)
     };
-
-    console.log(this.state);
 
     this.handleDateChange = this.handleDateChange.bind(this);
     this.onEditorStateChange = this.onEditorStateChange.bind(this);

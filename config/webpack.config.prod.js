@@ -1,20 +1,29 @@
+'use strict';
 
-var autoprefixer = require('autoprefixer');
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var ManifestPlugin = require('webpack-manifest-plugin');
-var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
-var url = require('url');
-var paths = require('./paths');
-var getClientEnvironment = require('./env');
+const autoprefixer = require('autoprefixer');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
+const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
+const paths = require('./paths');
+const getClientEnvironment = require('./env');
 
-var path = require('path');
-var publicPath = paths.servedPath;
-var shouldUseRelativeAssetPaths = publicPath === './';
-var publicUrl = publicPath.slice(0, -1);
-var env = getClientEnvironment(publicUrl);
+// Webpack uses `publicPath` to determine where the app is being served from.
+// It requires a trailing slash, or the file assets will get an incorrect path.
+const publicPath = paths.servedPath;
+// Some apps do not use client-side routing with pushState.
+// For these, "homepage" can be set to "." to enable relative asset paths.
+const shouldUseRelativeAssetPaths = publicPath === './';
+// `publicUrl` is just like `publicPath`, but we will provide it to our app
+// as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
+// Omit trailing slash as %PUBLIC_URL%/xyz looks better than %PUBLIC_URL%xyz.
+const publicUrl = publicPath.slice(0, -1);
+// Get environment variables to inject into our app.
+const env = getClientEnvironment(publicUrl);
 
+// Assert this just to be safe.
+// Development builds of React are slow and not intended for production.
 if (env.stringified['process.env'].NODE_ENV !== '"production"') {
   throw new Error('Production builds must have NODE_ENV=production.');
 }
@@ -27,8 +36,8 @@ const cssFilename = 'static/css/[name].[contenthash:8].css';
 // However, our output is structured with css, js and media folders.
 // To have this structure working with relative paths, we have to use custom options.
 const extractTextPluginOptions = shouldUseRelativeAssetPaths
-  // Making sure that the publicPath goes back to to build folder.
-  ? {publicPath: Array(cssFilename.split('/').length).join('../')}
+  ? // Making sure that the publicPath goes back to to build folder.
+    { publicPath: Array(cssFilename.split('/').length).join('../') }
   : {};
 
 // This is the production configuration.
@@ -41,10 +50,7 @@ module.exports = {
   // You can exclude the *.map files from the build during deployment.
   devtool: 'source-map',
   // In production, we only want to load the polyfills and the app code.
-  entry: [
-    require.resolve('./polyfills'),
-    paths.appIndexJs
-  ],
+  entry: [require.resolve('./polyfills'), paths.appIndexJs],
   output: {
     // The build folder.
     path: paths.appBuild,
@@ -74,24 +80,21 @@ module.exports = {
       'react-native': 'react-native-web'
     }
   },
-  // @remove-on-eject-begin
-  // Resolve loaders (webpack plugins for CSS, images, transpilation) from the
-  // directory of `react-scripts` itself rather than the project directory.
-  resolveLoader: {
-    modules: [
-      paths.ownNodeModules,
-      // Lerna hoists everything, so we need to look in our app directory
-      paths.appNodeModules
-    ]
-  },
-  // @remove-on-eject-end
+
   module: {
     rules: [
+      // Disable require.ensure as it's not a standard language feature.
+      { parser: { requireEnsure: false } },
       // First, run the linter.
       // It's important to do this before Babel processes the JS.
       {
         test: /\.(js|jsx)$/,
         enforce: 'pre',
+        use: [
+          {
+            loader: 'eslint-loader'
+          }
+        ],
         include: paths.appSrc
       },
       // ** ADDING/UPDATING LOADERS **
@@ -100,16 +103,19 @@ module.exports = {
       // When adding a new loader, you must add its `test`
       // as a new entry in the `exclude` list in the "url" loader.
 
-      // "url" loader embeds assets smaller than specified size as data URLs to avoid requests.
-      // Otherwise, it acts like the "file" loader.
+      // "file" loader makes sure those assets end up in the `build` folder.
+      // When you `import` an asset, you get its filename.
       {
-        exclude: [
-          /\.html$/,
-          /\.(js|jsx)$/,
-          /\.css$/,
-          /\.json$/,
-          /\.svg$/
-        ],
+        exclude: [/\.html$/, /\.(js|jsx)$/, /\.css$/, /\.json$/, /\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+        loader: 'file-loader',
+        options: {
+          name: 'static/media/[name].[hash:8].[ext]'
+        }
+      },
+      // "url" loader works just like "file" loader but it also embeds
+      // assets smaller than specified size as data URLs to avoid requests.
+      {
+        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
         loader: 'url-loader',
         options: {
           limit: 10000,
@@ -120,13 +126,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         include: paths.appSrc,
-        loader: 'babel-loader',
-        // @remove-on-eject-begin
-        options: {
-          babelrc: false,
-          presets: [require.resolve('babel-preset-react-app')],
-        },
-        // @remove-on-eject-end
+        loader: 'babel-loader'
       },
       // The notation here is somewhat confusing.
       // "postcss" loader applies autoprefixer to our CSS.
@@ -140,20 +140,45 @@ module.exports = {
       // tags. If you use code splitting, however, any async bundles will still
       // use the "style" loader inside the async code so CSS from them won't be
       // in the main CSS file.
+
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract({ 
-            loader:[ 'css-loader', 'sass-loader' ], 
-            fallbackLoader: 'style-loader' 
-        })
-      },
-      // "file" loader for svg
-      {
-        test: /\.svg$/,
-        loader: 'file-loader',
-        options: {
-          name: 'static/media/[name].[hash:8].[ext]'
-        }
+        loader: ExtractTextPlugin.extract(
+          Object.assign(
+            {
+              fallback: 'style-loader',
+              use: [
+                {
+                  loader: 'css-loader',
+                  options: {
+                    importLoaders: 1
+                  }
+                },
+                {
+                  loader: 'sass-loader'
+                },
+                {
+                  loader: 'postcss-loader',
+                  options: {
+                    ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
+                    plugins: () => [
+                      autoprefixer({
+                        browsers: [
+                          '>1%',
+                          'last 4 versions',
+                          'Firefox ESR',
+                          'not ie < 9' // React doesn't support IE8 anyway
+                        ]
+                      })
+                    ]
+                  }
+                }
+              ]
+            },
+            extractTextPluginOptions
+          )
+        )
+        // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
       }
       // ** STOP ** Are you adding a new loader?
       // Remember to add the new extension(s) to the "url" loader exclusion list.
@@ -204,7 +229,9 @@ module.exports = {
       sourceMap: true
     }),
     // Note: this won't work without ExtractTextPlugin.extract(..) in `loaders`.
-    new ExtractTextPlugin(cssFilename),
+    new ExtractTextPlugin({
+      filename: cssFilename
+    }),
     // Generate a manifest file which contains a mapping of all asset filenames
     // to their corresponding output file so that tools can pick it up without
     // having to parse `index.html`.

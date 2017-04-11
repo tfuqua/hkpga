@@ -5,7 +5,6 @@ import Carousel from '../../components/Carousel';
 import OrderOfMerit from '../../components/Merit';
 import LatestTournamentScores from '../../components/Tournament/Latest';
 import Partners from '../Partners';
-import { Link } from 'react-router-dom';
 
 class Home extends Component {
   render() {

@@ -1,32 +1,34 @@
 import routeLoader from './util/routeLoader';
 
 //App Specific components
-const Home = routeLoader(() => System.import('./containers/Home'));
-const Page = routeLoader(() => System.import('./containers/Pages'));
-const Contact = routeLoader(() => System.import('./containers/Contact'));
-const Coverage = routeLoader(() => System.import('./containers/Coverage'));
-const Magazine = routeLoader(() => System.import('./containers/Magazine'));
-const Releases = routeLoader(() => System.import('./containers/Releases'));
-const Tournaments = routeLoader(() => System.import('./containers/Tournaments'));
-const TournamentView = routeLoader(() => System.import('./containers/Tournament'));
-const Login = routeLoader(() => System.import('./containers/Login'));
-const Dashboard = routeLoader(() => System.import('./containers/Dashboard'));
-const AdminTournaments = routeLoader(() => System.import('./containers/Tournaments/tournaments'));
-const EditTournament = routeLoader(() => System.import('./containers/Tournaments/EditTournament'));
-const EditTournamentResults = routeLoader(() => System.import('./containers/Tournaments/EditResults'));
-const AdminPages = routeLoader(() => System.import('./containers/Pages/pages'));
-const EditPage = routeLoader(() => System.import('./containers/Pages/EditPage'));
-const AdminUsers = routeLoader(() => System.import('./containers/Users'));
-const EditUser = routeLoader(() => System.import('./containers/Users/EditUser'));
-const AdminArticles = routeLoader(() => System.import('./containers/Articles/articles'));
-const ArticleView = routeLoader(() => System.import('./containers/Articles/ArticleView'));
-const EditArticle = routeLoader(() => System.import('./containers/Articles/EditArticle'));
-const Pros = routeLoader(() => System.import('./containers/Pros'));
-const ProView = routeLoader(() => System.import('./containers/Pros/ProView'));
-const Partners = routeLoader(() => System.import('./containers/Partners'));
-const Committee = routeLoader(() => System.import('./containers/Committee'));
-const Terms = routeLoader(() => System.import('./containers/Terms'));
-const Merit = routeLoader(() => System.import('./containers/Merit'));
+const Home = routeLoader(() => import('./containers/Home'));
+const Register = routeLoader(() => import('./containers/Register'));
+const Forgot = routeLoader(() => import('./containers/Forgot'));
+const Page = routeLoader(() => import('./containers/Pages'));
+const Contact = routeLoader(() => import('./containers/Contact'));
+const Coverage = routeLoader(() => import('./containers/Coverage'));
+const Magazine = routeLoader(() => import('./containers/Magazine'));
+const Releases = routeLoader(() => import('./containers/Releases'));
+const Tournaments = routeLoader(() => import('./containers/Tournaments'));
+const TournamentView = routeLoader(() => import('./containers/Tournament'));
+const Login = routeLoader(() => import('./containers/Login'));
+const Dashboard = routeLoader(() => import('./containers/Dashboard'));
+const AdminTournaments = routeLoader(() => import('./containers/Tournaments/tournaments'));
+const EditTournament = routeLoader(() => import('./containers/Tournaments/EditTournament'));
+const EditTournamentResults = routeLoader(() => import('./containers/Tournaments/EditResults'));
+const AdminPages = routeLoader(() => import('./containers/Pages/pages'));
+const EditPage = routeLoader(() => import('./containers/Pages/EditPage'));
+const AdminUsers = routeLoader(() => import('./containers/Users'));
+const EditUser = routeLoader(() => import('./containers/Users/EditUser'));
+const AdminArticles = routeLoader(() => import('./containers/Articles/articles'));
+const ArticleView = routeLoader(() => import('./containers/Articles/ArticleView'));
+const EditArticle = routeLoader(() => import('./containers/Articles/EditArticle'));
+const Pros = routeLoader(() => import('./containers/Pros'));
+const ProView = routeLoader(() => import('./containers/Pros/ProView'));
+const Partners = routeLoader(() => import('./containers/Partners'));
+const Committee = routeLoader(() => import('./containers/Committee'));
+const Terms = routeLoader(() => import('./containers/Terms'));
+const Merit = routeLoader(() => import('./containers/Merit'));
 
 export const routes = [
   {
@@ -153,6 +155,16 @@ export const routes = [
   {
     path: '/terms',
     component: Terms
+  },
+  {
+    path: '/register',
+    component: Register,
+    exact: true
+  },
+  {
+    path: '/forgot',
+    component: Forgot,
+    exact: true
   },
   {
     path: '/',

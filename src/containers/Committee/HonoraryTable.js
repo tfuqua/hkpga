@@ -34,7 +34,6 @@ class HonoraryTable extends Component {
 
   render() {
     if (this.state.honorary) {
-      console.log(this.state.honorary);
       return (
         <div>
           <dl className="dl-horizontal">

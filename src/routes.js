@@ -6,9 +6,9 @@ const Register = routeLoader(() => import('./containers/Register'));
 const Forgot = routeLoader(() => import('./containers/Forgot'));
 const Page = routeLoader(() => import('./containers/Pages'));
 const Contact = routeLoader(() => import('./containers/Contact'));
-const Coverage = routeLoader(() => import('./containers/Coverage'));
+/*const Coverage = routeLoader(() => import('./containers/Coverage'));
 const Magazine = routeLoader(() => import('./containers/Magazine'));
-const Releases = routeLoader(() => import('./containers/Releases'));
+const Releases = routeLoader(() => import('./containers/Releases'));*/
 const Tournaments = routeLoader(() => import('./containers/Tournaments'));
 const TournamentView = routeLoader(() => import('./containers/Tournament'));
 const Login = routeLoader(() => import('./containers/Login'));
@@ -24,6 +24,9 @@ const AdminArticles = routeLoader(() => import('./containers/Articles/articles')
 const ArticleView = routeLoader(() => import('./containers/Articles/ArticleView'));
 const EditArticle = routeLoader(() => import('./containers/Articles/EditArticle'));
 const Pros = routeLoader(() => import('./containers/Pros'));
+const AdminPress = routeLoader(() => import('./containers/Press'));
+const EditPress = routeLoader(() => import('./containers/Press/EditPress'));
+const PressView = routeLoader(() => import('./containers/Press/PressView'));
 const ProView = routeLoader(() => import('./containers/Pros/ProView'));
 const Partners = routeLoader(() => import('./containers/Partners'));
 const Committee = routeLoader(() => import('./containers/Committee'));
@@ -83,16 +86,8 @@ export const routes = [
     exact: true
   },
   {
-    path: '/press/releases',
-    component: Releases
-  },
-  {
-    path: '/press/media',
-    component: Coverage
-  },
-  {
-    path: '/press/magazine',
-    component: Magazine
+    path: '/press/:type',
+    component: PressView
   },
   {
     path: '/contact',
@@ -118,7 +113,13 @@ export const routes = [
   },
   {
     path: '/admin/press',
-    component: Dashboard
+    component: AdminPress,
+    exact: true
+  },
+  {
+    path: '/admin/press/:key',
+    component: EditPress,
+    exact: true
   },
   {
     path: '/admin/pages',

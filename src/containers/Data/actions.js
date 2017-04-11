@@ -58,3 +58,65 @@ export function fixUserData() {
     });
   };
 }
+
+export function mergePressData() {
+  return dispathch => {
+    // Coverage
+    let pressRef = database.ref('press');
+    let ref = database.ref('coverage');
+    ref.once('value', function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        let cov = childSnapshot.val();
+
+        let coverage = {
+          cover: cov.cover,
+          title: cov.title,
+          publish_date: cov.publish_date,
+          publication: cov.publication,
+          url: cov.url,
+          type: 'coverage'
+        };
+
+        let newEntry = pressRef.push();
+        newEntry.set(coverage);
+      });
+    });
+
+    //Magazines
+    ref = database.ref('magazines');
+    ref.once('value', function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        let mag = childSnapshot.val();
+
+        let magazine = {
+          cover: mag.cover,
+          title: mag.coverstory,
+          publish_date: mag.publish_date,
+          url: mag.url,
+          type: 'magazine'
+        };
+
+        let newEntry = pressRef.push();
+        newEntry.set(magazine);
+      });
+    });
+
+    //Releases
+    ref = database.ref('releases');
+    ref.once('value', function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        let rel = childSnapshot.val();
+
+        let release = {
+          title: rel.title,
+          publish_date: rel.publish_date,
+          url: rel.url,
+          type: 'release'
+        };
+
+        let newEntry = pressRef.push();
+        newEntry.set(release);
+      });
+    });
+  };
+}

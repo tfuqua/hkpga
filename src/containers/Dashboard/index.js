@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { fixTournaments, fixUserData } from '../Data/actions';
+import { fixTournaments, fixUserData, mergePressData } from '../Data/actions';
 
 class Dashboard extends Component {
   render() {
@@ -33,7 +33,10 @@ class Dashboard extends Component {
           Fix Tournament Data
         </button>
         <button onClick={this.props.fixUserData.bind(this)} className="btn btn-default">
-          Remove Results from User Data
+          Fix Users
+        </button>
+        <button onClick={this.props.mergePressData.bind(this)} className="btn btn-default">
+          Merge Press Data
         </button>
       </div>
     );
@@ -41,7 +44,7 @@ class Dashboard extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fixTournaments, fixUserData }, dispatch);
+  return bindActionCreators({ fixTournaments, fixUserData, mergePressData }, dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(Dashboard);

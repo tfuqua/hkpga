@@ -146,30 +146,35 @@ class ArticleForm extends Component {
           />
         </div>
 
-        <div className="form-group">
-          <label>Publish Date</label>
-          <SingleDatePicker
-            id="publishDate"
-            withPortal={true}
-            date={moment(this.state.article.publish_date)}
-            initialVisibleMonth={() => moment(this.state.article.publish_date)}
-            focused={this.state.showCalendar}
-            numberOfMonths={1}
-            isOutsideRange={() => false}
-            onDateChange={this.handleDateChange}
-            onFocusChange={({ focused }) => {
-              this.setState({ showCalendar: focused });
-            }}
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Cover</label>
-          <TextField
-            showError={this.state.showErrors}
-            text={this.state.article.cover}
-            onFieldChanged={this.handleFieldChange('cover')}
-          />
+        <div className="row">
+          <div className="col-xs-6">
+            <div className="form-group">
+              <label>Publish Date</label>
+              <SingleDatePicker
+                id="publishDate"
+                withPortal={true}
+                date={moment(this.state.article.publish_date)}
+                initialVisibleMonth={() => moment(this.state.article.publish_date)}
+                focused={this.state.showCalendar}
+                numberOfMonths={1}
+                isOutsideRange={() => false}
+                onDateChange={this.handleDateChange}
+                onFocusChange={({ focused }) => {
+                  this.setState({ showCalendar: focused });
+                }}
+              />
+            </div>
+          </div>
+          <div className="col-xs-6">
+            <div className="form-group">
+              <label>Cover</label>
+              <TextField
+                showError={this.state.showErrors}
+                text={this.state.article.cover}
+                onFieldChanged={this.handleFieldChange('cover')}
+              />
+            </div>
+          </div>
         </div>
 
         <div className="row">

@@ -20,7 +20,7 @@ function ReleaseView(props) {
           </h4>
 
           <h4 className="press-title">
-            <a target="_blank" href={release.url[props.lang]}>
+            <a target="_blank" href={release.url}>
               <Text text={release.title} />
             </a>
           </h4>

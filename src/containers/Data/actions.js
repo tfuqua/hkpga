@@ -72,7 +72,7 @@ export function mergePressData() {
           cover: cov.cover,
           title: cov.title,
           publish_date: cov.publish_date,
-          publication: cov.publication,
+          publication: cov.publication.en,
           url: cov.url,
           type: 'media'
         };
@@ -110,7 +110,7 @@ export function mergePressData() {
         let release = {
           title: rel.title,
           publish_date: rel.publish_date,
-          url: rel.url,
+          url: rel.url.en,
           type: 'releases'
         };
 
@@ -118,5 +118,6 @@ export function mergePressData() {
         newEntry.set(release);
       });
     });
+    console.log('Press data merged');
   };
 }

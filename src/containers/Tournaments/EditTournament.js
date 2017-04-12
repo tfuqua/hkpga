@@ -17,11 +17,7 @@ class EditTournament extends Component {
       return (
         <div className="container-fluid">
           <h2>Edit Tournament</h2>
-
           <TournamentForm id={this.props.match.params.key} tournament={this.props.tournament} />
-          <pre>
-            {JSON.stringify(this.props.tournament, null, ' ')}
-          </pre>
         </div>
       );
     } else {

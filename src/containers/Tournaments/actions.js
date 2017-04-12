@@ -1,5 +1,7 @@
 import database from '../../database';
 import config from '../../../config/env/development';
+import { displayMessage } from '../Message/actions';
+import { SAVE_SUCCESSFUL } from '../../util/messages';
 import axios from 'axios';
 
 export const GET_RESULTS = 'GET_RESULTS';
@@ -180,5 +182,12 @@ export function queryTournaments(query) {
           console.log(error);
         });
     });
+  };
+}
+
+export function saveTournament(id, tournament) {
+  return dispatch => {
+    dispatch(displayMessage(SAVE_SUCCESSFUL));
+    return database.ref(`tournaments/${id}`).set(tournament);
   };
 }

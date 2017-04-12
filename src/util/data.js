@@ -56,3 +56,13 @@ export const pressOptions = [
   { value: 'magazine', name: 'Magazine' },
   { value: 'media', name: 'Media Coverage' }
 ];
+
+export const tournamentYears = createTournamentYears();
+
+function createTournamentYears() {
+  let years = [];
+  for (let i = 2010; i <= new Date().getFullYear(); i++) {
+    years.push({ value: i, name: i });
+  }
+  return years.reverse();
+}

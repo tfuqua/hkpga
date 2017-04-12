@@ -3,9 +3,12 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { SingleDatePicker } from 'react-dates';
 import TextField from '../../components/TextField';
+import Checkbox from '../../components/Checkbox';
+import Select from '../../components/Select';
 import { Link } from 'react-router-dom';
 import Tabs from '../../components/Tabs';
 import moment from 'moment';
+import { tournamentYears } from '../../util/data';
 import { saveTournament, getResults } from './actions';
 
 class TournamentForm extends Component {
@@ -21,8 +24,9 @@ class TournamentForm extends Component {
       id: props.id
     };
 
-    this.saveArticle = this.saveArticle.bind(this);
     this.handleFieldChange = this.handleFieldChange.bind(this);
+    this.handleCheckChange = this.handleCheckChange.bind(this);
+    this.handleDivisionChange = this.handleDivisionChange.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
   }
 
@@ -44,15 +48,23 @@ class TournamentForm extends Component {
   handleDateChange(field, date) {
     this.setState({ tournament: { ...this.state.tournament, [field]: moment(date).valueOf() } });
   }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.article.slug !== this.state.article.slug) {
-      this.setState({ article: nextProps.article });
-    }
+  handleCheckChange(e) {
+    this.setState({ tournament: { ...this.state.tournament, [e.target.name]: e.target.checked } });
+  }
+  handleSelectChange(field) {
+    return e => {
+      this.setState({ tournament: { ...this.state.tournament, [field]: e.target.value } });
+    };
+  }
+  handleDivisionChange(e) {
+    let divs = { ...this.state.tournament.divisions, [e.target.name]: e.target.checked };
+    this.setState({
+      tournament: { ...this.state.tournament, divisions: divs }
+    });
   }
 
-  saveArticle() {
-    this.props.saveArticle(this.state.id, this.state.article);
+  saveTournament() {
+    this.props.saveTournament(this.state.id, this.state.tournament);
   }
 
   render() {
@@ -67,7 +79,7 @@ class TournamentForm extends Component {
               </Link>
             </button>
             <Link to={`/admin/tournaments/${this.state.id}/results`} className="btn btn-default">Edit Prize Money</Link>
-            <button onClick={this.saveArticle} className="btn btn-default">Save</button>
+            <button onClick={this.saveTournament.bind(this)} className="btn btn-default">Save</button>
           </div>
 
         </div>
@@ -142,7 +154,7 @@ class TournamentForm extends Component {
                   <TextField
                     showError={this.state.showErrors}
                     text={this.state.tournament.venue['zh-hk']}
-                    onFieldChanged={this.handleFieldChange('name.zh-hk')}
+                    onFieldChanged={this.handleFieldChange('venue.zh-hk')}
                   />
                 )
               }
@@ -150,27 +162,26 @@ class TournamentForm extends Component {
           />
         </div>
 
-        <div className="row">
-          <div className="col-sm-6">
-            <div className="form-group">
-              <label>Number of Days</label>
-              <TextField
-                showError={this.state.showErrors}
-                text={this.state.tournament.no_days}
-                onFieldChanged={this.handleFieldChange('no_days')}
-              />
-            </div>
-          </div>
-          <div className="col-sm-6">
-            <div className="form-group">
-              <label>Scored</label>
-              {this.state.tournament.scored ? 'yes' : 'no'}
-            </div>
-          </div>
+        <div className="form-group">
+          <label>Rules URL</label>
+          <TextField
+            showError={this.state.showErrors}
+            text={this.state.tournament.rules_url}
+            onFieldChanged={this.handleFieldChange('rules_url')}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Tee Times</label>
+          <TextField
+            showError={this.state.showErrors}
+            text={this.state.tournament.tee_off}
+            onFieldChanged={this.handleFieldChange('tee_off')}
+          />
         </div>
 
         <div className="row">
-          <div className="col-sm-6">
+          <div className="col-xs-4">
             <div className="form-group">
               <label>Start Date</label>
               <SingleDatePicker
@@ -188,7 +199,7 @@ class TournamentForm extends Component {
               />
             </div>
           </div>
-          <div className="col-sm-6">
+          <div className="col-xs-4">
             <div className="form-group">
               <label>Signup Before</label>
               <SingleDatePicker
@@ -206,19 +217,54 @@ class TournamentForm extends Component {
               />
             </div>
           </div>
-        </div>
-        <div className="form-group">
-          <label>URL</label>
-          <TextField
-            showError={this.state.showErrors}
-            text={this.state.tournament.slug}
-            onFieldChanged={this.handleFieldChange('slug')}
-          />
+          <div className="col-xs-4">
+            <div className="form-group">
+              <label>Year</label>
+              <Select
+                handleChange={this.handleSelectChange('year')}
+                value={this.state.tournament.year}
+                options={tournamentYears}
+              />
+            </div>
+          </div>
         </div>
 
-        <div className="form-group">
-          <label>Divisions</label>
-          {JSON.stringify(this.state.tournament.divisions, null, ' ')}
+        <div className="row">
+          <div className="col-xs-4">
+            <div className="form-group">
+              <label>Number of Days</label>
+              <TextField
+                showError={this.state.showErrors}
+                text={this.state.tournament.no_days}
+                onFieldChanged={this.handleFieldChange('no_days')}
+              />
+            </div>
+          </div>
+          <div className="col-xs-4">
+            <div className="form-group">
+              <label>Divisions</label><br />
+              {Object.keys(this.state.tournament.divisions).map((k, i) => (
+                <div key={i}>
+                  <Checkbox
+                    name={k}
+                    label={k}
+                    checked={this.state.tournament.divisions[k]}
+                    handleCheckChange={this.handleDivisionChange}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="col-xs-4">
+            <div className="form-group">
+              <Checkbox
+                name="scored"
+                label="Scoring Complete?"
+                checked={this.state.tournament.scored}
+                handleCheckChange={this.handleCheckChange}
+              />
+            </div>
+          </div>
         </div>
       </div>
     );

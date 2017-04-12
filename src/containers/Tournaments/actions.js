@@ -1,7 +1,7 @@
 import database from '../../database';
 import config from '../../../config/env/development';
 import { displayMessage } from '../Message/actions';
-import { SAVE_SUCCESSFUL } from '../../util/messages';
+import { SAVE_SUCCESSFUL, DELETE_RESULT_SUCCESSFUL } from '../../util/messages';
 import axios from 'axios';
 
 export const GET_RESULTS = 'GET_RESULTS';
@@ -189,5 +189,28 @@ export function saveTournament(id, tournament) {
   return dispatch => {
     dispatch(displayMessage(SAVE_SUCCESSFUL));
     return database.ref(`tournaments/${id}`).set(tournament);
+  };
+}
+
+export function createTournament(tournament) {
+  return dispatch => {
+    dispatch(displayMessage(SAVE_SUCCESSFUL));
+    dispatch(queryTournaments({ page: 1 }));
+    return database.ref(`tournaments`).push(tournament);
+  };
+}
+
+export function deleteResult(tournament, entry, id, division) {
+  return dispatch => {
+    return database
+      .ref(`results/${id}/${division}/${entry.username}`)
+      .remove()
+      .then(() => {
+        dispatch(displayMessage(DELETE_RESULT_SUCCESSFUL));
+        dispatch(getResults(id));
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 }

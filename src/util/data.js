@@ -64,5 +64,6 @@ function createTournamentYears() {
   for (let i = 2010; i <= new Date().getFullYear(); i++) {
     years.push({ value: i, name: i });
   }
+  years.push({ value: '', name: '' });
   return years.reverse();
 }

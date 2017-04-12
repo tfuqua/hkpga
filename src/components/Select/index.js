@@ -11,7 +11,7 @@ function Select(props) {
 
   return options.length > 1
     ? <div className="select">
-        <select className="form-control" value={value} onChange={props.handleChange}>
+        <select className={`form-control ${props.class}`} value={value} onChange={props.handleChange}>
           {options.map((option, i) => (
             <option key={i} value={option.value}>
               {option[fieldName]}

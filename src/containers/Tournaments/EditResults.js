@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Loader from '../../components/Loader';
 import Tabs from '../../components/Tabs';
-import ResultsTable from './ResultsTable';
+import EditResultsTable from './EditResultsTable';
 import { getTournament, getResults } from './actions';
 
 class EditResults extends Component {
@@ -15,7 +15,7 @@ class EditResults extends Component {
   }
 
   render() {
-    if (typeof this.props.results !== 'undefined') {
+    if (typeof this.props.scores !== 'undefined') {
       let tabs = [];
 
       Object.keys(this.props.tournament.divisions).map((key, i) => {
@@ -23,9 +23,11 @@ class EditResults extends Component {
           tabs.push({
             name: key,
             component: (
-              <ResultsTable
+              <EditResultsTable
                 tournament={this.props.tournament}
-                results={this.props.results ? this.props.results[key] : {}}
+                id={this.props.match.params.key}
+                division={key}
+                scores={this.props.scores ? this.props.scores[key] : {}}
               />
             )
           });
@@ -34,7 +36,7 @@ class EditResults extends Component {
 
       return (
         <div className="container-fluid">
-          <h1>Edit Results</h1>
+          <h2>Edit Results</h2>
           <br />
           <Tabs tabs={tabs} />
         </div>
@@ -48,7 +50,7 @@ class EditResults extends Component {
 function mapStateToProps(store) {
   return {
     tournament: store.tournamentReducer.tournament,
-    results: store.tournamentReducer.results
+    scores: store.tournamentReducer.scoring
   };
 }
 

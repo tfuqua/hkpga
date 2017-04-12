@@ -47,7 +47,7 @@ function tournamentReducer(state = {}, action) {
       return {
         ...state,
         isFetching: false,
-        results: action.results
+        scoring: action.results
       };
     case CHANGE_TOURNAMENT_PAGE:
       return {

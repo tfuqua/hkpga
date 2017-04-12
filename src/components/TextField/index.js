@@ -6,7 +6,7 @@ function TextField(props) {
   return (
     <div>
       <input
-        className="form-control"
+        className={`form-control ${props.class}`}
         placeholder={props.placeholder}
         value={value}
         onChange={props.onFieldChanged}

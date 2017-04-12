@@ -26,6 +26,11 @@ export const PRESS_DELETE_SUCCESS = {
 };
 
 export const ARTICLE_ALREADY_EXISTS = {
-  message: 'An Article already exists with this title.',
+  message: 'An article already exists with this title.',
   type: 'ERROR'
+};
+
+export const DELETE_RESULT_SUCCESSFUL = {
+  message: 'Tournament entry successfully deleted.',
+  type: 'SUCCESS'
 };

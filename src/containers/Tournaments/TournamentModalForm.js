@@ -5,13 +5,12 @@ import { SingleDatePicker } from 'react-dates';
 import TextField from '../../components/TextField';
 import Checkbox from '../../components/Checkbox';
 import Select from '../../components/Select';
-import { Link } from 'react-router-dom';
 import Tabs from '../../components/Tabs';
 import moment from 'moment';
 import { tournamentYears } from '../../util/data';
-import { saveTournament, getResults } from './actions';
+import { createTournament, getResults } from './actions';
 
-class TournamentForm extends Component {
+class TournamentModalForm extends Component {
   constructor(props, context) {
     super(props, context);
 
@@ -20,14 +19,38 @@ class TournamentForm extends Component {
         start_date: false,
         signup_before: false
       },
-      tournament: props.tournament,
-      id: props.id
+      tournament: {
+        name: {
+          en: '',
+          'zh-cn': '',
+          'zh-hk': ''
+        },
+        venue: {
+          en: '',
+          'zh-cn': '',
+          'zh-hk': ''
+        },
+        divisions: {
+          ladies: false,
+          open: false,
+          senior: false,
+          trainee: false
+        },
+        no_days: 2,
+        rules_url: '',
+        scored: false,
+        signup_before: new Date(),
+        start_date: new Date(),
+        tee_off: '',
+        year: null
+      }
     };
 
     this.handleFieldChange = this.handleFieldChange.bind(this);
     this.handleCheckChange = this.handleCheckChange.bind(this);
     this.handleDivisionChange = this.handleDivisionChange.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
+    this.createTournament = this.createTournament.bind(this);
   }
 
   handleFieldChange(field) {
@@ -63,26 +86,14 @@ class TournamentForm extends Component {
     });
   }
 
-  saveTournament() {
-    this.props.saveTournament(this.state.id, this.state.tournament);
+  createTournament() {
+    this.props.createTournament(this.state.tournament);
+    this.props.toggleModal('modal');
   }
 
   render() {
     return (
       <div className="">
-
-        <div className="text-right">
-          <div className="btn-group">
-            <button className="btn btn-default" onClick={() => this.props.getResults(this.state.id)}>
-              <Link to={`/admin/tournaments/${this.state.id}/results`}>
-                Edit Results
-              </Link>
-            </button>
-            <button onClick={this.saveTournament.bind(this)} className="btn btn-default">Save</button>
-          </div>
-
-        </div>
-
         <div className="form-group">
           <label>Name</label>
           <Tabs
@@ -179,54 +190,46 @@ class TournamentForm extends Component {
           />
         </div>
 
-        <div className="row">
-          <div className="col-xs-4">
-            <div className="form-group">
-              <label>Start Date</label>
-              <SingleDatePicker
-                id="startDate"
-                withPortal={true}
-                date={moment(this.state.tournament.start_date)}
-                initialVisibleMonth={() => moment(this.state.tournament.start_date)}
-                focused={this.state.showCalendar.start_date}
-                numberOfMonths={1}
-                isOutsideRange={() => false}
-                onDateChange={this.handleDateChange.bind(this, 'start_date')}
-                onFocusChange={({ focused }) => {
-                  this.setState({ showCalendar: { ...this.state.showCalendar, start_date: focused } });
-                }}
-              />
-            </div>
-          </div>
-          <div className="col-xs-4">
-            <div className="form-group">
-              <label>Signup Before</label>
-              <SingleDatePicker
-                id="signupDate"
-                withPortal={true}
-                date={moment(this.state.tournament.signup_before)}
-                initialVisibleMonth={() => moment(this.state.tournament.signup_before)}
-                focused={this.state.showCalendar.signup_before}
-                numberOfMonths={1}
-                isOutsideRange={() => false}
-                onDateChange={this.handleDateChange.bind(this, 'signup_before')}
-                onFocusChange={({ focused }) => {
-                  this.setState({ showCalendar: { ...this.state.showCalendar, signup_before: focused } });
-                }}
-              />
-            </div>
-          </div>
-          <div className="col-xs-4">
-            <div className="form-group">
-              <label>Year</label>
-              <Select
-                class="width-auto"
-                handleChange={this.handleSelectChange('year')}
-                value={this.state.tournament.year}
-                options={tournamentYears}
-              />
-            </div>
-          </div>
+        <div className="form-group">
+          <label>Start Date</label>
+          <SingleDatePicker
+            id="startDate"
+            date={moment(this.state.tournament.start_date)}
+            initialVisibleMonth={() => moment(this.state.tournament.start_date)}
+            focused={this.state.showCalendar.start_date}
+            numberOfMonths={1}
+            isOutsideRange={() => false}
+            onDateChange={this.handleDateChange.bind(this, 'start_date')}
+            onFocusChange={({ focused }) => {
+              this.setState({ showCalendar: { ...this.state.showCalendar, start_date: focused } });
+            }}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Signup Before</label>
+          <SingleDatePicker
+            id="signupDate"
+            date={moment(this.state.tournament.signup_before)}
+            initialVisibleMonth={() => moment(this.state.tournament.signup_before)}
+            focused={this.state.showCalendar.signup_before}
+            numberOfMonths={1}
+            isOutsideRange={() => false}
+            onDateChange={this.handleDateChange.bind(this, 'signup_before')}
+            onFocusChange={({ focused }) => {
+              this.setState({ showCalendar: { ...this.state.showCalendar, signup_before: focused } });
+            }}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Year</label>
+          <Select
+            class="width-auto"
+            handleChange={this.handleSelectChange('year')}
+            value={this.state.tournament.year}
+            options={tournamentYears}
+          />
         </div>
 
         <div className="form-group">
@@ -270,13 +273,20 @@ class TournamentForm extends Component {
             handleCheckChange={this.handleCheckChange}
           />
         </div>
+
+        <hr />
+        <div className="text-right">
+          <button onClick={this.props.toggleModal.bind(this, 'modal')} className="btn btn-link">Cancel</button>
+          &nbsp;&nbsp;&nbsp;
+          <button type="submit" onClick={this.createTournament} className="btn btn-primary">Create Tournament</button>
+        </div>
       </div>
     );
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ saveTournament, getResults }, dispatch);
+  return bindActionCreators({ createTournament }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(TournamentForm);
+export default connect(null, mapDispatchToProps)(TournamentModalForm);

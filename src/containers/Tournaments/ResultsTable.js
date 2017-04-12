@@ -3,7 +3,7 @@ import { sortResults } from '../../util/util';
 import EditResultRow from './EditResultRow';
 
 function ResultsTable(props) {
-  let results = sortResults(props.results);
+  let results = sortResults(props.scores);
 
   return (
     <div>

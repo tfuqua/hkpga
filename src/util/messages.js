@@ -19,3 +19,13 @@ export const ARTICLE_DELETE_SUCCESS = {
   message: 'Article successfully deleted.',
   type: 'SUCCESS'
 };
+
+export const PRESS_DELETE_SUCCESS = {
+  message: 'Press entry successfully deleted.',
+  type: 'SUCCESS'
+};
+
+export const ARTICLE_ALREADY_EXISTS = {
+  message: 'An Article already exists with this title.',
+  type: 'ERROR'
+};

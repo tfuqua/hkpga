@@ -2,7 +2,7 @@ import database from '../../database';
 import config from '../../../config/env/development';
 import axios from 'axios';
 import { displayMessage } from '../Message/actions';
-import { ARTICLE_DELETE_SUCCESS, SAVE_SUCCESSFUL } from '../../util/messages';
+import { ARTICLE_DELETE_SUCCESS, SAVE_SUCCESSFUL, ARTICLE_ALREADY_EXISTS } from '../../util/messages';
 
 export const GET_ARTICLES = 'GET_ARTICLES';
 export const GET_MORE_NEWS = 'GET_MORE_NEWS';
@@ -78,8 +78,8 @@ export function getMoreNews() {
   return dispatch => {
     const ref = database.ref('articles');
     return ref
-      .orderByChild('publish_date')
-      .limitToLast(11)
+      .orderByChild('internal')
+      .equalTo(false)
       .once('value', articles => {
         dispatch(receiveMoreNews(articles.val()));
       })
@@ -121,6 +121,49 @@ export function saveArticle(id, article) {
   return dispatch => {
     dispatch(displayMessage(SAVE_SUCCESSFUL));
     return database.ref(`articles/${id}`).set(article);
+  };
+}
+
+export function createArticle(title) {
+  let slug = title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
+
+  let article = {
+    cover: '',
+    publish_date: Date.now(),
+    slug: slug,
+    draft: false,
+    internal: true,
+    title: {
+      en: title,
+      'zh-cn': title,
+      'zh-hk': title
+    },
+    html: {
+      en: '',
+      'zh-cn': '',
+      'zh-hk': ''
+    }
+  };
+
+  return dispatch => {
+    database
+      .ref(`articles/${slug}`)
+      .once('value', function(snapshot) {
+        return snapshot.val();
+      })
+      .then(entry => {
+        if (entry.val() !== null) {
+          dispatch(displayMessage(ARTICLE_ALREADY_EXISTS));
+        } else {
+          database.ref(`articles/${slug}`).set(article).then(article => {
+            dispatch(displayMessage(SAVE_SUCCESSFUL));
+            dispatch(queryArticles({ page: 1 }));
+          });
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 }
 

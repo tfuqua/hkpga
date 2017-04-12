@@ -1,17 +1,24 @@
 .editor{
   border:1px solid #ccc;
   padding:5px;
+  overflow: hidden;
 
   img {
-    max-width: 80%;
+    max-width: 100%;
+  }
+
+  .toolbar a {
+    color:#333;
+    &:hover{
+      text-decoration: none;
+    }
   }
 }
 
 .rdw-option-wrapper {
   border: 1px solid #F1F1F1;
   padding: 5px;
-  min-width: 25px;
-  height: 20px;
+  min-width: 30px;
   border-radius: 2px;
   margin: 0 4px;
   display: -webkit-box;

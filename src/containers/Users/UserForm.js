@@ -60,7 +60,7 @@ class UserForm extends Component {
       <div className="">
 
         <div className="text-right">
-          <button onClick={this.saveUser} className="btn btn-default">Save</button>
+          <button onClick={this.saveUser} className="btn btn-primary">Save</button>
         </div>
         <br />
 

@@ -13,8 +13,7 @@ class MoreNews extends Component {
 
   render() {
     if (this.props.moreNews) {
-      let news = mapObjectToArray(this.props.moreNews).reverse();
-      news.shift();
+      let news = mapObjectToArray(this.props.moreNews);
 
       return (
         <div className="latest-news">

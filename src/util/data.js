@@ -50,4 +50,9 @@ export const userFields = {
 };
 
 export const genders = [{ value: 'male', name: 'Male' }, { value: 'female', name: 'Female' }];
-export const trueFalse = [{ value: 'false', name: 'False' }, { value: 'true', name: 'True' }];
+export const trueFalse = [{ value: false, name: 'False' }, { value: true, name: 'True' }];
+export const pressOptions = [
+  { value: 'releases', name: 'Press Release' },
+  { value: 'magazine', name: 'Magazine' },
+  { value: 'media', name: 'Media Coverage' }
+];

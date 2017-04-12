@@ -2,7 +2,7 @@ import database from '../../database';
 import config from '../../../config/env/development';
 import axios from 'axios';
 import { displayMessage } from '../Message/actions';
-import { SAVE_SUCCESSFUL } from '../../util/messages';
+import { SAVE_SUCCESSFUL, PRESS_DELETE_SUCCESS } from '../../util/messages';
 
 export const REQUEST_PRESS = 'REQUEST_PRESS';
 export const GET_PRESS_ENTRY = 'GET_PRESS_ENTRY';
@@ -76,6 +76,13 @@ export function savePressEntry(id, entry) {
     return database.ref(`press/${id}`).set(entry);
   };
 }
+export function deleteEntry(id) {
+  return dispatch => {
+    database.ref(`press/${id}`).remove();
+    dispatch(displayMessage(PRESS_DELETE_SUCCESS));
+    dispatch(queryPress({ page: 1 }));
+  };
+}
 
 export function queryPress(query) {
   return dispatch => {
@@ -104,5 +111,32 @@ export function queryPress(query) {
           console.log(error);
         });
     });
+  };
+}
+
+export function createEntry(type) {
+  let press = {
+    cover: '',
+    publish_date: Date.now(),
+    type: type,
+    url: '',
+    title: {
+      en: '',
+      'zh-cn': '',
+      'zh-hk': ''
+    }
+  };
+
+  return dispatch => {
+    let entry = database.ref(`/press`).push();
+    entry
+      .set(press)
+      .then(result => {
+        dispatch(displayMessage(SAVE_SUCCESSFUL));
+        dispatch(queryPress({ page: 1 }));
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 }

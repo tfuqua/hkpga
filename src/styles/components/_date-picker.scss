@@ -20,10 +20,9 @@
 .DateInput__display-text{
   padding:0;
 }
-
-.CalendarMonth__day--selected-start,
-.CalendarMonth__day--selected-end,
-.CalendarMonth__day--selected{
+.CalendarDay--selected-start, 
+.CalendarDay--selected-end, 
+.CalendarDay--selected{
   background: #2d6aa7;
   border-color: #2d6aa7;
 }

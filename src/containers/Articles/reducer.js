@@ -43,9 +43,10 @@ function articleReducer(state = {}, action) {
         results: sortedResults.slice((action.query.current - 1) * 10, action.query.current * 10)
       };
     case GET_MORE_NEWS:
+      let news = sortBy(mapObjectToArray(action.moreNews), ['publish_date']).reverse();
       return {
         ...state,
-        moreNews: action.moreNews
+        moreNews: news.slice(1, 11)
       };
     case CHANGE_ARTICLE_PAGE:
       return {

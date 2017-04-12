@@ -7,7 +7,8 @@ import TextField from '../../components/TextField';
 import Select from '../../components/Select';
 import Tabs from '../../components/Tabs';
 import moment from 'moment';
-import { Editor } from 'react-draft-wysiwyg';
+//import { Editor } from 'react-draft-wysiwyg';
+import Editor from '../../components/wysiwyg';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 import { EditorState, ContentState, convertToRaw } from 'draft-js';
@@ -68,7 +69,11 @@ class ArticleForm extends Component {
 
   handleSelectChange(field) {
     return e => {
-      this.setState({ article: { ...this.state.article, [field]: e.target.value } });
+      let val = e.target.field;
+      if (e.target.value === 'false') val = false;
+      if (e.target.value === 'true') val = true;
+
+      this.setState({ article: { ...this.state.article, [field]: val } });
     };
   }
 
@@ -103,6 +108,45 @@ class ArticleForm extends Component {
         </div>
 
         <div className="form-group">
+          <label>Title</label>
+          <Tabs
+            selectedIndex={0}
+            tabs={[
+              {
+                name: 'en',
+                component: (
+                  <TextField
+                    showError={this.state.showErrors}
+                    text={this.state.article.title.en}
+                    onFieldChanged={this.handleFieldChange('title.en')}
+                  />
+                )
+              },
+              {
+                name: 'zh-cn',
+                component: (
+                  <TextField
+                    showError={this.state.showErrors}
+                    text={this.state.article.title['zh-cn']}
+                    onFieldChanged={this.handleFieldChange('title.zh-cn')}
+                  />
+                )
+              },
+              {
+                name: 'zh-hk',
+                component: (
+                  <TextField
+                    showError={this.state.showErrors}
+                    text={this.state.article.title['zh-hk']}
+                    onFieldChanged={this.handleFieldChange('title.zh-hk')}
+                  />
+                )
+              }
+            ]}
+          />
+        </div>
+
+        <div className="form-group">
           <label>Publish Date</label>
           <SingleDatePicker
             id="publishDate"
@@ -128,13 +172,27 @@ class ArticleForm extends Component {
           />
         </div>
 
-        <div className="form-group">
-          <label>Draft</label>
-          <Select
-            handleChange={this.handleSelectChange('draft')}
-            value={this.state.article.draft}
-            options={trueFalse}
-          />
+        <div className="row">
+          <div className="col-xs-6">
+            <div className="form-group">
+              <label>Draft</label>
+              <Select
+                handleChange={this.handleSelectChange('draft')}
+                value={this.state.article.draft}
+                options={trueFalse}
+              />
+            </div>
+          </div>
+          <div className="col-xs-6">
+            <div className="form-group">
+              <label>Internal</label>
+              <Select
+                handleChange={this.handleSelectChange('internal')}
+                value={this.state.article.internal}
+                options={trueFalse}
+              />
+            </div>
+          </div>
         </div>
 
         <div className="form-group">
@@ -145,40 +203,33 @@ class ArticleForm extends Component {
               {
                 name: 'en',
                 component: (
-                  <div className="editor">
-                    <Editor
-                      editorState={this.state.editorState.en}
-                      onEditorStateChange={this.onEditorStateChange.bind(this, 'en')}
-                    />
-                  </div>
+                  <Editor
+                    editorState={this.state.editorState.en}
+                    onEditorStateChange={this.onEditorStateChange.bind(this, 'en')}
+                  />
                 )
               },
               {
                 name: 'zh-cn',
                 component: (
-                  <div className="editor">
-                    <Editor
-                      editorState={this.state.editorState['zh-cn']}
-                      onEditorStateChange={this.onEditorStateChange.bind(this, 'zh-cn')}
-                    />
-                  </div>
+                  <Editor
+                    editorState={this.state.editorState['zh-cn']}
+                    onEditorStateChange={this.onEditorStateChange.bind(this, 'zh-cn')}
+                  />
                 )
               },
               {
                 name: 'zh-hk',
                 component: (
-                  <div className="editor">
-                    <Editor
-                      editorState={this.state.editorState['zh-hk']}
-                      onEditorStateChange={this.onEditorStateChange.bind(this, 'zh-hk')}
-                    />
-                  </div>
+                  <Editor
+                    editorState={this.state.editorState['zh-hk']}
+                    onEditorStateChange={this.onEditorStateChange.bind(this, 'zh-hk')}
+                  />
                 )
               }
             ]}
           />
         </div>
-
       </div>
     );
   }

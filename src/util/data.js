@@ -56,6 +56,16 @@ export const pressOptions = [
   { value: 'magazine', name: 'Magazine' },
   { value: 'media', name: 'Media Coverage' }
 ];
+export const playerStatus = [
+  { value: 'signedup', name: 'Signed Up' },
+  { value: 'registered', name: 'Registered' },
+  { value: 'played', name: 'Played' },
+  { value: 'retired', name: 'Retired' },
+  { value: 'withdrawn', name: 'Withdrawn' },
+  { value: 'missedcut', name: 'Missed Cut' },
+  { value: 'disqualified', name: 'Disqualified' },
+  { value: 'weathercancel', name: 'Weather Cancel' }
+];
 
 export const tournamentYears = createTournamentYears();
 

@@ -12,8 +12,8 @@ class Tournament extends Component {
   componentDidMount() {
     if (!this.props.tournament) {
       this.props.getTournament(this.props.match.params.key);
-      this.props.getResults(this.props.match.params.key);
     }
+    this.props.getResults(this.props.match.params.key);
   }
 
   render() {
@@ -27,7 +27,11 @@ class Tournament extends Component {
           tabs.push({
             name: key,
             component: (
-              <ResultsTable tournament={tournament} results={this.props.results ? this.props.results[key] : {}} />
+              <ResultsTable
+                isFetching={this.props.isFetching}
+                tournament={tournament}
+                scores={this.props.scores ? this.props.scores[key] : {}}
+              />
             )
           });
         }
@@ -35,7 +39,7 @@ class Tournament extends Component {
 
       return (
         <div className="container-fluid">
-          <div className="title text-center">
+          <div className="title">
             <h2><Text text={tournament.name} /></h2>
             <h3><FormattedDate value={new Date(tournament.start_date)} year="numeric" month="long" day="2-digit" /></h3>
             <h5><Text text={tournament.venue} /></h5>
@@ -54,7 +58,7 @@ class Tournament extends Component {
 function mapStateToProps(store) {
   return {
     tournament: store.tournamentReducer.tournament,
-    results: store.tournamentReducer.results,
+    scores: store.tournamentReducer.scoring,
     isFetching: store.tournamentReducer.isFetching
   };
 }

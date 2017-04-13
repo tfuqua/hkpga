@@ -24,12 +24,6 @@ export function mapStringToProps(str) {
   return obj;
 }
 
-export function sortResults(results) {
-  results = mapObjectToArray(results);
-
-  return sortBy(results, ['rank', 'totalScore']);
-}
-
 export function generatePreview(html, length) {
   let formattedHTML = {};
 
@@ -53,4 +47,25 @@ function strip(html) {
   var tmp = document.createElement('DIV');
   tmp.innerHTML = html;
   return tmp.textContent || tmp.innerText || '';
+}
+
+const sortWeight = {
+  played: 1,
+  signedup: 2,
+  registered: 2,
+  retired: 3,
+  missedcut: 4,
+  withdrawn: 5,
+  disqualified: 6,
+  weathercancel: 6
+};
+
+export function sortResults(results) {
+  results = mapObjectToArray(results);
+
+  let sort1 = sortBy(results, result => {
+    return sortWeight[result.status];
+  });
+  let sort2 = sortBy(sort1, ['rank', 'totalScore']);
+  return sort2;
 }

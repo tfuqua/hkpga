@@ -24,7 +24,7 @@ class EditResultRow extends Component {
         <td>{this.props.result.points}</td>
         <td>
           <div className="btn-group">
-            <button className="btn btn-default" onClick={this.deleteEntry}>
+            <button className="btn btn-default" onClick={this.props.editEntry.bind(this, this.props.result)}>
               Edit&nbsp;<i className="fa fa-edit" />
             </button>
             <button className="btn btn-default" onClick={this.deleteEntry}>

@@ -32,3 +32,24 @@ h3 {
     color: $primary-yellow;
     font-weight: 400;
 }
+
+ul.no-padding{
+    padding-left:20px;
+    margin:10px 0;
+}
+
+.divisions{
+    font-weight: 500;
+}
+.tournament-label.label{
+    font-size: 13px;
+    font-weight: 400;
+    text-transform: capitalize;
+    display: inline-block;
+    margin-right:5px;
+    margin-top:4px;
+    padding:.5em .8em;
+    /*background:#fff;
+    border:1px solid #337ab7;
+    color:#337ab7;*/
+}

@@ -15,7 +15,7 @@ function tournamentReducer(state = {}, action) {
     case GET_TOURNAMENTS:
       return {
         ...state,
-        tournaments: action.tournaments,
+        tournaments: sortResults(action.tournaments),
         isFetching: false
       };
     case GET_TOURNAMENT:
@@ -71,6 +71,13 @@ function filterResults(query) {
 
   let data = mapObjectToArray(query.data);
   let sortedResults = sortBy(data, query.sort).reverse();
+
+  return sortedResults;
+}
+
+function sortResults(tourneys) {
+  let data = mapObjectToArray(tourneys);
+  let sortedResults = sortBy(data, ['start_date']);
 
   return sortedResults;
 }

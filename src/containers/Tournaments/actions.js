@@ -214,3 +214,13 @@ export function deleteResult(tournament, entry, id, division) {
       });
   };
 }
+
+export function createEntry(id, division, entry) {
+  entry.totalScore = Object.keys(entry.rounds).reduce((prev, key) => prev + entry.rounds[key], 0);
+
+  return dispatch => {
+    dispatch(displayMessage(SAVE_SUCCESSFUL));
+    dispatch(getResults(id));
+    return database.ref(`results/${id}/${division}/${entry.username}`).set(entry);
+  };
+}

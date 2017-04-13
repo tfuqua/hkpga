@@ -73,11 +73,12 @@ class TournamentForm extends Component {
 
         <div className="text-right">
           <div className="btn-group">
-            <button className="btn btn-default" onClick={() => this.props.getResults(this.state.id)}>
-              <Link to={`/admin/tournaments/${this.state.id}/results`}>
-                Edit Results
-              </Link>
-            </button>
+            <Link
+              to={`/admin/tournaments/${this.state.id}/results`}
+              className="btn btn-default"
+              onClick={() => this.props.getResults(this.state.id)}>
+              Edit Results
+            </Link>
             <button onClick={this.saveTournament.bind(this)} className="btn btn-default">Save</button>
           </div>
 

@@ -35,8 +35,6 @@ class Tournaments extends Component {
 
   render() {
     if (!this.props.isFetching && this.props.tournaments) {
-      let tournaments = mapObjectToArray(this.props.tournaments);
-
       return (
         <div className="container-fluid">
           <h2>Tournaments</h2>
@@ -44,7 +42,7 @@ class Tournaments extends Component {
           <hr />
           <div className="row">
             <div className="col-sm-9">
-              {tournaments.map((tournament, i) => <TournamentRow key={i} tournament={tournament} />)}
+              {this.props.tournaments.map((tournament, i) => <TournamentRow key={i} tournament={tournament} />)}
             </div>
             <div className="col-sm-3">
               <Archives type={'tournaments'} link={'/tournaments/'} />

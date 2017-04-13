@@ -7,7 +7,6 @@ import TextField from '../../components/TextField';
 import Select from '../../components/Select';
 import Tabs from '../../components/Tabs';
 import moment from 'moment';
-//import { Editor } from 'react-draft-wysiwyg';
 import Editor from '../../components/wysiwyg';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';

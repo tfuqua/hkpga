@@ -29,6 +29,7 @@ class Dashboard extends Component {
           </div>
         </div>
 
+        {/*}
         <button onClick={this.props.fixTournaments.bind(this)} className="btn btn-default">
           Fix Tournament Data
         </button>
@@ -37,7 +38,7 @@ class Dashboard extends Component {
         </button>
         <button onClick={this.props.mergePressData.bind(this)} className="btn btn-default">
           Merge Press Data
-        </button>
+        </button>*/}
       </div>
     );
   }

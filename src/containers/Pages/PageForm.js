@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Editor } from 'react-draft-wysiwyg';
+import Editor from '../../components/wysiwyg';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 import { EditorState, ContentState, convertToRaw } from 'draft-js';
@@ -130,34 +130,28 @@ class PageForm extends Component {
               {
                 name: 'en',
                 component: (
-                  <div className="editor">
-                    <Editor
-                      editorState={this.state.editorState.en}
-                      onEditorStateChange={this.onEditorStateChange.bind(this, 'en')}
-                    />
-                  </div>
+                  <Editor
+                    editorState={this.state.editorState.en}
+                    onEditorStateChange={this.onEditorStateChange.bind(this, 'en')}
+                  />
                 )
               },
               {
                 name: 'zh-cn',
                 component: (
-                  <div className="editor">
-                    <Editor
-                      editorState={this.state.editorState['zh-cn']}
-                      onEditorStateChange={this.onEditorStateChange.bind(this, 'zh-cn')}
-                    />
-                  </div>
+                  <Editor
+                    editorState={this.state.editorState['zh-cn']}
+                    onEditorStateChange={this.onEditorStateChange.bind(this, 'zh-cn')}
+                  />
                 )
               },
               {
                 name: 'zh-hk',
                 component: (
-                  <div className="editor">
-                    <Editor
-                      editorState={this.state.editorState['zh-hk']}
-                      onEditorStateChange={this.onEditorStateChange.bind(this, 'zh-hk')}
-                    />
-                  </div>
+                  <Editor
+                    editorState={this.state.editorState['zh-hk']}
+                    onEditorStateChange={this.onEditorStateChange.bind(this, 'zh-hk')}
+                  />
                 )
               }
             ]}

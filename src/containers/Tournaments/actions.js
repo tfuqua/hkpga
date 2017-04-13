@@ -11,6 +11,7 @@ export const REQUEST_TOURNAMENTS = 'REQUEST_TOURNAMENTS';
 export const REQUEST_RESULTS = 'REQUEST_RESULTS';
 export const GET_TOURNAMENT_QUERY = 'GET_TOURNAMENT_QUERY';
 export const CHANGE_TOURNAMENT_PAGE = 'CHANGE_TOURNAMENT_PAGE';
+export const LATEST_RESULTS = 'LATEST_RESULTS';
 
 const ref = database.ref('tournaments');
 
@@ -38,6 +39,16 @@ export function receiveTournament(tournament) {
   return {
     type: GET_TOURNAMENT,
     tournament
+  };
+}
+
+export function receiveLatestResults(tournament, scores) {
+  return {
+    type: LATEST_RESULTS,
+    latest: {
+      tournament,
+      scores
+    }
   };
 }
 
@@ -97,7 +108,6 @@ export function getAllTournaments() {
 export function deleteTournament(id) {
   return dispatch => {
     let deleteRef = database.ref(`/tournaments/${id}`);
-
     deleteRef.remove().then(() => dispatch(getAllTournaments())).catch(error => {
       console.log(error);
     });
@@ -196,7 +206,7 @@ export function createTournament(tournament) {
   return dispatch => {
     dispatch(displayMessage(SAVE_SUCCESSFUL));
     dispatch(queryTournaments({ page: 1 }));
-    return database.ref(`tournaments`).push(tournament);
+    return database.ref(`tournaments/${Date.now()}`).set(tournament);
   };
 }
 
@@ -222,5 +232,30 @@ export function createEntry(id, division, entry) {
     dispatch(displayMessage(SAVE_SUCCESSFUL));
     dispatch(getResults(id));
     return database.ref(`results/${id}/${division}/${entry.username}`).set(entry);
+  };
+}
+
+export function getLatestScores() {
+  return dispatch => {
+    database
+      .ref(`tournaments`)
+      .orderByChild('start_date')
+      .startAt(0)
+      .endAt(Date.now())
+      .limitToLast(1)
+      .once('value', tournament => {
+        let t = tournament.val();
+        database
+          .ref(`results/${Object.keys(t)[0]}`)
+          .once('value', result => {
+            dispatch(receiveLatestResults(tournament.val()[Object.keys(t)[0]], result.val()));
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 }

@@ -15,16 +15,20 @@ class Tabs extends Component {
   render() {
     return (
       <div>
-        <div className="btn-group">
-          {this.props.tabs.map((tab, i) => (
-            <button
-              key={i}
-              className={`${this.state.selectedIndex === i ? 'active' : ''} btn btn-default`}
-              onClick={this.tabClick.bind(this, i)}>
-              {tab.name}
-            </button>
-          ))}
-        </div>
+
+        {this.props.tabs.length > 1
+          ? <div className="btn-group">
+              {this.props.tabs.map((tab, i) => (
+                <button
+                  key={i}
+                  className={`${this.state.selectedIndex === i ? 'active' : ''} btn btn-default`}
+                  onClick={this.tabClick.bind(this, i)}>
+                  {tab.name}
+                </button>
+              ))}
+            </div>
+          : null}
+
         <div className="tab-panels">
           {this.props.tabs.map((tab, i) => (
             <div className={this.state.selectedIndex === i ? '' : 'hidden'} key={i}>{tab.component}</div>

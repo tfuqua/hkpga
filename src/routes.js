@@ -78,6 +78,11 @@ export const routes = [
     exact: true
   },
   {
+    path: '/merit/:year?',
+    component: Merit,
+    exact: true
+  },
+  {
     path: '/news/:slug',
     component: ArticleView,
     exact: true

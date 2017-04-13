@@ -234,3 +234,21 @@ nav ul > li > ul{
    
 }
 
+
+.archives {
+    
+    h4{ border-bottom:1px solid #333;}
+    ul{
+    list-style:none;
+    padding:0;
+    margin:0;
+    border-top:1px solid #ccc;
+
+        > li > a {
+            display:block;
+            border:1px solid #ccc;
+            border-top:none;
+            padding:5px 10px;
+        }
+    }
+}

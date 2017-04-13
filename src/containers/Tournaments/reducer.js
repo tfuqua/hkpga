@@ -7,7 +7,8 @@ import {
   GET_TOURNAMENT,
   GET_TOURNAMENT_QUERY,
   GET_RESULTS,
-  CHANGE_TOURNAMENT_PAGE
+  CHANGE_TOURNAMENT_PAGE,
+  LATEST_RESULTS
 } from './actions';
 
 function tournamentReducer(state = {}, action) {
@@ -48,6 +49,12 @@ function tournamentReducer(state = {}, action) {
         ...state,
         isFetching: false,
         scoring: action.results
+      };
+    case LATEST_RESULTS:
+      return {
+        ...state,
+        isFetching: false,
+        latest: action.latest
       };
     case CHANGE_TOURNAMENT_PAGE:
       return {

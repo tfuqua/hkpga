@@ -5,7 +5,7 @@ import Loader from '../../components/Loader';
 
 function ResultsTable(props) {
   let results = sortResults(props.scores);
-  console.log(props);
+
   if (props.isFetching) {
     return <Loader />;
   } else {

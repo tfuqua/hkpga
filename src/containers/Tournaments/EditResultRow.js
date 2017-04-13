@@ -18,7 +18,10 @@ class EditResultRow extends Component {
     return (
       <tr>
         <td><Text text={this.props.result.name} /></td>
-        {[...Array(this.props.tournament.no_days)].map((x, i) => <td key={i}>{this.props.result.rounds[i + 1]}</td>)}
+        {this.props.result.rounds
+          ? [...Array(this.props.tournament.no_days)].map((x, i) => <td key={i}>{this.props.result.rounds[i + 1]}</td>)
+          : [...Array(this.props.tournament.no_days)].map((x, i) => <td key={i} />)}
+
         <td>{this.props.result.totalScore}</td>
         <td>{this.props.result.rank}</td>
         <td>{this.props.result.points}</td>

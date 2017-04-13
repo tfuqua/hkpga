@@ -67,13 +67,14 @@ export const playerStatus = [
   { value: 'weathercancel', name: 'Weather Cancel' }
 ];
 
-export const tournamentYears = createTournamentYears();
+export const tournamentYears = createYears(2010);
+export const meritYears = createYears(2004);
 
-function createTournamentYears() {
+function createYears(start) {
   let years = [];
-  for (let i = 2010; i <= new Date().getFullYear(); i++) {
+  for (let i = start; i <= new Date().getFullYear(); i++) {
     years.push({ value: i, name: i });
   }
-  years.push({ value: '', name: '' });
+  //years.push({ value: '', name: '' });
   return years.reverse();
 }

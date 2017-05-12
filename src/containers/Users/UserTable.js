@@ -12,7 +12,7 @@ function UserTable(props) {
           <th>Email</th>
           <th>Committee</th>
           <th>Honorary</th>
-          <th>isAdmin</th>
+          <th>Category</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -23,7 +23,7 @@ function UserTable(props) {
             <td>{user.email}</td>
             <td>{user.committee}</td>
             <td>{user.honorary}</td>
-            <td>{user.isAdmin ? 'yes' : 'no'}</td>
+            <td>{user.relation}</td>
             <td>
               <Link to={`/admin/users/${user.id}`}>
                 <button onClick={() => props.receiveUser(user)} className="btn btn-default">

@@ -11,6 +11,7 @@ export const GET_HONORARY = 'GET_HONORARY';
 export const GET_USER = 'GET_USER';
 export const REQUEST_USERS = 'REQUEST_USERS';
 export const CHANGE_USER_PAGE = 'CHANGE_USER_PAGE';
+export const SEARCH_USERS = 'SEARCH_USERS';
 
 export function receiveUsers(userQuery) {
   return {
@@ -42,6 +43,13 @@ export function receiveUser(user) {
   return {
     type: GET_USER,
     user
+  };
+}
+
+export function searchUsers(search) {
+  return {
+    type: SEARCH_USERS,
+    search
   };
 }
 

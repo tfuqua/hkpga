@@ -4,35 +4,42 @@ import { connect } from 'react-redux';
 import Loader from '../../components/Loader';
 import PaginatedTable from '../../components/PaginatedTable';
 import UserTable from './UserTable';
-import { getUsers, receiveUser, changePage } from './actions';
+import { getUsers, receiveUser, changePage, searchUsers } from './actions';
 
 class Pages extends Component {
-  constructor(props, context) {
-    super(props, context);
-
-    this.changePage = this.changePage.bind(this);
-    this.queryUsers = this.queryUsers.bind(this);
-  }
+  state = {
+    search: 'test'
+  };
 
   componentDidMount() {
     if (!this.props.query) {
-      this.props.getUsers({ page: 1 });
+      this.props.getUsers({ page: 1, search: this.state.search });
     }
   }
 
-  changePage(page) {
+  changePage = page => {
     this.props.changePage(page);
-  }
+  };
 
-  queryUsers(query) {
-    this.props.getUsers(query);
-  }
+  searchUsers = e => {
+    this.setState({ search: e.target.value });
+    this.props.searchUsers(e.target.value);
+  };
 
   render() {
     if (this.props.query) {
       return (
         <div className="container-fluid">
           <h2>Users</h2>
+          <input
+            style={{ width: '250px' }}
+            className={`form-control`}
+            placeholder="Search Users"
+            value={this.state.search}
+            onChange={this.searchUsers}
+          />
+          <hr />
+
           <PaginatedTable
             isFetching={this.props.isFetching}
             changePage={this.changePage}
@@ -56,7 +63,7 @@ function mapStateToProps(store) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getUsers, receiveUser, changePage }, dispatch);
+  return bindActionCreators({ getUsers, receiveUser, changePage, searchUsers }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Pages);

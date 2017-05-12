@@ -7,7 +7,8 @@ import {
   GET_ALL_USERS,
   GET_COMMITTEE,
   GET_HONORARY,
-  CHANGE_USER_PAGE
+  CHANGE_USER_PAGE,
+  SEARCH_USERS
 } from './actions';
 
 function userReducer(state = {}, action) {
@@ -61,9 +62,38 @@ function userReducer(state = {}, action) {
           last: action.page === state.userQuery.totalPages
         }
       };
+    case SEARCH_USERS:
+      return {
+        ...state,
+        ...searchResults(action.search, state.sortedResults, state.userQuery)
+      };
     default:
       return state;
   }
+}
+
+function searchResults(search, sortedResults, query) {
+  let data = mapObjectToArray(query.data);
+
+  data = data.filter(user => {
+    return user.name.en.toUpperCase().includes(search.toUpperCase());
+  });
+
+  let numberOfResults = data.length;
+  let totalPages = Math.ceil(numberOfResults / 10);
+
+  return {
+    sortedResults: data,
+    results: data.slice((1 - 1) * 10, 1 * 10),
+    userQuery: {
+      data: query.data,
+      numberOfResults,
+      totalPages,
+      current: 1,
+      first: true,
+      last: query.page === totalPages
+    }
+  };
 }
 
 function filterResults(query) {
@@ -71,6 +101,7 @@ function filterResults(query) {
   if (!query.sort) query.sort = 'name';
 
   let data = mapObjectToArray(query.data);
+
   let sortedResults = sortBy(data, [
     user => {
       return user.name.en;

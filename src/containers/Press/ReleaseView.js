@@ -15,11 +15,12 @@ function ReleaseView(props) {
       <br />
       {releases.map((release, i) => (
         <div key={i} className="">
-          <h4>
+          <h5>
+            <i className="fa fa-calendar" />&nbsp;
             <FormattedDate value={new Date(release.publish_date)} year="numeric" month="long" day="2-digit" />
-          </h4>
+          </h5>
 
-          <h4 className="press-title">
+          <h4 className="press-title yellow">
             <a target="_blank" href={release.url}>
               <Text text={release.title} />
             </a>

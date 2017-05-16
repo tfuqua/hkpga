@@ -1,0 +1,15 @@
+
+.tournament-row{
+
+    h4,  h4 > a {
+        color: $primary-yellow;
+    }
+
+    ul li a {
+        color: $primary-yellow;
+    }
+
+    .label.tournament-label {
+        background: $primary-yellow;
+    }
+}

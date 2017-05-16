@@ -9,27 +9,35 @@ import Text from '../../components/Text';
 class TournamentRow extends Component {
   render() {
     return (
-      <div>
+      <div className="tournament-row">
         <h5>
           <i className="fa fa-calendar" />&nbsp;
           <FormattedDate value={new Date(this.props.tournament.start_date)} year="numeric" month="long" day="2-digit" />
           <br />
         </h5>
         <h4>
-          <Link
-            onClick={() => this.props.receiveTournament(this.props.tournament)}
-            to={`/tournaments/${this.props.tournament.year}/${this.props.tournament.id}`}>
-            <Text text={this.props.tournament.name} />
-          </Link>
+          {this.props.tournament.scored
+            ? <Link
+                onClick={() => this.props.receiveTournament(this.props.tournament)}
+                to={`/tournaments/${this.props.tournament.year}/${this.props.tournament.id}`}>
+                <Text text={this.props.tournament.name} />
+              </Link>
+            : <Text text={this.props.tournament.name} />}
+
         </h4>
         <div>
           Venue: <Text text={this.props.tournament.venue} />
         </div>
 
-        <ul className="no-padding">
-          {this.props.tournament.tee_off ? <li><a href={this.props.tournament.tee_off}> Tee Times</a></li> : null}
-          {this.props.tournament.rules_url ? <li><a href={this.props.tournament.rules_url}> Rules </a></li> : null}
-        </ul>
+        {!this.props.tournament.hide
+          ? <ul className="no-padding">
+              {this.props.tournament.tee_off ? <li><a href={this.props.tournament.tee_off}> Tee Times</a></li> : null}
+              {this.props.tournament.rules_url ? <li><a href={this.props.tournament.rules_url}> Rules </a></li> : null}
+              {this.props.tournament.prize_money
+                ? <li><a href={this.props.tournament.prize_money}> Prize Money </a></li>
+                : null}
+            </ul>
+          : null}
 
         <div>
           <span className="divisions">Divisions:</span>&nbsp;

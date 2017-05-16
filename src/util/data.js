@@ -67,6 +67,12 @@ export const playerStatus = [
   { value: 'weathercancel', name: 'Weather Cancel' }
 ];
 
+export const prosFilter = [
+  { name: 'All', value: 4 },
+  { name: 'Qualified Professionals', value: 3 },
+  { name: 'Certified Instructors', value: 2 },
+  { name: 'Trainees', value: 1 }
+];
 export const tournamentYears = createYears(2010);
 export const meritYears = createYears(2004);
 

@@ -4,7 +4,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { receiveUser } from '../Users/actions';
+import Select from '../../components/Select';
 import TextField from '../../components/TextField';
+import { prosFilter } from '../../util/data';
 import { mapObjectToArray } from '../../util/util';
 
 class ProListing extends Component {
@@ -13,16 +15,25 @@ class ProListing extends Component {
 
     this.state = {
       pros: this.buildUserMap(props.pros, ''),
-      search: ''
+      search: '',
+      category: 4
     };
 
     this.handleFieldChange = this.handleFieldChange.bind(this);
+    this.handleSelectChange = this.handleSelectChange.bind(this);
+  }
+
+  handleSelectChange(e) {
+    this.setState({
+      category: e.target.value,
+      pros: this.buildUserMap(this.props.pros, this.state.search, e.target.value)
+    });
   }
 
   handleFieldChange(e) {
     this.setState({
       search: e.target.value,
-      pros: this.buildUserMap(this.props.pros, e.target.value)
+      pros: this.buildUserMap(this.props.pros, e.target.value, this.state.category)
     });
   }
 
@@ -32,9 +43,13 @@ class ProListing extends Component {
         <div className="row">
           <div className="col-sm-9">
             <div className="row">
-              <div className="col-sm-6">
+              <div className="col-sm-4">
                 <label>Search By Name:</label>
                 <TextField text={this.state.search} onFieldChanged={this.handleFieldChange} />
+              </div>
+              <div className="col-sm-4">
+                <label>Filter By Category:</label>
+                <Select handleChange={this.handleSelectChange} options={prosFilter} value={this.state.category} />
               </div>
             </div>
 
@@ -70,14 +85,35 @@ class ProListing extends Component {
           </div>
         </div>
       );
-    } else
-      return <div />;
+    } else return <div />;
   }
 
-  buildUserMap(users, searchString) {
+  buildUserMap(users, searchString, category) {
     users = mapObjectToArray(users);
     const entrants = ['full', 'tournament', 'associate', 'member', 'trainer', 'trainee', 'seniortrainee'];
     let filteredUsers = {};
+
+    const memberRelationStatus = {
+      full: 3,
+      tournament: 3,
+      associate: 3,
+      member: 3,
+      trainer: 2,
+      trainee: 1,
+      seniortrainee: 1,
+      honorary: 0,
+      none: 0
+    };
+
+    if (category < 4) {
+      users = users.filter(user => {
+        if (memberRelationStatus[user.relation] == category) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+    }
 
     for (let i = 0; i < users.length; i++) {
       if (

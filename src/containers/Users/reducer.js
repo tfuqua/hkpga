@@ -76,7 +76,10 @@ function searchResults(search, sortedResults, query) {
   let data = mapObjectToArray(query.data);
 
   data = data.filter(user => {
-    return user.name.en.toUpperCase().includes(search.toUpperCase());
+    return (
+      user.name.en.toUpperCase().includes(search.toUpperCase()) ||
+      (user.email && user.email.toUpperCase().includes(search.toUpperCase()))
+    );
   });
 
   let numberOfResults = data.length;

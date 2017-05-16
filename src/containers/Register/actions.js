@@ -1,5 +1,6 @@
 import database, { firebaseAuth } from '../../database';
 import { displayMessage } from '../Message/actions';
+import { createUsername } from '../../util/util';
 import { REGISTRATION_ERROR, REGISTRATION_SUCCESS } from '../../util/messages';
 
 export function registerUser(creds) {
@@ -7,7 +8,7 @@ export function registerUser(creds) {
     return firebaseAuth
       .createUserWithEmailAndPassword(creds.username, creds.password)
       .then(user => {
-        database.ref(`users/${user.uid}`).set({
+        database.ref(`users/${createUsername(user.email)}`).set({
           email: user.email,
           uid: user.uid,
           name: {

@@ -108,14 +108,17 @@ class UserForm extends Component {
                   />
                 </div>
 
-                <div className="form-group">
-                  <label>Is Admin?</label>
-                  <Select
-                    handleChange={this.handleSelectChange('isAdmin')}
-                    value={this.state.user.isAdmin}
-                    options={trueFalse}
-                  />
-                </div>
+                {!this.props.isAdmin
+                  ? null
+                  : <div className="form-group">
+                      <label>Is Admin?</label>
+                      <Select
+                        handleChange={this.handleSelectChange('isAdmin')}
+                        value={this.state.user.isAdmin}
+                        options={trueFalse}
+                      />
+                    </div>}
+
                 <div className="form-group">
                   <label>Active</label>
                   <Select

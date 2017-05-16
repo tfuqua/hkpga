@@ -8,7 +8,7 @@ import { getUsers, receiveUser, changePage, searchUsers } from './actions';
 
 class Pages extends Component {
   state = {
-    search: 'test'
+    search: ''
   };
 
   componentDidMount() {

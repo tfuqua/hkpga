@@ -1,18 +1,28 @@
-import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from './actions'
+import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from './actions';
 
-function loginReducer(state = {isAuthenticated: localStorage.getItem('user') ? true : false }, action) {
+function loginReducer(
+  state = {
+    isAuthenticated: localStorage.getItem('email') ? true : false,
+    email: localStorage.getItem('email'),
+    isAdmin: localStorage.getItem('isAdmin')
+  },
+  action
+) {
   switch (action.type) {
     case LOGIN_SUCCESS:
       return {
+        ...state,
         isAuthenticated: true,
-        user: action.user
-      }
+        email: action.email,
+        isAdmin: action.isAdmin
+      };
     case LOGOUT_SUCCESS:
       return {
-        isAuthenticated: false,
-      }
+        ...state,
+        isAuthenticated: false
+      };
     default:
-      return state
+      return state;
   }
 }
 

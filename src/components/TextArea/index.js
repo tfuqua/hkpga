@@ -7,6 +7,7 @@ function TextArea(props) {
     <div>
       <textarea
         type="text"
+        style={props.style}
         className="form-control"
         placeholder={props.placeholder}
         value={value}

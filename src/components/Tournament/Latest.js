@@ -39,7 +39,7 @@ class LatestTournamentScores extends Component {
           <h2>{translations[this.props.lang].LATEST_TOURNAMENT_SCORES}</h2>
           <h4>VENUE: <Text text={this.props.latest.tournament.venue} /></h4>
           <h5>
-            DATE:&nbsp;
+            <i className="fa fa-calendar" />&nbsp;
             <FormattedDate
               value={new Date(this.props.latest.tournament.start_date)}
               year="numeric"

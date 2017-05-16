@@ -172,11 +172,20 @@ class TournamentForm extends Component {
         </div>
 
         <div className="form-group">
-          <label>Tee Times</label>
+          <label>Tee Times URL</label>
           <TextField
             showError={this.state.showErrors}
             text={this.state.tournament.tee_off}
             onFieldChanged={this.handleFieldChange('tee_off')}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Prize Money URL</label>
+          <TextField
+            showError={this.state.showErrors}
+            text={this.state.tournament.prize_money}
+            onFieldChanged={this.handleFieldChange('prize_money')}
           />
         </div>
 
@@ -240,37 +249,54 @@ class TournamentForm extends Component {
           />
         </div>
 
-        <div className="form-group">
-          <table className="table auto">
-            <thead>
-              <tr>
-                <th colSpan={2}>Divisions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {Object.keys(this.state.tournament.divisions).map((k, i) => (
-                <tr key={i}>
-                  <td>{k}</td>
-                  <td>
-                    <Checkbox
-                      name={k}
-                      checked={this.state.tournament.divisions[k]}
-                      handleCheckChange={this.handleDivisionChange}
-                    />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="row">
+          <div className="col-xs-4">
+            <div className="form-group">
+              <table className="table auto">
+                <thead>
+                  <tr>
+                    <th colSpan={2}>Divisions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {Object.keys(this.state.tournament.divisions).map((k, i) => (
+                    <tr key={i}>
+                      <td>{k}</td>
+                      <td>
+                        <Checkbox
+                          name={k}
+                          checked={this.state.tournament.divisions[k]}
+                          handleCheckChange={this.handleDivisionChange}
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div className="col-xs-4">
+            <div className="form-group">
+              <Checkbox
+                name="scored"
+                label="Scoring Complete?"
+                checked={this.state.tournament.scored}
+                handleCheckChange={this.handleCheckChange}
+              />
+            </div>
+          </div>
+          <div className="col-xs-4">
+            <div className="form-group">
+              <Checkbox
+                name="hide"
+                label="Hide Tee Times & Prize Money"
+                checked={this.state.tournament.hide}
+                handleCheckChange={this.handleCheckChange}
+              />
+            </div>
+          </div>
         </div>
-        <div className="form-group">
-          <Checkbox
-            name="scored"
-            label="Scoring Complete?"
-            checked={this.state.tournament.scored}
-            handleCheckChange={this.handleCheckChange}
-          />
-        </div>
+
       </div>
     );
   }

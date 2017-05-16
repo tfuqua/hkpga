@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { deleteTournament, queryTournaments } from './actions';
+import { FormattedDate } from 'react-intl';
 import TournamentModalForm from './TournamentModalForm';
 import Text from '../../components/Text';
 import Modal from '../../components/Modal';
@@ -45,6 +46,7 @@ class TournamentTable extends Component {
           <thead>
             <tr>
               <th>Name</th>
+              <th>Start Date</th>
               <th>Year</th>
               <th>Actions</th>
             </tr>
@@ -53,6 +55,9 @@ class TournamentTable extends Component {
             {tournaments.map((tournament, i) => (
               <tr key={i}>
                 <td><Text text={tournament.name} /></td>
+                <td>
+                  <FormattedDate value={new Date(tournament.start_date)} year="numeric" month="long" day="2-digit" />
+                </td>
                 <td>{tournament.year}</td>
                 <td>
                   <div className="btn-group">

@@ -18,19 +18,21 @@ class LatestTournamentScores extends Component {
     if (this.props.latest) {
       let tabs = [];
 
-      Object.keys(this.props.latest.scores).map((key, i) => {
-        if (this.props.latest.scores[key]) {
-          tabs.push({
-            name: key,
-            component: (
-              <ScoreTable
-                tournament={this.props.latest.tournament}
-                scores={this.props.latest.scores ? this.props.latest.scores[key] : {}}
-              />
-            )
-          });
-        }
-      });
+      if (this.props.latest.scores) {
+        Object.keys(this.props.latest.scores).map((key, i) => {
+          if (this.props.latest.scores[key]) {
+            tabs.push({
+              name: key,
+              component: (
+                <ScoreTable
+                  tournament={this.props.latest.tournament}
+                  scores={this.props.latest.scores ? this.props.latest.scores[key] : {}}
+                />
+              )
+            });
+          }
+        });
+      }
 
       return (
         <div>
@@ -45,7 +47,8 @@ class LatestTournamentScores extends Component {
               day="2-digit"
             />
           </h5>
-          <Tabs tabs={tabs} />
+          {tabs.length > 0 ? <Tabs tabs={tabs} /> : <p>Scores have not yet been posted </p>}
+
         </div>
       );
     } else {

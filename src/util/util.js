@@ -31,10 +31,8 @@ export function generatePreview(html, length) {
     Object.keys(html).forEach(function(key, i) {
       formattedHTML[key] = strip(html[key].replace(/<img[^>]*>/g, ''));
       formattedHTML[key] = formattedHTML[key].substring(0, length);
-      formattedHTML[key] = formattedHTML[key].substr(
-        0,
-        Math.min(formattedHTML[key].length, formattedHTML[key].lastIndexOf(' '))
-      ) + '...';
+      formattedHTML[key] =
+        formattedHTML[key].substr(0, Math.min(formattedHTML[key].length, formattedHTML[key].lastIndexOf(' '))) + '...';
     });
   } else {
     formattedHTML = strip(html.replace(/<img[^>]*>/g, ''));
@@ -68,4 +66,11 @@ export function sortResults(results) {
   });
   let sort2 = sortBy(sort1, ['rank', 'totalScore']);
   return sort2;
+}
+
+export function createUsername(str) {
+  var username = '';
+  var trimmed = str.trim();
+  username = trimmed.replace(/[^a-z0-9-]/gi, '');
+  return username.toLowerCase();
 }

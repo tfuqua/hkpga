@@ -34,7 +34,10 @@ class LatestNews extends Component {
                   </div>
                   <div className="col-md-7 col-sm-8">
                     <div className="preview">
-                      <Text text={generatePreview(article.html, 500)} />
+                      {article.description && article.description.en !== ''
+                        ? <Text text={article.description} />
+                        : <Text text={generatePreview(article.html, 500)} />}
+
                       <br />
                     </div>
                   </div>

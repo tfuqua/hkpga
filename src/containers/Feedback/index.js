@@ -29,7 +29,7 @@ class Feedback extends Component {
             </thead>
             <tbody>
               {feedbackList.map((feedback, i) => (
-                <tr>
+                <tr key={i}>
                   <td style={{ width: '50%' }}>{feedback.message}</td>
                   <td>
                     <FormattedDate value={new Date(feedback.date)} year="numeric" month="long" day="2-digit" />

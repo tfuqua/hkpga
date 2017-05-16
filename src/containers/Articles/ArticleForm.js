@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { SingleDatePicker } from 'react-dates';
 import { trueFalse } from '../../util/data';
 import TextField from '../../components/TextField';
+import TextArea from '../../components/TextArea';
 import Select from '../../components/Select';
 import Tabs from '../../components/Tabs';
 import moment from 'moment';
@@ -197,6 +198,48 @@ class ArticleForm extends Component {
               />
             </div>
           </div>
+        </div>
+
+        <div className="form-group">
+          <label>Preview</label>
+          <Tabs
+            selectedIndex={0}
+            tabs={[
+              {
+                name: 'en',
+                component: (
+                  <TextArea
+                    style={{ height: '100px' }}
+                    showError={this.state.showErrors}
+                    text={this.state.article.description ? this.state.article.description.en : ''}
+                    onFieldChanged={this.handleFieldChange('description.en')}
+                  />
+                )
+              },
+              {
+                name: 'zh-cn',
+                component: (
+                  <TextArea
+                    style={{ height: '100px' }}
+                    showError={this.state.showErrors}
+                    text={this.state.article.description ? this.state.article.description['zh-cn'] : ''}
+                    onFieldChanged={this.handleFieldChange('description.zh-cn')}
+                  />
+                )
+              },
+              {
+                name: 'zh-hk',
+                component: (
+                  <TextArea
+                    style={{ height: '100px' }}
+                    showError={this.state.showErrors}
+                    text={this.state.article.description ? this.state.article.description['zh-hk'] : ''}
+                    onFieldChanged={this.handleFieldChange('description.zh-hk')}
+                  />
+                )
+              }
+            ]}
+          />
         </div>
 
         <div className="form-group">

@@ -21,7 +21,10 @@ function NewsCard(props) {
             </div>
             <div className="col-sm-7">
               <div className="preview">
-                <Text text={generatePreview(article.html, 400)} />
+                {article.description && article.description.en !== ''
+                  ? <Text text={article.description} />
+                  : <Text text={generatePreview(article.html, 400)} />}
+
               </div>
             </div>
             <div className="col-xs-12 text-right">
@@ -33,7 +36,10 @@ function NewsCard(props) {
         : <div className="row">
             <div className="col-xs-12">
               <div className="preview">
-                <Text text={generatePreview(article.html, 400)} />
+                {article.description && article.description.en !== ''
+                  ? <Text text={article.description} />
+                  : <Text text={generatePreview(article.html, 400)} />}
+
               </div>
             </div>
             <div className="col-sm-12 text-right">

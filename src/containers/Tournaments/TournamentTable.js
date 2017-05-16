@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { deleteTournament, queryTournaments } from './actions';
 import TournamentModalForm from './TournamentModalForm';
 import Text from '../../components/Text';
 import Modal from '../../components/Modal';
@@ -10,10 +13,23 @@ class TournamentTable extends Component {
 
     this.state = {
       modal: false,
-      createModal: false
+      deleteModal: false
     };
 
     this.toggleModal = this.toggleModal.bind(this);
+  }
+
+  showDelete(id) {
+    this.setState({
+      deleteModal: true,
+      idToDelete: id
+    });
+  }
+
+  deleteTournament() {
+    this.props.deleteTournament(this.state.idToDelete);
+    this.props.queryTournaments({ page: 1 });
+    this.setState({ deleteModal: false });
   }
 
   toggleModal(modal) {
@@ -39,11 +55,17 @@ class TournamentTable extends Component {
                 <td><Text text={tournament.name} /></td>
                 <td>{tournament.year}</td>
                 <td>
-                  <Link to={`/admin/tournaments/${tournament.id}`}>
-                    <button onClick={() => this.props.receiveTournament(tournament)} className="btn btn-default">
-                      Edit
+                  <div className="btn-group">
+                    <Link
+                      to={`/admin/tournaments/${tournament.id}`}
+                      onClick={() => this.props.receiveTournament(tournament)}
+                      className="btn btn-default">
+                      Edit <i className="fa fa-edit" />
+                    </Link>
+                    <button onClick={() => this.showDelete(tournament.id)} className="btn btn-default">
+                      Delete <i className="fa fa-trash" />
                     </button>
-                  </Link>
+                  </div>
                 </td>
               </tr>
             ))}
@@ -62,9 +84,30 @@ class TournamentTable extends Component {
             <TournamentModalForm toggleModal={this.toggleModal} />
           </div>
         </Modal>
+
+        <Modal
+          toggleModal={this.toggleModal.bind(this, 'deleteModal')}
+          isOpen={this.state.deleteModal}
+          title="Delete Tournament?">
+          <div className="modal-body">
+            Are you sure you want to delete this tournament?
+          </div>
+          <div className="modal-footer">
+            <button className="btn btn-link" onClick={this.toggleModal.bind(this, 'deleteModal')}>Cancel</button>
+            &nbsp;&nbsp;&nbsp;
+            <button type="submit" onClick={() => this.deleteTournament()} className="btn btn-danger">
+              Delete Tournament
+            </button>
+          </div>
+        </Modal>
+
       </div>
     );
   }
 }
 
-export default TournamentTable;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ deleteTournament, queryTournaments }, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(TournamentTable);

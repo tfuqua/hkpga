@@ -107,10 +107,10 @@ export function getAllTournaments() {
 /******* Delete Tournament  *********/
 export function deleteTournament(id) {
   return dispatch => {
-    let deleteRef = database.ref(`/tournaments/${id}`);
-    deleteRef.remove().then(() => dispatch(getAllTournaments())).catch(error => {
-      console.log(error);
-    });
+    let tournamentRef = database.ref(`/tournaments/${id}`);
+    let resultsRef = database.ref(`/results/${id}`);
+
+    tournamentRef.remove().then(() => resultsRef.remove());
   };
 }
 

@@ -12,6 +12,7 @@ export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 function createUser(email) {
   database.ref(`users/${createUsername(email)}`).set({
     email: email,
+    username: createUsername(email),
     name: {
       en: '',
       'zh-cn': '',

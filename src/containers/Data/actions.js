@@ -60,7 +60,7 @@ export function fixUserData() {
 }
 
 export function mergePressData() {
-  return dispathch => {
+  return dispatch => {
     // Coverage
     let pressRef = database.ref('press');
     let ref = database.ref('coverage');

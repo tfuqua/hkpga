@@ -11,6 +11,7 @@ export function registerUser(creds) {
         database.ref(`users/${createUsername(user.email)}`).set({
           email: user.email,
           uid: user.uid,
+          username: createUsername(user.email),
           name: {
             en: creds.name,
             'zh-cn': creds.name,

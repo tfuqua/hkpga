@@ -5,6 +5,7 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { configureStore } from './store';
 import { Match } from 'react-router-dom';
+import registerServiceWorker from './registerServiceWorker';
 import App from './containers/App';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
@@ -24,6 +25,8 @@ function render(Component) {
     document.getElementById('root')
   );
 }
+
+registerServiceWorker();
 
 if (window.location.hash.includes('#/')) {
   window.location = window.location.hash.replace('#', '');

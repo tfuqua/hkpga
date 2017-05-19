@@ -1,0 +1,15 @@
+{
+    "short_name": "HKPGA",
+    "name": "Hong Kong Professional Golfers Association",
+    "icons": [
+        {
+            "src": "favicon.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "./index.html",
+    "display": "standalone",
+    "theme_color": "#5fb95f",
+    "background_color": "#ffffff"
+}

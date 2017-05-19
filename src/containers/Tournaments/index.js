@@ -38,6 +38,8 @@ class Tournaments extends Component {
 
   render() {
     if (!this.props.isFetching && this.props.tournaments) {
+      let tournaments = this.props.tournaments.reverse();
+
       return (
         <div className="container-fluid">
           <h2>{translations[this.props.lang].MENU_TOURNAMENTS}</h2>
@@ -45,7 +47,7 @@ class Tournaments extends Component {
           <hr />
           <div className="row">
             <div className="col-sm-9">
-              {this.props.tournaments.map((tournament, i) => <TournamentRow key={i} tournament={tournament} />)}
+              {tournaments.map((tournament, i) => <TournamentRow key={i} tournament={tournament} />)}
             </div>
             <div className="col-sm-3 ">
               <div className="archives">

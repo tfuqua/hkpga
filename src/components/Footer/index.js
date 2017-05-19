@@ -17,7 +17,9 @@ function Footer() {
                 <div className="">
                   <ul className="social">
                     <li>
-                      <a href="https://www.facebook.com/thehkpga" target="_blank"><i className="fa fa-facebook" /></a>
+                      <a href="https://www.facebook.com/hkpga.golf/" target="_blank">
+                        <i className="fa fa-facebook" />
+                      </a>
                     </li>
                   </ul>
                 </div>

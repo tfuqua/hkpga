@@ -8,7 +8,7 @@ import Select from '../../components/Select';
 import Tabs from '../../components/Tabs';
 import moment from 'moment';
 import { tournamentYears } from '../../util/data';
-import { createTournament, getResults } from './actions';
+import { createTournament } from './actions';
 
 class TournamentModalForm extends Component {
   constructor(props, context) {

@@ -17,6 +17,7 @@ class Menu extends Component {
               <li><NavLink activeClassName="active" exact to="/admin/press">Press</NavLink></li>
               <li><NavLink activeClassName="active" exact to="/admin/pages">Pages</NavLink></li>
               <li><NavLink activeClassName="active" exact to="/admin/tournaments">Tournaments</NavLink></li>
+              <li><NavLink activeClassName="active" exact to="/admin/merit">Order of Merit</NavLink></li>
               <li><NavLink activeClassName="active" exact to="/admin/users">Users</NavLink></li>
             </ul>
           </nav>

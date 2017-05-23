@@ -33,10 +33,3 @@ if (window.location.hash.includes('#/')) {
 } else {
   render(App);
 }
-
-if (module.hot) {
-  module.hot.accept('./containers/App', () => {
-    const NextApp = require('./containers/App').default;
-    render(NextApp);
-  });
-}

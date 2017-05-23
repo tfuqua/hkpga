@@ -6,6 +6,7 @@ import feedbackReducer from './containers/Feedback/reducer';
 import languageReducer from './containers/Lang/reducer';
 import loginReducer from './containers/Login/reducer';
 import messageReducer from './containers/Message/reducer';
+import meritReducer from './containers/Merit/reducer';
 import pageReducer from './containers/Pages/reducer';
 import pressReducer from './containers/Press/reducer';
 import tournamentReducer from './containers/Tournaments/reducer';
@@ -18,6 +19,7 @@ const reducer = combineReducers({
   languageReducer,
   loginReducer,
   messageReducer,
+  meritReducer,
   pageReducer,
   pressReducer,
   tournamentReducer,

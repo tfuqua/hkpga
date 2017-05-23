@@ -29,6 +29,7 @@ const Partners = routeLoader(() => import('./containers/Partners'));
 const Committee = routeLoader(() => import('./containers/Committee'));
 const Terms = routeLoader(() => import('./containers/Terms'));
 const Merit = routeLoader(() => import('./containers/Merit'));
+const AdminMerit = routeLoader(() => import('./containers/Merit/AdminMerit'));
 
 export const routes = [
   {
@@ -135,6 +136,11 @@ export const routes = [
   {
     path: '/admin/tournaments',
     component: AdminTournaments,
+    exact: true
+  },
+  {
+    path: '/admin/merit',
+    component: AdminMerit,
     exact: true
   },
   {

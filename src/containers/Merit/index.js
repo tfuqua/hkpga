@@ -2,13 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import StaticMeritView from './StaticMeritView';
+import MeritTable from './MeritTable';
 import { meritYears } from '../../util/data';
 
 class Merit extends Component {
-  constructor(props, context) {
-    super(props, context);
-  }
-
   render() {
     let year = this.props.match.params.year ? this.props.match.params.year : new Date().getFullYear();
 
@@ -19,7 +16,9 @@ class Merit extends Component {
         <div className="row">
 
           <div className="col-sm-9">
-            {parseInt(year, 10) > 2013 ? 'dynamic' : <StaticMeritView year={year} lang={this.props.lang} />}
+            {parseInt(year, 10) > 2013
+              ? <MeritTable year={year} />
+              : <StaticMeritView year={year} lang={this.props.lang} />}
           </div>
 
           <div className="col-sm-3 ">

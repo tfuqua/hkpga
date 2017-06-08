@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 
 import archiveReducer from './containers/Archives/reducer';
 import articleReducer from './containers/Articles/reducer';
+import contactReducer from './containers/Contact/reducer';
 import feedbackReducer from './containers/Feedback/reducer';
 import languageReducer from './containers/Lang/reducer';
 import loginReducer from './containers/Login/reducer';
@@ -15,6 +16,7 @@ import userReducer from './containers/Users/reducer';
 const reducer = combineReducers({
   archiveReducer,
   articleReducer,
+  contactReducer,
   feedbackReducer,
   languageReducer,
   loginReducer,

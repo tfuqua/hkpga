@@ -6,6 +6,7 @@ const Register = routeLoader(() => import('./containers/Register'));
 const Forgot = routeLoader(() => import('./containers/Forgot'));
 const Page = routeLoader(() => import('./containers/Pages'));
 const Contact = routeLoader(() => import('./containers/Contact'));
+const AdminContact = routeLoader(() => import('./containers/Contact/admin'));
 const Tournaments = routeLoader(() => import('./containers/Tournaments'));
 const TournamentView = routeLoader(() => import('./containers/Tournament'));
 const Login = routeLoader(() => import('./containers/Login'));
@@ -160,6 +161,10 @@ export const routes = [
   {
     path: '/admin/users/:key',
     component: EditUser
+  },
+  {
+    path: '/admin/contact',
+    component: AdminContact
   },
   {
     path: '/terms',

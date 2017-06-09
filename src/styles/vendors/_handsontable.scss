@@ -1,5 +1,35 @@
-
-.hands {
+/*!
+ * (The MIT License)
+ * 
+ * Copyright (c) 2012-2014 Marcin Warpechowski
+ * Copyright (c) 2015 Handsoncode sp. z o.o. <hello@handsoncode.net>
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining
+ * a copy of this software and associated documentation files (the
+ * 'Software'), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to
+ * the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+ * CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * 
+ * Version: 0.32.0
+ * Date: Tue May 30 2017 12:18:32 GMT+0200 (CEST)
+ */
+/**
+ * Fix for bootstrap styles
+ */
+ .hands {
 .handsontable .table th, .handsontable .table td {
   border-top: none;
 }
@@ -40,6 +70,7 @@
 .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
   line-height: 21px;
   padding: 0 4px;
+}
 }
 
 .col-lg-1.handsontable, .col-lg-10.handsontable, .col-lg-11.handsontable, .col-lg-12.handsontable,
@@ -1232,5 +1263,5 @@ thead .htCollapseButton:after {
 .handsontable.on-moving--rows .ht__manualRowMove--backlight {
   display: block;
 }
-}
+
 /*# sourceMappingURL=handsontable.css.map*/

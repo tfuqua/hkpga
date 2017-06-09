@@ -3,8 +3,8 @@ import Handsontable from 'handsontable';
 import SettingsMapper from './settingsMapper';
 
 export default class HotTable extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.hotInstance = null;
     this.settingsMapper = new SettingsMapper();
@@ -25,7 +25,7 @@ export default class HotTable extends Component {
     this.hotInstance.destroy();
   }
   save = () => {
-    this.props.saveCallback(this.hotInstance.getData());
+    this.props.save(this.props.division, this.hotInstance.getData());
   };
 
   render() {
@@ -33,9 +33,9 @@ export default class HotTable extends Component {
     return (
       <div>
         <div className="text-right">
-          <button onClick={this.save} className="btn btn-success">Save Merit</button>
+          <button onClick={this.save} className="btn btn-success">Save Order of Merit</button>
         </div>
-        <div id={this.root} />
+        <div className="hot-table-wrapper"><div id={this.root} /></div>
       </div>
     );
   }

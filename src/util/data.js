@@ -76,7 +76,7 @@ export const prosFilter = [
 export const tournamentYears = createYears(2010);
 export const meritYears = createYears(2004);
 
-function createYears(start) {
+export function createYears(start) {
   let years = [];
   for (let i = start; i <= new Date().getFullYear(); i++) {
     years.push({ value: i, name: i });

@@ -31,6 +31,7 @@ const Committee = routeLoader(() => import('./containers/Committee'));
 const Terms = routeLoader(() => import('./containers/Terms'));
 const Merit = routeLoader(() => import('./containers/Merit'));
 const AdminMerit = routeLoader(() => import('./containers/Merit/AdminMerit'));
+const MeritForm = routeLoader(() => import('./containers/Merit/MeritView'));
 
 export const routes = [
   {
@@ -142,6 +143,11 @@ export const routes = [
   {
     path: '/admin/merit',
     component: AdminMerit,
+    exact: true
+  },
+  {
+    path: '/admin/merit/:year',
+    component: MeritForm,
     exact: true
   },
   {

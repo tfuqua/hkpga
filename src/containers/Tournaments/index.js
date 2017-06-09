@@ -53,11 +53,11 @@ class Tournaments extends Component {
               <div className="archives">
                 <h3>Tournaments</h3>
                 <ul>
-                  {tournamentYears.map((year, i) => (
+                  {tournamentYears.map((year, i) =>
                     <li key={i}>
                       <Link to={`/tournaments/${year.value}`}>{year.value}</Link>
                     </li>
-                  ))}
+                  )}
                 </ul>
               </div>
             </div>

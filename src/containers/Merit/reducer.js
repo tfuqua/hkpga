@@ -1,4 +1,4 @@
-import { GET_MERIT, REQUEST_MERIT } from './actions';
+import { GET_MERIT, REQUEST_MERIT, GET_MERIT_BY_YEAR } from './actions';
 
 function meritReducer(state = {}, action) {
   switch (action.type) {
@@ -7,6 +7,12 @@ function meritReducer(state = {}, action) {
         ...state,
         isFetching: false,
         merit: action.merit
+      };
+    case GET_MERIT_BY_YEAR:
+      return {
+        ...state,
+        isFetching: false,
+        meritByYear: action.merit
       };
     case REQUEST_MERIT:
       return {

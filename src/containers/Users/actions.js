@@ -1,7 +1,7 @@
 import database from '../../database';
 import config from '../../../config/env/development';
 import { displayMessage } from '../Message/actions';
-import { SAVE_SUCCESSFUL } from '../../util/messages';
+import { SAVE_SUCCESSFUL, USER_DELETE_SUCCESS } from '../../util/messages';
 import axios from 'axios';
 
 export const GET_USERS = 'GET_USERS';
@@ -170,6 +170,16 @@ export function getUsers(query) {
         .catch(error => {
           console.log(error);
         });
+    });
+  };
+}
+
+export function deleteUser(id) {
+  return dispatch => {
+    let usersRef = database.ref(`/users/${id}`);
+
+    usersRef.remove().then(result => {
+      dispatch(displayMessage(USER_DELETE_SUCCESS));
     });
   };
 }

@@ -20,6 +20,11 @@ export const ARTICLE_DELETE_SUCCESS = {
   type: 'SUCCESS'
 };
 
+export const USER_DELETE_SUCCESS = {
+  message: 'User successfully deleted.',
+  type: 'SUCCESS'
+};
+
 export const PRESS_DELETE_SUCCESS = {
   message: 'Press entry successfully deleted.',
   type: 'SUCCESS'

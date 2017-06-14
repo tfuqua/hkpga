@@ -52,7 +52,7 @@ class TournamentTable extends Component {
             </tr>
           </thead>
           <tbody>
-            {tournaments.map((tournament, i) => (
+            {tournaments.map((tournament, i) =>
               <tr key={i}>
                 <td><Text text={tournament.name} /></td>
                 <td>
@@ -73,9 +73,9 @@ class TournamentTable extends Component {
                   </div>
                 </td>
               </tr>
-            ))}
+            )}
             <tr>
-              <td colSpan={3} className="text-center">
+              <td colSpan={4} className="text-center">
                 <button onClick={this.toggleModal.bind(this, 'modal')} className="btn btn-default">
                   Add New Tournament <i className="fa fa-plus" />
                 </button>

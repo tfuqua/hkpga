@@ -12,12 +12,13 @@ class Dashboard extends Component {
 
         {this.props.isAdmin ? <AdminDashboard /> : <UserDashboard />}
 
+        {/*
         <button onClick={this.props.fixTournaments.bind(this)} className="btn btn-default">
           Fix Tournament Data
         </button>
         <button onClick={this.props.mergePressData.bind(this)} className="btn btn-default">
           Merge Press Data
-        </button>
+        </button>*/}
       </div>
     );
   }

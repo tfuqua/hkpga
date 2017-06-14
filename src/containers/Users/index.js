@@ -3,12 +3,15 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Loader from '../../components/Loader';
 import PaginatedTable from '../../components/PaginatedTable';
+import Select from '../../components/Select';
 import UserTable from './UserTable';
+import { prosFilter } from '../../util/data';
 import { getUsers, receiveUser, changePage, searchUsers } from './actions';
 
 class Pages extends Component {
   state = {
-    search: ''
+    search: '',
+    category: ''
   };
 
   componentDidMount() {
@@ -17,13 +20,20 @@ class Pages extends Component {
     }
   }
 
+  handleSelectChange = e => {
+    let state = { ...this.state, category: e.target.value };
+    this.setState(state);
+    this.props.searchUsers(state);
+  };
+
   changePage = page => {
     this.props.changePage(page);
   };
 
   searchUsers = e => {
-    this.setState({ search: e.target.value });
-    this.props.searchUsers(e.target.value);
+    let state = { ...this.state, search: e.target.value };
+    this.setState(state);
+    this.props.searchUsers(state);
   };
 
   render() {
@@ -31,13 +41,24 @@ class Pages extends Component {
       return (
         <div className="container-fluid">
           <h2>Users</h2>
-          <input
-            style={{ width: '250px' }}
-            className={`form-control`}
-            placeholder="Search Users"
-            value={this.state.search}
-            onChange={this.searchUsers}
-          />
+
+          <div className="row">
+            <div className="col-sm-3">
+              <label>Search</label>
+              <input
+                className={`form-control`}
+                placeholder="Search Users"
+                value={this.state.search}
+                onChange={this.searchUsers}
+              />
+            </div>
+
+            <div className="col-sm-3 ">
+              <label>Filter By Category:</label>
+              <Select handleChange={this.handleSelectChange} options={prosFilter} value={this.state.category} />
+            </div>
+
+          </div>
           <hr />
 
           <PaginatedTable

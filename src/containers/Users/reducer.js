@@ -75,10 +75,32 @@ function userReducer(state = {}, action) {
 function searchResults(search, sortedResults, query) {
   let data = mapObjectToArray(query.data);
 
+  if (search.category < 4) {
+    const memberRelationStatus = {
+      full: 3,
+      tournament: 3,
+      associate: 3,
+      member: 3,
+      trainer: 2,
+      trainee: 1,
+      seniortrainee: 1,
+      honorary: 0,
+      none: 0
+    };
+
+    data = data.filter(user => {
+      if (memberRelationStatus[user.relation] == search.category) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }
+
   data = data.filter(user => {
     return (
-      user.name.en.toUpperCase().includes(search.toUpperCase()) ||
-      (user.email && user.email.toUpperCase().includes(search.toUpperCase()))
+      user.name.en.toUpperCase().includes(search.search.toUpperCase()) ||
+      (user.email && user.email.toUpperCase().includes(search.search.toUpperCase()))
     );
   });
 

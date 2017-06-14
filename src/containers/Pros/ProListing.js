@@ -53,12 +53,12 @@ class ProListing extends Component {
               </div>
             </div>
 
-            {Object.keys(this.state.pros).sort().map((key, i) => (
+            {Object.keys(this.state.pros).sort().map((key, i) =>
               <div key={i}>
                 <h3>{key}</h3>
                 <hr />
                 <div className="row">
-                  {this.state.pros[key].map((pro, i) => (
+                  {this.state.pros[key].map((pro, i) =>
                     <div key={i} className="col-sm-4 col-md-4">
                       <div className={`pro ${pro.relation}`}>
                         <Link onClick={() => this.props.receiveUser(pro)} to={`/pros/${pro.username}`}>
@@ -66,11 +66,11 @@ class ProListing extends Component {
                         </Link>
                       </div>
                     </div>
-                  ))}
+                  )}
                 </div>
 
               </div>
-            ))}
+            )}
           </div>
           <div className="col-sm-3">
             <div className="pros-legend">

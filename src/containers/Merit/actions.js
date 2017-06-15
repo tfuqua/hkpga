@@ -5,6 +5,7 @@ import { SAVE_SUCCESSFUL } from '../../util/messages';
 export const GET_MERIT = 'GET_MERIT';
 export const SAVE_MERIT = 'SAVE_MERIT';
 export const REQUEST_MERIT = 'REQUEST_MERIT';
+export const GET_HOME_PAGE_MERIT = 'GET_HOME_PAGE_MERIT';
 export const GET_MERIT_BY_YEAR = 'GET_MERIT_BY_YEAR';
 
 export function receiveMerit(merit) {
@@ -21,9 +22,31 @@ export function receiveMeritByYear(merit) {
   };
 }
 
+export function receiveHomePageMerit(merit) {
+  return {
+    type: GET_HOME_PAGE_MERIT,
+    merit
+  };
+}
+
 export function requestMerit() {
   return {
     type: REQUEST_MERIT
+  };
+}
+
+export function getHomePageMerit(year) {
+  return dispatch => {
+    dispatch(requestMerit());
+
+    return database
+      .ref(`merit/${year}`)
+      .once('value', merit => {
+        dispatch(receiveHomePageMerit(merit.val()));
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 }
 

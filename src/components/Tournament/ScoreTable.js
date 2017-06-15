@@ -10,19 +10,19 @@ function ScoreTable(props) {
       <table className="table table-striped">
         <thead>
           <tr>
+            <th>Rank</th>
             <th>Name</th>
             <th>Total Score</th>
-            <th>Rank</th>
           </tr>
         </thead>
         <tbody>
-          {results.map((result, i) => (
+          {results.map((result, i) =>
             <tr key={i}>
+              <td>{result.rank}</td>
               <td><Text text={result.name} /></td>
               <td>{result.totalScore}</td>
-              <td>{result.rank}</td>
             </tr>
-          ))}
+          )}
           {results.length === 0
             ? <tr>
                 <td className="text-center" colSpan="100%">No Scores have been entered for this tournament</td>

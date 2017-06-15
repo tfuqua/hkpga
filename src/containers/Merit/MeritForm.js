@@ -45,6 +45,7 @@ class MeritForm extends Component {
             contextMenu={['row_above', 'row_below', 'col_left', 'col_right', 'remove_row', 'remove_col']}
             width="100%"
             height="400"
+            copyPaste={true}
             stretchH="all"
             division={division}
             save={this.handleDivisionSave}

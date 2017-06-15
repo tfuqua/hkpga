@@ -87,16 +87,16 @@ class EntryForm extends Component {
         {this.state.entry.username === ''
           ? null
           : <div>
-              {[...Array(this.props.tournament.no_days)].map((x, i) => (
+              {[...Array(this.props.tournament.no_days)].map((x, i) =>
                 <div key={i} className="form-group">
                   <label>Round {i + 1}</label>
                   <TextField
                     showError={this.state.showErrors}
-                    text={this.state.entry.rounds[i + 1]}
+                    text={this.state.entry.rounds ? this.state.entry.rounds[i + 1] : ''}
                     onFieldChanged={this.handleFieldChange(`rounds.${i + 1}`)}
                   />
                 </div>
-              ))}
+              )}
 
               <div className="form-group">
                 <label>Rank</label>

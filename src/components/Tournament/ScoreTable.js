@@ -3,7 +3,7 @@ import { sortResults } from '../../util/util';
 import Text from '../Text';
 
 function ScoreTable(props) {
-  let results = sortResults(props.scores).slice(0, 10);
+  let results = sortResults(props.scores).slice(0, 5);
 
   return (
     <div>

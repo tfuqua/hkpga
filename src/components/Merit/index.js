@@ -11,6 +11,7 @@ class OrderOfMerit extends Component {
   }
 
   render() {
+    console.log(this.props.merit);
     return (
       <div>
         <h2>Order of Merit</h2>
@@ -18,9 +19,9 @@ class OrderOfMerit extends Component {
         {this.props.merit
           ? <div>
 
-              {Object.keys(this.props.merit).map((key, i) =>
-                <MeritTable division={key} data={this.props.merit[key]} />
-              )}
+              <MeritTable division="Open" data={this.props.merit.open} />
+              <MeritTable division="Senior" data={this.props.merit.senior} />
+              <MeritTable division="Ladies" data={this.props.merit.ladies} />
 
             </div>
           : <Loader />}

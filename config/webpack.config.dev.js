@@ -9,6 +9,7 @@ const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
+const WebpackBundleSizeAnalyzerPlugin = require('webpack-bundle-size-analyzer').WebpackBundleSizeAnalyzerPlugin;
 
 const publicPath = '/';
 const publicUrl = '';
@@ -83,7 +84,8 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
+        loader:
+          'style-loader!css-loader?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
       },
       {
         test: /\.scss$/,

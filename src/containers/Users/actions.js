@@ -89,6 +89,26 @@ export function getUser(key) {
   };
 }
 
+/******* Get User by Email *********/
+export function getUserByEmail(email) {
+  return dispatch => {
+    dispatch(RequestUsers());
+
+    const ref = database.ref('users');
+
+    return ref
+      .orderByChild('email')
+      .equalTo(email)
+      .once('value', user => {
+        console.log(user.val());
+        dispatch(receiveUser(Object.values(user.val())[0]));
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+}
+
 /******* Get All Users *********/
 export function getAllUsers() {
   return dispatch => {

@@ -9,6 +9,7 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
+const WebpackBundleSizeAnalyzerPlugin = require('webpack-bundle-size-analyzer').WebpackBundleSizeAnalyzerPlugin;
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -131,7 +132,8 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
+        loader:
+          'style-loader!css-loader?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
       },
       {
         test: /\.scss$/,
@@ -230,6 +232,7 @@ module.exports = {
     new ManifestPlugin({
       fileName: 'asset-manifest.json'
     }),
+    new WebpackBundleSizeAnalyzerPlugin('./reports/plain-report.txt'),
     new SWPrecacheWebpackPlugin({
       // By default, a cache-busting query parameter is appended to requests
       // used to populate the caches, to ensure the responses are fresh.

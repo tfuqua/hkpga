@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getUser } from '../Users/actions';
+import { getUserByEmail } from '../Users/actions';
 import { sendMessage } from '../Feedback/actions';
 import { createUsername } from '../../util/util';
 import Loader from '../../components/Loader';
@@ -27,10 +27,11 @@ class UserDashboard extends Component {
   };
 
   componentDidMount() {
-    this.props.getUser(createUsername(this.props.email));
+    this.props.getUserByEmail(this.props.email);
   }
 
   render() {
+    console.log(this.props);
     return (
       <div className="container-fluid">
         <h2>Dashboard</h2>
@@ -42,7 +43,7 @@ class UserDashboard extends Component {
         <hr />
         <h3>My Info</h3>
         {this.props.user
-          ? <UserForm user={this.props.user} id={createUsername(this.props.email)} isAdmin={false} />
+          ? <UserForm user={{ ...this.props.user }} id={createUsername(this.props.email)} isAdmin={false} />
           : <Loader />}
 
         <Modal
@@ -83,7 +84,7 @@ function mapStateToProps(store) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getUser, sendMessage }, dispatch);
+  return bindActionCreators({ getUserByEmail, sendMessage }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserDashboard);

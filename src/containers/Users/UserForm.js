@@ -14,6 +14,7 @@ class UserForm extends Component {
   constructor(props, context) {
     super(props, context);
 
+    console.log(props);
     this.state = {
       showCalendar: false,
       user: props.user,

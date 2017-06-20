@@ -54,6 +54,7 @@ export function loginUser(creds) {
               isAdmin = true;
             }
           } else {
+            console.log('create user');
             createUser(email);
           }
           dispatch(receiveLogin(email, isAdmin));

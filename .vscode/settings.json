@@ -5,6 +5,11 @@
         //"build/" : true,
         //"scripts": true
     },
+    "search.exclude": {
+        "**/.git": true,
+        "**/node_modules": true,
+        "**/build": true
+    },
     // Controls if quick suggestions should show up while typing
     "editor.quickSuggestions": true,
     // Controls if suggestions should be accepted with "Enter" - in addition to "Tab". Helps to avoid ambiguity between inserting new lines and accepting suggestions.

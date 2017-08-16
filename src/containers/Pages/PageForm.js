@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Editor from '../../components/wysiwyg';
-import draftToHtml from 'draftjs-to-html';
-import htmlToDraft from 'html-to-draftjs';
-import { EditorState, ContentState, convertToRaw } from 'draft-js';
 import TextField from '../../components/TextField';
 import Tabs from '../../components/Tabs';
 import { savePage } from './actions';
@@ -15,28 +12,11 @@ class PageForm extends Component {
 
     this.state = {
       page: props.page,
-      id: props.id,
-      editorState: this.setupEditor(props.page)
+      id: props.id
     };
 
     this.savePage = this.savePage.bind(this);
     this.handleFieldChange = this.handleFieldChange.bind(this);
-    this.onEditorStateChange = this.onEditorStateChange.bind(this);
-  }
-
-  setupEditor(page) {
-    const langs = ['en', 'zh-cn', 'zh-hk'];
-    let content = {};
-
-    for (let i = 0; i < langs.length; i++) {
-      let html = page.html[langs[i]] ? page.html[langs[i]] : '<div></div>';
-      const blocksFromHTML = htmlToDraft(html);
-      const contentBlocks = blocksFromHTML.contentBlocks;
-      const contentState = ContentState.createFromBlockArray(contentBlocks);
-      content[langs[i]] = EditorState.createWithContent(contentState);
-    }
-
-    return content;
   }
 
   handleFieldChange(field) {
@@ -54,6 +34,11 @@ class PageForm extends Component {
     };
   }
 
+  handleContentChange = (field, content) => {
+    let html = { ...this.state.article.html, [field]: content };
+    this.setState({ article: { ...this.state.article, html } });
+  };
+
   savePage() {
     let page = { ...this.state.page, updated_at: Date.now() };
     this.props.savePage(this.state.id, page);
@@ -65,21 +50,14 @@ class PageForm extends Component {
     }
   }
 
-  onEditorStateChange(lang, editorState) {
-    const rawContentState = convertToRaw(editorState.getCurrentContent());
-    const markup = draftToHtml(rawContentState);
-    this.setState({
-      editorState: { ...this.state.editorState, [lang]: editorState },
-      page: { ...this.state.page, html: { ...this.state.page.html, [lang]: markup } }
-    });
-  }
-
   render() {
     return (
       <div className="">
-
         <div className="text-right">
-          <button onClick={this.savePage} className="btn btn-success">Save Page</button><br />
+          <button onClick={this.savePage} className="btn btn-success">
+            Save Page
+          </button>
+          <br />
         </div>
         <br />
 
@@ -131,8 +109,9 @@ class PageForm extends Component {
                 name: 'en',
                 component: (
                   <Editor
-                    editorState={this.state.editorState.en}
-                    onEditorStateChange={this.onEditorStateChange.bind(this, 'en')}
+                    html={this.state.page.html ? this.state.page.html.en : ''}
+                    name="en"
+                    onFieldChanged={this.handleContentChange}
                   />
                 )
               },
@@ -140,8 +119,9 @@ class PageForm extends Component {
                 name: 'zh-cn',
                 component: (
                   <Editor
-                    editorState={this.state.editorState['zh-cn']}
-                    onEditorStateChange={this.onEditorStateChange.bind(this, 'zh-cn')}
+                    html={this.state.page.html ? this.state.page.html['zh-cn'] : ''}
+                    name="zn-cn"
+                    onFieldChanged={this.handleContentChange}
                   />
                 )
               },
@@ -149,8 +129,9 @@ class PageForm extends Component {
                 name: 'zh-hk',
                 component: (
                   <Editor
-                    editorState={this.state.editorState['zh-hk']}
-                    onEditorStateChange={this.onEditorStateChange.bind(this, 'zh-hk')}
+                    html={this.state.page.html ? this.state.page.html['zh-hk'] : ''}
+                    name="zn-hk"
+                    onFieldChanged={this.handleContentChange}
                   />
                 )
               }

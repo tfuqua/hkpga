@@ -26,7 +26,7 @@ function render(Component) {
   );
 }
 
-registerServiceWorker();
+//registerServiceWorker();
 
 if (window.location.hash.includes('#/')) {
   window.location = window.location.hash.replace('#', '');

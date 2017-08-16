@@ -30,7 +30,8 @@
     "react-slick": "^0.14.7",
     "react-tinymce": "^0.5.1",
     "redux": "^3.6.0",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "tinymce": "^4.6.4"
   },
   "devDependencies": {
     "autoprefixer": "6.7.5",
@@ -47,7 +48,7 @@
     "cross-spawn": "4.0.2",
     "css-loader": "0.26.2",
     "detect-port": "1.1.0",
-    "dotenv": "2.0.0",
+    "dotenv": "^4.0.0",
     "eslint": "3.16.1",
     "eslint-config-react-app": "0.7.0-alpha.f55d2212",
     "eslint-loader": "1.6.3",
@@ -72,6 +73,7 @@
     "sw-precache-webpack-plugin": "^0.11.0",
     "url-loader": "0.5.8",
     "webpack": "3.0.0",
+    "webpack-bundle-analyzer": "^2.8.2",
     "webpack-bundle-size-analyzer": "^2.7.0",
     "webpack-dev-server": "2.4.1",
     "webpack-manifest-plugin": "1.1.0",

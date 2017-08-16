@@ -33,9 +33,14 @@ export default class HotTable extends Component {
     return (
       <div>
         <div className="text-right">
-          <button onClick={this.save} className="btn btn-success">Save Order of Merit</button>
+          <button onClick={this.save} className="btn btn-success">
+            Save Order of Merit
+          </button>
+          <hr />
         </div>
-        <div className="hot-table-wrapper"><div id={this.root} /></div>
+        <div className="hot-table-wrapper">
+          <div id={this.root} />
+        </div>
       </div>
     );
   }

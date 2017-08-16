@@ -6,6 +6,7 @@ import Loader from '../../components/Loader';
 
 class MeritTable extends Component {
   render() {
+    console.log(this.props);
     return (
       <div className="container-fluid">
         {this.props.merit
@@ -36,9 +37,21 @@ class MeritTable extends Component {
                     : <div>Not Yet Entered</div>}
                 </tbody>
               </table>
+
+              {this.props.year > 2016
+                ? <div>
+                    <h3>Super Senior Division</h3>
+                    <table className="table table-striped table-bordered">
+                      <tbody>
+                        {this.props.merit.super
+                          ? this.props.merit.super.map((merit, i) => <MeritRow key={i} count={i} entry={merit} />)
+                          : <div>Not Yet Entered</div>}
+                      </tbody>
+                    </table>
+                  </div>
+                : null}
             </div>
           : <div>Merit Not Yet Entered</div>}
-
       </div>
     );
   }

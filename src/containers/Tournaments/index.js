@@ -13,9 +13,8 @@ class Tournaments extends Component {
     super(props, context);
 
     this.state = {
-      year: typeof this.props.match.params.year !== 'undefined'
-        ? this.props.match.params.year
-        : new Date().getFullYear()
+      year:
+        typeof this.props.match.params.year !== 'undefined' ? this.props.match.params.year : new Date().getFullYear()
     };
   }
 
@@ -32,18 +31,18 @@ class Tournaments extends Component {
     }
   }
 
-  fixData() {
-    this.props.fixTournaments();
-  }
-
   render() {
     if (!this.props.isFetching && this.props.tournaments) {
-      let tournaments = this.props.tournaments.reverse();
+      let tournaments = this.props.tournaments;
 
       return (
         <div className="container-fluid">
-          <h2>{translations[this.props.lang].MENU_TOURNAMENTS}</h2>
-          <h3>{this.state.year} &nbsp;Schedule</h3>
+          <h2>
+            {translations[this.props.lang].MENU_TOURNAMENTS}
+          </h2>
+          <h3>
+            {this.state.year} &nbsp;Schedule
+          </h3>
           <hr />
           <div className="row">
             <div className="col-sm-9">
@@ -55,7 +54,9 @@ class Tournaments extends Component {
                 <ul>
                   {tournamentYears.map((year, i) =>
                     <li key={i}>
-                      <Link to={`/tournaments/${year.value}`}>{year.value}</Link>
+                      <Link to={`/tournaments/${year.value}`}>
+                        {year.value}
+                      </Link>
                     </li>
                   )}
                 </ul>
@@ -67,7 +68,8 @@ class Tournaments extends Component {
     } else {
       return (
         <div className="container-fluid">
-          <h2>Tournaments</h2><Loader />
+          <h2>Tournaments</h2>
+          <Loader />
         </div>
       );
     }

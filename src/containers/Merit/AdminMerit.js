@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { saveMerit, getMerit } from './actions';
 import { createYears } from '../../util/data';
-import MeritForm from './MeritForm';
-import Loader from '../../components/Loader';
 
 class AdminMerit extends Component {
   saveMeritTable = data => {
@@ -29,9 +27,13 @@ class AdminMerit extends Component {
           <tbody>
             {years.map((year, i) =>
               <tr>
-                <td>{year.value}</td>
+                <td>
+                  {year.value}
+                </td>
                 <td className="text-right">
-                  <Link to={`/admin/merit/${year.value}`} className="btn btn-default">Edit</Link>
+                  <Link to={`/admin/merit/${year.value}`} className="btn btn-default">
+                    Edit
+                  </Link>
                 </td>
               </tr>
             )}

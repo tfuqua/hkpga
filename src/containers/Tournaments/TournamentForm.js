@@ -8,7 +8,7 @@ import Select from '../../components/Select';
 import { Link } from 'react-router-dom';
 import Tabs from '../../components/Tabs';
 import moment from 'moment';
-import { tournamentYears } from '../../util/data';
+import { tournamentYears, divisions } from '../../util/data';
 import { saveTournament, getResults } from './actions';
 
 class TournamentForm extends Component {
@@ -70,7 +70,6 @@ class TournamentForm extends Component {
   render() {
     return (
       <div className="">
-
         <div className="text-right">
           <div className="btn-group">
             <Link
@@ -79,9 +78,10 @@ class TournamentForm extends Component {
               onClick={() => this.props.getResults(this.state.id)}>
               Edit Results
             </Link>
-            <button onClick={this.saveTournament.bind(this)} className="btn btn-default">Save</button>
+            <button onClick={this.saveTournament.bind(this)} className="btn btn-default">
+              Save
+            </button>
           </div>
-
         </div>
 
         <div className="form-group">
@@ -259,18 +259,20 @@ class TournamentForm extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {Object.keys(this.state.tournament.divisions).map((k, i) => (
+                  {divisions.map((division, i) =>
                     <tr key={i}>
-                      <td>{k}</td>
+                      <td>
+                        {division.label}
+                      </td>
                       <td>
                         <Checkbox
-                          name={k}
-                          checked={this.state.tournament.divisions[k]}
+                          name={division.key}
+                          checked={this.state.tournament.divisions[division.key]}
                           handleCheckChange={this.handleDivisionChange}
                         />
                       </td>
                     </tr>
-                  ))}
+                  )}
                 </tbody>
               </table>
             </div>
@@ -296,7 +298,6 @@ class TournamentForm extends Component {
             </div>
           </div>
         </div>
-
       </div>
     );
   }

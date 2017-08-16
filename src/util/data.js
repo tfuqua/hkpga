@@ -81,6 +81,14 @@ export function createYears(start) {
   for (let i = start; i <= new Date().getFullYear(); i++) {
     years.push({ value: i, name: i });
   }
-  //years.push({ value: '', name: '' });
+
   return years.reverse();
 }
+
+export const divisions = [
+  { key: 'open', label: 'Open' },
+  { key: 'ladies', label: 'Ladies' },
+  { key: 'senior', label: 'Senior' },
+  { key: 'super', label: 'Super Senior' },
+  { key: 'trainee', label: 'Trainee' }
+];

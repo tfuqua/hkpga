@@ -7,7 +7,7 @@ import Checkbox from '../../components/Checkbox';
 import Select from '../../components/Select';
 import Tabs from '../../components/Tabs';
 import moment from 'moment';
-import { tournamentYears } from '../../util/data';
+import { tournamentYears, divisions } from '../../util/data';
 import { createTournament } from './actions';
 
 class TournamentModalForm extends Component {
@@ -34,7 +34,8 @@ class TournamentModalForm extends Component {
           ladies: false,
           open: false,
           senior: false,
-          trainee: false
+          trainee: false,
+          super: false
         },
         no_days: 2,
         rules_url: '',
@@ -250,18 +251,20 @@ class TournamentModalForm extends Component {
               </tr>
             </thead>
             <tbody>
-              {Object.keys(this.state.tournament.divisions).map((k, i) => (
+              {divisions.map((division, i) =>
                 <tr key={i}>
-                  <td>{k}</td>
+                  <td>
+                    {division.label}
+                  </td>
                   <td>
                     <Checkbox
-                      name={k}
-                      checked={this.state.tournament.divisions[k]}
+                      name={division.key}
+                      checked={this.state.tournament.divisions[division.key]}
                       handleCheckChange={this.handleDivisionChange}
                     />
                   </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>
@@ -276,9 +279,13 @@ class TournamentModalForm extends Component {
 
         <hr />
         <div className="text-right">
-          <button onClick={this.props.toggleModal.bind(this, 'modal')} className="btn btn-link">Cancel</button>
+          <button onClick={this.props.toggleModal.bind(this, 'modal')} className="btn btn-link">
+            Cancel
+          </button>
           &nbsp;&nbsp;&nbsp;
-          <button type="submit" onClick={this.createTournament} className="btn btn-primary">Create Tournament</button>
+          <button type="submit" onClick={this.createTournament} className="btn btn-primary">
+            Create Tournament
+          </button>
         </div>
       </div>
     );

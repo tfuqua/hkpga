@@ -5,7 +5,7 @@ import { saveMerit, getMeritByYear } from './actions';
 import Handsontable from 'handsontable';
 import HotTable from '../../components/HotTable';
 import Tabs from '../../components/Tabs';
-import Loader from '../../components/Loader';
+import { divisions } from '../../util/data';
 
 class MeritForm extends Component {
   constructor(props) {
@@ -17,6 +17,10 @@ class MeritForm extends Component {
       ladies: m.ladies || [['Rank', 'Player', 'Leg 1', 'Leg 2'], ['1', 'John Smith', '100', '100']],
       senior: m.senior || [['Rank', 'Player', 'Leg 1', 'Leg 2'], ['1', 'John Smith', '100', '100']]
     };
+
+    if (props.year > 2016) {
+      merit.super = m.super || [['Rank', 'Player', 'Leg 1', 'Leg 2'], ['1', 'John Smith', '100', '100']];
+    }
 
     this.state = {
       merit

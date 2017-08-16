@@ -11,21 +11,18 @@ class OrderOfMerit extends Component {
   }
 
   render() {
-    console.log(this.props.merit);
     return (
       <div>
         <h2>Order of Merit</h2>
 
         {this.props.merit
           ? <div>
-
               <MeritTable division="Open" data={this.props.merit.open} />
               <MeritTable division="Senior" data={this.props.merit.senior} />
               <MeritTable division="Ladies" data={this.props.merit.ladies} />
-
+              <MeritTable division="Super Senior" data={this.props.merit.super} />
             </div>
           : <Loader />}
-
       </div>
     );
   }

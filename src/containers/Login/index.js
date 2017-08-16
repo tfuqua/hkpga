@@ -34,9 +34,10 @@ class Login extends Component {
     return this.props.isAuthenticated
       ? <Redirect to="/admin" />
       : <div className="container-fluid">
-
           <div className="login-form">
-            <h2>{translations[this.props.lang].LOGIN}</h2>
+            <h2>
+              {translations[this.props.lang].LOGIN}
+            </h2>
             <form onSubmit={this.handleSubmit} className="form">
               <div className="form-group">
                 <TextField
@@ -59,9 +60,9 @@ class Login extends Component {
             </form>
           </div>
           <div className="text-center">
-            <Link to="/register">{translations[this.props.lang].REGISTER}</Link>
-            &nbsp; | &nbsp;
-            <Link to="/forgot">{translations[this.props.lang].RESETPASSWORD}</Link>
+            <Link to="/forgot">
+              {translations[this.props.lang].RESETPASSWORD}
+            </Link>
           </div>
         </div>;
   }

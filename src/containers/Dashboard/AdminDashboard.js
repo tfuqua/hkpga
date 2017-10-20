@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
-import Feedback from '../Feedback';
 import { Link } from 'react-router-dom';
+import Feedback from '../Feedback';
+import Years from './Years';
+import Modal from '../../components/Modal';
 
 class AdminDashboard extends Component {
+  state = {
+    showYears: false
+  };
+
   render() {
     return (
       <div className="container-fluid">
-
         <h2>Dashboard</h2>
         <div className="wells">
           <div className="btn-group">
@@ -25,11 +30,21 @@ class AdminDashboard extends Component {
             <Link to="/admin/users" className="btn btn-default">
               Manage Users
             </Link>
+            <button onClick={() => this.setState({ showYears: true })} className="btn btn-default">
+              Manage Years
+            </button>
           </div>
         </div>
 
         <hr />
         <Feedback />
+
+        <Modal
+          toggleModal={() => this.setState({ showYears: false })}
+          isOpen={this.state.showYears}
+          title="Manage Years">
+          <Years toggleModal={() => this.setState({ showYears: false })} />
+        </Modal>
       </div>
     );
   }

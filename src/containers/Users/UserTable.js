@@ -5,10 +5,12 @@ import { deleteUser, getUsers } from './actions';
 import Text from '../../components/Text';
 import { Link } from 'react-router-dom';
 import Modal from '../../components/Modal';
+import RegisterForm from '../Register';
 
 class UserTable extends Component {
   state = {
     showDelete: false,
+    showForm: false,
     user: null
   };
 
@@ -35,9 +37,11 @@ class UserTable extends Component {
             </tr>
           </thead>
           <tbody>
-            {users.map((user, i) =>
+            {users.map((user, i) => (
               <tr key={i}>
-                <td><Text text={user.name} /></td>
+                <td>
+                  <Text text={user.name} />
+                </td>
                 <td>{user.email}</td>
                 <td>{user.committee}</td>
                 <td>{user.honorary}</td>
@@ -62,7 +66,14 @@ class UserTable extends Component {
                   </div>
                 </td>
               </tr>
-            )}
+            ))}
+            <tr>
+              <td colSpan={6} className="text-center">
+                <button onClick={() => this.setState({ showForm: true })} className="btn btn-default">
+                  <i className="fa fa-plus" />&nbsp; Create account
+                </button>
+              </td>
+            </tr>
           </tbody>
         </table>
 
@@ -70,15 +81,24 @@ class UserTable extends Component {
           toggleModal={() => this.setState({ showDelete: false })}
           isOpen={this.state.showDelete}
           title="Delete User?">
-          <div className="modal-body">
-            Are you sure you want to delete this user?
-          </div>
+          <div className="modal-body">Are you sure you want to delete this user?</div>
           <div className="modal-footer">
-            <button className="btn btn-link" onClick={() => this.setState({ showDelete: false })}>Cancel</button>
+            <button className="btn btn-link" onClick={() => this.setState({ showDelete: false })}>
+              Cancel
+            </button>
             &nbsp;&nbsp;&nbsp;
             <button type="submit" onClick={this.deleteUser} className="btn btn-danger">
               Delete User
             </button>
+          </div>
+        </Modal>
+
+        <Modal
+          toggleModal={() => this.setState({ showForm: false })}
+          isOpen={this.state.showForm}
+          title="Create Account">
+          <div className="modal-body">
+            <RegisterForm toggleModal={() => this.setState({ showForm: false })} searchUsers={this.props.searchUsers} />
           </div>
         </Modal>
       </div>

@@ -1,18 +1,27 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+
 import { Link } from 'react-router-dom';
+import { getOOMYears } from '../Dashboard/actions';
 import { saveMerit, getMerit } from './actions';
-import { createYears } from '../../util/data';
 
 class AdminMerit extends Component {
+  state = {
+    years: []
+  };
+
+  componentDidMount() {
+    this.props.getOOMYears().then(years => {
+      this.setState({ years });
+    });
+  }
+
   saveMeritTable = data => {
     this.props.saveMerit(data);
   };
 
   render() {
-    let years = createYears(2014);
-
     return (
       <div className="container-fluid">
         <h2>Order of Merit</h2>
@@ -25,18 +34,16 @@ class AdminMerit extends Component {
             </tr>
           </thead>
           <tbody>
-            {years.map((year, i) =>
+            {this.state.years.map((year, i) => (
               <tr>
-                <td>
-                  {year.value}
-                </td>
+                <td>{year}</td>
                 <td className="text-right">
-                  <Link to={`/admin/merit/${year.value}`} className="btn btn-default">
+                  <Link to={`/admin/merit/${year}`} className="btn btn-default">
                     Edit
                   </Link>
                 </td>
               </tr>
-            )}
+            ))}
           </tbody>
         </table>
       </div>
@@ -51,7 +58,7 @@ function mapStateToProps(store) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ saveMerit, getMerit }, dispatch);
+  return bindActionCreators({ saveMerit, getMerit, getOOMYears }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdminMerit);

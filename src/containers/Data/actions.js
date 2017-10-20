@@ -33,7 +33,7 @@ export function fixTournaments() {
 
 /******* Remove Results from Users  *********/
 export function fixUserData() {
-  return dispathch => {
+  return dispatch => {
     const ref = database.ref('users');
     ref.once('value', function(snapshot) {
       snapshot.forEach(function(childSnapshot) {

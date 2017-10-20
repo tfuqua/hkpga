@@ -9,18 +9,20 @@ function Select(props) {
     value = value.id;
   }
 
-  return options.length > 1
-    ? <div className="select">
-        <select className={`form-control ${props.class}`} value={value} onChange={props.handleChange}>
-          {options.map((option, i) => (
-            <option key={i} value={option.value}>
-              {option[fieldName]}
-            </option>
-          ))}
-
-        </select>
-      </div>
-    : <div />;
+  return options.length > 1 ? (
+    <div className="select">
+      <select className={`form-control ${props.class}`} value={value} onChange={props.handleChange}>
+        <option value={null} />
+        {options.map((option, i) => (
+          <option key={i} value={option.value}>
+            {option[fieldName]}
+          </option>
+        ))}
+      </select>
+    </div>
+  ) : (
+    <div />
+  );
 }
 
 export default Select;

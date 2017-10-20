@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { registerUser } from './actions';
+import { getUsers } from '../Users/actions';
 import TextField from '../../components/TextField';
 import translations from '../../util/translations';
 
@@ -21,7 +22,10 @@ class Register extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.registerUser(this.state);
+    this.props.registerUser(this.state).then(response => {
+      this.props.getUsers({ page: 1, search: '' });
+      this.props.toggleModal();
+    });
   }
 
   handleFieldChange(field) {
@@ -33,9 +37,8 @@ class Register extends Component {
   render() {
     return (
       <div className="container-fluid">
-
         <div className="login-form">
-          <h2>{translations[this.props.lang].REGISTER}</h2>
+          {/*<h2>{translations[this.props.lang].REGISTER}</h2>*/}
           <form onSubmit={this.handleSubmit} className="form">
             <div className="form-group">
               <TextField
@@ -62,21 +65,22 @@ class Register extends Component {
                 placeholder="Password"
               />
             </div>
-            <input
-              type="submit"
-              value={translations[this.props.lang].REGISTER_USER}
-              className="btn btn-success btn-block"
-            />
+
+            <div className="text-right">
+              <button className="btn btn-link" onClick={() => this.props.toggleModal()}>
+                Cancel
+              </button>
+              <input type="submit" value={translations[this.props.lang].REGISTER_USER} className="btn btn-success " />
+            </div>
           </form>
         </div>
-
       </div>
     );
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ registerUser }, dispatch);
+  return bindActionCreators({ registerUser, getUsers }, dispatch);
 }
 
 function mapStateToProps(store) {

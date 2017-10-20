@@ -8,8 +8,9 @@ import Select from '../../components/Select';
 import { Link } from 'react-router-dom';
 import Tabs from '../../components/Tabs';
 import moment from 'moment';
-import { tournamentYears, divisions } from '../../util/data';
+import { divisions } from '../../util/data';
 import { saveTournament, getResults } from './actions';
+import { getTournamentYears } from '../Dashboard/actions';
 
 class TournamentForm extends Component {
   constructor(props, context) {
@@ -21,13 +22,21 @@ class TournamentForm extends Component {
         signup_before: false
       },
       tournament: props.tournament,
-      id: props.id
+      id: props.id,
+      years: []
     };
 
     this.handleFieldChange = this.handleFieldChange.bind(this);
     this.handleCheckChange = this.handleCheckChange.bind(this);
     this.handleDivisionChange = this.handleDivisionChange.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.getTournamentYears().then(years => {
+      let data = years.map(year => ({ name: year, value: year }));
+      this.setState({ years: data });
+    });
   }
 
   handleFieldChange(field) {
@@ -53,7 +62,8 @@ class TournamentForm extends Component {
   }
   handleSelectChange(field) {
     return e => {
-      this.setState({ tournament: { ...this.state.tournament, [field]: parseInt(e.target.value, 10) } });
+      let value = e.target.value ? parseInt(e.target.value, 10) : null;
+      this.setState({ tournament: { ...this.state.tournament, [field]: value } });
     };
   }
   handleDivisionChange(e) {
@@ -68,6 +78,7 @@ class TournamentForm extends Component {
   }
 
   render() {
+    console.log(this.state.tournament);
     return (
       <div className="">
         <div className="text-right">
@@ -233,7 +244,7 @@ class TournamentForm extends Component {
                 class="width-auto"
                 handleChange={this.handleSelectChange('year')}
                 value={this.state.tournament.year}
-                options={tournamentYears}
+                options={this.state.years}
               />
             </div>
           </div>
@@ -259,11 +270,9 @@ class TournamentForm extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {divisions.map((division, i) =>
+                  {divisions.map((division, i) => (
                     <tr key={i}>
-                      <td>
-                        {division.label}
-                      </td>
+                      <td>{division.label}</td>
                       <td>
                         <Checkbox
                           name={division.key}
@@ -272,7 +281,7 @@ class TournamentForm extends Component {
                         />
                       </td>
                     </tr>
-                  )}
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -304,7 +313,7 @@ class TournamentForm extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ saveTournament, getResults }, dispatch);
+  return bindActionCreators({ saveTournament, getResults, getTournamentYears }, dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(TournamentForm);

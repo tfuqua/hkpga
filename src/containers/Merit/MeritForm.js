@@ -13,13 +13,13 @@ class MeritForm extends Component {
 
     let m = props.merit || {};
     let merit = {
-      open: m.open || [['Rank', 'Player', 'Leg 1', 'Leg 2'], ['1', 'John Smith', '100', '100']],
-      ladies: m.ladies || [['Rank', 'Player', 'Leg 1', 'Leg 2'], ['1', 'John Smith', '100', '100']],
-      senior: m.senior || [['Rank', 'Player', 'Leg 1', 'Leg 2'], ['1', 'John Smith', '100', '100']]
+      open: m.open || [['Rank', 'Player', 'Leg 1', 'Leg 2'], ['1', ' ', '100', '100']],
+      ladies: m.ladies || [['Rank', 'Player', 'Leg 1', 'Leg 2'], ['1', ' ', '100', '100']],
+      senior: m.senior || [['Rank', 'Player', 'Leg 1', 'Leg 2'], ['1', ' ', '100', '100']]
     };
 
     if (props.year > 2016) {
-      merit.super = m.super || [['Rank', 'Player', 'Leg 1', 'Leg 2'], ['1', 'John Smith', '100', '100']];
+      merit.super = m.super || [['Rank', 'Player', 'Leg 1', 'Leg 2'], ['1', ' ', '100', '100']];
     }
 
     this.state = {

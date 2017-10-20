@@ -16,7 +16,8 @@ export function registerUser(creds) {
             en: creds.name,
             'zh-cn': creds.name,
             'zh-hk': creds.name
-          }
+          },
+          relation: 'none'
         });
         dispatch(displayMessage(REGISTRATION_SUCCESS));
       })

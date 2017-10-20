@@ -15,9 +15,7 @@ class Pages extends Component {
   };
 
   componentDidMount() {
-    if (!this.props.query) {
-      this.props.getUsers({ page: 1, search: this.state.search });
-    }
+    this.props.getUsers({ page: 1, search: this.state.search });
   }
 
   handleSelectChange = e => {
@@ -57,7 +55,6 @@ class Pages extends Component {
               <label>Filter By Category:</label>
               <Select handleChange={this.handleSelectChange} options={prosFilter} value={this.state.category} />
             </div>
-
           </div>
           <hr />
 
@@ -65,7 +62,13 @@ class Pages extends Component {
             isFetching={this.props.isFetching}
             changePage={this.changePage}
             query={this.props.query}
-            component={<UserTable results={this.props.results} receiveUser={this.props.receiveUser} />}
+            component={
+              <UserTable
+                results={this.props.results}
+                receiveUser={this.props.receiveUser}
+                searchUsers={() => this.props.searchUsers({ search: '' })}
+              />
+            }
           />
         </div>
       );

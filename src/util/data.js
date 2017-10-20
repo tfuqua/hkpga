@@ -73,7 +73,7 @@ export const prosFilter = [
   { name: 'Certified Instructors', value: 2 },
   { name: 'Trainees', value: 1 }
 ];
-export const tournamentYears = createYears(2010);
+
 export const meritYears = createYears(2004);
 
 export function createYears(start) {

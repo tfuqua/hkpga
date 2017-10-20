@@ -7,8 +7,9 @@ import Checkbox from '../../components/Checkbox';
 import Select from '../../components/Select';
 import Tabs from '../../components/Tabs';
 import moment from 'moment';
-import { tournamentYears, divisions } from '../../util/data';
+import { divisions } from '../../util/data';
 import { createTournament } from './actions';
+import { getTournamentYears } from '../Dashboard/actions';
 
 class TournamentModalForm extends Component {
   constructor(props, context) {
@@ -44,7 +45,8 @@ class TournamentModalForm extends Component {
         start_date: new Date(),
         tee_off: '',
         year: null
-      }
+      },
+      years: []
     };
 
     this.handleFieldChange = this.handleFieldChange.bind(this);
@@ -52,6 +54,13 @@ class TournamentModalForm extends Component {
     this.handleDivisionChange = this.handleDivisionChange.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
     this.createTournament = this.createTournament.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.getTournamentYears().then(years => {
+      let data = years.map(year => ({ name: year, value: year }));
+      this.setState({ years: data });
+    });
   }
 
   handleFieldChange(field) {
@@ -229,7 +238,7 @@ class TournamentModalForm extends Component {
             class="width-auto"
             handleChange={this.handleSelectChange('year')}
             value={this.state.tournament.year}
-            options={tournamentYears}
+            options={this.state.years}
           />
         </div>
 
@@ -251,11 +260,9 @@ class TournamentModalForm extends Component {
               </tr>
             </thead>
             <tbody>
-              {divisions.map((division, i) =>
+              {divisions.map((division, i) => (
                 <tr key={i}>
-                  <td>
-                    {division.label}
-                  </td>
+                  <td>{division.label}</td>
                   <td>
                     <Checkbox
                       name={division.key}
@@ -264,7 +271,7 @@ class TournamentModalForm extends Component {
                     />
                   </td>
                 </tr>
-              )}
+              ))}
             </tbody>
           </table>
         </div>
@@ -293,7 +300,7 @@ class TournamentModalForm extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ createTournament }, dispatch);
+  return bindActionCreators({ createTournament, getTournamentYears }, dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(TournamentModalForm);

@@ -1,5 +1,3 @@
-import { mapObjectToArray } from '../../util/util';
-import { sortBy } from 'lodash';
 import { GET_YEARS } from './actions';
 
 function yearsReducer(state = {}, action) {

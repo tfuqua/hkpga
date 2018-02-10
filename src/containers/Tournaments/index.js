@@ -9,15 +9,10 @@ import TournamentRow from './TournamentRow';
 import Loader from '../../components/Loader';
 
 class Tournaments extends Component {
-  constructor(props, context) {
-    super(props, context);
-
-    this.state = {
-      year:
-        typeof this.props.match.params.year !== 'undefined' ? this.props.match.params.year : new Date().getFullYear(),
-      years: []
-    };
-  }
+  state = {
+    year: this.props.match.params.year || new Date().getFullYear().toString(),
+    years: []
+  };
 
   componentDidMount() {
     if (this.props.tournaments === undefined) {
@@ -29,9 +24,16 @@ class Tournaments extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.match.params.year !== this.state.year) {
-      this.setState({ year: nextProps.match.params.year });
-      this.props.getTournaments(nextProps.match.params.year);
+    if (nextProps.match.params.year) {
+      if (nextProps.match.params.year !== this.state.year) {
+        this.setState({ year: nextProps.match.params.year });
+        this.props.getTournaments(nextProps.match.params.year);
+      }
+    } else {
+      if (new Date().getFullYear().toString() !== this.state.year) {
+        this.setState({ year: new Date().getFullYear().toString() });
+        this.props.getTournaments(new Date().getFullYear());
+      }
     }
   }
 

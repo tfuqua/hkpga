@@ -17,16 +17,24 @@ class Footer extends Component {
           <div className="container-fluid">
             <div className="row">
               <div className="footer">
-                <div className="col-md-6 contact-details">
+                <div className="col-md-7 contact-details">
                   <p>
-                    <span>Email: <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a> &nbsp; | &nbsp;</span>
-                    <span>Tel: <a href={`tel:${contactInfo.phone}`}>{contactInfo.phone}</a> &nbsp; | &nbsp;</span>
-                    <span>Fax: <a href={`tel:${contactInfo.fax}`}>{contactInfo.fax}</a> &nbsp; | &nbsp;</span>
-                    <span><a href={`http://maps.google.com/?q=${contactInfo.address}`}>{contactInfo.address}</a></span>
-
+                    <span>
+                      Email: <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a> &nbsp; | &nbsp;
+                    </span>
+                    <span>
+                      Tel: <a href={`tel:${contactInfo.phone}`}>{contactInfo.phone}</a> &nbsp; | &nbsp;
+                    </span>
+                    <span>
+                      Fax: <a href={`tel:${contactInfo.fax}`}>{contactInfo.fax}</a> &nbsp; | &nbsp;
+                    </span>
+                    <br />
+                    <span>
+                      <a href={`http://maps.google.com/?q=${contactInfo.address}`}>{contactInfo.address}</a>
+                    </span>
                   </p>
                 </div>
-                <div className="terms-copyright col-md-6">
+                <div className="terms-copyright col-md-5">
                   <div className="">
                     <ul className="social">
                       <li>
@@ -40,7 +48,7 @@ class Footer extends Component {
                     <a href="/terms#tc"> Terms & Conditions &nbsp; </a>
                     |
                     <a href="/terms#privacy"> &nbsp; Privacy Policy &nbsp; </a>
-                    | &nbsp; Copyright © 2002-2017 HKPGA. &nbsp;
+                    | &nbsp; Copyright © 2002-{new Date().getFullYear()} HKPGA. &nbsp;
                   </p>
                 </div>
               </div>

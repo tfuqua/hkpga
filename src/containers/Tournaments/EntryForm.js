@@ -31,7 +31,6 @@ class EntryForm extends Component {
     };
     this.handleFieldChange = this.handleFieldChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
-    this.createEntry = this.createEntry.bind(this);
     this.playerChange = this.playerChange.bind(this);
   }
 
@@ -61,79 +60,85 @@ class EntryForm extends Component {
     };
     this.setState({ entry: newState });
   }
-  createEntry() {
+
+  createEntry = () => {
     this.props.createEntry(this.props.id, this.props.division, this.state.entry);
     this.props.toggleModal('modal');
-  }
+  };
 
   render() {
     return (
       <div>
         <div className="form-group">
           <label>Player</label>
-          {this.state.entry.username === ''
-            ? <Autocomplete playerChange={this.playerChange} />
-            : <div>
-                {this.state.entry.name.en} <br />
-                <a
-                  onClick={() => {
-                    this.setState({ entry: { ...this.state.entry, username: '' } });
-                  }}>
-                  Remove
-                </a>
-              </div>}
+          {this.state.entry.username === '' ? (
+            <Autocomplete playerChange={this.playerChange} />
+          ) : (
+            <div>
+              {this.state.entry.name.en} <br />
+              <a
+                onClick={() => {
+                  this.setState({ entry: { ...this.state.entry, username: '' } });
+                }}>
+                Remove
+              </a>
+            </div>
+          )}
         </div>
 
-        {this.state.entry.username === ''
-          ? null
-          : <div>
-              {[...Array(this.props.tournament.no_days)].map((x, i) =>
-                <div key={i} className="form-group">
-                  <label>Round {i + 1}</label>
-                  <TextField
-                    showError={this.state.showErrors}
-                    text={this.state.entry.rounds ? this.state.entry.rounds[i + 1] : ''}
-                    onFieldChanged={this.handleFieldChange(`rounds.${i + 1}`)}
-                  />
-                </div>
-              )}
-
-              <div className="form-group">
-                <label>Rank</label>
+        {this.state.entry.username === '' ? null : (
+          <div>
+            {[...Array(this.props.tournament.no_days)].map((x, i) => (
+              <div key={i} className="form-group">
+                <label>Round {i + 1}</label>
                 <TextField
                   showError={this.state.showErrors}
-                  text={this.state.entry.rank}
-                  onFieldChanged={this.handleFieldChange(`rank`)}
+                  text={this.state.entry.rounds ? this.state.entry.rounds[i + 1] : ''}
+                  onFieldChanged={this.handleFieldChange(`rounds.${i + 1}`)}
                 />
               </div>
+            ))}
 
-              <div className="form-group">
-                <label>Points</label>
-                <TextField
-                  showError={this.state.showErrors}
-                  text={this.state.entry.points}
-                  onFieldChanged={this.handleFieldChange(`points`)}
-                />
-              </div>
-              <div className="form-group">
-                <label>Status</label>
-                <Select
-                  class=""
-                  handleChange={this.handleSelectChange}
-                  value={this.state.entry.status}
-                  options={playerStatus}
-                />
-              </div>
-              <hr />
-            </div>}
+            <div className="form-group">
+              <label>Rank</label>
+              <TextField
+                showError={this.state.showErrors}
+                text={this.state.entry.rank}
+                onFieldChanged={this.handleFieldChange(`rank`)}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Points</label>
+              <TextField
+                showError={this.state.showErrors}
+                text={this.state.entry.points}
+                onFieldChanged={this.handleFieldChange(`points`)}
+              />
+            </div>
+            <div className="form-group">
+              <label>Status</label>
+              <Select
+                class=""
+                handleChange={this.handleSelectChange}
+                value={this.state.entry.status}
+                options={playerStatus}
+              />
+            </div>
+            <hr />
+          </div>
+        )}
         <div className="text-right">
-          <button className="btn btn-link" onClick={this.props.toggleModal.bind(this, 'modal')}>Cancel</button>
+          <button className="btn btn-link" onClick={this.props.toggleModal.bind(this, 'modal')}>
+            Cancel
+          </button>
           &nbsp;&nbsp;&nbsp;
-          {this.state.entry.username === ''
-            ? null
-            : <button type="submit" onClick={this.createEntry} className="btn btn-primary">Create Entry</button>}
+          {this.state.entry.username === '' ? null : (
+            <button type="submit" onClick={() => this.createEntry()} className="btn btn-primary">
+              Create Entry
+            </button>
+          )}
         </div>
-
       </div>
     );
   }

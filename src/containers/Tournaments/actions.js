@@ -1,7 +1,7 @@
 import database from '../../database';
 import config from '../../../config/env/development';
 import { displayMessage } from '../Message/actions';
-import { SAVE_SUCCESSFUL, DELETE_RESULT_SUCCESSFUL } from '../../util/messages';
+import { SAVE_SUCCESSFUL, SAVE_ERROR, DELETE_RESULT_SUCCESSFUL } from '../../util/messages';
 import axios from 'axios';
 
 export const GET_RESULTS = 'GET_RESULTS';
@@ -228,10 +228,19 @@ export function deleteResult(tournament, entry, id, division) {
 export function createEntry(id, division, entry) {
   entry.totalScore = Object.keys(entry.rounds).reduce((prev, key) => prev + entry.rounds[key], 0);
 
+  if (!entry.rank) delete entry.rank;
+
   return dispatch => {
-    dispatch(displayMessage(SAVE_SUCCESSFUL));
-    dispatch(getResults(id));
-    return database.ref(`results/${id}/${division}/${entry.username}`).set(entry);
+    database
+      .ref(`results/${id}/${division}/${entry.username}`)
+      .set(entry)
+      .then(() => {
+        dispatch(displayMessage(SAVE_SUCCESSFUL));
+        dispatch(getResults(id));
+      })
+      .catch(error => {
+        dispatch(displayMessage(SAVE_ERROR));
+      });
   };
 }
 
@@ -258,4 +267,17 @@ export function getLatestScores() {
         console.log(error);
       });
   };
+}
+
+export function checkStatus(status) {
+  switch (status) {
+    case 'withdrawn':
+      return 'WD';
+    case 'missedcut':
+      return 'MC';
+    case 'disqualified':
+      return 'DQ';
+    default:
+      return '-';
+  }
 }

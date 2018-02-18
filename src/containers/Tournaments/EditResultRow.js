@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { deleteResult } from './actions';
+import { deleteResult, checkStatus } from './actions';
 import Text from '../../components/Text';
 
 class EditResultRow extends Component {
@@ -15,15 +15,20 @@ class EditResultRow extends Component {
   }
 
   render() {
+    let placeholder = checkStatus(this.props.result.status);
     return (
       <tr>
-        <td><Text text={this.props.result.name} /></td>
+        <td>
+          <Text text={this.props.result.name} />
+        </td>
         {this.props.result.rounds
-          ? [...Array(this.props.tournament.no_days)].map((x, i) => <td key={i}>{this.props.result.rounds[i + 1]}</td>)
+          ? [...Array(this.props.tournament.no_days)].map((x, i) => (
+              <td key={i}>{this.props.result.rounds[i + 1] ? this.props.result.rounds[i + 1] : placeholder}</td>
+            ))
           : [...Array(this.props.tournament.no_days)].map((x, i) => <td key={i} />)}
 
-        <td>{this.props.result.totalScore}</td>
-        <td>{this.props.result.rank}</td>
+        <td>{placeholder !== '-' ? placeholder : this.props.result.totalScore}</td>
+        <td>{placeholder !== '-' ? placeholder : this.props.result.rank}</td>
         <td>{this.props.result.points}</td>
         <td>
           <div className="btn-group">

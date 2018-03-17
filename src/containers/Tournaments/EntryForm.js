@@ -49,6 +49,12 @@ class EntryForm extends Component {
     };
   }
 
+  pointChange(field) {
+    return e => {
+      this.setState({ entry: { ...this.state.entry, [field]: e.target.value } });
+    };
+  }
+
   handleSelectChange(e) {
     this.setState({ entry: { ...this.state.entry, status: e.target.value } });
   }
@@ -85,7 +91,6 @@ class EntryForm extends Component {
             </div>
           )}
         </div>
-
         {this.state.entry.username === '' ? null : (
           <div>
             {[...Array(this.props.tournament.no_days)].map((x, i) => (
@@ -113,7 +118,7 @@ class EntryForm extends Component {
               <TextField
                 showError={this.state.showErrors}
                 text={this.state.entry.points}
-                onFieldChanged={this.handleFieldChange(`points`)}
+                onFieldChanged={this.pointChange(`points`)}
               />
             </div>
             <div className="form-group">

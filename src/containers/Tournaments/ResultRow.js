@@ -11,9 +11,14 @@ class ResultRow extends Component {
         <td>
           <Text text={this.props.result.name} />
         </td>
-        {[...Array(this.props.tournament.no_days)].map((x, i) => (
-          <td key={i}>{this.props.result.rounds[i + 1] ? this.props.result.rounds[i + 1] : placeholder}</td>
-        ))}
+        {[...Array(this.props.tournament.no_days)].map(
+          (x, i) =>
+            this.props.result.rounds ? (
+              <td key={i}>{this.props.result.rounds[i + 1] ? this.props.result.rounds[i + 1] : placeholder}</td>
+            ) : (
+              <td />
+            )
+        )}
         <td>{placeholder !== '-' ? placeholder : this.props.result.totalScore}</td>
         <td>{placeholder !== '-' ? placeholder : this.props.result.rank}</td>
         <td>{this.props.result.points}</td>

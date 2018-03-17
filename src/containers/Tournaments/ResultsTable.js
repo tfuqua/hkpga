@@ -23,11 +23,13 @@ function ResultsTable(props) {
           </thead>
           <tbody>
             {results.map((result, i) => <ResultRow key={i} tournament={props.tournament} result={result} />)}
-            {results.length === 0
-              ? <tr>
-                  <td className="text-center" colSpan="100%">No Scores have been entered for this tournament</td>
-                </tr>
-              : null}
+            {results.length === 0 ? (
+              <tr>
+                <td className="text-center" colSpan="100%">
+                  No Scores have been entered for this tournament
+                </td>
+              </tr>
+            ) : null}
           </tbody>
         </table>
       </div>

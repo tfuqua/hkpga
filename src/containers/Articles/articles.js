@@ -16,9 +16,7 @@ class Articles extends Component {
   }
 
   componentDidMount() {
-    if (!this.props.query) {
-      this.props.queryArticles({ page: 1 });
-    }
+    this.props.queryArticles({ page: 1 });
   }
 
   fetchArticles(query) {

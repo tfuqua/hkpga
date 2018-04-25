@@ -58,14 +58,7 @@ class ArticleForm extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.article.slug !== this.state.article.slug) {
-      this.setState({
-        article: nextProps.article,
-        editorState: this.setupEditor(nextProps.article)
-      });
-    }
-  }
+  componentWillReceiveProps(nextProps) {}
 
   saveArticle() {
     this.props.saveArticle(this.state.id, this.state.article);
@@ -235,7 +228,7 @@ class ArticleForm extends Component {
                 component: (
                   <Editor
                     html={this.state.article.html ? this.state.article.html['zh-cn'] : ''}
-                    name="zn-cn"
+                    name="zh-cn"
                     onFieldChanged={this.handleContentChange}
                   />
                 )
@@ -245,7 +238,7 @@ class ArticleForm extends Component {
                 component: (
                   <Editor
                     html={this.state.article.html ? this.state.article.html['zh-hk'] : ''}
-                    name="zn-hk"
+                    name="zh-hk"
                     onFieldChanged={this.handleContentChange}
                   />
                 )

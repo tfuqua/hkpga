@@ -7,9 +7,7 @@ import ArticleForm from './ArticleForm';
 
 class EditArticle extends Component {
   componentDidMount() {
-    if (!this.props.article) {
-      this.props.getArticle(this.props.match.params.key);
-    }
+    this.props.getArticle(this.props.match.params.key);
   }
 
   render() {
@@ -18,7 +16,6 @@ class EditArticle extends Component {
         <div className="container-fluid">
           <h2>Edit Article</h2>
           <ArticleForm article={this.props.article} id={this.props.match.params.key} />
-
         </div>
       );
     } else {

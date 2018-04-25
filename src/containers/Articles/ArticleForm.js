@@ -66,7 +66,6 @@ class ArticleForm extends Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <div className="">
         <div className="text-right">

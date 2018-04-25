@@ -17,7 +17,10 @@ class ArticleForm extends Component {
 
     this.state = {
       showCalendar: false,
-      article: props.article,
+      article: {
+        ...props.article,
+        publish_date: props.article.publish_date || Date.now()
+      },
       id: props.id
     };
 
@@ -58,13 +61,12 @@ class ArticleForm extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {}
-
   saveArticle() {
     this.props.saveArticle(this.state.id, this.state.article);
   }
 
   render() {
+    console.log(this.state);
     return (
       <div className="">
         <div className="text-right">

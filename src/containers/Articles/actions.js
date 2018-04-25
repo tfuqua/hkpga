@@ -118,6 +118,11 @@ export function getArticleBySlug(slug) {
 }
 
 export function saveArticle(id, article) {
+  if (article.internal) {
+    //Used to remove from news home
+    article.publish_date = null;
+  }
+
   return dispatch => {
     dispatch(displayMessage(SAVE_SUCCESSFUL));
     return database.ref(`articles/${id}`).set(article);
@@ -125,7 +130,10 @@ export function saveArticle(id, article) {
 }
 
 export function createArticle(title) {
-  let slug = title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
+  let slug = title
+    .toLowerCase()
+    .replace(/ /g, '-')
+    .replace(/[^\w-]+/g, '');
 
   let article = {
     cover: '',
@@ -155,10 +163,13 @@ export function createArticle(title) {
         if (entry.val() !== null) {
           dispatch(displayMessage(ARTICLE_ALREADY_EXISTS));
         } else {
-          database.ref(`articles/${slug}`).set(article).then(article => {
-            dispatch(displayMessage(SAVE_SUCCESSFUL));
-            dispatch(queryArticles({ page: 1 }));
-          });
+          database
+            .ref(`articles/${slug}`)
+            .set(article)
+            .then(article => {
+              dispatch(displayMessage(SAVE_SUCCESSFUL));
+              dispatch(queryArticles({ page: 1 }));
+            });
         }
       })
       .catch(error => {

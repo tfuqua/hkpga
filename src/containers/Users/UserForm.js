@@ -14,7 +14,6 @@ class UserForm extends Component {
   constructor(props, context) {
     super(props, context);
 
-    console.log(props);
     this.state = {
       showCalendar: false,
       user: props.user,
@@ -59,9 +58,10 @@ class UserForm extends Component {
   render() {
     return (
       <div className="">
-
         <div className="text-right">
-          <button onClick={this.saveUser} className="btn btn-primary">Save</button>
+          <button onClick={this.saveUser} className="btn btn-primary">
+            Save
+          </button>
         </div>
         <br />
 
@@ -69,7 +69,6 @@ class UserForm extends Component {
           <Accordion open={true} header={`Name & Standing`}>
             <div className="row">
               <div className="col-sm-6">
-
                 <div className="form-group">
                   <label>Name</label>
                   <Tabs
@@ -109,16 +108,16 @@ class UserForm extends Component {
                   />
                 </div>
 
-                {!this.props.isAdmin
-                  ? null
-                  : <div className="form-group">
-                      <label>Is Admin?</label>
-                      <Select
-                        handleChange={this.handleSelectChange('isAdmin')}
-                        value={this.state.user.isAdmin}
-                        options={trueFalse}
-                      />
-                    </div>}
+                {!this.props.isAdmin ? null : (
+                  <div className="form-group">
+                    <label>Is Admin?</label>
+                    <Select
+                      handleChange={this.handleSelectChange('isAdmin')}
+                      value={this.state.user.isAdmin}
+                      options={trueFalse}
+                    />
+                  </div>
+                )}
 
                 <div className="form-group">
                   <label>Active</label>
@@ -305,7 +304,6 @@ class UserForm extends Component {
                   />
                 </div>
               </div>
-
             </div>
           </Accordion>
 

@@ -17,53 +17,82 @@ class ProView extends Component {
         <div className="container-fluid">
           <h2>{translations[this.props.lang].PROFILE}</h2>
 
-          {this.props.user.profile_picture
-            ? <img
-                className="profile-pic img-responsive img-rounded"
-                src={this.props.user.profile_picture}
-                alt={this.props.user.name.en}
-              />
-            : null}
+          {this.props.user.profile_picture ? (
+            <img
+              className="profile-pic img-responsive img-rounded"
+              src={this.props.user.profile_picture}
+              alt={this.props.user.name.en}
+            />
+          ) : null}
 
           {/***** Name *****/}
-          <h3><Text text={this.props.user.name} /></h3>
+          <h3>
+            <Text text={this.props.user.name} />
+          </h3>
 
           {/***** Intro *****/}
-          {this.props.user.introduction.en !== ''
-            ? <div>Intro<Text text={this.props.user.introduction} /><br /></div>
-            : null}
+          {this.props.user.introduction && this.props.user.introduction.en !== '' ? (
+            <div>
+              Intro<Text text={this.props.user.introduction} />
+              <br />
+            </div>
+          ) : null}
 
           {/***** Qualifications *****/}
-          {this.props.user.qualifications.en !== ''
-            ? <div>Qualifications <Text text={this.props.user.qualifications} /><br /></div>
-            : null}
+          {this.props.user.qualifications && this.props.user.qualifications.en !== '' ? (
+            <div>
+              Qualifications <Text text={this.props.user.qualifications} />
+              <br />
+            </div>
+          ) : null}
 
           {/***** Pro Since *****/}
-          {this.props.user.pro_since ? <div>Year Since: {this.props.user.pro_since}<br /></div> : null}
+          {this.props.user.pro_since ? (
+            <div>
+              Year Since: {this.props.user.pro_since}
+              <br />
+            </div>
+          ) : null}
 
           {/***** Achievements *****/}
-          {this.props.user.achievements.en !== ''
-            ? <div>Achievements <Text text={this.props.user.achievements} /><br /></div>
-            : null}
+          {this.props.user.achievements && this.props.user.achievements.en !== '' ? (
+            <div>
+              Achievements <Text text={this.props.user.achievements} />
+              <br />
+            </div>
+          ) : null}
 
           {/***** Teaching Experience *****/}
-          {this.props.user.teaching_experience.en !== ''
-            ? <div>Teaching Experience <Text text={this.props.user.teaching_experience} /><br /></div>
-            : null}
+          {this.props.user.teaching_experience && this.props.user.teaching_experience.en !== '' ? (
+            <div>
+              Teaching Experience <Text text={this.props.user.teaching_experience} />
+              <br />
+            </div>
+          ) : null}
 
           {/***** Member Since *****/}
-          {this.props.user.member_since ? <div>Member Since: {this.props.user.member_since}<br /></div> : null}
+          {this.props.user.member_since ? (
+            <div>
+              Member Since: {this.props.user.member_since}
+              <br />
+            </div>
+          ) : null}
 
           {/***** Email *****/}
-          {this.props.user.email
-            ? <div>Email: <a href={`mailto:${this.props.user.email}`}>{this.props.user.email}</a><br /></div>
-            : null}
+          {this.props.user.email ? (
+            <div>
+              Email: <a href={`mailto:${this.props.user.email}`}>{this.props.user.email}</a>
+              <br />
+            </div>
+          ) : null}
 
           {/***** Phone *****/}
-          {this.props.user.phone
-            ? <div>Phone: <a href={`phone:${this.props.user.phone}`}>{this.props.user.phone}</a><br /></div>
-            : null}
-
+          {this.props.user.phone ? (
+            <div>
+              Phone: <a href={`phone:${this.props.user.phone}`}>{this.props.user.phone}</a>
+              <br />
+            </div>
+          ) : null}
         </div>
       );
     } else {

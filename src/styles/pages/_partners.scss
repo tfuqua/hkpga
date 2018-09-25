@@ -1,57 +1,56 @@
-    #partners-widget {
-      .logos {
-          overflow:hidden;
-        div {
-          height: 90px;
-          background-repeat: no-repeat;
-          background-size: contain;
-          background-position: center;
-          float: left;
-          margin: 8px 13px;
-        }
-        a {
-          height: 100%;
-          width: 100%;
-        }
-      }
+#partners-widget {
+  .logos {
+    overflow: hidden;
+    div {
+      height: 90px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      float: left;
+      margin: 8px 13px;
+    }
+    a {
+      height: 100%;
+      width: 100%;
+    }
+  }
 
-      #official-partners .logos {
-        a:nth-child(1) div {
+  #official-partners .logos {
+    /*a:nth-child(1) div {
             background-image: url(../images/logo-pgae.png);
             width: 150px;
-        }
-        a:nth-child(2) div {
-            background-image: url(../images/logo-hkga.png);
-            width: 190px;
-        }
-        a:nth-child(3)  div{
-            background-image: url(../images/logo-lcsd.png);
-            width: 150px;
-        }
-        a:nth-child(4) div {
+        }*/
+    a:nth-child(1) div {
+      background-image: url(../images/logo-hkga.png);
+      width: 190px;
+    }
+    a:nth-child(2) div {
+      background-image: url(../images/logo-lcsd.png);
+      width: 150px;
+    }
+    /*a:nth-child(4) div {
             background-image: url(../images/logo-stjames.png);
             width: 160px;
-        }
-      }
-      #sponsors .logos {
-        a:nth-child(1) div{
-            background-image: url(../images/logo-ageas.png);
-            width: 150px;
-        }
-      }
-      #supporting-organisations .logos {
-        a:nth-child(1) div{
-            background-image: url(../images/logo-nine-eagles.png);
-            width: 150px;
-        }
-        a:nth-child(2) div{
-            background-image: url(../images/logo-phoenix-hill.png);
-            width: 190px;
-        }
-        a:nth-child(3) div{
-          background-image: url(../images/logo-yinli.png);
-          width: 150px;
-        }
-      }
-
+        }*/
+  }
+  #sponsors .logos {
+    a:nth-child(1) div {
+      background-image: url(../images/logo-ageas.png);
+      width: 150px;
     }
+  }
+  #supporting-organisations .logos {
+    a:nth-child(1) div {
+      background-image: url(../images/logo-nine-eagles.png);
+      width: 150px;
+    }
+    a:nth-child(2) div {
+      background-image: url(../images/logo-phoenix-hill.png);
+      width: 190px;
+    }
+    a:nth-child(3) div {
+      background-image: url(../images/logo-yinli.png);
+      width: 150px;
+    }
+  }
+}
